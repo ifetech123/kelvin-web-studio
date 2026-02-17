@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelvin Web Studio | Professional Websites for Growing Businesses</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">KELVIN<span> WEBSTUDIO</span></div>
+            <ul class="nav-links">
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="https://wa.me/2349041999098" class="cta-nav">Start a Project</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>Professional Website Built  <span>to Grow Your Business.</span></h1>
+            <p>Choose a proven template, get it customize in 7-10 days, and start attracting customers online.</p>
+            <div class="hero-btns">
+                <a href="#templates" class="btn-primary">Explore Website Solutions</a>
+                <a href="#portfolio" class="btn-secondary">See Our Work</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Template Storefront (The Shelves) -->
+    <section id="templates" class="templates-section">
+        <div class="container">
+            <h2 class="section-title">The Template Library</h2>
+            <p class="section-subtitle">Choose a foundation, and we'll build your dream on top of it.</p>
+            
+            <div class="template-grid">
+                 <!-- Template 1: Personal Brand -->
+                <div class="template-card">
+                    <div class="temp-img">CREATOR</div>
+                    <div class="temp-info">
+                        <h2>Creator/Personal Brand</h2>
+                        <h3>Business Starter Website – ₦50,000</h3>
+                        <p>For consultants, speakers, and digital creators.</p>
+                        <a href="#" class="view-demo">Live Demo (Coming Soon)</a>
+                    </div>
+                </div>
+
+
+                <!-- Template 2: SME -->
+                <div class="template-card">
+                    <div class="temp-img">SME STARTER</div>
+                    <div class="temp-info">
+                        <h2>SME Business Starter</h2>
+                        <h3>Business Starter Website – ₦75,000</h3>
+                        <p>Perfect for retail, services, and small brands.</p>
+                        <a href="Templates/index1.html" class="view-demo">Live Demo →</a>
+                    </div>
+                </div>
+
+                <!-- Template 3: Real Estate -->
+                <div class="template-card">
+                    <div class="temp-img">REAL ESTATE</div>
+                    <div class="temp-info">
+                        <h2>Real Estate Pro</h2>
+                        <h3>Business Starter Website – ₦99,000</h3>
+                        <p>Optimized for property listings and lead capture.</p>
+                        <a href="#" class="view-demo">Live Demo (Coming Soon)</a>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section (Your Past Work) -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="portfolio-grid">
+                <!-- Add your projects from last year here -->
+                <div class="portfolio-item">
+                    <div class="port-img">PROJECT 1</div>
+                    <p>E-commerce Brand 2025</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="port-img">PROJECT 2</div>
+                    <p>Logistics Company Site</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Kelvin Web Studio. Built for Growth.</p>
+    </footer>
+
+    <script>
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- ```text
+kelvin-web-studio/
+├── index.html          <-- (The Main HQ Page)
+├── css/
+│   └── main.css        <-- (Styles for the HQ)
+├── js/
+│   └── main.js
+├── templates/          <-- (Your "Shelves")
+│   ├── sme-starter/    <-- (Template 1 files inside here)
+│   ├── real-estate/    <-- (Template 2 files inside here)
+│   └── creator-pro/    <-- (Template 3 files inside here)
+└── portfolio/          <-- (Screenshots of your past work)
+``` -->
