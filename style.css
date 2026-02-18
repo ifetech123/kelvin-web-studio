@@ -1,12 +1,13 @@
+/* ================= ROOT VARIABLES ================= */
 :root {
     --primary: #0f172a;
     --secondary: #1e293b;
     --accent: #2563eb;
     --text: #f8fafc;
-    --gray: #94a3b8;
-    --light-gray: #e2e8f0;
+    --gray: #4372b3;
 }
 
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +16,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--primary);
+    background: var(--primary);
     color: var(--text);
     line-height: 1.6;
 }
@@ -26,7 +27,9 @@ body {
     margin: auto;
 }
 
-/* ================= NAVBAR ================= */
+/* ================================================== */
+/* ================= NAVBAR ========================= */
+/* ================================================== */
 
 .navbar {
     padding: 20px 0;
@@ -41,7 +44,7 @@ body {
 }
 
 .logo {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 800;
     letter-spacing: -0.5px;
 }
@@ -50,6 +53,7 @@ body {
     color: var(--accent);
 }
 
+/* Desktop nav default */
 .nav-links {
     list-style: none;
     display: flex;
@@ -68,19 +72,6 @@ body {
     color: var(--text);
 }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: white;
-}
-
 .cta-nav {
     background: var(--accent);
     padding: 10px 18px;
@@ -89,7 +80,36 @@ body {
     font-weight: 600;
 }
 
-/* ================= HERO ================= */
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: 0.3s ease;
+}
+
+.hamburger.toggle span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.toggle span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ================================================== */
+/* ================= HERO =========================== */
+/* ================================================== */
 
 .hero {
     padding: 100px 0;
@@ -97,7 +117,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-size: clamp(28px, 6vw, 48px);
     font-weight: 800;
     margin-bottom: 20px;
 }
@@ -113,12 +133,23 @@ body {
     font-size: 18px;
 }
 
+/* Buttons */
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .hero-btns a {
     text-decoration: none;
-    padding: 14px 28px;
+    padding: 15px 25px;
     border-radius: 6px;
     font-weight: 600;
-    margin: 0 10px;
+    transition: 0.3s ease;
+}
+
+.hero-btns a:hover {
+    transform: translateY(-3px);
 }
 
 .btn-primary {
@@ -131,7 +162,9 @@ body {
     color: var(--text);
 }
 
-/* ================= TEMPLATES ================= */
+/* ================================================== */
+/* ================= SECTIONS ======================= */
+/* ================================================== */
 
 .templates-section {
     padding: 80px 0;
@@ -160,8 +193,8 @@ body {
     background: var(--primary);
     border-radius: 12px;
     overflow: hidden;
-    transition: 0.3s ease;
     border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s ease;
 }
 
 .template-card:hover {
@@ -176,36 +209,24 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    letter-spacing: 1px;
 }
 
 .temp-info {
     padding: 20px;
 }
 
-.temp-info h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
-}
-
 .temp-info h3 {
-    font-size: 16px;
     color: var(--accent);
     margin-bottom: 10px;
 }
 
-.temp-info p {
-    color: var(--gray);
-    margin-bottom: 15px;
-}
-
 .view-demo {
-    text-decoration: none;
     color: var(--accent);
     font-weight: 600;
+    text-decoration: none;
 }
 
-/* ================= PORTFOLIO ================= */
+/* Portfolio */
 
 .portfolio-section {
     padding: 80px 0;
@@ -215,7 +236,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin-top: 40px;
 }
 
 .portfolio-item {
@@ -234,7 +254,7 @@ body {
     justify-content: center;
 }
 
-/* ================= FOOTER ================= */
+/* Footer */
 
 footer {
     text-align: center;
@@ -242,47 +262,104 @@ footer {
     background: var(--secondary);
     color: var(--gray);
     font-size: 14px;
-    margin-top: 60px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================================================== */
+/* ================= MOBILE ========================= */
+/* ================================================== */
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 34px;
+
+    /* Fix hero spacing because navbar becomes fixed */
+    .navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 999;
     }
 
-    .nav-links {
-        display: none;
+    .hero {
+        padding-top: 160px;
+        padding-bottom: 80px;
     }
-}
 
-
-
-
-
-
-
-/* MOBILE */
-@media (max-width: 768px) {
-
+    /* Mobile Nav */
     .nav-links {
-        position: absolute;
+        position: fixed;
         top: 70px;
         right: 0;
-        background: var(--secondary);
-        width: 200px;
+        width: 300px;
+        height: calc(100vh - 70px);
+
+        background: rgba(30, 41, 59, 0.96);
+        backdrop-filter: blur(8px);
+
         flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-        display: none;
+        align-items: center;
+        padding: 50px 30px;
+        gap: 30px;
+
+        transform: translateX(110%);
+        opacity: 0;
+
+        transition: 
+            transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.4s ease;
     }
 
     .nav-links.active {
-        display: flex;
+        transform: translateX(0);
+        opacity: 1;
     }
+
+    .nav-links li {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: 0.4s ease;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
 
     .hamburger {
         display: flex;
+    }
+
+    /* Mobile buttons stacked */
+    .hero-btns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-btns a {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+}
+
+/* ================================================== */
+/* ================= DESKTOP FORCE ================== */
+/* ================================================== */
+
+@media (min-width: 769px) {
+
+    .nav-links {
+        display: flex !important;
+        position: static;
+        transform: none;
+        opacity: 1;
+        height: auto;
+        background: transparent;
+    }
+
+    .hamburger {
+        display: none;
     }
 }

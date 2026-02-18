@@ -13,13 +13,14 @@
 
     <!-- Navigation -->
     <nav class="navbar">
+        
         <div class="container">
             <div class="logo">KELVIN<span> WEBSTUDIO</span></div>
             <ul class="nav-links">
                 <li><a href="#templates">Templates</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="https://wa.me/2349041999098" class="cta-nav">Start a Project</a></li>
+                <li><a href="https://wa.me/9041999098" class="cta-nav">Start a Project</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -29,6 +30,7 @@
             </div>
         </div>
     </nav>
+
 
     <!-- Hero Section -->
     <header class="hero">
@@ -68,7 +70,7 @@
                         <h2>SME Business Starter</h2>
                         <h3>Business Starter Website – ₦75,000</h3>
                         <p>Perfect for retail, services, and small brands.</p>
-                        <a href="Templates/index1.html" class="view-demo">Live Demo →</a>
+                        <a href="templates/smallbusiness/index1.html" class="view-demo">Live Demo →</a>
                     </div>
                 </div>
 
@@ -115,9 +117,12 @@
     const hamburger = document.querySelector(".hamburger");
     const navLinks = document.querySelector(".nav-links");
 
+
     hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("toggle");
+});
+
 </script>
 
 </body>
