@@ -48,5 +48,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+function selectTemplate(templateName) {
+  document.getElementById("selectedTemplate").value = templateName;
+
+  document.getElementById("contact").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const template = document.getElementById("selectedTemplate").value;
+
+  const phoneNumber = "2349041999098"; // Replace with your WhatsApp number
+
+  const message = `Hello Kelvin, I am interested in the ${template} template.`;
+
+  window.open(`https://wa.me/${2349041999098}?text=${encodeURIComponent(message)}`, "_blank");
+
+  event.target.submit();
+}
+
+
 
 
