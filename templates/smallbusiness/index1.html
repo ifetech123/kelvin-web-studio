@@ -153,25 +153,30 @@
     </section>
 
     <!-- Contact Section -->
-    <!-- <section id="contact" class="contact-section section-padding">
+     <section id="contact" class="contact-section section-padding">
         <div class="container">
             <div class="section-header">
-                <h2>Ready to Get Started?</h2>
-                <p>Fill out the form below or chat with us directly to discuss your project.</p>
+                <h2>Request This Template</h2>
+                <p>Fill this form and Kelvin Web Studio will contact you within 24 hours, Or chat with us directly to discuss your project.</p>
             </div>
             <div class="contact-content">
-                <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" class="contact-form">
+                <form name="template-request" method="POST" data-netlify="true">
+                    <!-- REQUIRED hidden input -->
+      <input type="hidden" name="form-name" value="template-request">
+      <!-- Hidden template name -->
+      <input type="hidden" name="template" value="SME Starter Template">
+
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" pattern="^[^0-9]+$" required>
+                        <input type="text" id="name" name="name"  pattern="^[^0-9]+$" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email"   id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Your WhatsApp Number (e.g., +23480...) </label>
-                        <input type="tel"  id="phone" name="phone"  inputmode="numeric" maxlength="14" minlength="11" placeholder="+23480XXXXXXXX " required>
+                        <input type="tel"  id="phone" name="phone"  inputmode="numeric" maxlength="14" minlength="11"  required>
                     </div>
                     <div class="form-group">
                         <label for="business">Your Business Name</label>
@@ -188,13 +193,13 @@
                     <p><i class="fas fa-envelope"></i> <b> Email: </b> <a href="mailto:ifeoluwakelvin123@gmail.com">ifeoluwakelvin123@gmail.com</a></p>
                     <p><i class="fab fa-whatsapp"></i> <b> WhatsApp: </b> <a href="https://wa.me/09041999098" >09041999098</a></p>
                     <p><i class="fas fa-map-marker-alt"></i> <b> Location: </b> Lagos, Nigeria</p>
-                     You can add a map embed here later 
+                     <!-- You can add a map embed here later  -->
                 </div>
             </div>
         </div>
-    </section> -->
+    </section> 
     
-<section id="contact" class="contact-section">
+<!-- <section id="contact" class="contact-section">
   <div class="container">
 
     <h2>Request This Template</h2>
@@ -202,10 +207,10 @@
 
     <form name="template-request" method="POST" data-netlify="true">
 
-      <!-- REQUIRED hidden input -->
+      < !-- REQUIRED hidden input --
       <input type="hidden" name="form-name" value="template-request">
 
-      <!-- Hidden template name -->
+      !-- Hidden template name --
       <input type="hidden" name="template" value="SME Starter Template">
 
       <div class="form-group">
@@ -226,12 +231,12 @@
 
       <button type="submit" class="btn primary-btn">
         Request This Website
-      </button>
+      </button> 
 
     </form>
 
   </div>
-</section>
+</section>-->
 
 
 
