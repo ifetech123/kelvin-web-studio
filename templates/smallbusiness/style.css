@@ -369,7 +369,7 @@ ul {
     background-color: var(--background-light);
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
 }
 
 .form-group {
