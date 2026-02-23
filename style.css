@@ -227,9 +227,7 @@ body {
 .template-card:hover .temp-img img {
     transform: scale(1.05);
 }
- git add.     
- git commit -m "added new changes"   
- git push
+
 
 .temp-info {
     padding: 20px;
