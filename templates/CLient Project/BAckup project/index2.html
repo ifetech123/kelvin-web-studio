@@ -1,0 +1,288 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Retail | Premium Snacks, Fragrances & Essentials</title>
+    <!-- Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+<style>
+
+    /* <!--  `style.css` (The Luxury Polish) --> */
+
+ :root {
+    --honey: #D97706;
+    --charcoal: #1F2937;
+    --cream: #FFFDF5;
+    --white: #FFFFFF;
+    --gray: #F3F4F6;
+    --text-light: #6B7280;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--white);
+    color: var(--charcoal);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+/* Loader */
+#loader {
+    position: fixed; inset: 0; background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center; z-index: 10000;
+}
+.loader-logo { color: var(--honey); letter-spacing: 5px; font-size: 30px; }
+
+/* Navbar */
+.navbar {
+    height: 90px; display: flex; align-items: center;
+    position: sticky; top: 0; background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px); z-index: 1000;
+}
+.nav-flex { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.logo { font-weight: 800; font-size: 24px; color: var(--charcoal); }
+.logo span { color: var(--honey); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--charcoal); font-weight: 600; font-size: 14px; }
+.btn-nav {
+    background: var(--honey); color: white; padding: 10px 20px;
+    border-radius: 50px; text-decoration: none; font-weight: 700;
+}
+
+/* Hero */
+.hero { padding: 80px 0; background: var(--cream); min-height: 80vh; display: flex; align-items: center; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.hero-text h1 { font-size: 56px; font-family: 'Quicksand', sans-serif; line-height: 1.1; margin-bottom: 20px; }
+.hero-text h1 span { color: var(--honey); }
+.badge { background: #FEF3C7; color: var(--honey); padding: 5px 15px; border-radius: 50px; font-weight: 700; font-size: 12px; }
+.btn-primary { background: var(--honey); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; margin-right: 15px; }
+.btn-secondary { color: var(--charcoal); text-decoration: underline; font-weight: 700; }
+
+.img-blob {
+    width: 100%; height: 500px; background: var(--honey); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.img-blob img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Sections */
+section { padding: 100px 0; }
+.section-title { font-size: 40px; margin-bottom: 30px; font-family: 'Quicksand', sans-serif; }
+.section-title span { color: var(--honey); }
+.text-center { text-align: center; }
+
+/* Category Cards */
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.cat-card {
+    background: var(--white); border: 1px solid var(--gray); padding: 40px;
+    border-radius: 20px; text-align: center; transition: 0.4s;
+}
+.cat-card:hover { border-color: var(--honey); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.cat-img { font-size: 50px; margin-bottom: 20px; }
+.cat-card h3 { margin-bottom: 10px; }
+.cat-link { display: block; margin-top: 20px; color: var(--honey); font-weight: 800; text-decoration: none; }
+
+/* Step Cards */
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.step-card { background: var(--charcoal); color: white; padding: 40px; border-radius: 20px; position: relative; }
+.step-num { position: absolute; top: 20px; right: 20px; color: var(--honey); font-size: 24px; font-weight: 800; opacity: 0.3; }
+
+/* Contact Box */
+.contact-box { background: var(--cream); padding: 80px 40px; border-radius: 40px; }
+.btn-whatsapp {
+    background: #25D366; color: white; padding: 20px 50px; border-radius: 50px;
+    text-decoration: none; font-weight: 800; font-size: 20px; display: inline-block; margin-top: 30px;
+}
+.contact-details { margin-top: 30px; display: flex; justify-content: center; gap: 30px; color: var(--text-light); }
+
+/* Footer */
+.footer-flex { display: flex; justify-content: space-between; padding: 40px 0; border-top: 1px solid var(--gray); }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-text h1 { font-size: 40px; }
+    .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+    <!-- Intro Loader -->
+    <div id="loader">
+        <h1 class="loader-logo">K-RETAIL</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">K-<span>RETAIL</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#how-to">How to Order</a></li>
+            </ul>
+            <a href="https://wa.me/2349041999098" class="btn-nav">Order on WhatsApp</a>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text" data-aos="fade-right">
+                <span class="badge">NATURE'S FINEST & LUXURY SCENTS</span>
+                <h1>Quality Essentials,<br><span>Tailored for You.</span></h1>
+                <p>From organic Honey and Garri to premium Designer Fragrances. We bring quality closer to your home with just one click.</p>
+                <div class="hero-btns">
+                    <a href="#categories" class="btn-primary">Explore Products</a>
+                    <a href="#how-to" class="btn-secondary">How it Works</a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="zoom-in">
+                <!-- Placeholder for high-end product display -->
+                <div class="img-blob">
+                    <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?auto=format&fit=crop&w=800&q=80" alt="Premium Products">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content" data-aos="fade-up">
+                    <h2 class="section-title">A Brand Built on <span>Trust.</span></h2>
+                    <p>At K-Retail, we believe you shouldn't have to choose between quality and convenience. Whether you are stocking your pantry with our premium Garri and Honey or upgrading your aura with our luxury fragrances, we guarantee excellence in every delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Categories (Figma Card Style) -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Our Product <span>Universe</span></h2>
+                <p>Select a category to view our premium collection</p>
+            </div>
+            <div class="category-grid">
+                <!-- Category 1 -->
+                <div class="cat-card" data-aos="fade-up">
+                    <div class="cat-img">🍪</div>
+                    <h3>Crunchy Snacks</h3>
+                    <p>Freshly made, perfectly spiced snacks for your cravings.</p>
+                    <a href="https://wa.me/..." class="cat-link">View Stock →</a>
+                </div>
+                <!-- Category 2 -->
+                <div class="cat-card highlight" data-aos="fade-up" data-aos-delay="100">
+                    <div class="cat-img">🍯</div>
+                    <h3>Pure Honey</h3>
+                    <p>100% Unrefined, natural honey sourced from the best farms.</p>
+                    <a href="https://wa.me/..." class="cat-link">View Stock →</a>
+                </div>
+                <!-- Category 3 -->
+                <div class="cat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cat-img">🥣</div>
+                    <h3>Premium Garri</h3>
+                    <p>Standardized processing for that perfect crunchy taste.</p>
+                    <a href="https://wa.me/..." class="cat-link">View Stock →</a>
+                </div>
+                <!-- Category 4 -->
+                <div class="cat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="cat-img">✨</div>
+                    <h3>Fragrances</h3>
+                    <p>Designer perfumes and long-lasting oil scents.</p>
+                    <a href="https://wa.me/..." class="cat-link">View Stock →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. How to Order (Luxury Steps) -->
+    <section id="how-to" class="how-to">
+        <div class="container">
+            <h2 class="section-title text-center">How to <span>Shop</span></h2>
+            <div class="steps-grid">
+                <div class="step-card" data-aos="flip-left">
+                    <span class="step-num">01</span>
+                    <h4>Browse</h4>
+                    <p>Explore our categories and pick your essentials.</p>
+                </div>
+                <div class="step-card" data-aos="flip-left" data-aos-delay="100">
+                    <span class="step-num">02</span>
+                    <h4>Chat</h4>
+                    <p>Click the WhatsApp button to start a conversation.</p>
+                </div>
+                <div class="step-card" data-aos="flip-left" data-aos-delay="200">
+                    <span class="step-num">03</span>
+                    <h4>Confirm</h4>
+                    <p>Send your order, pay via transfer, and confirm.</p>
+                </div>
+                <div class="step-card" data-aos="flip-left" data-aos-delay="300">
+                    <span class="step-num">04</span>
+                    <h4>Enjoy</h4>
+                    <p>Relax while we deliver quality to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Contact / Final CTA -->
+    <section class="contact">
+        <div class="container text-center">
+            <div class="contact-box" data-aos="zoom-in">
+                <h2>Ready to Place an Order?</h2>
+                <p>We handle high-volume orders daily. Tap below to chat with us now.</p>
+                <a href="https://wa.me/2349041999098" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <div class="contact-details">
+                    <span><i class="fas fa-phone"></i> +234 904 199 9098</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-flex">
+            <p>&copy; 2026 Kelvin Web Studio | K-Retail MVP</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

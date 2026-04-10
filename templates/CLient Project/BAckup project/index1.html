@@ -1,0 +1,235 @@
+<!-- `index.html` -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Essentials | Snacks, Honey & Luxury Fragrances</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+<style>
+        /* style.css` (Warm & Clean Palette) */:root { 
+            --cream: #FDF5E6;
+            --honey: #E67E22;
+            --slate: #2C3E50;
+            --text: #333;
+            --white: #ffffff;
+            }
+
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+           body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+    h1, h2, h3 { font-family: 'Quicksand', sans-serif; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    .hero {
+    background-color: var(--cream);
+    padding: 40px 0 80px;
+    text-align: center;
+    }
+
+    .simple-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    }
+
+    .logo { font-weight: 800; font-size: 20px; color: var(--honey); }
+
+    .nav-chat {
+    background: var(--honey);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    }
+
+    .hero-content h1 { font-size: 42px; margin-bottom: 20px; color: var(--slate); }
+    .hero-content h1 span { color: var(--honey); }
+    .hero-content p { font-size: 18px; margin-bottom: 30px; opacity: 0.8; }
+
+    .btn-main {
+    background: var(--slate);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    }
+
+    /* Category Grid */
+    .categories { padding: 80px 0; }
+    .section-title { text-align: center; margin-bottom: 40px; font-size: 32px; }
+
+    .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    }
+
+    .cat-card {
+    background: var(--cream);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    }
+
+    .cat-card:hover { transform: translateY(-5px); }
+
+    .cat-icon { font-size: 40px; margin-bottom: 10px; }
+
+    /* Steps */
+    .how-to { padding: 60px 0; background: var(--slate); color: white; }
+    .steps-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    }
+
+    .step { display: flex; align-items: center; gap: 10px; }
+    .step span {
+    background: var(--honey);
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-weight: 700;
+    }
+
+    /* CTA Section */
+    .cta-final { padding: 80px 0; text-align: center; }
+    .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 20px;
+    }   
+
+    footer { text-align: center; padding: 40px; font-size: 14px; opacity: 0.6; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+    .hero-content h1 { font-size: 32px; }
+    .steps-flex { flex-direction: column; }
+    }
+
+                                                        
+
+
+</style>
+
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <nav class="simple-nav">
+                <div class="logo">Kelvin Store</div>
+                <a href="https://wa.me/2349041999098" class="nav-chat">Order Now</a>
+            </nav>
+            <div class="hero-content">
+                <h1>Quality Snacks & Everyday Essentials <span>You Can Trust.</span></h1>
+                <p>Freshly sourced honey, premium garri, and luxury fragrances delivered to your doorstep.</p>
+                <a href="#categories" class="btn-main">Browse Products</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-card">
+                <h2>Our Commitment</h2>
+                <p>We pride ourselves on providing high-quality retail products with convenience. From our kitchen to your home, trust and quality come first.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories Grid -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <!-- Category 1 -->
+                <div class="cat-card">
+                    <div class="cat-icon">🍪</div>
+                    <h3>Crunchy Snacks</h3>
+                    <p>Homemade recipes made fresh daily.</p>
+                </div>
+                <!-- Category 2 -->
+                <div class="cat-card">
+                    <div class="cat-icon">🍯</div>
+                    <h3>Pure Honey</h3>
+                    <p>100% natural, unrefined honey.</p>
+                </div>
+                <!-- Category 3 -->
+                <div class="cat-card">
+                    <div class="cat-icon">🥣</div>
+                    <h3>Premium Garri</h3>
+                    <p>Properly processed, clean, and crunchy.</p>
+                </div>
+                <!-- Category 4 -->
+                <div class="cat-card">
+                    <div class="cat-icon">✨</div>
+                    <h3>Designer Perfumes</h3>
+                    <p>Long-lasting scents for every occasion.</p>
+                </div>
+                <!-- Category 5 -->
+                <div class="cat-card">
+                    <div class="cat-icon">💍</div>
+                    <h3>Accessories</h3>
+                    <p>The perfect finishing touch for your look.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order -->
+    <section class="how-to">
+        <div class="container">
+            <h2 class="section-title">How to Order</h2>
+            <div class="steps-flex">
+                <div class="step"><span>1</span> <p>Choose your items</p></div>
+                <div class="step"><span>2</span> <p>Click WhatsApp Order</p></div>
+                <div class="step"><span>3</span> <p>Confirm & Transfer</p></div>
+                <div class="step"><span>4</span> <p>Get Delivery</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Ready to place your order?</h2>
+            <p>Chat with us now to see our latest stock.</p>
+            <a href="https://wa.me/2349041999098?text=Hello, I would like to place an order" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Kelvin Store. Built for easy and fast ordering.</p>
+    </footer>
+
+</body>
+</html>
+

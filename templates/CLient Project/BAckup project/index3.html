@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelvin Store | Premium Retail Essentials</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* INLINE CRITICAL CSS FOR SPEED */
+        :root {
+            --honey: #E3C586;
+            --black: #1A1A1A;
+            --cream: #FFFDF5;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--white); color: var(--black); overflow-x: hidden; scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Loader */
+        #intro {
+            position: fixed; inset: 0; background: var(--black); 
+            display: flex; align-items: center; justify-content: center; z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        #intro h1 { color: var(--honey); letter-spacing: 10px; font-size: 24px; }
+
+        /* Navigation */
+        nav {
+            height: 80px; display: flex; align-items: center; background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--gray);
+        }
+        .nav-flex { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+        .logo { font-weight: 800; font-size: 22px; }
+        .logo span { color: var(--honey); }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--black); font-weight: 600; font-size: 14px; }
+        .btn-wa-nav { background: var(--black); color: var(--white); padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: 700; }
+
+        /* Hero */
+        .hero { padding: 100px 0; background: var(--cream); text-align: center; }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 800; line-height: 1; margin-bottom: 20px; }
+        .hero h1 span { color: var(--honey); }
+        .hero p { max-width: 600px; margin: 0 auto 40px; color: #666; font-size: 18px; }
+        .btn-primary { background: var(--black); color: var(--white); padding: 20px 40px; text-decoration: none; font-weight: 700; border-radius: 5px; display: inline-block; transition: 0.3s; }
+        .btn-primary:hover { background: var(--honey); color: var(--black); transform: translateY(-5px); }
+        .price {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            }
+        /* Grid */
+        section { padding: 100px 0; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 50px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        /* Category Card */
+        .card { background: var(--white); border: 1px solid var(--gray); border-radius: 12px; overflow: hidden; transition: 0.4s; position: relative; }
+        .card:hover { border-color: var(--honey); transform: translateY(-10px); }
+        .card-img { height: 300px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 20px; margin-bottom: 10px; }
+        .card-body p { font-size: 14px; color: #777; margin-bottom: 20px; }
+        .btn-card { display: block; text-align: center; border: 1px solid var(--black); padding: 12px; text-decoration: none; color: var(--black); font-weight: 700; font-size: 13px; transition: 0.3s; }
+        .btn-card:hover { background: var(--black); color: var(--white); }
+
+        /* How to Order */
+        .steps { background: var(--black); color: var(--white); }
+        .step-item { text-align: center; }
+        .step-item span { font-size: 40px; color: var(--honey); font-weight: 800; display: block; margin-bottom: 10px; }
+        
+        /* Footer */
+        footer { padding: 50px 0; border-top: 1px solid var(--gray); text-align: center; font-size: 13px; color: #aaa; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 45px; }
+        }
+    </style>
+</head>
+<body>
+<!-- 
+    <div id="intro"><h1>KELVIN STORE</h1></div> -->
+
+    <nav>
+        <div class="container nav-flex">
+            <div class="logo">KELVIN<span>STORE</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">Trust</a></li>
+                <li><a href="#categories">Products</a></li>
+                <li><a href="#steps">How to Order</a></li>
+            </ul>
+            <a href="https://wa.me/2349041999098" class="btn-wa-nav">Order Now</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Fresh Honey, Quality Garri & Luxury Fragrances — <br><span>Delivered Fast in Lagos.</span></h1>
+            <p data-aos="fade-up" data-aos-delay="100">Premium retail sourced with integrity. From organic food essentials to luxury fragrances, we deliver quality to your doorstep.</p>
+            <a href="#categories" class="btn-primary" data-aos="fade-up" data-aos-delay="200">Shop the Catalog</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">Built on Trust</h2>
+            <p>At Kelvin Store, we don't just sell products; we provide convenience and quality. Every item in our catalog is vetted for excellence, ensuring that your snacks are fresh and your fragrances are authentic.</p>
+        </div>
+    </section>
+
+    <section id="categories" class="container">
+        <h2 class="section-title">The Catalog</h2>
+        <div class="grid">
+            <!-- Product 1 -->
+            <div class="card" data-aos="fade-up">
+                <div class="card-img">🍪</div>
+                <div class="card-body">
+                    <h3>Crunchy Snacks</h3>
+                    <p>Homemade recipes, perfectly fried and packaged for freshness.</p>
+                    <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20the%20Crunchy%20Snacks" class="btn-card">Order via WhatsApp</a>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-img">🍯</div>
+                <div class="card-body">
+                    <h3>Pure Honey (1L)</h3>
+                    <p class="price">₦5,000</p>
+                    <p>100% natural and unrefined. Directly from the source.</p>
+                    <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20the%20Pure%20Honey" class="btn-card">Order via WhatsApp</a>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-img">🥣</div>
+                <div class="card-body">
+                    <h3>Premium Garri</h3>
+                    <p>Super clean, dry, and crunchy. The best for your pantry.</p>
+                    <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20the%20Premium%20Garri" class="btn-card">Order via WhatsApp</a>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-img">✨</div>
+                <div class="card-body">
+                    <h3>Luxury Fragrances</h3>
+                    <p>Long-lasting designer oil perfumes and accessories.</p>
+                    <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20Luxury%20Fragrances" class="btn-card">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="steps" class="steps">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">3 Steps to Order</h2>
+            <div class="grid">
+                <div class="step-item"><span>01</span><h3>Choose Item</h3><p>Pick what you want from the catalog above.</p></div>
+                <div class="step-item"><span>02</span><h3>WhatsApp Chat</h3><p>Click order and send the auto-message to us.</p></div>
+                <div class="step-item"><span>03</span><h3>Pay & Receive</h3><p>Confirm via transfer and get your delivery.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Kelvin Store. Built for Easy & Fast Ordering.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        window.addEventListener('load', () => {
+            const intro = document.getElementById('intro');
+            setTimeout(() => { intro.style.opacity = '0'; 
+                setTimeout(() => intro.style.display = 'none', 800);
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
