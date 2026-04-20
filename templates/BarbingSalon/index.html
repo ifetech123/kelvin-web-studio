@@ -1,306 +1,520 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Heritage | Precision Cuts & Timeless Style</title>
-    <!-- Fonts: Inter for that modern bold look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preload" as="image" href="image2.webp">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Studio | Precision Cuts & Timeless Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Upgraded fonts: Playfair Display (luxury serif) + DM Sans (clean body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="image2.webp">
 </head>
 <body>
-         <div id="intro">
-            <h1 class="intro-logo">HERITAGE STUDIO</h1>
-        </div> 
-        
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo"><span> HERITAGE STUDIO</span></div>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a> </li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a> </li>
-            </ul>
-            <!-- <a href="#contact" class="nav-btn">Book Appointment</a> -->
-        </div>
-        <div class="menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-    </nav>
-
-    <!-- 1.Hook (Hero) -->
-    <section id="hero" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text" >
-                <h1>Precision Cuts.<br>Timeless Style.</h1>
-                <p><span>Trusted by 500+ clients in Lagos</span><br>No waiting. Walk in or book instantly.<br>Premium tools. Clean cuts. Guaranteed sharp look.</p>
-                <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" class="btn-primary">Book Your Cut Now → WhatsApp</a>
-                <p style="margin-top:12px; font-size:13px; color:#aaa;">⚡ Only 5–10 slots daily • First come, first served</p>
-            </div>
-            <!-- <div class="hero-image" data-aos="fade-left">
-                 Replace with your stylish barber image 
-                <div class="img-container">
-                    <img src="image1.jfif">
-                    
-                </div>
-            </div> -->
-        </div>
-    </section>
-
-    <!-- 2. About Section -->
-    <section id="about" class="about">
-        <div class="container text-center" >
-            <h2 class="section-title">The Heritage</h2>
-            <p class="about-desc">At Elite Barber, we bring over 15 years of professional grooming expertise to every client. Our master barbers combine traditional techniques with modern styling to deliver exceptional results that exceed expectations.</p>
-            <p class="about-desc"><br>We pride ourselves on professionalism, precision, and personalized service. From classic cuts to contemporary styles, we ensure every visit is a premium grooming experience in a luxurious, masculine environment.</p>
-        </div>
-    </section>
-
-    <!-- 3. Value (Services) -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title text-center">Premium Services</h2>
-            <div class="services-grid">
-                <div class="service-card" >
-                    <span class="large-emoji">✂️</span>
-                    <h3>Haircut</h3>
-                    <p>Precision cutting and Styling tailored to your features and preference</p>
-                </div>
-                <div class="service-card"  data-aos-delay="100">
-                    <span class="large-emoji">🪒</span>
-                    <h3>Beard Trim</h3>
-                    <p>Expert beard shaping and grooming for a polished, refined look</p>
-                </div>
-                <div class="service-card"  data-aos-delay="200">
-                    <span class="large-emoji" >💈</span>
-                    <h3>Full Grooming</h3>
-                    <p>Complete grooming Package including haircut, beard trim, and facial treatment</p>
-                </div>
-                <div class="service-card"  data-aos-delay="300">
-                    <h1 class="large-emoji">👑</h1>
-                    <h3>VIP Package</h3>
-                    <p>Ultimate luxury experience with hit towel service, massage, and premium Products</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Pricing (Decision) -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title text-center">Service Menu</h2>
-            <div class="pricing-table" >
-                <div class="pricing-item featured">
-                    <p>Signature Precision Cut</p>
-                    <span class="price">₦10,000</span>
-                </div>
-                <div class="pricing-item">
-                    <p>Sharp Beard Sculpt</p>
-                    <span class="price">₦5,000</span>
-                </div>
-                <div class="pricing-item">
-                    <p>Beard Sculpting</p>
-                    <span class="price">₦8,000</span>
-                </div>
-                <div class="pricing-item">
-                    <p>Complete Grooming Experience</p>
-                    <span class="price">₦15,000</span>
-                </div>
-                <div class="pricing-item">
-                    <p>Executive VIP Experience</p>
-                    <span class="price">₦30,000</span>
-                </div>
-                <div class="pricing-item">
-                    <p>Kids Cut(under 12) </p>
-                    <span class="price">₦6,000</span>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    <!-- 5. Trust (Testimonials) -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title text-center">What Our Clients Say</h2>
-            <div class="testimonial-grid">
-                <div class="test-card" >
-                    <span class="rating">★★★★★</span>
-                    <p class="testimonial-text">""Walked in looking rough, left looking like a different person. Fade was perfect."</p>
-                    <span class="testimonial-span">— Emeka J. (Lekki)</span>
-                </div>
-                <div class="test-card" >
-                    <span class="rating">★★★★★</span>
-                    <p class="testimonial-text">"I've been coming here for 3 years. Consistently excellent service, professional staff, and always leave looking sharp."</p>
-                    <span class="testimonial-span">- David A. (Ajah)</span>
-                </div>
-                <div class="test-card" >
-                    <span class="rating">★★★★★</span>
-                    <p class="testimonial-text">"The VIP package is worth every penny. Premium service, relaxing environment, and phenomenal results every time."</p>
-                    <span class="testimonial-span">- Tunde K.</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2 class="section-title text-center">Gallery</h2>
-            <p class="gallery-caption">From rough to sharp in 30 minutes ⚡</p>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Barber work" width="300" height="220"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" width="300" height="220"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Barber work" width="300" height="220"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" width="300" height="220"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" width="300" height="220"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy"></div>
-                <div class="gallery-item"><img src="image2.jpg" loading="lazy" width="300" height="220"></div>
-            
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. Urgency (Offer) -->
-    <section id="contact" class="contact">
-        <div class="container contact-flex">
-            <div class="contact-details" >
-                <h2>Book Your Cut in Seconds</h2>
-                <span class="larger-emoji">📍</span>
-                <h3 class="section-subtitle">Location</h3>
-                <p>  15 Lekki Phase 1,<br> Lagos,<br> Nigeria</p>
-                <span class="larger-emoji">📞</span>
-                <h3 class="section-subtitle">Phone </h3>
-                <p><a  href="tel:+2349041999098">09041999098</a></p>
-                <p>Mon-Sun: 9AM - 8PM<br> Sun: 10AM - 6PM</p>
-                <span class="larger-emoji">✉️</span>
-                <h3 class="section-subtitle">Email</h3>
-                <p><a href="mailto:ifeoluwakelvin123@gmail.com">ifeoluwakelvin123@gmail.com</a></p>
-                <p>We handle high demand daily. Book ahead to avoid waiting.</p>
-
-            </div>
-                <!-- Action (WhatsApp) -->
-            <div class="contact-action" >
-                <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" class="btn-primary" rel="nooperner">Book via WhatsApp</a>
-            </div>
-        </div>
-    </section>
-     <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-<footer>
-    <div class="container-footer">
-        <p>&copy; 2026 Ifetech. All rights reserved</p>
-
-        <div class="socials">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
+  <!-- INTRO SCREEN -->
+  <div id="intro">
+    <div class="intro-inner">
+      <div class="intro-scissors">✂</div>
+      <h1 class="intro-logo">HERITAGE STUDIO</h1>
+      <div class="intro-line"></div>
     </div>
-</footer>
+  </div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-mark">H</span>
+        <span class="logo-text">HERITAGE STUDIO</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" target="_blank" class="nav-book-btn">Book Now</a>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-dot"></span>
+        Lagos, Nigeria · Est. 2010
+      </div>
+      <h1 class="hero-title">
+        Precision<br>
+        <em>Cuts.</em><br>
+        Timeless<br>Style.
+      </h1>
+      <p class="hero-sub">
+        Trusted by <strong>500+ clients</strong> across Lagos.<br>
+        Premium tools. Master barbers. Guaranteed sharp look.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" target="_blank" class="btn-gold">
+          Book Your Cut Now
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#services" class="btn-outline-hero">View Services</a>
+      </div>
+      <p class="hero-scarcity">⚡ Only 5–10 slots daily · First come, first served</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-    const toggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const navbar = document.querySelector('.navbar');
-    const sections = document.querySelectorAll("section");
-    const navLinksAll = document.querySelectorAll(".nav-links a");
+  <!-- STATS STRIP -->
+  <section class="stats-strip">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="15">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="6">0</div>
+        <div class="stat-label">Master Barbers</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="98">0</div>
+        <div class="stat-label">% Satisfaction Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="about-container">
+      <div class="about-left">
+        <div class="about-img-wrap">
+          <img src="image2.jpg" alt="Heritage Studio Interior" loading="lazy">
+          <div class="about-img-badge">
+            <span class="badge-num">15+</span>
+            <span class="badge-lbl">Years of<br>Excellence</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title-left">Where Craft Meets <em>Character</em></h2>
+        <p class="about-p">At Heritage Studio, we bring over 15 years of professional grooming expertise to every chair. Our master barbers combine traditional techniques with modern styling to deliver results that go beyond a haircut.</p>
+        <p class="about-p">We pride ourselves on precision, professionalism, and personalized service. Every visit is a full experience — not just a trim.</p>
+        <div class="about-pillars">
+          <div class="pillar">
+            <span class="pillar-icon">✦</span>
+            <div>
+              <h4>Premium Tools Only</h4>
+              <p>Every cut done with professional-grade equipment</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">✦</span>
+            <div>
+              <h4>No Waiting. Ever.</h4>
+              <p>Book ahead and walk straight into your chair</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">✦</span>
+            <div>
+              <h4>Satisfaction Guaranteed</h4>
+              <p>Not happy? We fix it. No questions asked.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title-center">Premium Services</h2>
+        <p class="section-sub-center">Every service is performed by a trained master barber — no apprentices on your head.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <span class="service-emoji">✂️</span>
+          </div>
+          <h3>Haircut</h3>
+          <p>Precision cutting and styling tailored to your face shape and personal preference. Every time.</p>
+          <div class="service-from">From ₦10,000</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <span class="service-emoji">🪒</span>
+          </div>
+          <h3>Beard Trim</h3>
+          <p>Expert beard shaping and sculpting for a clean, sharp, polished look that commands respect.</p>
+          <div class="service-from">From ₦5,000</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">
+            <span class="service-emoji">💈</span>
+          </div>
+          <h3>Full Grooming</h3>
+          <p>Complete package — haircut, beard trim, and facial treatment. Walk in. Walk out transformed.</p>
+          <div class="service-from">From ₦15,000</div>
+        </div>
+        <div class="service-card featured-service">
+          <div class="featured-service-label">Most Booked</div>
+          <div class="service-icon-wrap">
+            <span class="service-emoji">👑</span>
+          </div>
+          <h3>VIP Package</h3>
+          <p>The ultimate experience. Hot towel service, head massage, premium products, and full grooming. Pure luxury.</p>
+          <div class="service-from">From ₦30,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Service Menu</div>
+        <h2 class="section-title-center">Transparent Pricing</h2>
+        <p class="section-sub-center">No hidden charges. No surprises. What you see is what you pay.</p>
+      </div>
+      <div class="pricing-wrap">
+        <div class="pricing-table">
+          <div class="pricing-item featured-item">
+            <div class="pi-left">
+              <span class="pi-dot featured-dot"></span>
+              <p>Signature Precision Cut</p>
+            </div>
+            <span class="price">₦10,000</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pi-left">
+              <span class="pi-dot"></span>
+              <p>Sharp Beard Sculpt</p>
+            </div>
+            <span class="price">₦5,000</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pi-left">
+              <span class="pi-dot"></span>
+              <p>Beard Sculpting & Shape</p>
+            </div>
+            <span class="price">₦8,000</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pi-left">
+              <span class="pi-dot"></span>
+              <p>Complete Grooming Experience</p>
+            </div>
+            <span class="price">₦15,000</span>
+          </div>
+          <div class="pricing-item vip-item">
+            <div class="pi-left">
+              <span class="pi-dot vip-dot"></span>
+              <p>Executive VIP Experience <span class="pi-tag">👑 Premium</span></p>
+            </div>
+            <span class="price">₦30,000</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pi-left">
+              <span class="pi-dot"></span>
+              <p>Kids Cut <span class="pi-tag-sm">(under 12)</span></p>
+            </div>
+            <span class="price">₦6,000</span>
+          </div>
+        </div>
+        <div class="pricing-cta-box">
+          <div class="pcta-badge">⚡ Limited Slots Daily</div>
+          <h3>Ready to look sharp?</h3>
+          <p>Book now via WhatsApp and secure your spot. We confirm in minutes.</p>
+          <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" target="_blank" class="btn-gold" style="width:100%;justify-content:center;">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+          <p class="pcta-note">Mon–Sun: 9AM–8PM · Sun: 10AM–6PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Client Reviews</div>
+        <h2 class="section-title-center">What Our Clients Say</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="test-card">
+          <div class="test-quote-mark">"</div>
+          <div class="rating">★★★★★</div>
+          <p class="testimonial-text">Walked in looking rough, left looking like a different person. Fade was perfect. No barber in Lagos touches this level of precision.</p>
+          <div class="test-author">
+            <div class="test-avatar">E</div>
+            <div>
+              <span class="test-name">Emeka J.</span>
+              <span class="test-location">Lekki</span>
+            </div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-quote-mark">"</div>
+          <div class="rating">★★★★★</div>
+          <p class="testimonial-text">I've been coming here for 3 years. Consistently excellent service, professional staff, and I always leave looking sharper than I arrived.</p>
+          <div class="test-author">
+            <div class="test-avatar">D</div>
+            <div>
+              <span class="test-name">David A.</span>
+              <span class="test-location">Ajah</span>
+            </div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-quote-mark">"</div>
+          <div class="rating">★★★★★</div>
+          <p class="testimonial-text">The VIP package is worth every naira. Hot towel, head massage, perfect fade — I walked out feeling like a new man. Book it.</p>
+          <div class="test-author">
+            <div class="test-avatar">T</div>
+            <div>
+              <span class="test-name">Tunde K.</span>
+              <span class="test-location">Victoria Island</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Our Work</div>
+        <h2 class="section-title-center">The Results Speak</h2>
+        <p class="gallery-caption">From rough to sharp in 30 minutes ⚡</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item tall"><img src="image2.jpg" loading="lazy" alt="Heritage Studio cut"></div>
+        <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Precision fade"></div>
+        <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Beard sculpt"></div>
+        <div class="gallery-item wide"><img src="image2.jpg" loading="lazy" alt="VIP experience"></div>
+        <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Clean cut"></div>
+        <div class="gallery-item"><img src="image2.jpg" loading="lazy" alt="Grooming"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      <div class="contact-left">
+        <div class="section-label" style="color:rgba(227,197,134,0.6);">Find Us</div>
+        <h2 class="contact-title">Book Your<br><em>Cut Today</em></h2>
+        <p class="contact-sub">Walk in, or book ahead on WhatsApp to skip the wait. We confirm your slot in minutes.</p>
+
+        <div class="contact-info-list">
+          <div class="ci-item">
+            <span class="ci-icon"><i class="fas fa-map-marker-alt"></i></span>
+            <div>
+              <h4>Location</h4>
+              <p>15 Lekki Phase 1, Lagos, Nigeria</p>
+            </div>
+          </div>
+          <div class="ci-item">
+            <span class="ci-icon"><i class="fas fa-phone"></i></span>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+2349041999098">09041999098</a></p>
+            </div>
+          </div>
+          <div class="ci-item">
+            <span class="ci-icon"><i class="fas fa-clock"></i></span>
+            <div>
+              <h4>Hours</h4>
+              <p>Mon–Sat: 9AM – 8PM<br>Sunday: 10AM – 6PM</p>
+            </div>
+          </div>
+          <div class="ci-item">
+            <span class="ci-icon"><i class="fas fa-envelope"></i></span>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:ifeoluwakelvin123@gmail.com">ifeoluwakelvin123@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="book-card">
+          <div class="book-card-header">
+            <span>📅</span> Reserve Your Slot
+          </div>
+          <div class="book-card-body">
+            <p class="book-card-sub">Pick your service and we'll confirm your time instantly.</p>
+            <div class="service-selector">
+              <label>What service?</label>
+              <div class="service-options">
+                <button class="svc-opt active" onclick="selectService(this,'Signature%20Precision%20Cut')">Haircut</button>
+                <button class="svc-opt" onclick="selectService(this,'Beard%20Trim')">Beard Trim</button>
+                <button class="svc-opt" onclick="selectService(this,'Full%20Grooming')">Full Grooming</button>
+                <button class="svc-opt" onclick="selectService(this,'VIP%20Package')">VIP 👑</button>
+              </div>
+            </div>
+            <a id="bookBtn" href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book:%20Signature%20Precision%20Cut" target="_blank" class="btn-gold book-wa-btn">
+              <i class="fab fa-whatsapp"></i>
+              Confirm on WhatsApp
+            </a>
+            <p class="book-reassure">⚡ Replies in under 5 minutes · Free cancellation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book%20a%20haircut%20today" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-mark">H</div>
+        <div>
+          <div class="footer-name">Heritage Studio</div>
+          <div class="footer-tagline">Precision. Style. Legacy.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/2349041999098" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Heritage Studio. All rights reserved.</p>
+      <p>Built by <a href="https://ifetech123.github.io/kelvin-web-studio/" target="_blank">Kelvin Web Studio</a></p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navbar = document.getElementById('navbar');
     const intro = document.getElementById("intro");
+    const sections = document.querySelectorAll("section[id]");
+    const navAnchors = document.querySelectorAll(".nav-links a");
 
-    // SAFETY CHECK (prevents site breaking if element missing)
-    if (!toggle || !navLinks || !navbar) return;
+    // INTRO
+    window.addEventListener("load", () => {
+      setTimeout(() => { intro.classList.add("hidden"); }, 1400);
+      setTimeout(() => { intro.style.display = "none"; }, 2100);
+    });
 
     // MENU TOGGLE
     toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        toggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      toggle.classList.toggle('active');
     });
 
-    // SCROLL EFFECT + ACTIVE LINK
+    // Close menu on link click
+    navAnchors.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        navLinks.classList.remove('active');
+        toggle.classList.remove('active');
+      });
+    });
+
+    // SCROLL: nav shrink + active links
     window.addEventListener("scroll", () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      let current = "";
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 130) current = s.id;
+      });
+      navAnchors.forEach(a => {
+        a.classList.remove("active");
+        if (a.getAttribute("href") === "#" + current) a.classList.add("active");
+      });
+    }, { passive: true });
 
-        let current = "";
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120;
-            if (window.scrollY >= sectionTop) {
-                current = section.getAttribute("id");
-            }
-        });
-
-        navLinksAll.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === "#" + current) {
-                link.classList.add("active");
-            }
-        });
-    });
-
-    // SMOOTH SCROLL
-    navLinksAll.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            const target = document.querySelector(this.getAttribute('href'));
-
-            if (!target) return;
-
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'smooth'
-            });
-
-            navLinks.classList.remove('active');
-            toggle.classList.remove('active');
-        });
-    });
-
-    // INTRO ANIMATION (FIXED — NO LOADER BUG)
-    window.addEventListener("load", () => {
-
-        if (intro) {
-            setTimeout(() => {
-                intro.classList.add("hidden");
-            }, 1200);
-
-            setTimeout(() => {
-                intro.style.display = "none";
-            }, 1800);
+    // COUNTER ANIMATION
+    const counters = document.querySelectorAll('.stat-num');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          const suffix = target >= 98 ? '%' : target >= 500 ? '+' : target >= 15 ? '+' : '';
+          let count = 0;
+          const step = Math.ceil(target / 60);
+          const timer = setInterval(() => {
+            count = Math.min(count + step, target);
+            el.textContent = count + suffix;
+            if (count >= target) clearInterval(timer);
+          }, 25);
+          countObserver.unobserve(el);
         }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => countObserver.observe(c));
 
-        // INIT AOS ONCE
-        if (typeof AOS !== "undefined") {
-            AOS.init({
-                duration: 800,
-                once: true
-            });
+    // SCROLL REVEAL
+    const revealEls = document.querySelectorAll('.service-card, .test-card, .gallery-item, .about-left, .about-right, .pillar, .pricing-table, .pricing-cta-box, .ci-item, .stat-item');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('revealed'), i * 80);
+          revealObs.unobserve(e.target);
         }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => {
+      el.classList.add('will-reveal');
+      revealObs.observe(el);
     });
+  });
 
-});
-</script>
+  // SERVICE SELECTOR
+  function selectService(btn, service) {
+    document.querySelectorAll('.svc-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('bookBtn').href =
+      `https://wa.me/2349041999098?text=Hi%20I%20want%20to%20book:%20${service}`;
+  }
+  </script>
 </body>
 </html>

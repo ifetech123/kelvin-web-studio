@@ -212,7 +212,9 @@
     border-top: 1px solid var(--border);
   }
 
-  .proof-item {}
+  .proof-item {
+    border-radius: 0;
+  }
   .proof-num {
     font-family: 'Fraunces', serif;
     font-size: 2.4rem;
@@ -398,6 +400,7 @@
   .t1 .m-grid-item:nth-child(2) { background:#d4bfa8; }
   .t1 .m-grid-item:nth-child(3) { background:#c4a882; }
 
+
   /* Theme 2 — Food/Restaurant (fresh green) */
   .t2 .mock-nav-bar { background:#fff; border-bottom:1px solid #e8f0ec; }
   .t2 .m-dot:nth-child(1){background:#ff6b6b;} .t2 .m-dot:nth-child(2){background:#ffd93d;} .t2 .m-dot:nth-child(3){background:#6bcb77;}
@@ -446,6 +449,57 @@
   .t5 .m-grid-item:nth-child(2) { background:#383838; }
   .t5 .m-grid-item:nth-child(3) { background:#252525; }
 
+
+  .tpl-thumb {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.tpl-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top; /* shows the hero/top of site, not middle */
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+  .tpl-card:hover .tpl-thumb img {
+   transform: scale(1.04);
+  }
+
+  .tpl-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 11, 9, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s;
+  }
+
+  .tpl-card:hover .tpl-overlay {
+   background: rgba(12, 11, 9, 0.55); 
+  }
+
+  .preview-btn {
+    background: white;
+    color: var(--ink);
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .tpl-card:hover .preview-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .tpl-overlay {
     position: absolute; inset: 0;
     background: rgba(20,18,16,0);
