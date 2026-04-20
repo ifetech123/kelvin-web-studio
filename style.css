@@ -715,6 +715,27 @@
     padding:2.5rem 5%;
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;
   }
+  
+  .footer-eyebrow{
+    display: inline-flex;  ;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    
+  }
+  .footer-eyebrow::before{
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: breath 2.5s infinite;
+  }
+  
+  @keyframes breath {
+    0%,100% { opacity:1; transform:scale(1.40); }
+    50% { opacity:0.3; transform:scale(0.6); }
+  }
+
 
   .footer-logo { font-family:'Fraunces',serif; font-size:1rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; }
   .footer-links { display:flex; gap:2rem; flex-wrap:wrap; }
