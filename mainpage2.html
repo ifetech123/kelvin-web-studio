@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebsByDev — Websites That Get You Customers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --cream: #ede8da;
+    --accent: #ff4d00;
+    --accent2: #00c896;
+    --mid: #1e1e1e;
+    --muted: #888;
+    --border: rgba(245,240,232,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3,h4 { font-family: 'Syne', sans-serif; font-weight: 800; line-height: 1.1; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.55rem 1.3rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: #e04400; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10rem 5% 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(8rem, 22vw, 20rem);
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,200,150,0.1);
+    border: 1px solid rgba(0,200,150,0.3);
+    color: var(--accent2);
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.8rem;
+    width: fit-content;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  h1.hero-headline {
+    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    letter-spacing: -0.04em;
+    max-width: 14ch;
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+  }
+
+  h1.hero-headline em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(245,240,232,0.65);
+    max-width: 50ch;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-ctas {
+    display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--accent);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+    border: 2px solid var(--accent);
+  }
+
+  .btn-primary:hover { background: #e04400; border-color: #e04400; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,77,0,0.35); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: rgba(245,240,232,0.4); background: rgba(245,240,232,0.05); }
+
+  .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 2.5rem;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--white);
+    letter-spacing: -0.03em;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 7rem 5%; }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-sub {
+    color: rgba(245,240,232,0.55);
+    font-size: 1.05rem;
+    max-width: 55ch;
+    line-height: 1.8;
+  }
+
+  /* ─── PROBLEM SECTION ─── */
+  #problem {
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 4rem;
+  }
+
+  .problem-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .problem-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  .problem-item:hover { border-color: rgba(255,77,0,0.4); }
+
+  .problem-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .problem-item h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .problem-item p {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.7;
+  }
+
+  .solution-box {
+    position: sticky; top: 8rem;
+    background: linear-gradient(135deg, rgba(255,77,0,0.12), rgba(0,200,150,0.06));
+    border: 1px solid rgba(255,77,0,0.25);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+
+  .solution-box h3 {
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+  }
+
+  .solution-box p {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .solution-points { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
+
+  .solution-points li {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.92rem;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .solution-points li::before {
+    content: '✓';
+    color: var(--accent2);
+    font-weight: 700;
+    font-size: 0.85rem;
+    background: rgba(0,200,150,0.15);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--black); }
+
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .package-card {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.2rem;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .package-card:hover { border-color: rgba(255,77,0,0.35); transform: translateY(-4px); }
+
+  .package-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(255,77,0,0.08), var(--mid));
+  }
+
+  .featured-badge {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .package-emoji { font-size: 2.2rem; margin-bottom: 1.2rem; }
+
+  .package-name {
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .package-tagline {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .package-desc {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.75;
+    margin-bottom: 1.8rem;
+  }
+
+  .package-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+
+  .package-features li {
+    font-size: 0.87rem;
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    color: rgba(245,240,232,0.75);
+  }
+
+  .package-features li .check {
+    color: var(--accent2);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .package-price {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .price-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .price-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -0.03em;
+  }
+
+  .price-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
+
+  .package-cta {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 0.85rem;
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border: 2px solid var(--border);
+    color: var(--white);
+  }
+
+  .package-card.featured .package-cta {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .package-card:not(.featured) .package-cta:hover { border-color: var(--accent); color: var(--accent); }
+  .package-card.featured .package-cta:hover { background: #e04400; }
+
+  /* ─── HOW IT WORKS ─── */
+  #process {
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2rem; left: calc(12.5% + 1.5rem); right: calc(12.5% + 1.5rem);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0.5;
+  }
+
+  .step-item {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    padding: 0 1.5rem;
+    position: relative;
+  }
+
+  .step-num {
+    width: 4rem; height: 4rem;
+    background: var(--black);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-desc { font-size: 0.85rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+  /* ─── PORTFOLIO ─── */
+  #portfolio { background: var(--black); }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .case-card {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .case-card:hover { border-color: rgba(0,200,150,0.4); transform: translateY(-4px); }
+
+  .case-card.wide { grid-column: span 2; }
+
+  .case-thumb {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-thumb.orange { background: linear-gradient(135deg, #1a0800, #2a1005); }
+  .case-thumb.green { background: linear-gradient(135deg, #001a0f, #002916); }
+  .case-thumb.blue { background: linear-gradient(135deg, #000d1a, #001429); }
+
+  .case-thumb .mock-browser {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    width: 80%; height: 80%;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  .browser-bar {
+    background: rgba(255,255,255,0.05);
+    height: 28px;
+    display: flex; align-items: center;
+    padding: 0 0.75rem;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .browser-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .d1 { background: #ff5f57; }
+  .d2 { background: #ffbd2e; }
+  .d3 { background: #28c840; }
+
+  .browser-content {
+    flex: 1;
+    padding: 0.75rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .mock-line {
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .mock-line.accent { background: rgba(255,77,0,0.4); width: 40%; }
+  .mock-line.short { width: 60%; }
+  .mock-line.shorter { width: 35%; }
+
+  .case-body { padding: 1.8rem; }
+
+  .case-client {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .case-title {
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .case-flow {
+    display: flex; gap: 0.5rem; align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+
+  .case-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: rgba(245,240,232,0.6);
+  }
+
+  .case-arrow { color: var(--muted); font-size: 0.8rem; }
+
+  .case-result {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: rgba(0,200,150,0.08);
+    border: 1px solid rgba(0,200,150,0.2);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  /* ─── TRUST ─── */
+  #trust { background: var(--mid); border-top: 1px solid var(--border); }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+  }
+
+  .testimonials { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .testi-card {
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .testi-card:hover { border-color: rgba(255,77,0,0.3); }
+
+  .testi-quote {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+
+  .testi-author { display: flex; align-items: center; gap: 0.85rem; }
+
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .av1 { background: #2a1005; }
+  .av2 { background: #001a0f; }
+  .av3 { background: #000d1a; }
+
+  .testi-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .testi-role { font-size: 0.78rem; color: var(--muted); }
+
+  .stars { color: #f5a623; font-size: 0.75rem; margin-bottom: 0.8rem; }
+
+  .guarantees { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .guarantee-item {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .guarantee-item:hover { border-color: rgba(0,200,150,0.3); }
+
+  .g-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .guarantee-item h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    margin-bottom: 0.3rem;
+  }
+
+  .guarantee-item p {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.65;
+  }
+
+  /* ─── STANDOUT SECTION ─── */
+  #standout { background: var(--black); border-top: 1px solid var(--border); }
+
+  .standout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .standout-card {
+    padding: 2rem;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.25s;
+  }
+
+  .standout-card:hover { border-color: rgba(255,77,0,0.3); transform: translateY(-3px); }
+
+  .standout-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .standout-title { font-size: 1rem; font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 0.5rem; }
+  .standout-desc { font-size: 0.85rem; color: rgba(245,240,232,0.5); line-height: 1.7; }
+
+  /* ─── FINAL CTA ─── */
+  #cta {
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 9rem 5%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,77,0,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #cta .section-title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 1.2rem;
+  }
+
+  #cta p {
+    color: rgba(245,240,232,0.55);
+    max-width: 45ch;
+    margin: 0 auto 2.5rem;
+    font-size: 1.05rem;
+  }
+
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: #25d366;
+    color: white;
+    padding: 1.1rem 2.2rem;
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s;
+    border: 2px solid #25d366;
+  }
+
+  .whatsapp-btn:hover { background: #1db954; border-color: #1db954; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.35); }
+
+  .whatsapp-icon { font-size: 1.3rem; }
+
+  .cta-note {
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+
+  .footer-brand span { color: var(--accent); }
+
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .problem-grid { grid-template-columns: 1fr; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .case-card.wide { grid-column: span 1; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .standout-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 4%; }
+    section { padding: 5rem 5%; }
+    .hero-stats { gap: 1.5rem; }
+    .process-steps { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Webs<span>By</span>Dev</div>
+  <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20get%20my%20business%20online" class="nav-cta" target="_blank">💬 Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">ONLINE</div>
+
+  <div class="hero-badge">✦ Available for new projects</div>
+
+  <h1 class="hero-headline fade-up">
+    Your Business Needs to be <em>Found</em> Online
+  </h1>
+
+  <p class="hero-sub fade-up">
+    I build fast, mobile-friendly websites that help small businesses, vendors, and service providers get real customers — not just followers. If people can't find you online, you're losing money every single day.
+  </p>
+
+  <div class="hero-ctas fade-up">
+    <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20get%20my%20business%20online" class="btn-primary" target="_blank">
+      <span>💬</span> Get My Business Online
+    </a>
+    <a href="#portfolio" class="btn-ghost">See My Work ↓</a>
+  </div>
+
+  <div class="hero-stats fade-up">
+    <div class="stat-item">
+      <div class="stat-num">3<span>–</span>5</div>
+      <div class="stat-label">Days Delivery</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Mobile Optimised</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">₦<span>0</span></div>
+      <div class="stat-label">Hidden Charges</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">WhatsApp Integration</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM → SOLUTION -->
+<section id="problem">
+  <div class="section-tag">The Real Problem</div>
+  <h2 class="section-title">You're losing customers<br>you don't even know about</h2>
+  <p class="section-sub">Every day someone searches for what you sell. If you're not online, they find your competitor instead.</p>
+
+  <div class="problem-grid">
+    <div class="problem-list">
+      <div class="problem-item fade-up">
+        <div class="problem-icon">📱</div>
+        <div>
+          <h4>"Only Instagram & WhatsApp" isn't enough</h4>
+          <p>Posts get buried, stories disappear in 24hrs, and your DMs are a mess. You're working hard but customers can't find you when they need you most.</p>
+        </div>
+      </div>
+      <div class="problem-item fade-up">
+        <div class="problem-icon">🔍</div>
+        <div>
+          <h4>You're invisible on Google</h4>
+          <p>When someone types "fashion vendor near me" or "best food delivery [your city]" — your business doesn't show up. That's direct sales you're missing.</p>
+        </div>
+      </div>
+      <div class="problem-item fade-up">
+        <div class="problem-icon">📋</div>
+        <div>
+          <h4>No clear place to show your prices & products</h4>
+          <p>Customers have to DM just to ask basic questions. That friction kills sales. You need one clean link that answers everything for you — even while you sleep.</p>
+        </div>
+      </div>
+      <div class="problem-item fade-up">
+        <div class="problem-icon">😤</div>
+        <div>
+          <h4>You look less legit without a website</h4>
+          <p>People Google businesses before they buy. No website = no trust. Your competitor with a site wins the customer — even if you're actually better.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-box fade-up">
+      <h3>Here's what changes when you get a proper website</h3>
+      <p>A website isn't just a page on the internet. It's a sales tool that works 24/7, builds trust instantly, and turns strangers into paying customers.</p>
+      <p>I build simple, fast sites built around one goal: getting you more business. Not fancy art — <strong>practical tools that make you money.</strong></p>
+      <ul class="solution-points">
+        <li>Customers find you on Google search</li>
+        <li>Your products & prices are always visible</li>
+        <li>One-tap WhatsApp order button on every page</li>
+        <li>Works perfectly on any phone (that's where your buyers are)</li>
+        <li>Looks professional enough to win trust immediately</li>
+        <li>No tech knowledge needed from you — ever</li>
+      </ul>
+      <br>
+      <a href="https://wa.me/2348000000000?text=I%20want%20to%20get%20my%20business%20online" class="btn-primary" target="_blank" style="display:inline-flex;font-size:0.9rem;padding:0.8rem 1.5rem;">
+        💬 Let's fix this today
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag">Packages</div>
+      <h2 class="section-title">Simple offers.<br>Real results.</h2>
+    </div>
+    <p class="section-sub" style="max-width:38ch;">No confusing tech packages. Just pick what fits your business and I handle the rest.</p>
+  </div>
+
+  <div class="packages-grid">
+
+    <!-- Package 1 -->
+    <div class="package-card fade-up">
+      <div class="package-emoji">🏪</div>
+      <div class="package-name">Business Starter Page</div>
+      <div class="package-tagline">Get online in 3 days</div>
+      <p class="package-desc">Perfect if you just need a clean, professional page that tells people who you are, what you do, and how to contact you.</p>
+      <ul class="package-features">
+        <li><span class="check">✓</span> 1-page clean website</li>
+        <li><span class="check">✓</span> Your info, services & location</li>
+        <li><span class="check">✓</span> WhatsApp contact button</li>
+        <li><span class="check">✓</span> Works on all phones</li>
+        <li><span class="check">✓</span> Fast loading speed</li>
+        <li><span class="check">✓</span> Basic Google visibility setup</li>
+      </ul>
+      <div class="package-price">
+        <div class="price-label">Starting from</div>
+        <div class="price-value">₦25,000</div>
+        <div class="price-note">One-time payment. No monthly fees.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I'm%20interested%20in%20the%20Starter%20package" class="package-cta" target="_blank">Get This →</a>
+    </div>
+
+    <!-- Package 2 - Featured -->
+    <div class="package-card featured fade-up">
+      <div class="featured-badge">Most Popular</div>
+      <div class="package-emoji">🛒</div>
+      <div class="package-name">Vendor / Product Page</div>
+      <div class="package-tagline">Turn visitors into buyers</div>
+      <p class="package-desc">For Instagram vendors, fashion sellers, food businesses & local shops. Showcase your products and get orders flowing directly to your WhatsApp.</p>
+      <ul class="package-features">
+        <li><span class="check">✓</span> Multi-page website</li>
+        <li><span class="check">✓</span> Product gallery with prices</li>
+        <li><span class="check">✓</span> "Order on WhatsApp" button per product</li>
+        <li><span class="check">✓</span> Customer review section</li>
+        <li><span class="check">✓</span> Instagram / social media links</li>
+        <li><span class="check">✓</span> Google My Business setup</li>
+        <li><span class="check">✓</span> 1 month free support</li>
+      </ul>
+      <div class="package-price">
+        <div class="price-label">Starting from</div>
+        <div class="price-value">₦50,000</div>
+        <div class="price-note">Delivered in 5–7 days.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I'm%20interested%20in%20the%20Vendor%20package" class="package-cta" target="_blank">Get This →</a>
+    </div>
+
+    <!-- Package 3 -->
+    <div class="package-card fade-up">
+      <div class="package-emoji">⚡</div>
+      <div class="package-name">Custom Solution</div>
+      <div class="package-tagline">Built around your exact needs</div>
+      <p class="package-desc">For businesses that need something specific — booking systems, service listings, appointment forms, or a full brand website with custom features.</p>
+      <ul class="package-features">
+        <li><span class="check">✓</span> Full custom design</li>
+        <li><span class="check">✓</span> Booking or order forms</li>
+        <li><span class="check">✓</span> Multiple pages & sections</li>
+        <li><span class="check">✓</span> WhatsApp automation setup</li>
+        <li><span class="check">✓</span> SEO (Google search) setup</li>
+        <li><span class="check">✓</span> 3 months ongoing support</li>
+        <li><span class="check">✓</span> Priority delivery</li>
+      </ul>
+      <div class="package-price">
+        <div class="price-label">Starting from</div>
+        <div class="price-value">₦100,000</div>
+        <div class="price-note">Timeline based on project scope.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I%20need%20a%20custom%20website%20solution" class="package-cta" target="_blank">Let's Talk →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="process">
+  <div class="section-tag">The Process</div>
+  <h2 class="section-title">Getting started is<br>easier than you think</h2>
+  <p class="section-sub">No lengthy meetings. No confusing tech talk. Just 4 simple steps from first message to live website.</p>
+
+  <div class="process-steps">
+    <div class="step-item fade-up">
+      <div class="step-num">01</div>
+      <div class="step-title">We Chat on WhatsApp</div>
+      <p class="step-desc">Message me, tell me about your business and what you need. I'll ask a few quick questions to understand your goals. Takes about 10 minutes.</p>
+    </div>
+    <div class="step-item fade-up">
+      <div class="step-num">02</div>
+      <div class="step-title">I Send You a Plan</div>
+      <p class="step-desc">I'll tell you exactly what your website will include, what it will look like, and what it costs. No surprises, no hidden fees.</p>
+    </div>
+    <div class="step-item fade-up">
+      <div class="step-num">03</div>
+      <div class="step-title">I Build It Fast</div>
+      <p class="step-desc">Once we agree, I get to work. You'll get a preview to review before anything goes live. Most projects are done within 3–7 days.</p>
+    </div>
+    <div class="step-item fade-up">
+      <div class="step-num">04</div>
+      <div class="step-title">You Go Live & Get Customers</div>
+      <p class="step-desc">Your website goes live. I'll hand it over to you fully and show you how to share it. Then watch your business grow online.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-tag">My Work</div>
+  <h2 class="section-title">Real projects.<br>Real results.</h2>
+  <p class="section-sub">Every project starts with a problem. Here's how I solve them.</p>
+
+  <div class="portfolio-grid">
+
+    <div class="case-card fade-up">
+      <div class="case-thumb orange">
+        <div class="mock-browser">
+          <div class="browser-bar">
+            <div class="browser-dot d1"></div>
+            <div class="browser-dot d2"></div>
+            <div class="browser-dot d3"></div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-line accent"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-line"></div>
+            <div class="mock-line shorter"></div>
+            <div class="mock-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-client">📦 Fashion Vendor — Lagos</div>
+        <h3 class="case-title">From Instagram-only to a website that orders for her</h3>
+        <div class="case-flow">
+          <span class="case-tag">Problem: No website</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Built: Product page + WhatsApp</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Result ↓</span>
+        </div>
+        <div class="case-result">
+          📈 3× more order enquiries within first 2 weeks of going live
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card fade-up">
+      <div class="case-thumb green">
+        <div class="mock-browser">
+          <div class="browser-bar">
+            <div class="browser-dot d1"></div>
+            <div class="browser-dot d2"></div>
+            <div class="browser-dot d3"></div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-line accent"></div>
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-line shorter"></div>
+            <div class="mock-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-client">🍱 Food Business — Abuja</div>
+        <h3 class="case-title">A local caterer finally showing up on Google</h3>
+        <div class="case-flow">
+          <span class="case-tag">Problem: No visibility</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Built: Menu site + SEO</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Result ↓</span>
+        </div>
+        <div class="case-result">
+          🔍 Ranked on first page of Google for local food searches in 4 weeks
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card wide fade-up">
+      <div class="case-thumb blue" style="height:160px;">
+        <div class="mock-browser" style="width:70%;">
+          <div class="browser-bar">
+            <div class="browser-dot d1"></div>
+            <div class="browser-dot d2"></div>
+            <div class="browser-dot d3"></div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-line accent"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-line"></div>
+            <div class="mock-line shorter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-client">🔧 Local Service Provider — Port Harcourt</div>
+        <h3 class="case-title">An electrician who stopped relying on referrals alone</h3>
+        <div class="case-flow">
+          <span class="case-tag">Problem: Only word of mouth</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Built: Service page + WhatsApp booking</span>
+          <span class="case-arrow">→</span>
+          <span class="case-tag">Result ↓</span>
+        </div>
+        <div class="case-result">
+          ⚡ Went from 2 clients/week from referrals to 8+ enquiries/week from online search
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRUST BUILDERS -->
+<section id="trust">
+  <div class="section-tag">Why Trust Me</div>
+  <h2 class="section-title">Words from clients.<br>Promises I keep.</h2>
+
+  <div class="trust-grid">
+
+    <div class="testimonials">
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"I was skeptical — I thought websites were only for big companies. But within the first week, I got 4 new orders from people who found me on Google. That never happened with just Instagram."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">👩🏾</div>
+          <div>
+            <div class="testi-name">Amaka O.</div>
+            <div class="testi-role">Fashion Vendor, Lagos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"The WhatsApp button is everything. My customers just tap and they're already chatting with me. It's like having a salesperson working 24/7 for free."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">👨🏾</div>
+          <div>
+            <div class="testi-name">Chukwuemeka B.</div>
+            <div class="testi-role">Food Business, Abuja</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"He delivered in 4 days and explained everything in plain English. I was worried I wouldn't understand but it was so smooth. My business looks legit now."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">👩🏽</div>
+          <div>
+            <div class="testi-name">Tolu F.</div>
+            <div class="testi-role">Beauty Services, Port Harcourt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guarantees">
+      <div class="guarantee-item fade-up">
+        <div class="g-icon">⚡</div>
+        <div>
+          <h4>Fast Delivery — 3 to 7 Days</h4>
+          <p>I know time is money. Basic sites are done in 3 days. Bigger projects max 7 days. I don't sit on your project.</p>
+        </div>
+      </div>
+      <div class="guarantee-item fade-up">
+        <div class="g-icon">📱</div>
+        <div>
+          <h4>100% Mobile-Friendly. Guaranteed.</h4>
+          <p>Over 80% of your customers are on their phones. Every site I build looks perfect on mobile — or I fix it for free.</p>
+        </div>
+      </div>
+      <div class="guarantee-item fade-up">
+        <div class="g-icon">💬</div>
+        <div>
+          <h4>WhatsApp Integration on Every Site</h4>
+          <p>Every site I build comes with a WhatsApp button that makes it dead easy for customers to reach you instantly.</p>
+        </div>
+      </div>
+      <div class="guarantee-item fade-up">
+        <div class="g-icon">🔒</div>
+        <div>
+          <h4>No Hidden Fees. Ever.</h4>
+          <p>The price we agree on is the price you pay. I'll be upfront about any future costs like hosting or domain — nothing sneaks up on you.</p>
+        </div>
+      </div>
+      <div class="guarantee-item fade-up">
+        <div class="g-icon">🛠️</div>
+        <div>
+          <h4>Free Support After Launch</h4>
+          <p>Got a question after your site goes live? I'm available on WhatsApp. I don't disappear once I get paid.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDOUT SECTION -->
+<section id="standout">
+  <div class="section-tag">What Makes Me Different</div>
+  <h2 class="section-title">I'm not just a developer.<br>I think like your customer.</h2>
+  <p class="section-sub">Most developers build websites. I build websites that do a job — getting your business more customers.</p>
+
+  <div class="standout-grid">
+    <div class="standout-card fade-up">
+      <div class="standout-icon">🎯</div>
+      <div class="standout-title">WhatsApp-First Design</div>
+      <p class="standout-desc">Every site I build is designed to push visitors to WhatsApp — where Nigerian businesses actually close deals. It's not an afterthought, it's the foundation.</p>
+    </div>
+    <div class="standout-card fade-up">
+      <div class="standout-icon">🗣️</div>
+      <div class="standout-title">I Explain Things in Plain English</div>
+      <p class="standout-desc">No tech jargon. No confusing terms. I explain what I'm doing and why, so you always know what's happening with your website.</p>
+    </div>
+    <div class="standout-card fade-up">
+      <div class="standout-icon">🏘️</div>
+      <div class="standout-title">I Understand Small Business</div>
+      <p class="standout-desc">I'm not building for Silicon Valley startups. I understand the budget, the market, and the hustle of Nigerian vendors and local businesses.</p>
+    </div>
+    <div class="standout-card fade-up">
+      <div class="standout-icon">📊</div>
+      <div class="standout-title">I Set You Up to Be Found on Google</div>
+      <p class="standout-desc">Every site comes with basic SEO — the stuff that helps Google understand your business so you can rank locally. Most beginners skip this. I don't.</p>
+    </div>
+    <div class="standout-card fade-up">
+      <div class="standout-icon">🚀</div>
+      <div class="standout-title">Speed-Obsessed</div>
+      <p class="standout-desc">Slow websites kill sales. I optimize every site so it loads fast even on poor mobile data connections — because that's the reality for most Nigerian users.</p>
+    </div>
+    <div class="standout-card fade-up">
+      <div class="standout-icon">🤝</div>
+      <div class="standout-title">I'm a Partner, Not Just a Vendor</div>
+      <p class="standout-desc">When your business grows, I grow with you. I'll tell you honestly when it's time to upgrade your site, add new features, or try something new.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="section-tag">Ready to Grow?</div>
+  <h2 class="section-title">Let's get your business the attention it deserves</h2>
+  <p>
+    Message me on WhatsApp right now. Tell me about your business. No pressure, no commitments — just a real conversation about what's possible.
+  </p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20get%20my%20business%20online.%20Can%20we%20talk%3F" class="whatsapp-btn" target="_blank">
+      <span class="whatsapp-icon">💬</span>
+      Message Me on WhatsApp
+    </a>
+    <a href="mailto:your@email.com" class="btn-ghost">📧 Send an Email</a>
+  </div>
+  <p class="cta-note">⚡ I typically reply within 1–2 hours · No spam, ever · 100% free consultation</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Webs<span>By</span>Dev</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#portfolio">Work</a>
+    <a href="#process">Process</a>
+    <a href="https://wa.me/2348000000000" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2025 WebsByDev. Built to convert.</div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth nav hide/show
+  let lastY = 0;
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.style.transform = (y > lastY && y > 100) ? 'translateY(-100%)' : 'translateY(0)';
+    nav.style.transition = 'transform 0.3s ease';
+    lastY = y;
+  });
+</script>
+</body>
+</html>

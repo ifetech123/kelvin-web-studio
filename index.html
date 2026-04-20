@@ -1,167 +1,555 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelvin Web Studio | Professional Websites for Growing Businesses</title>
-    <link rel="stylesheet" href="style.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelvin Web Studio — Websites That Grow Your Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        
-        <div class="container">
-            <div class="logo">KELVIN<span> WEBSTUDIO</span></div>
-            <ul class="nav-links">
-                <li><a href="#templates">Templates</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="https://wa.me/9041999098" class="cta-nav">Start a Project</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <span class="logo-dot"></span>
+    Kelvin Web Studio
+  </div>
+  <ul class="nav-links">
+    <li><a href="#templates">Templates</a></li>
+    <li><a href="#services">Packages</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#trust">Reviews</a></li>
+    <li><a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="nav-cta">Start a Project</a></li>
+  </ul>
+  <a href="https://wa.me/2349041999098" target="_blank" class="nav-mobile-cta">💬 Chat</a>
+</nav>
 
-            </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">Open for new projects</div>
+
+    <h1 class="hero-h reveal">
+      Websites that bring your business <em>real customers</em>
+    </h1>
+
+    <p class="hero-sub reveal">
+      I'm Kelvin — I build fast, clean, mobile-ready websites for small businesses, vendors, and local services across Nigeria. Pick a ready-made template or get something built from scratch. Either way, you go live in days.
+    </p>
+
+    <div class="hero-actions reveal">
+      <a href="#templates" class="btn-primary">Browse Templates →</a>
+      <a href="https://wa.me/2348000000000?text=Hi%20Kelvin!%20I%20want%20a%20custom%20website" target="_blank" class="btn-outline">💬 Talk to Kelvin</a>
+    </div>
+
+    <div class="hero-proof reveal">
+      <div class="proof-item">
+        <div class="proof-num">3<sup>–5</sup></div>
+        <div class="proof-label">Days to go live</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">5<sup>+</sup></div>
+        <div class="proof-label">Live templates ready</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">100<sup>%</sup></div>
+        <div class="proof-label">Mobile optimised</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">₦0</div>
+        <div class="proof-label">Hidden charges</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM → SOLUTION -->
+<section id="problem">
+  <div class="label">The Problem</div>
+  <h2 class="section-h reveal">Your customers are searching.<br>They just can't find you.</h2>
+  <p class="section-p reveal">Every day people search Google for exactly what you sell. If you're not online, your competitor gets that customer instead.</p>
+
+  <div class="problem-layout">
+    <div class="problem-cards">
+      <div class="prob-card reveal">
+        <div class="prob-icon">📱</div>
+        <div>
+          <h4>Instagram & WhatsApp alone aren't enough</h4>
+          <p>Posts disappear, stories expire in 24 hours, and DMs are chaotic. Customers can't find you when they actually need you.</p>
         </div>
-    </nav>
-
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <h1>Professional Website Built  <span>to Grow Your Business.</span></h1>
-            <p>Choose a proven template, get it customize in 7-10 days, and start attracting customers online.</p>
-            <div class="hero-btns">
-                <a href="#templates" class="btn-primary">Explore Website Solutions</a>
-                <a href="#portfolio" class="btn-secondary">See Our Work</a>
-                <a href="templates/BarbingSalon/index2.html">See Demo</a>
-                <a href="templates/clientproject/index.html">See Client Project</a>
-            </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-icon">🔍</div>
+        <div>
+          <h4>You don't exist on Google</h4>
+          <p>When someone searches "fashion vendor Lagos" or "caterer near me" — without a website, you're invisible. That's direct income you're missing daily.</p>
         </div>
-    </header>
-
-    <!-- Template Storefront (The Shelves) -->
-    <section id="templates" class="templates-section">
-        <div class="container">
-            <h2 class="section-title">The Template Library</h2>
-            <p class="section-subtitle">Choose a foundation, and we'll build your dream on top of it.</p>
-            
-            <div class="template-grid">
-                 <!-- Template 1: Personal Brand -->
-                <div class="template-card">
-                    <div class="temp-img">
-                        <img src="image1.JPG" alt="Creator Template">
-                    </div>
-
-                    <div class="temp-info">
-                        <h2>Creator/Personal Brand</h2>
-                        <h3>Business Starter Website – ₦50,000</h3>
-                        <p>For consultants, speakers, and digital creators.</p>
-                        <a href="#" class="view-demo">Live Demo (Coming Soon)</a>
-                    </div>
-                </div>
-
-
-                <!-- Template 2: SME -->
-                <div class="template-card">
-                    <div class="temp-img">
-                        <img src="image2.JPG" alt="Small business Template">
-                    </div>
-                    <div class="temp-info">
-                        <h2>SME Business Starter</h2>
-                        <h3>Business Starter Website – ₦75,000</h3>
-                        <p>Perfect for retail, services, and small brands.</p>
-                        <a href="templates/smallbusiness/index1.html" class="view-demo">Live Demo →</a>
-                    </div>
-                </div>
-
-                <!-- Template 3: Real Estate -->
-                <div class="template-card">
-                    <div class="temp-img">
-                        <img src="image3.JPG" alt="Real Estate Template">
-                    </div>
-                    <div class="temp-info">
-                        <h2>Real Estate Pro</h2>
-                        <h3>Business Starter Website – ₦99,000</h3>
-                        <p>Optimized for property listings and lead capture.</p>
-                        <a href="#" class="view-demo">Live Demo (Coming Soon)</a>
-                    </div>
-                </div>
-
-               
-            </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-icon">📋</div>
+        <div>
+          <h4>No single place to show prices & products</h4>
+          <p>Customers DM just to ask basic questions. That friction kills sales. A website answers everything automatically, even at 2am.</p>
         </div>
-    </section>
-
-    <!-- Portfolio Section (Your Past Work) -->
-    <section id="portfolio" class="portfolio-section">
-        <div class="container">
-            <h2 class="section-title">Selected Projects</h2>
-            <div class="portfolio-grid">
-                <!-- Add your projects from last year here -->
-                <div class="portfolio-item">
-                    <div class="port-img">PROJECT 1</div>
-                    <p>E-commerce Brand 2025</p>
-                </div>
-                <div class="portfolio-item">
-                    <div class="port-img">PROJECT 2</div>
-                    <p>Logistics Company Site</p>
-                </div>
-            </div>
+      </div>
+      <div class="prob-card reveal">
+        <div class="prob-icon">🤝</div>
+        <div>
+          <h4>No website means less trust</h4>
+          <p>Before buying, people search. A competitor with a website looks more professional — and wins the sale, even if you're actually better.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Kelvin Web Studio. Built for Growth.</p>
-    </footer>
+    <div class="solution-panel reveal">
+      <h3>A website fixes all of this — fast.</h3>
+      <p>Not a complex system. A clean, fast site built around one goal: getting your business more customers. I've done it for vendors, caterers, and service providers across Nigeria.</p>
+      <ul class="sol-list">
+        <li>Shows up when customers search Google</li>
+        <li>Displays products, prices & services 24/7</li>
+        <li>One-tap WhatsApp button on every page</li>
+        <li>Loads fast even on slow mobile data</li>
+        <li>Builds instant trust with new visitors</li>
+        <li>You don't need any tech knowledge</li>
+      </ul>
+      <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="sol-cta">
+        💬 Let's fix this — chat me now
+      </a>
+    </div>
+  </div>
+</section>
 
-    <a href="https://wa.me/2349041999098?text=Hello,%20I%20want%20a%20website%20from%20Kelvin%20Web%20Studio"
-   class="whatsapp-float"
-   target="_blank">
-   <i class="fab fa-whatsapp"></i>
-</a>
+<!-- TEMPLATES -->
+<section id="templates">
+  <div class="templates-header">
+    <div>
+      <div class="label">Ready-Made Templates</div>
+      <h2 class="section-h reveal">Pick a design.<br>I'll make it yours.</h2>
+    </div>
+    <p class="section-p reveal" style="max-width:36ch; text-align:right;">Real websites I've built. Click Preview to see the live version, then tell me which one you want.</p>
+  </div>
 
+  <div class="templates-grid">
 
-    <script>
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
+    <!-- Template 1 -->
+    <div class="tpl-card reveal" onclick="window.open('https://ifetech123.github.io/MKADreamHomeProperty/MKA_Backup/index.html','_blank')">
+      <div class="tpl-thumb">
+        <div class="tpl-mock t1">
+          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
+          <div class="mock-body">
+            <div class="m-hero-block">
+              <div class="m-line heading"></div>
+              <div class="m-line sub"></div>
+              <div class="m-btn"></div>
+            </div>
+            <div class="m-grid">
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-overlay">
+          <div class="preview-btn" herf="https://ifetech123.github.io/MKADreamHomeProperty/MKA_Backup/index.html">👁 Preview Live</div>
+        </div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-category">Real Estate</div>
+        <div class="tpl-name">MKA Dream Home Property </div>
+        <p class="tpl-desc">Product gallery, WhatsApp order button, Instagram link. Perfect for fashion vendors & clothing sellers.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price">₦79,999 <span><b> customised for you</span></div>
+          <div class="tpl-action">Preview →</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Template 2 -->
+    <div class="tpl-card reveal" onclick="window.open('https://your-demo-link-2.com','_blank')">
+      <div class="tpl-thumb">
+        <div class="tpl-mock t2">
+          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
+          <div class="mock-body">
+            <div class="m-hero-block">
+              <div class="m-line heading"></div>
+              <div class="m-line sub"></div>
+              <div class="m-btn"></div>
+            </div>
+            <div class="m-grid">
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-overlay">
+          <div class="preview-btn">👁 Preview Live</div>
+        </div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-category">Food & Catering</div>
+        <div class="tpl-name">The Menu</div>
+        <p class="tpl-desc">Digital menu, food photos, WhatsApp ordering. Built for caterers, restaurants & home chefs.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price">₦35,000 <span>customised for you</span></div>
+          <div class="tpl-action">Preview →</div>
+        </div>
+      </div>
+    </div>
 
-    hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    hamburger.classList.toggle("toggle");
-});
+    <!-- Template 3 -->
+    <div class="tpl-card reveal" onclick="window.open('https://your-demo-link-3.com','_blank')">
+      <div class="tpl-thumb">
+        <div class="tpl-mock t3">
+          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
+          <div class="mock-body">
+            <div class="m-hero-block">
+              <div class="m-line heading"></div>
+              <div class="m-line sub"></div>
+              <div class="m-btn"></div>
+            </div>
+            <div class="m-grid">
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-overlay">
+          <div class="preview-btn">👁 Preview Live</div>
+        </div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-category">Local Services</div>
+        <div class="tpl-name">The Pro</div>
+        <p class="tpl-desc">Services list, pricing, booking form + WhatsApp. For electricians, plumbers, cleaners, repair services.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price">₦35,000 <span>customised for you</span></div>
+          <div class="tpl-action">Preview →</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Template 4 -->
+    <div class="tpl-card reveal" onclick="window.open('https://your-demo-link-4.com','_blank')">
+      <div class="tpl-thumb">
+        <div class="tpl-mock t4">
+          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
+          <div class="mock-body">
+            <div class="m-hero-block">
+              <div class="m-line heading"></div>
+              <div class="m-line sub"></div>
+              <div class="m-btn"></div>
+            </div>
+            <div class="m-grid">
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-overlay">
+          <div class="preview-btn">👁 Preview Live</div>
+        </div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-category">Beauty & Wellness</div>
+        <div class="tpl-name">The Glam</div>
+        <p class="tpl-desc">Gallery, services & prices, appointment booking. For salons, makeup artists & beauty brands.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price">₦35,000 <span>customised for you</span></div>
+          <div class="tpl-action">Preview →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template 5 -->
+    <div class="tpl-card reveal" onclick="window.open('https://your-demo-link-5.com','_blank')">
+      <div class="tpl-thumb">
+        <div class="tpl-mock t5">
+          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
+          <div class="mock-body">
+            <div class="m-hero-block">
+              <div class="m-line heading"></div>
+              <div class="m-line sub"></div>
+              <div class="m-btn"></div>
+            </div>
+            <div class="m-grid">
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+              <div class="m-grid-item"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-overlay">
+          <div class="preview-btn">👁 Preview Live</div>
+        </div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-category">Tech & Agency</div>
+        <div class="tpl-name">The Studio</div>
+        <p class="tpl-desc">Portfolio, case studies, contact form. For freelancers, creatives, and small agencies.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price">₦40,000 <span>customised for you</span></div>
+          <div class="tpl-action">Preview →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coming Soon Slot -->
+    <div class="tpl-card reveal">
+      <div class="tpl-coming">+ Coming Soon</div>
+      <div class="tpl-body">
+        <div class="tpl-category">New Template</div>
+        <div class="tpl-name">More dropping soon</div>
+        <p class="tpl-desc">New industry templates are being built regularly. Drop me a message if you need something specific.</p>
+        <div class="tpl-footer">
+          <div class="tpl-price" style="color:var(--muted);">TBA</div>
+          <a href="https://wa.me/2348000000000?text=I%20want%20a%20custom%20template" target="_blank" class="tpl-action" onclick="event.stopPropagation()">Request one →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="services">
+  <div class="label">Pricing</div>
+  <h2 class="section-h reveal">Simple packages.<br>No surprises.</h2>
+  <p class="section-p reveal">Whether you want a ready template or something fully custom — there's a clear option for you.</p>
+
+  <div class="packages-wrap">
+
+    <div class="pkg reveal">
+      <div class="pkg-icon">🏪</div>
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-tagline">Get online fast</div>
+      <p class="pkg-desc">A clean 1-page site that tells the world who you are and how to reach you. Perfect starting point.</p>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> 1-page professional website</li>
+        <li><span class="ck">✓</span> Your services, info & location</li>
+        <li><span class="ck">✓</span> WhatsApp contact button</li>
+        <li><span class="ck">✓</span> Mobile-optimised</li>
+        <li><span class="ck">✓</span> Basic Google setup (SEO)</li>
+        <li><span class="ck">✓</span> Delivered in 3 days</li>
+      </ul>
+      <div class="pkg-price-row">
+        <div class="pkg-price-lbl">Starting from</div>
+        <div class="pkg-price-val">₦25,000</div>
+        <div class="pkg-price-note">One-time. No monthly fees.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I%20want%20the%20Starter%20package" target="_blank" class="pkg-btn">Get Started →</a>
+    </div>
+
+    <div class="pkg popular reveal">
+      <div class="pop-badge">Most Popular</div>
+      <div class="pkg-icon">🛒</div>
+      <div class="pkg-name">Vendor / Business</div>
+      <div class="pkg-tagline">Turn visitors into orders</div>
+      <p class="pkg-desc">For vendors, sellers & service providers who want a full site with products, prices & direct WhatsApp ordering.</p>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> Multi-page website</li>
+        <li><span class="ck">✓</span> Product / service gallery</li>
+        <li><span class="ck">✓</span> "Order on WhatsApp" per item</li>
+        <li><span class="ck">✓</span> Customer reviews section</li>
+        <li><span class="ck">✓</span> Google My Business setup</li>
+        <li><span class="ck">✓</span> Social media links</li>
+        <li><span class="ck">✓</span> 1 month free support</li>
+      </ul>
+      <div class="pkg-price-row">
+        <div class="pkg-price-lbl">Starting from</div>
+        <div class="pkg-price-val">₦50,000</div>
+        <div class="pkg-price-note">Delivered in 5–7 days.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I%20want%20the%20Vendor%20package" target="_blank" class="pkg-btn">Get Started →</a>
+    </div>
+
+    <div class="pkg reveal">
+      <div class="pkg-icon">⚡</div>
+      <div class="pkg-name">Custom Build</div>
+      <div class="pkg-tagline">Built for your exact needs</div>
+      <p class="pkg-desc">Booking systems, full brand sites, custom features. If you need something specific, we'll build it right.</p>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> Full custom design</li>
+        <li><span class="ck">✓</span> Booking or order forms</li>
+        <li><span class="ck">✓</span> Multiple pages</li>
+        <li><span class="ck">✓</span> WhatsApp automation</li>
+        <li><span class="ck">✓</span> Full SEO setup</li>
+        <li><span class="ck">✓</span> 3 months support</li>
+      </ul>
+      <div class="pkg-price-row">
+        <div class="pkg-price-lbl">Starting from</div>
+        <div class="pkg-price-val">₦100,000</div>
+        <div class="pkg-price-note">Timeline depends on scope.</div>
+      </div>
+      <a href="https://wa.me/2348000000000?text=I%20need%20a%20custom%20website" target="_blank" class="pkg-btn">Let's Talk →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="label">How It Works</div>
+  <h2 class="section-h reveal">From first message<br>to live in days.</h2>
+  <p class="section-p reveal">No long meetings. No tech confusion. Just four simple steps.</p>
+
+  <div class="process-row">
+    <div class="step reveal">
+      <div class="step-circle">01</div>
+      <h4>We Chat on WhatsApp</h4>
+      <p>Tell me about your business. I'll ask a few quick questions to understand what you need. Takes 10 minutes.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">02</div>
+      <h4>I Send You a Clear Plan</h4>
+      <p>I'll tell you exactly what you'll get, what it looks like, and what it costs. No surprises, nothing hidden.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">03</div>
+      <h4>I Build It Fast</h4>
+      <p>You get a preview before anything goes live. Most projects are done within 3–7 days.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">04</div>
+      <h4>You Go Live & Grow</h4>
+      <p>Site goes live. I hand it over fully and show you how to share it. Then watch your business grow online.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="label">Why Trust Kelvin</div>
+  <h2 class="section-h reveal">Real feedback.<br>Solid guarantees.</h2>
+
+  <div class="trust-layout">
+    <div class="testi-stack">
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Within the first week I got 4 new orders from people who found me on Google. That never happened with just Instagram. Kelvin made it so easy."</p>
+        <div class="testi-who">
+          <div class="testi-ava a1">👩🏾</div>
+          <div>
+            <div class="testi-nm">Amaka O.</div>
+            <div class="testi-rl">Fashion Vendor, Lagos</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The WhatsApp button is everything. Customers just tap and they're already talking to me. It's like having someone selling for me around the clock."</p>
+        <div class="testi-who">
+          <div class="testi-ava a2">👨🏾</div>
+          <div>
+            <div class="testi-nm">Emeka B.</div>
+            <div class="testi-rl">Food Business, Abuja</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I was scared it would be complicated but Kelvin explained everything in plain English. Delivered in 4 days and my business finally looks legit."</p>
+        <div class="testi-who">
+          <div class="testi-ava a3">👩🏽</div>
+          <div>
+            <div class="testi-nm">Tolu F.</div>
+            <div class="testi-rl">Beauty Services, PH</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guarantees-stack">
+      <div class="guar reveal">
+        <div class="guar-icon">⚡</div>
+        <div>
+          <h4>Fast Delivery — 3 to 7 Days</h4>
+          <p>I know your time matters. Basic sites in 3 days, bigger projects max 7. I don't sit on your project.</p>
+        </div>
+      </div>
+      <div class="guar reveal">
+        <div class="guar-icon">📱</div>
+        <div>
+          <h4>100% Mobile-Friendly. Guaranteed.</h4>
+          <p>Over 80% of your customers browse on their phones. Every site I build is perfect on mobile — or I fix it free.</p>
+        </div>
+      </div>
+      <div class="guar reveal">
+        <div class="guar-icon">💬</div>
+        <div>
+          <h4>WhatsApp Integration on Every Site</h4>
+          <p>Every single site includes a WhatsApp button that makes it dead easy for customers to reach you.</p>
+        </div>
+      </div>
+      <div class="guar reveal">
+        <div class="guar-icon">🔒</div>
+        <div>
+          <h4>Zero Hidden Fees</h4>
+          <p>The price we agree is what you pay. I'll always be upfront about hosting and domain costs — nothing sneaks up on you.</p>
+        </div>
+      </div>
+      <div class="guar reveal">
+        <div class="guar-icon">🛠️</div>
+        <div>
+          <h4>Support After Launch</h4>
+          <p>Questions after your site goes live? I'm on WhatsApp. I don't disappear once I've been paid.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="label" style="justify-content:center; color:rgba(255,255,255,0.4);">Let's Build Something</div>
+  <h2 class="section-h reveal">Ready to get your business online?</h2>
+  <p class="section-p reveal" style="color:rgba(255,255,255,0.55);">
+    Message me on WhatsApp now. Tell me about your business, pick a template, or just ask a question. Zero pressure — just a real conversation.
+  </p>
+  <div class="cta-btns reveal">
+    <a href="https://wa.me/2348000000000?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online.%20Can%20we%20talk%3F" target="_blank" class="wa-btn">
+      💬 Message Kelvin on WhatsApp
+    </a>
+    <a href="mailto:kelvin@yourmail.com" class="email-btn">📧 Send an Email</a>
+  </div>
+  <p class="cta-reassure">⚡ Usually replies within 1–2 hours &nbsp;·&nbsp; Free consultation &nbsp;·&nbsp; No spam</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span> Kelvin Web Studio</div>
+  <div class="footer-links">
+    <a href="#templates">Templates</a>
+    <a href="#services">Packages</a>
+    <a href="#process">Process</a>
+    <a href="https://wa.me/2348000000000" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2025 Kelvin Web Studio. Built to convert.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 70);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Nav hide on scroll down
+  let lastY = 0;
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
+    lastY = y;
+  }, { passive: true });
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!-- ```text
-kelvin-web-studio/
-├── index.html          <-- (The Main HQ Page)
-├── css/
-│   └── main.css        <-- (Styles for the HQ)
-├── js/
-│   └── main.js
-├── templates/          <-- (Your "Shelves")
-│   ├── sme-starter/    <-- (Template 1 files inside here)
-│   ├── real-estate/    <-- (Template 2 files inside here)
-│   └── creator-pro/    <-- (Template 3 files inside here)
-└── portfolio/          <-- (Screenshots of your past work)
-``` -->
