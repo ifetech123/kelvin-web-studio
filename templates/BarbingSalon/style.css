@@ -167,6 +167,8 @@ img { display: block; width: 100%; }
 }
 .nav-book-btn:hover { background: var(--tan2); box-shadow: var(--shadow-g); }
 
+.nav-mobile-book { display: none; }
+
 .menu-toggle {
   display: none;
   flex-direction: column; gap: 5px; cursor: pointer;
@@ -909,53 +911,246 @@ footer {
   transform: translateY(0);
 }
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════
+   RESPONSIVE — FULL MOBILE FIX
+   ══════════════════════════════ */
+
+/* ── TABLET (≤1024px) ── */
 @media (max-width: 1024px) {
-  .about-container { grid-template-columns: 1fr; gap: 3rem; }
-  .about-img-wrap img { height: 380px; }
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-img-wrap img { height: 340px; }
+  .about-p { max-width: 100%; }
+
   .services-grid { grid-template-columns: 1fr 1fr; }
+
   .pricing-wrap { grid-template-columns: 1fr; }
   .pricing-cta-box { position: static; }
-  .contact-container { grid-template-columns: 1fr; gap: 3rem; }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
   .book-card { position: static; }
 }
 
+/* ── MOBILE (≤768px) ── */
 @media (max-width: 768px) {
+
+  /* NAV */
   .nav-links {
     position: fixed;
-    top: 80px; left: 0; width: 100%;
-    height: calc(100vh - 80px);
-    background: rgba(17,16,16,0.97);
-    backdrop-filter: blur(20px);
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    background: rgba(17,16,16,0.98);
+    backdrop-filter: blur(24px);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 2.5rem;
-    transform: translateY(-110%);
+    gap: 2.2rem;
+    transform: translateX(100%);
     opacity: 0;
-    transition: all 0.45s ease;
-    z-index: 400;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 450;
   }
-  .nav-links.active { transform: translateY(0); opacity: 1; }
-  .nav-links a { font-size: 1.1rem; }
+  .nav-links.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .nav-links li { opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .nav-links.active li:nth-child(1) { opacity:1; transform:translateX(0); transition-delay: 0.1s; }
+  .nav-links.active li:nth-child(2) { opacity:1; transform:translateX(0); transition-delay: 0.15s; }
+  .nav-links.active li:nth-child(3) { opacity:1; transform:translateX(0); transition-delay: 0.2s; }
+  .nav-links.active li:nth-child(4) { opacity:1; transform:translateX(0); transition-delay: 0.25s; }
+  .nav-links.active li:nth-child(5) { opacity:1; transform:translateX(0); transition-delay: 0.3s; }
+  .nav-links.active li:nth-child(6) { opacity:1; transform:translateX(0); transition-delay: 0.35s; }
+  .nav-links.active li:nth-child(7) { opacity:1; transform:translateX(0); transition-delay: 0.4s; }
+  .nav-links a { font-size: 1.3rem; letter-spacing: 0.06em; }
+
   .nav-book-btn { display: none; }
-  .menu-toggle { display: flex; }
+  .menu-toggle { display: flex; z-index: 500; position: relative; }
+  .nav-mobile-book { display: flex; margin-top: 0.5rem; }
 
-  .stats-container { justify-content: center; }
+  /* HERO */
+  .hero-content {
+    padding: 7rem 5% 5rem;
+    max-width: 100%;
+  }
+  .hero-title {
+    font-size: clamp(2.6rem, 11vw, 3.5rem);
+    line-height: 1.0;
+    margin-bottom: 1.2rem;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-ctas .btn-gold,
+  .hero-ctas .btn-outline-hero {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-scroll-hint { display: none; }
+
+  /* STATS */
+  .stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    justify-items: center;
+  }
   .stat-divider { display: none; }
+  .stat-item { min-width: unset; width: 100%; }
 
-  .services-grid { grid-template-columns: 1fr; }
-  .testimonial-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  /* ABOUT */
+  .about { padding: 5rem 0; }
+  .about-container { gap: 2.5rem; }
+  .about-img-wrap img { height: 260px; }
+  .about-img-badge {
+    bottom: 1rem; right: 1rem;
+    padding: 0.75rem 1rem;
+  }
+  .badge-num { font-size: 1.6rem; }
+  .section-title-left { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .about-pillars { gap: 1rem; }
+
+  /* SERVICES */
+  .services { padding: 5rem 0; }
+  .services-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .featured-service { margin-top: 0.6rem; }
+
+  /* PRICING */
+  .pricing { padding: 5rem 0; }
+  .pricing-wrap { gap: 1.5rem; }
+  .pricing-item {
+    padding: 1rem 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pi-left {
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .pi-tag { display: none; } /* hide on mobile — too cramped */
+  .price { font-size: 0.95rem; }
+  .pricing-cta-box { padding: 1.5rem; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 5rem 0; }
+  .testimonial-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .test-quote-mark { font-size: 3rem; }
+
+  /* GALLERY */
+  .gallery { padding: 5rem 0; }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
   .gallery-item.tall { grid-row: span 1; }
   .gallery-item.wide { grid-column: span 2; }
+  .gallery-item img { min-height: 160px; }
 
-  .footer-inner { flex-direction: column; text-align: center; align-items: center; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+  /* CONTACT */
+  .contact { padding: 5rem 0; }
+  .contact-container { gap: 2.5rem; }
+  .contact-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .contact-sub { max-width: 100%; }
+  .contact-info-list { gap: 1.2rem; }
+
+  /* BOOKING CARD */
+  .book-card-body { padding: 1.4rem; }
+  .service-options { gap: 0.4rem; }
+  .svc-opt { padding: 0.5rem 0.75rem; font-size: 0.78rem; }
+
+  /* SECTION HEADERS */
+  .section-header { margin-bottom: 2.5rem; }
+  .section-title-center { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .section-sub-center { font-size: 0.88rem; }
+  .section-label { font-size: 0.65rem; }
+
+  /* FOOTER */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 2.5rem 24px;
+    gap: 1.5rem;
+  }
+  .footer-links {
+    justify-content: center;
+    gap: 1.2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.4rem;
+  }
 }
 
+/* ── SMALL PHONE (≤480px) ── */
 @media (max-width: 480px) {
-  .hero-title { font-size: 3rem; }
-  .gallery-grid { grid-template-columns: 1fr; }
+  /* General section spacing */
+  section { padding: 4.5rem 0; }
+
+  /* Hero */
+  .hero-content { padding: 6.5rem 5% 4rem; }
+  .hero-title { font-size: clamp(2.2rem, 12vw, 2.8rem); }
+  .hero-tag { font-size: 0.65rem; padding: 0.3rem 0.75rem; }
+  .hero-scarcity { font-size: 0.75rem; }
+
+  /* Stats — stack to 2 cols still, tighter */
+  .stats-strip { padding: 2rem 0; }
+  .stat-num { font-size: 2rem; }
+  .stat-label { font-size: 0.68rem; }
+
+  /* About */
+  .about { padding: 4.5rem 0; }
+  .about-img-wrap img { height: 220px; }
+  .about-img-badge { padding: 0.6rem 0.85rem; }
+  .badge-num { font-size: 1.3rem; }
+  .badge-lbl { font-size: 0.62rem; }
+
+  /* Services */
+  .services { padding: 4.5rem 0; }
+  .service-card { padding: 1.8rem 1.4rem; }
+
+  /* Pricing */
+  .pricing { padding: 4.5rem 0; }
+  .pricing-item { padding: 0.9rem 1rem; }
+  .pi-left { font-size: 0.82rem; }
+
+  /* Gallery — single column */
+  .gallery { padding: 4.5rem 0; }
+  .gallery-grid { grid-template-columns: 1fr; gap: 0.6rem; }
   .gallery-item.wide { grid-column: span 1; }
-  section { padding: 5rem 0; }
+  .gallery-item.tall { grid-row: span 1; }
+  .gallery-item img { min-height: 200px; }
+
+  /* Contact */
+  .contact { padding: 4.5rem 0; }
+  .ci-icon { width: 34px; height: 34px; font-size: 0.8rem; }
+
+  /* Booking card */
+  .book-card-body { padding: 1.2rem; }
+  .book-wa-btn { font-size: 0.85rem; padding: 0.9rem; }
+
+  /* Footer */
+  .footer-inner { padding: 2rem 20px; }
+  .footer-links { gap: 1rem; }
+  .footer-links a { font-size: 0.75rem; }
+
+  /* WhatsApp float — smaller on small screens */
+  .whatsapp-float {
+    width: 50px; height: 50px;
+    bottom: 1.2rem; right: 1.2rem;
+    font-size: 1.4rem;
+  }
 }
