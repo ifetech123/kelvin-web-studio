@@ -1,106 +1,417 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finest Hiz & Herz Beauty Salon & Spa — Lagos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Grotesk:wght@300;400;500;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#C9A84C;--gold-dim:rgba(201,168,76,0.15);--gold-border:rgba(201,168,76,0.3);--ink:#0D0B08;--cream:#F7F0E6;--cream-dim:rgba(247,240,230,0.06);--muted:rgba(247,240,230,0.45)}
-body{font-family:'Space Grotesk',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem;border-bottom:1px solid rgba(201,168,76,0.12)}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-.nav-links{display:flex;gap:1.5rem}
-.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;cursor:pointer}
-.nav-links a:hover{color:var(--gold)}
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: rgba(201,168,76,0.12);
+    --gold-border: rgba(201,168,76,0.28);
+    --ink: #0D0B08;
+    --cream: #F7F0E6;
+    --cream-faint: rgba(247,240,230,0.06);
+    --muted: rgba(247,240,230,0.45);
+    --border: rgba(247,240,230,0.08);
+  }
 
-/* HERO */
-.hero{position:relative;padding:3.5rem 1.5rem 2.5rem;overflow:hidden}
-.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:9rem;font-weight:600;color:rgba(201,168,76,0.04);white-space:nowrap;pointer-events:none;letter-spacing:-4px;line-height:1}
-.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
-.eyebrow-line{width:30px;height:1px;background:var(--gold)}
-.eyebrow-text{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:.4rem}
-.hero h1 strong{font-weight:600;font-style:italic;color:var(--gold);display:block}
-.hero-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
-.rating-pill{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid var(--gold-border);padding:6px 14px;border-radius:100px;margin-bottom:2rem}
-.rating-stars{color:var(--gold);font-size:12px}
-.rating-num{font-size:12px;font-weight:500;color:var(--cream)}
-.rating-sep{width:1px;height:12px;background:var(--gold-border)}
-.rating-count{font-size:11px;color:var(--muted)}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:var(--ink);padding:11px 24px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:0}
-.btn-ghost{background:transparent;color:var(--cream);padding:11px 24px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(247,240,230,0.2);cursor:pointer;border-radius:0}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  html { scroll-behavior: smooth; }
 
-/* TICKER */
-.ticker{border-top:1px solid rgba(201,168,76,0.12);border-bottom:1px solid rgba(201,168,76,0.12);padding:.6rem 0;overflow:hidden;margin-top:2.5rem}
-.ticker-inner{display:flex;gap:2rem;animation:tick 18s linear infinite;width:max-content}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ticker-item{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-.ticker-dot{color:var(--gold)}
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* SERVICES */
-.services{padding:2.5rem 1.5rem}
-.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.5rem}
-.sec-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.sec-count{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(201,168,76,0.2);line-height:1}
-.svc-list{display:flex;flex-direction:column;gap:0}
-.svc-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:1px solid rgba(247,240,230,0.06);cursor:pointer;transition:all .2s}
-.svc-row:hover{padding-left:8px}
-.svc-row:hover .svc-arrow{color:var(--gold);opacity:1}
-.svc-row:first-child{border-top:1px solid rgba(247,240,230,0.06)}
-.svc-num{font-size:10px;color:var(--muted);width:24px;flex-shrink:0}
-.svc-info{flex:1;padding:0 1rem}
-.svc-name{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:2px}
-.svc-desc{font-size:11px;color:var(--muted)}
-.svc-arrow{font-size:16px;color:var(--muted);opacity:0.3;transition:all .2s}
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: rgba(13,11,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 1.2rem; align-items: center; }
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .nav-book {
+    background: var(--gold);
+    color: var(--ink) !important;
+    font-weight: 700;
+    padding: 7px 14px;
+  }
 
-/* STATS BAR */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(201,168,76,0.12);border-bottom:1px solid rgba(201,168,76,0.12);margin:0 1.5rem}
-.stat{padding:1.2rem .5rem;text-align:center;border-right:1px solid rgba(201,168,76,0.12)}
-.stat:last-child{border-right:none}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold);line-height:1;margin-bottom:3px}
-.stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: clamp(2.5rem, 8vw, 5rem) 1.25rem 2rem;
+    overflow: hidden;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 28vw, 14rem);
+    font-weight: 600;
+    color: rgba(201,168,76,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.4rem;
+  }
+  .eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .eyebrow-text {
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 11vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: .5rem;
+    position: relative;
+  }
+  .hero h1 strong {
+    font-weight: 600;
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-sub {
+    font-size: clamp(11px, 2.8vw, 13px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.8rem;
+    position: relative;
+  }
+  .rating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    padding: 7px 14px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    width: fit-content;
+  }
+  .rating-stars { color: var(--gold); font-size: 13px; }
+  .rating-num { font-size: 13px; font-weight: 500; color: var(--cream); }
+  .rating-sep { width: 1px; height: 13px; background: var(--gold-border); }
+  .rating-count { font-size: 11px; color: var(--muted); }
 
-/* LOCATION */
-.location{padding:2.5rem 1.5rem}
-.loc-card{background:var(--cream-dim);border:1px solid rgba(201,168,76,0.15);padding:1.5rem}
-.loc-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);margin-bottom:1.2rem;font-style:italic}
-.loc-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:.9rem}
-.loc-icon{width:16px;flex-shrink:0;color:var(--gold);font-size:13px;margin-top:1px}
-.loc-text{font-size:12px;color:var(--muted);line-height:1.6}
-.loc-text strong{color:var(--cream);font-weight:500}
-.hours-inline{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:.3rem}
-.hours-inline span{font-size:11px;color:var(--muted)}
-.open-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(50,200,100,0.1);border:1px solid rgba(50,200,100,0.25);padding:3px 10px;border-radius:100px;font-size:10px;color:#4ade80;letter-spacing:1px;text-transform:uppercase;margin-top:1rem}
-.open-dot{width:5px;height:5px;border-radius:50%;background:#4ade80}
+  .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    padding: clamp(10px,2.5vw,13px) clamp(18px,5vw,28px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(10px, 2.5vw, 12px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    padding: clamp(10px,2.5vw,13px) clamp(18px,5vw,28px);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(10px, 2.5vw, 12px);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(247,240,230,0.2);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
 
-/* SOCIAL */
-.social{padding:0 1.5rem 2.5rem}
-.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.social-card{background:var(--cream-dim);border:1px solid rgba(247,240,230,0.08);padding:1.2rem;display:flex;flex-direction:column;gap:.4rem;cursor:pointer;transition:border-color .2s}
-.social-card:hover{border-color:var(--gold-border)}
-.sc-platform{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-.sc-handle{font-size:13px;color:var(--cream);font-weight:500}
-.sc-followers{font-size:11px;color:var(--muted)}
+  /* ── TICKER ── */
+  .ticker {
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    padding: .65rem 0;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+  .ticker-inner {
+    display: flex;
+    gap: 2rem;
+    animation: tick 22s linear infinite;
+    width: max-content;
+  }
+  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker-item {
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ticker-dot { color: var(--gold); }
 
-/* FOOTER */
-footer{padding:1.5rem;border-top:1px solid rgba(201,168,76,0.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
-.footer-brand{font-family:'Cormorant Garamond',serif;font-size:.9rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-.footer-copy{font-size:10px;color:var(--muted);letter-spacing:1px}
+  /* ── STATS ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .stat {
+    padding: clamp(1rem, 4vw, 1.5rem) .5rem;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.12);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: clamp(8px, 2vw, 10px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SERVICES ── */
+  .services { padding: clamp(2rem, 6vw, 3.5rem) 1.25rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.4rem;
+  }
+  .sec-label {
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .sec-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 300;
+    color: rgba(201,168,76,0.18);
+    line-height: 1;
+  }
+  .svc-list { display: flex; flex-direction: column; }
+  .svc-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(.85rem, 3vw, 1.1rem) 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: padding-left .2s;
+  }
+  .svc-row:first-child { border-top: 1px solid var(--border); }
+  .svc-row:hover { padding-left: 8px; }
+  .svc-row:hover .svc-arrow { color: var(--gold); opacity: 1; }
+  .svc-num {
+    font-size: clamp(10px, 2.5vw, 11px);
+    color: var(--muted);
+    width: 26px;
+    flex-shrink: 0;
+  }
+  .svc-info { flex: 1; padding: 0 .9rem; }
+  .svc-name {
+    font-size: clamp(13px, 3.5vw, 15px);
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 2px;
+  }
+  .svc-desc {
+    font-size: clamp(11px, 2.8vw, 12px);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .svc-arrow {
+    font-size: 16px;
+    color: var(--muted);
+    opacity: .3;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+
+  /* ── LOCATION ── */
+  .location { padding: clamp(2rem, 6vw, 3.5rem) 1.25rem; }
+  .loc-card {
+    background: var(--cream-faint);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: clamp(1.2rem, 5vw, 2rem);
+    margin-top: 1rem;
+  }
+  .loc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 1.4rem;
+    line-height: 1.3;
+  }
+  .loc-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .loc-icon { font-size: 14px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .loc-text { font-size: clamp(12px, 3vw, 14px); color: var(--muted); line-height: 1.7; }
+  .loc-text strong { color: var(--cream); font-weight: 500; display: block; margin-bottom: 2px; }
+  .loc-text a { color: var(--gold); text-decoration: none; }
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: .4rem; }
+  .hours-grid span { font-size: clamp(11px, 2.8vw, 12px); color: var(--muted); }
+  .open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(50,200,100,0.08);
+    border: 1px solid rgba(50,200,100,0.22);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: clamp(10px, 2.5vw, 11px);
+    color: #4ade80;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 1.2rem;
+  }
+  .open-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+
+  /* ── SOCIAL ── */
+  .social { padding: 0 1.25rem clamp(2rem, 6vw, 3.5rem); }
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+  .social-card {
+    background: var(--cream-faint);
+    border: 1px solid var(--border);
+    padding: clamp(1rem, 4vw, 1.4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    transition: border-color .2s;
+    text-decoration: none;
+  }
+  .social-card:hover { border-color: var(--gold-border); }
+  .sc-platform {
+    font-size: clamp(9px, 2.3vw, 10px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .sc-handle { font-size: clamp(12px, 3vw, 14px); color: var(--cream); font-weight: 500; }
+  .sc-followers { font-size: clamp(10px, 2.5vw, 11px); color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.4rem 1.25rem;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(.85rem, 3vw, 1rem);
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-size: clamp(9px, 2.5vw, 11px);
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ── TABLET+ ── */
+  @media (min-width: 600px) {
+    nav { padding: 1rem 2rem; }
+    .hero { padding: 4rem 2rem 2.5rem; }
+    .services, .location, .social { padding-left: 2rem; padding-right: 2rem; }
+    .social-grid { grid-template-columns: repeat(2, 280px); }
+    footer { padding: 1.4rem 2rem; }
+  }
+
+  @media (min-width: 900px) {
+    .hero { min-height: 80vh; padding: 5rem 3rem 3rem; }
+    .services, .location, .social { padding-left: 3rem; padding-right: 3rem; }
+    footer { padding: 1.5rem 3rem; }
+    .stats { margin: 0 3rem; }
+  }
 </style>
+</head>
+<body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">FH&H</div>
+  <div class="nav-logo">FH&amp;H</div>
   <div class="nav-links">
-    <a>Services</a>
-    <a>Gallery</a>
-    <a onclick="sendPrompt('How do I book an appointment at Finest Hiz and Herz salon Lagos?')">Book ↗</a>
+    <a href="#services">Services</a>
+    <a href="#location">Location</a>
+    <a href="tel:08164752226" class="nav-book">Book now</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg-text">FINEST</div>
-  <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Lagos · Nigeria · Since 2020</span></div>
+  <div class="hero-watermark">FINEST</div>
+  <div class="hero-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Lagos &nbsp;·&nbsp; Nigeria &nbsp;·&nbsp; Since 2020</span>
+  </div>
   <h1>Where Beauty<strong>Gets Elevated.</strong></h1>
   <div class="hero-sub">Alimosho, Lagos &nbsp;·&nbsp; Salon & Spa</div>
   <div class="rating-pill">
@@ -110,25 +421,26 @@ footer{padding:1.5rem;border-top:1px solid rgba(201,168,76,0.12);display:flex;ju
     <span class="rating-count">166 reviews on Google</span>
   </div>
   <div class="hero-cta">
-    <button class="btn-primary" onclick="sendPrompt('I want to book an appointment at Finest Hiz and Herz salon in Egbeda Lagos')">Book appointment</button>
-    <button class="btn-ghost" onclick="sendPrompt('Call Finest Hiz and Herz salon Lagos')">Call us</button>
+    <a href="tel:08164752226" class="btn-primary">Book appointment</a>
+    <a href="https://www.google.com/maps/search/Solaron+Plaza+17+Akowonjo+Rd+Alimosho+Lagos" target="_blank" class="btn-ghost">Get directions</a>
   </div>
+
   <div class="ticker">
     <div class="ticker-inner">
       <span class="ticker-item">Hair Styling <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Makeup & Gele <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Nails & Pedicure <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Makeup &amp; Gele <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Nails &amp; Pedicure <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Microblading <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Massage & Spa <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Massage &amp; Spa <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Wig Installation <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Lash Lift <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Facials <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Home Service <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Hair Styling <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Makeup & Gele <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Nails & Pedicure <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Makeup &amp; Gele <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Nails &amp; Pedicure <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Microblading <span class="ticker-dot">✦</span></span>
-      <span class="ticker-item">Massage & Spa <span class="ticker-dot">✦</span></span>
+      <span class="ticker-item">Massage &amp; Spa <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Wig Installation <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Lash Lift <span class="ticker-dot">✦</span></span>
       <span class="ticker-item">Facials <span class="ticker-dot">✦</span></span>
@@ -137,13 +449,15 @@ footer{padding:1.5rem;border-top:1px solid rgba(201,168,76,0.12);display:flex;ju
   </div>
 </div>
 
+<!-- STATS -->
 <div class="stats">
   <div class="stat"><div class="stat-num">4.9</div><div class="stat-label">Google rating</div></div>
   <div class="stat"><div class="stat-num">78K</div><div class="stat-label">Instagram fans</div></div>
-  <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Services offered</div></div>
+  <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Services</div></div>
 </div>
 
-<div class="services">
+<!-- SERVICES -->
+<div class="services" id="services">
   <div class="section-header">
     <span class="sec-label">What we do</span>
     <span class="sec-count">09</span>
@@ -161,26 +475,61 @@ footer{padding:1.5rem;border-top:1px solid rgba(201,168,76,0.12);display:flex;ju
   </div>
 </div>
 
-<div class="location">
+<!-- LOCATION -->
+<div class="location" id="location">
   <span class="sec-label">Find us</span>
-  <div class="loc-card" style="margin-top:1rem">
+  <div class="loc-card">
     <div class="loc-title">Come in. We've been expecting you.</div>
-    <div class="loc-row"><span class="loc-icon">◎</span><div class="loc-text"><strong>Solaron Plaza</strong><br>17 Akowonjo Rd, Alimosho<br>Lagos 102213, Nigeria</div></div>
-    <div class="loc-row"><span class="loc-icon">✆</span><div class="loc-text"><strong>0816 475 2226</strong></div></div>
-    <div class="loc-row"><span class="loc-icon">◷</span><div class="loc-text"><strong>Opens 9 am daily</strong><div class="hours-inline"><span>Mon – Sat: 9am – 7pm</span><span>Peak time: ~5 pm</span></div></div></div>
+    <div class="loc-row">
+      <span class="loc-icon">◎</span>
+      <div class="loc-text">
+        <strong>Solaron Plaza</strong>
+        17 Akowonjo Rd, Alimosho<br>Lagos 102213, Nigeria
+      </div>
+    </div>
+    <div class="loc-row">
+      <span class="loc-icon">✆</span>
+      <div class="loc-text">
+        <strong>Phone</strong>
+        <a href="tel:08164752226">0816 475 2226</a>
+      </div>
+    </div>
+    <div class="loc-row">
+      <span class="loc-icon">◷</span>
+      <div class="loc-text">
+        <strong>Opening Hours</strong>
+        <div class="hours-grid">
+          <span>Mon – Sat: 9am – 7pm</span>
+          <span>Peak time: ~5 pm</span>
+        </div>
+      </div>
+    </div>
     <div class="open-badge"><div class="open-dot"></div>Open today</div>
   </div>
 </div>
 
+<!-- SOCIAL -->
 <div class="social">
   <span class="sec-label">Follow the journey</span>
-  <div class="social-grid" style="margin-top:1rem">
-    <div class="social-card"><span class="sc-platform">Instagram</span><span class="sc-handle">@fines.tsaloncouture</span><span class="sc-followers">78.8K+ followers</span></div>
-    <div class="social-card"><span class="sc-platform">Facebook</span><span class="sc-handle">Finest Hiz & Herz</span><span class="sc-followers">2.4K+ followers</span></div>
+  <div class="social-grid">
+    <a class="social-card" href="https://instagram.com/fines.tsaloncouture" target="_blank">
+      <span class="sc-platform">Instagram</span>
+      <span class="sc-handle">@fines.tsaloncouture</span>
+      <span class="sc-followers">78.8K+ followers</span>
+    </a>
+    <a class="social-card" href="https://facebook.com" target="_blank">
+      <span class="sc-platform">Facebook</span>
+      <span class="sc-handle">Finest Hiz & Herz</span>
+      <span class="sc-followers">2.4K+ followers</span>
+    </a>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-brand">Finest Hiz & Herz</div>
-  <div class="footer-copy">© 2025 · Egbeda, Lagos</div>
+  <div class="footer-copy">© 2025 &nbsp;·&nbsp; Egbeda, Lagos</div>
 </footer>
+
+</body>
+</html>
