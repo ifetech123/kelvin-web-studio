@@ -12,77 +12,115 @@
     <style>
         /* INLINE CRITICAL CSS FOR SPEED */
         :root {
-            --honey: #E3C586;
-            --black: #1A1A1A;
-            --cream: #FFFDF5;
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #F8F9FA;
             --white: #FFFFFF;
-            --gray: #F5F5F5;
+            --gray: #E8EAED;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--white); color: var(--black); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background: var(--white); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         /* Loader */
         #intro {
-            position: fixed; inset: 0; background: var(--black); 
+            position: fixed; inset: 0; background: var(--dark); 
             display: flex; align-items: center; justify-content: center; z-index: 9999;
             transition: opacity 0.8s ease;
         }
-        #intro h1 { color: var(--honey); letter-spacing: 10px; font-size: 24px; }
+        #intro h1 { color: var(--primary); letter-spacing: 10px; font-size: 24px; }
 
         /* Navigation */
         nav {
-            height: 80px; display: flex; align-items: center; background: rgba(255,255,255,0.8);
+            height: 80px; display: flex; align-items: center; background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid var(--gray);
+            border-bottom: 2px solid var(--primary);
         }
         .nav-flex { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-        .logo { font-weight: 800; font-size: 22px; }
-        .logo span { color: var(--honey); }
+        .logo { font-weight: 800; font-size: 22px; color: var(--dark); }
+        .logo span { color: var(--primary); }
         .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--black); font-weight: 600; font-size: 14px; }
-        .btn-wa-nav { background: var(--black); color: var(--white); padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: 700; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-wa-nav { background: var(--primary); color: var(--white); padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: 700; transition: 0.3s; }
+        .btn-wa-nav:hover { background: var(--secondary); transform: scale(1.05); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--dark); border-radius: 2px; transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(10px, 10px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
 
         /* Hero */
-        .hero { padding: 100px 0; background: var(--cream); text-align: center; }
-        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 800; line-height: 1; margin-bottom: 20px; }
-        .hero h1 span { color: var(--honey); }
-        .hero p { max-width: 600px; margin: 0 auto 40px; color: #666; font-size: 18px; }
-        .btn-primary { background: var(--black); color: var(--white); padding: 20px 40px; text-decoration: none; font-weight: 700; border-radius: 5px; display: inline-block; transition: 0.3s; }
-        .btn-primary:hover { background: var(--honey); color: var(--black); transform: translateY(-5px); }
-        .price {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            }
+        .hero { padding: 100px 0; background: linear-gradient(135deg, var(--light) 0%, #FFF5F7 100%); text-align: center; }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 800; line-height: 1; margin-bottom: 20px; color: var(--dark); }
+        .hero h1 span { color: var(--primary); }
+        .hero p { max-width: 600px; margin: 0 auto 40px; color: #555; font-size: 18px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #FF5252); color: var(--white); padding: 20px 40px; text-decoration: none; font-weight: 700; border-radius: 8px; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3); }
+        .price { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
         /* Grid */
         section { padding: 100px 0; }
-        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 50px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 50px; text-align: center; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         
         /* Category Card */
-        .card { background: var(--white); border: 1px solid var(--gray); border-radius: 12px; overflow: hidden; transition: 0.4s; position: relative; }
-        .card:hover { border-color: var(--honey); transform: translateY(-10px); }
-        .card-img { height: 300px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+        .card { background: var(--white); border: 2px solid var(--gray); border-radius: 12px; overflow: hidden; transition: 0.4s; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2); }
+        .card-img { height: 300px; background: linear-gradient(135deg, var(--light), #FFF5F7); display: flex; align-items: center; justify-content: center; font-size: 70px; }
         .card-body { padding: 25px; }
-        .card-body h3 { font-size: 20px; margin-bottom: 10px; }
+        .card-body h3 { font-size: 20px; margin-bottom: 10px; color: var(--dark); }
         .card-body p { font-size: 14px; color: #777; margin-bottom: 20px; }
-        .btn-card { display: block; text-align: center; border: 1px solid var(--black); padding: 12px; text-decoration: none; color: var(--black); font-weight: 700; font-size: 13px; transition: 0.3s; }
-        .btn-card:hover { background: var(--black); color: var(--white); }
+        .btn-card { display: block; text-align: center; border: 2px solid var(--primary); padding: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 13px; transition: 0.3s; border-radius: 6px; background: var(--white); }
+        .btn-card:hover { background: var(--primary); color: var(--white); }
 
         /* How to Order */
-        .steps { background: var(--black); color: var(--white); }
-        .step-item { text-align: center; }
-        .step-item span { font-size: 40px; color: var(--honey); font-weight: 800; display: block; margin-bottom: 10px; }
+        .steps { background: linear-gradient(135deg, var(--dark), #1A1A1A); color: var(--white); }
+        .step-item { text-align: center; padding: 20px; }
+        .step-item h3 { margin: 15px 0 10px 0; }
+        .step-item span { font-size: 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; display: block; margin-bottom: 10px; }
+        
+        /* Featured Product */
+        .featured-section { background: linear-gradient(135deg, #FFF5F7 0%, var(--light) 100%); }
+        .featured-badge { background: var(--primary); color: white; padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 15px; }
+        
+        /* Testimonials */
+        .testimonial-card { background: var(--white); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 4px solid var(--primary); }
+        .testimonial-card p { font-size: 15px; color: #555; margin-bottom: 20px; font-style: italic; }
+        .testimonial-card .stars { color: var(--accent); font-size: 18px; margin-bottom: 10px; }
+        .testimonial-card .name { font-weight: 700; color: var(--dark); }
+        
+        /* Why Choose Us */
+        .why-section { background: linear-gradient(135deg, var(--light), #FFF5F7); }
+        .why-card { text-align: center; padding: 30px; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .why-card .icon { font-size: 50px; margin-bottom: 15px; }
+        .why-card h3 { color: var(--dark); margin-bottom: 10px; }
+        .why-card p { color: #777; font-size: 14px; }
+        
+        /* Newsletter */
+        .newsletter { background: linear-gradient(135deg, var(--primary), #FF5252); color: white; text-align: center; }
+        .newsletter h2 { margin-bottom: 20px; }
+        .newsletter-form { display: flex; gap: 10px; max-width: 500px; margin: 30px auto; flex-wrap: wrap; justify-content: center; }
+        .newsletter-form input { flex: 1; min-width: 250px; padding: 15px; border: none; border-radius: 8px; font-size: 14px; }
+        .newsletter-form button { padding: 15px 40px; background: var(--dark); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .newsletter-form button:hover { background: var(--secondary); }
         
         /* Footer */
-        footer { padding: 50px 0; border-top: 1px solid var(--gray); text-align: center; font-size: 13px; color: #aaa; }
+        footer { padding: 50px 0; border-top: 2px solid var(--gray); text-align: center; font-size: 13px; color: #aaa; background: #FAFAFA; }
         
         /* Mobile */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links { position: absolute; top: 80px; left: 0; width: 100%; flex-direction: column; gap: 0; background: white; display: none; border-bottom: 1px solid var(--gray); }
+            .nav-links.active { display: flex; }
+            .nav-links li { padding: 15px 20px; border-bottom: 1px solid var(--gray); }
+            .nav-links a { display: block; }
+            .btn-wa-nav { display: none; }
             .hero h1 { font-size: 45px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-form input { min-width: 100%; }
         }
     </style>
 </head>
@@ -97,8 +135,14 @@
                 <li><a href="#about">Trust</a></li>
                 <li><a href="#categories">Products</a></li>
                 <li><a href="#steps">How to Order</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
             <a href="https://wa.me/2349041999098" class="btn-wa-nav">Order Now</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
@@ -117,6 +161,29 @@
         </div>
     </section>
 
+    <section id="features" class="why-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Kelvin Store?</h2>
+            <div class="grid">
+                <div class="why-card" data-aos="fade-up">
+                    <div class="icon">🚀</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Same-day delivery available in Lagos. Get your orders quick!</p>
+                </div>
+                <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon">✅</div>
+                    <h3>Verified Quality</h3>
+                    <p>All items vetted for excellence. Real reviews, real customers.</p>
+                </div>
+                <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon">💬</div>
+                    <h3>Best Customer Service</h3>
+                    <p>24/7 WhatsApp support. We're here to help anytime!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="categories" class="container">
         <h2 class="section-title">The Catalog</h2>
         <div class="grid">
@@ -125,6 +192,7 @@
                 <div class="card-img">🍪</div>
                 <div class="card-body">
                     <h3>Crunchy Snacks</h3>
+                    <p class="price">₦2,500</p>
                     <p>Homemade recipes, perfectly fried and packaged for freshness.</p>
                     <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20the%20Crunchy%20Snacks" class="btn-card">Order via WhatsApp</a>
                 </div>
@@ -144,6 +212,7 @@
                 <div class="card-img">🥣</div>
                 <div class="card-body">
                     <h3>Premium Garri</h3>
+                    <p class="price">₦3,500</p>
                     <p>Super clean, dry, and crunchy. The best for your pantry.</p>
                     <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20the%20Premium%20Garri" class="btn-card">Order via WhatsApp</a>
                 </div>
@@ -153,6 +222,7 @@
                 <div class="card-img">✨</div>
                 <div class="card-body">
                     <h3>Luxury Fragrances</h3>
+                    <p class="price">₦8,000</p>
                     <p>Long-lasting designer oil perfumes and accessories.</p>
                     <a href="https://wa.me/2349041999098?text=I%20want%20to%20order%20Luxury%20Fragrances" class="btn-card">Order via WhatsApp</a>
                 </div>
@@ -171,6 +241,64 @@
         </div>
     </section>
 
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="grid">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"The honey is absolutely pure and natural. Been a customer for 6 months now!"</p>
+                    <div class="name">- Chioma O.</div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Fast delivery and excellent fragrances. The quality is premium. Highly recommended!"</p>
+                    <div class="name">- Tunde A.</div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"The garri is super clean and fresh. Their customer service is top-notch!"</p>
+                    <div class="name">- Amara P.</div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Crunchy snacks are homemade and delicious. Worth every naira!"</p>
+                    <div class="name">- Kunle M.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Get Exclusive Deals & Updates</h2>
+            <p>Subscribe to our WhatsApp updates for special discounts and new product launches!</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="text" placeholder="Enter your name" required>
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe Now</button>
+            </form>
+        </div>
+    </section>
+    <section id="contact" class="container" style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h2 class="section-title">Get in Touch</h2>
+        <div style="background: linear-gradient(135deg, #FFF5F7, var(--light)); padding: 40px; border-radius: 12px; border-left: 4px solid var(--primary);">
+            <div style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 10px; color: var(--dark);">📍 Visit Us</h3>
+                <p>Lagos, Nigeria</p>
+            </div>
+            <div style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 10px; color: var(--dark);">📞 Call or WhatsApp</h3>
+                <p><a href="tel:+2349041999098" style="text-decoration: none; color: var(--primary); font-weight: 700; font-size: 18px;">+234 904 199 9098</a></p>
+            </div>
+            <div style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 10px; color: var(--dark);">⏰ Business Hours</h3>
+                <p>Monday - Sunday: 9:00 AM - 8:00 PM (WAT)</p>
+            </div>
+            <a href="https://wa.me/2349041999098" class="btn-primary">Chat on WhatsApp</a>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Kelvin Store. Built for Easy & Fast Ordering.</p>
@@ -180,11 +308,43 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
+        
+        // Mobile Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Newsletter subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = form.querySelector('input[type="text"]').value;
+            const email = form.querySelector('input[type="email"]').value;
+            const message = `Hi Kelvin Store, I'd like to subscribe. Name: ${name}, Email: ${email}`;
+            const whatsappUrl = `https://wa.me/2349041999098?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            form.reset();
+        }
+        
         window.addEventListener('load', () => {
             const intro = document.getElementById('intro');
-            setTimeout(() => { intro.style.opacity = '0'; 
-                setTimeout(() => intro.style.display = 'none', 800);
-            }, 1200);
+            if (intro) {
+                setTimeout(() => { intro.style.opacity = '0'; 
+                    setTimeout(() => intro.style.display = 'none', 800);
+                }, 1200);
+            }
         });
     </script>
 </body>
