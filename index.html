@@ -3,836 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kelvin Web Studio — Websites That Grow Your Business</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Kelvin Web Studio — Websites That Get You Customers</title>
+
+<!-- ── SEO META ── -->
+<meta name="description" content="I build fast, mobile-ready websites for small businesses, vendors & service providers across Nigeria. Templates from ₦29,999. Go live in 3–5 days.">
+<meta name="keywords" content="web design Nigeria, website developer Lagos, affordable website Nigeria, small business website, WhatsApp website Nigeria, Kelvin Web Studio">
+<meta name="author" content="Kelvin Web Studio">
+<meta name="robots" content="index, follow">
+
+<!-- ── OPEN GRAPH (WhatsApp / Facebook preview) ── -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ifetech.name.ng/">
+<meta property="og:title" content="Kelvin Web Studio — Websites That Get You Customers">
+<meta property="og:description" content="Fast, mobile-ready websites for Nigerian businesses. Templates from ₦29,999. Go live in 3–5 days. WhatsApp-first design.">
+<meta property="og:image" content="https://ifetech.name.ng/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_NG">
+<meta property="og:site_name" content="Kelvin Web Studio">
+
+<!-- ── TWITTER CARD ── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kelvin Web Studio — Websites That Get You Customers">
+<meta name="twitter:description" content="Fast, mobile-ready websites for Nigerian businesses. Templates from ₦29,999.">
+<meta name="twitter:image" content="https://ifetech.name.ng/og-image.jpg">
+
+<!-- ── CANONICAL ── -->
+<link rel="canonical" href="https://ifetech.name.ng/">
+
+<!-- ── STRUCTURED DATA (Google Rich Results) ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Kelvin Web Studio",
+  "description": "Fast, mobile-ready website design for small businesses, vendors & service providers across Nigeria. Templates from ₦29,999.",
+  "url": "https://ifetech.name.ng/",
+  "logo": "https://ifetech.name.ng/og-image.jpg",
+  "image": "https://ifetech.name.ng/og-image.jpg",
+  "telephone": "+2349041999098",
+  "email": "ifeoluwakelvin123@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NG",
+    "addressRegion": "Lagos"
+  },
+  "priceRange": "₦₦",
+  "openingHours": "Mo-Su 08:00-22:00",
+  "sameAs": ["https://wa.me/2349041999098"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Website Design Packages",
+    "itemListElement": [
+      {"@type":"Offer","name":"Starter Website","price":"29999","priceCurrency":"NGN"},
+      {"@type":"Offer","name":"Vendor / Business Website","price":"49999","priceCurrency":"NGN"},
+      {"@type":"Offer","name":"Custom Website Build","price":"100000","priceCurrency":"NGN"}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How long does my website stay live?","acceptedAnswer":{"@type":"Answer","text":"Your website stays live for as long as you keep paying the hosting and domain renewal, which is typically ₦15,000–₦30,000 per year. I'll remind you before it's due so you never go offline unexpectedly."}},
+    {"@type":"Question","name":"Can I edit my website myself after it's built?","acceptedAnswer":{"@type":"Answer","text":"Yes — for simple updates like changing prices, adding photos, or editing text, I'll show you exactly how to do it. For bigger changes, I'm available on WhatsApp."}},
+    {"@type":"Question","name":"Do you do SEO (Google visibility)?","acceptedAnswer":{"@type":"Answer","text":"Every site I build includes basic on-page SEO — page titles, meta descriptions, Google-friendly structure, and Google My Business setup. This helps you show up in local searches."}},
+    {"@type":"Question","name":"What if I don't like the design?","acceptedAnswer":{"@type":"Answer","text":"Before I build anything, we agree on the design direction. You get a preview before the site goes live, and I include 2 rounds of revisions in every package."}},
+    {"@type":"Question","name":"Do you work with clients outside Lagos?","acceptedAnswer":{"@type":"Answer","text":"Yes — 100% remote. Everything is handled via WhatsApp and email. I've worked with clients across Lagos, Abuja, Port Harcourt, and beyond."}}
+  ]
+}
+</script>
+
+<!-- ── FONTS ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    :root {
-    --white: #ffffff;
-    --off: #f7f6f3;
-    --paper: #f0ede6;
-    --ink: #141210;
-    --ink2: #3a3530;
-    --muted: #9c9489;
-    --border: #e4e0d8;
-    --accent: #1a6b4a;
-    --accent-light: #e8f4ef;
-    --accent2: #c45c1a;
-    --shadow: 0 1px 3px rgba(20,18,16,0.06), 0 4px 16px rgba(20,18,16,0.06);
-    --shadow-lg: 0 2px 8px rgba(20,18,16,0.06), 0 16px 48px rgba(20,18,16,0.1);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--white);
-    color: var(--ink);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  h1,h2,h3,h4 {
-    font-family: 'Fraunces', serif;
-    line-height: 1.08;
-    letter-spacing: -0.025em;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5%;
-    height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: transform 0.35s ease;
-  }
-
-  .nav-logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-
-  .logo-dot {
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .nav-links {
-    display: flex; align-items: center; gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink2);
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-
-  .nav-cta {
-    background: var(--ink);
-    color: var(--white) !important;
-    padding: 0.55rem 1.25rem;
-    border-radius: 6px;
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
-    transition: background 0.2s, transform 0.15s !important;
-  }
-  .nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); }
-
-  .nav-mobile-cta {
-    display: none;
-    background: var(--ink);
-    color: var(--white);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    padding: 9rem 5% 6rem;
-    background: var(--white);
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Subtle grid background */
-  #hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  /* Gradient fade over grid */
-  #hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 70% at 60% 40%, rgba(255,255,255,0) 0%, var(--white) 75%);
-    pointer-events: none;
-  }
-
-  .hero-inner { position: relative; z-index: 1; max-width: 1100px; }
-
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: var(--accent-light);
-    color: var(--accent);
-    border: 1px solid rgba(26,107,74,0.2);
-    padding: 0.35rem 0.9rem;
-    border-radius: 100px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: breathe 2.5s infinite;
-  }
-
-  @keyframes breathe {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:0.3; transform:scale(0.6); }
-  }
-
-  h1.hero-h {
-    font-size: clamp(3rem, 7.5vw, 6.8rem);
-    font-weight: 600;
-    color: var(--ink);
-    max-width: 16ch;
-    margin-bottom: 1.5rem;
-  }
-
-  h1.hero-h em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-    color: var(--ink2);
-    max-width: 52ch;
-    margin-bottom: 2.8rem;
-    line-height: 1.75;
-    font-weight: 400;
-  }
-
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: var(--ink);
-    color: var(--white);
-    padding: 0.9rem 1.8rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: all 0.2s;
-    border: 2px solid var(--ink);
-  }
-  .btn-primary:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,107,74,0.25); }
-
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: transparent;
-    color: var(--ink);
-    padding: 0.9rem 1.6rem;
-    border-radius: 8px;
-    font-size: 0.92rem;
-    font-weight: 500;
-    border: 2px solid var(--border);
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--ink); background: var(--off); }
-
-  .hero-proof {
-    display: flex; flex-wrap: wrap; gap: 2.5rem;
-    margin-top: 5rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .proof-item {
-    border-radius: 0;
-  }
-  .proof-num {
-    font-family: 'Fraunces', serif;
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-  .proof-num sup { font-size: 1rem; color: var(--accent); }
-  .proof-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.35rem; }
-
-  /* ── SHARED SECTION STYLES ── */
-  section { padding: 7rem 5%; }
-
-  .label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .label::before { content:''; width:20px; height:1px; background:var(--accent); }
-
-  .section-h {
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-
-  .section-p {
-    font-size: 1.05rem;
-    color: var(--ink2);
-    max-width: 54ch;
-    line-height: 1.75;
-  }
-
-  /* ── PROBLEM SECTION ── */
-  #problem { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-  .problem-layout {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 5rem; margin-top: 4rem; align-items: start;
-  }
-
-  .problem-cards { display: flex; flex-direction: column; gap: 1rem; }
-
-  .prob-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.5rem 1.6rem;
-    display: flex; gap: 1.1rem; align-items: flex-start;
-    transition: box-shadow 0.2s, border-color 0.2s;
-    cursor: default;
-  }
-  .prob-card:hover { box-shadow: var(--shadow); border-color: #d0ccc4; }
-
-  .prob-icon {
-    font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem;
-    width: 40px; height: 40px;
-    background: var(--off);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .prob-card h4 { font-size: 0.95rem; font-family:'Instrument Sans',sans-serif; font-weight:600; margin-bottom:0.3rem; color:var(--ink); }
-  .prob-card p { font-size:0.85rem; color:var(--muted); line-height:1.65; }
-
-  .solution-panel {
-    background: var(--ink);
-    color: var(--white);
-    border-radius: 14px;
-    padding: 2.8rem;
-    position: sticky; top: 5rem;
-  }
-
-  .solution-panel h3 {
-    font-size: 1.9rem; font-weight: 600;
-    color: var(--white);
-    margin-bottom: 1.2rem;
-  }
-
-  .solution-panel p { font-size:0.92rem; color:rgba(255,255,255,0.65); line-height:1.8; margin-bottom:1rem; }
-
-  .sol-list { list-style:none; display:flex; flex-direction:column; gap:0.75rem; margin:1.5rem 0 2rem; }
-
-  .sol-list li {
-    display:flex; align-items:center; gap:0.75rem;
-    font-size:0.9rem; color:rgba(255,255,255,0.85);
-  }
-
-  .sol-list li::before {
-    content:'✓';
-    background:var(--accent);
-    color:white;
-    width:20px; height:20px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-size:0.7rem; font-weight:700; flex-shrink:0;
-  }
-
-  .sol-cta {
-    display:inline-flex; align-items:center; gap:0.6rem;
-    background: var(--accent);
-    color: white;
-    padding: 0.85rem 1.5rem;
-    border-radius: 7px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.2s;
-    width: 100%;
-    justify-content: center;
-  }
-  .sol-cta:hover { background:#155c3e; transform:translateY(-1px); }
-
-  /* ── TEMPLATES ── */
-  #templates { background: var(--white); }
-
-  .templates-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    flex-wrap: wrap; gap: 2rem; margin-bottom: 3.5rem;
-  }
-
-  .templates-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.8rem;
-  }
-
-  .tpl-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: box-shadow 0.25s, transform 0.25s;
-    cursor: pointer;
-  }
-  .tpl-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-5px); }
-
-  .tpl-thumb {
-    height: 210px;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-
-  /* Mock website previews with distinct personalities */
-  .tpl-mock {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    transform-origin: top left;
-  }
-
-  .mock-nav-bar {
-    height: 32px;
-    display: flex; align-items: center;
-    padding: 0 12px;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .m-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-
-  .mock-body { flex:1; padding:10px 12px; display:flex; flex-direction:column; gap:7px; overflow:hidden; }
-
-  .m-hero-block { border-radius: 6px; flex:1; display:flex; align-items:center; justify-content:center; padding:8px; flex-direction:column; gap:5px; }
-  .m-line { border-radius: 3px; }
-  .m-btn { border-radius:4px; height:10px; width:55px; }
-  .m-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; }
-  .m-grid-item { border-radius:5px; aspect-ratio:1; }
-
-  /* Theme 1 — Fashion/Vendor (warm beige) */
-  .t1 .mock-nav-bar { background:#faf7f2; border-bottom:1px solid #ede8e0; }
-  .t1 .m-dot:nth-child(1){background:#ff6b6b;} .t1 .m-dot:nth-child(2){background:#ffd93d;} .t1 .m-dot:nth-child(3){background:#6bcb77;}
-  .t1 .mock-body { background:#faf7f2; }
-  .t1 .m-hero-block { background:#f0e8dc; }
-  .t1 .m-line.heading { height:10px; width:70%; background:#3d2b1f; border-radius:3px; }
-  .t1 .m-line.sub { height:7px; width:50%; background:#c4a882; border-radius:3px; }
-  .t1 .m-btn { background:#3d2b1f; }
-  .t1 .m-grid-item { background:#e8d9c8; }
-  .t1 .m-grid-item:nth-child(2) { background:#d4bfa8; }
-  .t1 .m-grid-item:nth-child(3) { background:#c4a882; }
-
-
-  /* Theme 2 — Food/Restaurant (fresh green) */
-  .t2 .mock-nav-bar { background:#fff; border-bottom:1px solid #e8f0ec; }
-  .t2 .m-dot:nth-child(1){background:#ff6b6b;} .t2 .m-dot:nth-child(2){background:#ffd93d;} .t2 .m-dot:nth-child(3){background:#6bcb77;}
-  .t2 .mock-body { background:#f4faf6; }
-  .t2 .m-hero-block { background:#d4f0e0; }
-  .t2 .m-line.heading { height:10px; width:65%; background:#1a6b4a; border-radius:3px; }
-  .t2 .m-line.sub { height:7px; width:45%; background:#5aad82; border-radius:3px; }
-  .t2 .m-btn { background:#1a6b4a; }
-  .t2 .m-grid-item { background:#b8e8cc; }
-  .t2 .m-grid-item:nth-child(2) { background:#8fd4a8; }
-  .t2 .m-grid-item:nth-child(3) { background:#d4f0e0; }
-
-  /* Theme 3 — Services/Professional (navy clean) */
-  .t3 .mock-nav-bar { background:#fff; border-bottom:1px solid #e4e8f0; }
-  .t3 .m-dot:nth-child(1){background:#ff6b6b;} .t3 .m-dot:nth-child(2){background:#ffd93d;} .t3 .m-dot:nth-child(3){background:#6bcb77;}
-  .t3 .mock-body { background:#f8f9fc; }
-  .t3 .m-hero-block { background:#e4e8f8; }
-  .t3 .m-line.heading { height:10px; width:60%; background:#1e3a6e; border-radius:3px; }
-  .t3 .m-line.sub { height:7px; width:48%; background:#6a89cc; border-radius:3px; }
-  .t3 .m-btn { background:#1e3a6e; }
-  .t3 .m-grid-item { background:#c8d4f0; }
-  .t3 .m-grid-item:nth-child(2) { background:#a8bcec; }
-  .t3 .m-grid-item:nth-child(3) { background:#e4e8f8; }
-
-  /* Theme 4 — Beauty/Salon (rose minimal) */
-  .t4 .mock-nav-bar { background:#fff; border-bottom:1px solid #f0e8ec; }
-  .t4 .m-dot:nth-child(1){background:#ff6b6b;} .t4 .m-dot:nth-child(2){background:#ffd93d;} .t4 .m-dot:nth-child(3){background:#6bcb77;}
-  .t4 .mock-body { background:#fdf6f8; }
-  .t4 .m-hero-block { background:#f8e0e8; }
-  .t4 .m-line.heading { height:10px; width:68%; background:#8b2252; border-radius:3px; }
-  .t4 .m-line.sub { height:7px; width:44%; background:#c47090; border-radius:3px; }
-  .t4 .m-btn { background:#8b2252; }
-  .t4 .m-grid-item { background:#f0c0d0; }
-  .t4 .m-grid-item:nth-child(2) { background:#e8a8bc; }
-  .t4 .m-grid-item:nth-child(3) { background:#f8e0e8; }
-
-  /* Theme 5 — Tech/Agency (bold dark) */
-  .t5 .mock-nav-bar { background:#111; }
-  .t5 .m-dot:nth-child(1){background:#ff6b6b;} .t5 .m-dot:nth-child(2){background:#ffd93d;} .t5 .m-dot:nth-child(3){background:#6bcb77;}
-  .t5 .mock-body { background:#1a1a1a; }
-  .t5 .m-hero-block { background:#252525; }
-  .t5 .m-line.heading { height:10px; width:72%; background:#fff; border-radius:3px; }
-  .t5 .m-line.sub { height:7px; width:50%; background:#888; border-radius:3px; }
-  .t5 .m-btn { background:#00d4aa; }
-  .t5 .m-grid-item { background:#2e2e2e; }
-  .t5 .m-grid-item:nth-child(2) { background:#383838; }
-  .t5 .m-grid-item:nth-child(3) { background:#252525; }
-
-
-  .tpl-thumb {
-  height: 210px;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-}
-
-.tpl-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top; /* shows the hero/top of site, not middle */
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-  .tpl-card:hover .tpl-thumb img {
-   transform: scale(1.04);
-  }
-
-  .tpl-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(12, 11, 9, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.25s;
-  }
-
-  .tpl-card:hover .tpl-overlay {
-   background: rgba(12, 11, 9, 0.55); 
-  }
-
-  .preview-btn {
-    background: white;
-    color: var(--ink);
-    padding: 0.5rem 1.1rem;
-    border-radius: 6px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  .tpl-card:hover .preview-btn {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .tpl-overlay {
-    position: absolute; inset: 0;
-    background: rgba(20,18,16,0);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.25s;
-    gap: 0.75rem;
-  }
-
-  .tpl-card:hover .tpl-overlay { background: rgba(20,18,16,0.45); }
-
-  .preview-btn {
-    background: white;
-    color: var(--ink);
-    padding: 0.5rem 1.1rem;
-    border-radius: 6px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .tpl-card:hover .preview-btn { opacity: 1; transform: translateY(0); }
-
-  .tpl-body { padding: 1.4rem 1.5rem; }
-
-  .tpl-category {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 0.4rem;
-  }
-
-  .tpl-name { font-size: 1.05rem; font-weight: 600; font-family:'Instrument Sans',sans-serif; color: var(--ink); margin-bottom: 0.3rem; }
-  .tpl-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-
-  .tpl-footer {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 0.9rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .tpl-price { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--ink); }
-  .tpl-price span { font-size:0.78rem; font-family:'Instrument Sans',sans-serif; font-weight:400; color:var(--muted); margin-left:0.3rem; }
-
-  .tpl-action {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent);
-    display:flex; align-items:center; gap:0.3rem;
-    transition: gap 0.2s;
-  }
-  .tpl-card:hover .tpl-action { gap:0.5rem; }
-
-  .tpl-coming {
-    display:flex; align-items:center; justify-content:center;
-    height:210px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 2rem;
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-weight:300;
-  }
-
-  /* ── SERVICES / PACKAGES ── */
-  #services { background: var(--off); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-
-  .packages-wrap {
-    display:grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem; margin-top: 3.5rem;
-  }
-
-  .pkg {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    display:flex; flex-direction:column;
-    position:relative;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .pkg:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-
-  .pkg.popular {
-    border-color: var(--accent);
-    background: var(--white);
-    box-shadow: 0 0 0 1px var(--accent), var(--shadow);
-  }
-
-  .pop-badge {
-    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
-    background: var(--accent);
-    color: white;
-    font-size:0.7rem; font-weight:600;
-    padding:0.25rem 0.85rem;
-    border-radius:100px;
-    white-space:nowrap;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-  }
-
-  .pkg-icon { font-size:1.8rem; margin-bottom:1rem; }
-  .pkg-name { font-family:'Fraunces',serif; font-size:1.3rem; font-weight:600; color:var(--ink); margin-bottom:0.3rem; }
-  .pkg-tagline { font-size:0.82rem; color:var(--accent); font-weight:500; margin-bottom:1rem; }
-  .pkg-desc { font-size:0.87rem; color:var(--muted); line-height:1.7; margin-bottom:1.5rem; }
-
-  .pkg-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.8rem; }
-  .pkg-list li { font-size:0.86rem; display:flex; align-items:flex-start; gap:0.6rem; color:var(--ink2); }
-  .pkg-list li .ck { color:var(--accent); font-weight:700; flex-shrink:0; }
-
-  .pkg-price-row {
-    margin-top:auto;
-    padding-top:1.4rem;
-    border-top:1px solid var(--border);
-  }
-
-  .pkg-price-lbl { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.3rem; }
-  .pkg-price-val { font-family:'Fraunces',serif; font-size:2rem; font-weight:600; color:var(--ink); letter-spacing:-0.03em; }
-  .pkg-price-note { font-size:0.78rem; color:var(--muted); margin-top:0.3rem; }
-
-  .pkg-btn {
-    display:block; text-align:center; margin-top:1.4rem;
-    padding:0.8rem; border-radius:7px;
-    font-size:0.9rem; font-weight:600;
-    border: 2px solid var(--border);
-    color: var(--ink);
-    transition: all 0.2s;
-  }
-  .pkg.popular .pkg-btn { background:var(--accent); border-color:var(--accent); color:white; }
-  .pkg:not(.popular) .pkg-btn:hover { border-color: var(--ink); background: var(--off); }
-  .pkg.popular .pkg-btn:hover { background:#155c3e; }
-
-  /* ── PROCESS ── */
-  #process { background: var(--white); }
-
-  .process-row {
-    display:grid; grid-template-columns:repeat(4,1fr);
-    gap:2rem; margin-top:4rem;
-    position:relative;
-  }
-
-  .process-row::before {
-    content:'';
-    position:absolute;
-    top:1.75rem; left:calc(12.5% + 1rem); right:calc(12.5% + 1rem);
-    height:1px;
-    background: linear-gradient(90deg, var(--accent), var(--border));
-  }
-
-  .step {
-    display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:0 1rem;
-  }
-
-  .step-circle {
-    width:3.5rem; height:3.5rem;
-    border-radius:50%;
-    border:2px solid var(--accent);
-    background:var(--white);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem;
-    color:var(--accent);
-    margin-bottom:1.2rem;
-    position:relative; z-index:1;
-  }
-
-  .step h4 { font-family:'Instrument Sans',sans-serif; font-weight:600; font-size:0.95rem; color:var(--ink); margin-bottom:0.5rem; }
-  .step p { font-size:0.83rem; color:var(--muted); line-height:1.7; }
-
-  /* ── TRUST ── */
-  #trust { background:var(--off); border-top:1px solid var(--border); }
-
-  .trust-layout {
-    display:grid; grid-template-columns:1fr 1fr;
-    gap:4rem; margin-top:4rem;
-  }
-
-  .testi-stack { display:flex; flex-direction:column; gap:1.2rem; }
-
-  .testi {
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:1.6rem;
-    transition: box-shadow 0.2s;
-  }
-  .testi:hover { box-shadow:var(--shadow); }
-
-  .testi-stars { color:#e8a020; font-size:0.8rem; margin-bottom:0.75rem; letter-spacing:2px; }
-  .testi-text { font-size:0.9rem; color:var(--ink2); line-height:1.75; font-style:italic; margin-bottom:1.1rem; }
-
-  .testi-who { display:flex; align-items:center; gap:0.75rem; }
-  .testi-ava {
-    width:38px; height:38px; border-radius:50%; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center; font-size:1rem;
-  }
-  .a1{background:#f0e8dc;} .a2{background:#d4f0e0;} .a3{background:#f8e0e8;}
-  .testi-nm { font-size:0.88rem; font-weight:600; color:var(--ink); }
-  .testi-rl { font-size:0.77rem; color:var(--muted); }
-
-  .guarantees-stack { display:flex; flex-direction:column; gap:1rem; }
-
-  .guar {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:10px; padding:1.4rem 1.5rem;
-    display:flex; gap:1rem; align-items:flex-start;
-    transition:all 0.2s;
-  }
-  .guar:hover { border-color:#c8c4bc; box-shadow:var(--shadow); }
-
-  .guar-icon { font-size:1.5rem; flex-shrink:0; margin-top:0.1rem; }
-  .guar h4 { font-family:'Instrument Sans',sans-serif; font-weight:600; font-size:0.92rem; color:var(--ink); margin-bottom:0.25rem; }
-  .guar p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
-
-  /* ── FINAL CTA ── */
-  #cta {
-    background:var(--ink);
-    color:var(--white);
-    padding:8rem 5%;
-    text-align:center;
-    position:relative; overflow:hidden;
-  }
-
-  #cta::before {
-    content:'';
-    position:absolute; inset:0;
-    background:
-      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(26,107,74,0.2) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(196,92,26,0.1) 0%, transparent 60%);
-    pointer-events:none;
-  }
-
-  #cta .section-h { color:var(--white); max-width:18ch; margin:0 auto 1.2rem; }
-  #cta .section-p { color:rgba(255,255,255,0.55); margin:0 auto 2.8rem; text-align:center; }
-
-  .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-
-  .wa-btn {
-    display:inline-flex; align-items:center; gap:0.75rem;
-    background:#25d366; color:white;
-    padding:1rem 2rem; border-radius:8px;
-    font-size:0.95rem; font-weight:600;
-    border:2px solid #25d366;
-    transition:all 0.2s;
-  }
-  .wa-btn:hover { background:#1db954; border-color:#1db954; transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,0.3); }
-
-  .email-btn {
-    display:inline-flex; align-items:center; gap:0.6rem;
-    background:transparent; color:rgba(255,255,255,0.8);
-    padding:1rem 1.6rem; border-radius:8px;
-    font-size:0.92rem; font-weight:500;
-    border:2px solid rgba(255,255,255,0.2);
-    transition:all 0.2s;
-  }
-  .email-btn:hover { border-color:rgba(255,255,255,0.5); color:white; }
-
-  .cta-reassure { margin-top:1.5rem; font-size:0.82rem; color:rgba(255,255,255,0.35); }
-
-  /* ── FOOTER ── */
-  footer {
-    background:var(--white);
-    border-top:1px solid var(--border);
-    padding:2.5rem 5%;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;
-  }
-  
-  .footer-eyebrow{
-    display: inline-flex;  ;
-    color: var(--accent);
-    font-weight: 700;
-    text-transform: uppercase;
-    
-  }
-  .footer-eyebrow::before{
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: breath 2.5s infinite;
-  }
-  
-  @keyframes breath {
-    0%,100% { opacity:1; transform:scale(1.40); }
-    50% { opacity:0.3; transform:scale(0.6); }
-  }
-
-
-  .footer-logo { font-family:'Fraunces',serif; font-size:1rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; }
-  .footer-links { display:flex; gap:2rem; flex-wrap:wrap; }
-  .footer-links a { font-size:0.84rem; color:var(--muted); transition:color 0.2s; }
-  .footer-links a:hover { color:var(--ink); }
-  .footer-copy { font-size:0.78rem; color:var(--muted); }
-
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.65s ease, transform 0.65s ease; }
-  .reveal.in { opacity:1; transform:translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media(max-width:960px){
-    .nav-links { display:none; }
-    .nav-mobile-cta { display:flex; }
-    .problem-layout { grid-template-columns:1fr; }
-    .templates-grid { grid-template-columns:1fr 1fr; }
-    .packages-wrap { grid-template-columns:1fr; }
-    .process-row { grid-template-columns:1fr 1fr; gap:2.5rem; }
-    .process-row::before { display:none; }
-    .trust-layout { grid-template-columns:1fr; }
-    footer { flex-direction:column; text-align:center; }
-  }
-
-  @media(max-width:600px){
-    .templates-grid { grid-template-columns:1fr; }
-    .process-row { grid-template-columns:1fr; }
-    .hero-proof { gap:1.5rem; }
-    .cta-btns { flex-direction:column; align-items:center; }
-  }
-
-</style>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- PAGE LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo" id="loaderLogo"></div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -842,43 +107,65 @@
   </div>
   <ul class="nav-links">
     <li><a href="#templates">Templates</a></li>
+    <li><a href="#cases">Case Studies</a></li>
     <li><a href="#services">Packages</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#trust">Reviews</a></li>
-    <li><a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="nav-cta">Start a Project</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="nav-cta"><span>Start a Project</span></a></li>
   </ul>
-  <a href="https://wa.me/2349041999098" target="_blank" class="nav-mobile-cta">💬 Chat</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" tabindex="0">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer" role="navigation" aria-label="Mobile menu">
+  <a href="#templates">Templates</a>
+  <a href="#cases">Case Studies</a>
+  <a href="#services">Packages</a>
+  <a href="#process">Process</a>
+  <a href="#trust">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="drawer-cta">💬 Start a Project</a>
+</div>
+
+<!-- TRUST BADGE STRIP -->
+<div id="trust-strip" role="complementary" aria-label="Trust indicators">
+  <div class="ts-item"><span class="ts-icon">⚡</span> <strong>3–5 day</strong>&nbsp;delivery</div>
+  <div class="ts-item"><span class="ts-icon">📱</span> <strong>100%</strong>&nbsp;mobile-ready</div>
+  <div class="ts-item"><span class="ts-icon">💬</span> WhatsApp-first design</div>
+  <div class="ts-item"><span class="ts-icon">🔒</span> <strong>₦0</strong>&nbsp;hidden fees</div>
+  <div class="ts-item"><span class="ts-icon">🇳🇬</span> Made for Nigerian businesses</div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow reveal">Open for new projects</div>
-
-    <h1 class="hero-h reveal">
+    <div class="hero-eyebrow">Open for new projects</div>
+    <h1 class="hero-h" id="heroHeadline">
       Websites that bring your business <em>real customers</em>
     </h1>
-
-    <p class="hero-sub reveal">
+    <p class="hero-sub">
       I'm Kelvin — I build fast, clean, mobile-ready websites for small businesses, vendors, and local services across Nigeria. Pick a ready-made template or get something built from scratch. Either way, you go live in days.
     </p>
-
-    <div class="hero-actions reveal">
-      <a href="#templates" class="btn-primary">Browse Templates →</a>
+    <div class="hero-actions">
+      <a href="#templates" class="btn-primary"><span>Browse Templates</span><span>→</span></a>
       <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20a%20custom%20website" target="_blank" class="btn-outline">💬 Talk to Kelvin</a>
     </div>
-
-    <div class="hero-proof reveal">
+    <div class="hero-proof">
       <div class="proof-item">
-        <div class="proof-num">3<sup>–5</sup></div>
+        <div class="proof-num" data-target="5" data-suffix="+" data-prefix="3–">3–5</div>
         <div class="proof-label">Days to go live</div>
       </div>
       <div class="proof-item">
-        <div class="proof-num">5<sup>+</sup></div>
+        <div class="proof-num" data-target="4" data-suffix="+">0</div>
         <div class="proof-label">Live templates ready</div>
       </div>
       <div class="proof-item">
-        <div class="proof-num">100<sup>%</sup></div>
+        <div class="proof-num" data-target="100" data-suffix="%">0</div>
         <div class="proof-label">Mobile optimised</div>
       </div>
       <div class="proof-item">
@@ -891,45 +178,31 @@
 
 <!-- PROBLEM → SOLUTION -->
 <section id="problem">
-  <div class="label">The Problem</div>
-  <h2 class="section-h reveal">Your customers are searching.<br>They just can't find you.</h2>
-  <p class="section-p reveal">Every day people search Google for exactly what you sell. If you're not online, your competitor gets that customer instead.</p>
-
+  <div class="label sr">The Problem</div>
+  <h2 class="section-h sr">Your customers are searching.<br>They just can't find you.</h2>
+  <p class="section-p sr">Every day people search Google for exactly what you sell. If you're not online, your competitor gets that customer instead.</p>
   <div class="problem-layout">
     <div class="problem-cards">
-      <div class="prob-card reveal">
+      <div class="prob-card sr" style="transition-delay:.05s">
         <div class="prob-icon">📱</div>
-        <div>
-          <h4>Instagram & WhatsApp alone aren't enough</h4>
-          <p>Posts disappear, stories expire in 24 hours, and DMs are chaotic. Customers can't find you when they actually need you.</p>
-        </div>
+        <div><h4>Instagram & WhatsApp alone aren't enough</h4><p>Posts disappear, stories expire in 24 hours. Customers can't find you when they need you.</p></div>
       </div>
-      <div class="prob-card reveal">
+      <div class="prob-card sr" style="transition-delay:.12s">
         <div class="prob-icon">🔍</div>
-        <div>
-          <h4>You don't exist on Google</h4>
-          <p>When someone searches "fashion vendor Lagos" or "caterer near me" — without a website, you're invisible. That's direct income you're missing daily.</p>
-        </div>
+        <div><h4>You don't exist on Google</h4><p>When someone searches "fashion vendor Lagos" — without a website, you're invisible. That's income you're losing daily.</p></div>
       </div>
-      <div class="prob-card reveal">
+      <div class="prob-card sr" style="transition-delay:.19s">
         <div class="prob-icon">📋</div>
-        <div>
-          <h4>No single place to show prices & products</h4>
-          <p>Customers DM just to ask basic questions. That friction kills sales. A website answers everything automatically, even at 2am.</p>
-        </div>
+        <div><h4>No single place to show prices & products</h4><p>Customers DM just to ask basic questions. That friction kills sales — even at 2am.</p></div>
       </div>
-      <div class="prob-card reveal">
+      <div class="prob-card sr" style="transition-delay:.26s">
         <div class="prob-icon">🤝</div>
-        <div>
-          <h4>No website means less trust</h4>
-          <p>Before buying, people search. A competitor with a website looks more professional — and wins the sale, even if you're actually better.</p>
-        </div>
+        <div><h4>No website means less trust</h4><p>A competitor with a website looks more professional and wins the sale — even if you're actually better.</p></div>
       </div>
     </div>
-
-    <div class="solution-panel reveal">
+    <div class="solution-panel sr sr-right">
       <h3>A website fixes all of this — fast.</h3>
-      <p>Not a complex system. A clean, fast site built around one goal: getting your business more customers. I've done it for vendors, caterers, and service providers across Nigeria.</p>
+      <p>Not a complex system. A clean, fast site built around one goal: getting your business more customers. Done for vendors, caterers, and service providers across Nigeria.</p>
       <ul class="sol-list">
         <li>Shows up when customers search Google</li>
         <li>Displays products, prices & services 24/7</li>
@@ -938,9 +211,7 @@
         <li>Builds instant trust with new visitors</li>
         <li>You don't need any tech knowledge</li>
       </ul>
-      <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="sol-cta">
-        💬 Let's fix this — chat me now
-      </a>
+      <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online" target="_blank" class="sol-cta"><span>💬 Let's fix this — chat me now</span></a>
     </div>
   </div>
 </section>
@@ -949,188 +220,138 @@
 <section id="templates">
   <div class="templates-header">
     <div>
-      <div class="label">Ready-Made Templates</div>
-      <h2 class="section-h reveal">Pick a design.<br>I'll make it yours.</h2>
+      <div class="label sr">Ready-Made Templates</div>
+      <h2 class="section-h sr">Pick a design.<br>I'll make it yours.</h2>
     </div>
-    <p class="section-p reveal" style="max-width:36ch; text-align:right;">Real websites I've built. Click Preview to see the live version, then tell me which one you want.</p>
+    <p class="section-p sr" style="max-width:36ch;text-align:right;">Real websites I've built. Click Preview to see the live version, then tell me which one you want.</p>
   </div>
-
   <div class="templates-grid">
 
-    <!-- Template 1 -->
-    <div class="tpl-card reveal" onclick="window.open('https://ifetech123.github.io/MKADreamHomeProperty/','_blank')">
+    <div class="tpl-card sr" style="transition-delay:.05s" onclick="window.open('https://ifetech123.github.io/MKADreamHomeProperty/','_blank')">
       <div class="tpl-thumb">
-        <div class="tpl-mock t1">
-          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-          <div class="mock-body">
-            <div class="m-hero-block">
-              <div class="m-line heading"></div>
-              <div class="m-line sub"></div>
-              <div class="m-btn"></div>
-            </div>
-            <div class="m-grid">
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-            </div>
-          </div>
-        </div>
-        <div class="tpl-thumb">
-          <img src="image3.JPG" alt="MKA Dream Home Property Preview">
-        <div class="tpl-overlay">
-          <div class="preview-btn">👁 Preview Live</div>
-        </div></div>
+        <img src="image3.JPG" alt="MKA Dream Home Property">
+        <div class="tpl-overlay"><div class="preview-btn">👁 Preview Live</div></div>
       </div>
       <div class="tpl-body">
         <div class="tpl-category">Real Estate</div>
         <div class="tpl-name">MKA Dream Home Property</div>
-        <p class="tpl-desc">Modern real estate listing site. Perfect for property agents, developers & real estate businesses. Full gallery, property details & WhatsApp inquiry button.</p>
+        <p class="tpl-desc">Property listings, gallery, WhatsApp inquiry. For agents & developers.</p>
         <div class="tpl-footer">
-          <div class="tpl-price">₦79,999 <span>customised for you</span></div>
+          <div class="tpl-price">₦79,999 <span>customised</span></div>
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
     </div>
 
-    <!-- Template 2 -->
-    <div class="tpl-card reveal" onclick="window.open('https://ifetech.name.ng/templates/clientproject/index.html','_blank')">
+    <div class="tpl-card sr" style="transition-delay:.1s" onclick="window.open('https://ifetech.name.ng/templates/clientproject/index.html','_blank')">
       <div class="tpl-thumb">
-        <div class="tpl-mock t2">
-          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-          <div class="mock-body">
-            <div class="m-hero-block">
-              <div class="m-line heading"></div>
-              <div class="m-line sub"></div>
-              <div class="m-btn"></div>
+        <div class="tpl-mock-fallback t-food">
+          <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
+          <div class="mock-content">
+            <div class="mc-hero" style="background:#c8ecd8;">
+              <div style="height:8px;width:60%;background:#1a6b4a;border-radius:3px;"></div>
+              <div style="height:6px;width:40%;background:#4aad72;border-radius:3px;margin-top:4px;"></div>
+              <div style="height:9px;width:50px;background:#1a6b4a;border-radius:3px;margin-top:6px;"></div>
             </div>
-            <div class="m-grid">
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-            </div>
+            <div class="mc-row"><div class="mc-box" style="background:#a8d8bc;"></div><div class="mc-box" style="background:#88c8a0;"></div><div class="mc-box" style="background:#c8ecd8;"></div></div>
           </div>
         </div>
-        <div class="tpl-overlay">
-          <div class="preview-btn">👁 Preview Live</div>
-        </div>
+        <div class="tpl-overlay"><div class="preview-btn">👁 Preview Live</div></div>
       </div>
       <div class="tpl-body">
         <div class="tpl-category">Food & Catering</div>
-        <div class="tpl-name">Kelvin Store – Quality Snacks & Everyday Essentials</div>
-        <p class="tpl-desc">Digital menu, food photos, WhatsApp ordering. Built for caterers, restaurants & home chefs.</p>
+        <div class="tpl-name">Kelvin Store — Snacks & Essentials</div>
+        <p class="tpl-desc">Menu, photos, WhatsApp ordering. For food vendors & caterers.</p>
         <div class="tpl-footer">
-          <div class="tpl-price">₦49,999 <span>customised for you</span></div>
+          <div class="tpl-price">₦39,999 <span>customised</span></div>
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
     </div>
 
-    <!-- Template 3 -->
-    <div class="tpl-card reveal" onclick="window.open('https://ifetech.name.ng/templates/BarbingSalon/index.html','_blank')">
+    <div class="tpl-card sr" style="transition-delay:.15s" onclick="window.open('https://ifetech.name.ng/templates/BarbingSalon/index.html','_blank')">
       <div class="tpl-thumb">
-        <div class="tpl-mock t3">
-          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-          <div class="mock-body">
-            <div class="m-hero-block">
-              <div class="m-line heading"></div>
-              <div class="m-line sub"></div>
-              <div class="m-btn"></div>
+        <div class="tpl-mock-fallback t-barber">
+          <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
+          <div class="mock-content">
+            <div class="mc-hero" style="background:#201c14;">
+              <div style="height:8px;width:62%;background:#e3c586;border-radius:3px;"></div>
+              <div style="height:6px;width:40%;background:#806a30;border-radius:3px;margin-top:4px;"></div>
+              <div style="height:9px;width:50px;background:#e3c586;border-radius:3px;margin-top:6px;"></div>
             </div>
-            <div class="m-grid">
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-            </div>
+            <div class="mc-row"><div class="mc-box" style="background:#282018;"></div><div class="mc-box" style="background:#1e1810;"></div><div class="mc-box" style="background:#201c14;"></div></div>
           </div>
         </div>
-        <div class="tpl-overlay">
-          <div class="preview-btn">👁 Preview Live</div>
-        </div>
+        <div class="tpl-overlay"><div class="preview-btn">👁 Preview Live</div></div>
       </div>
       <div class="tpl-body">
-        <div class="tpl-category">Local Services</div>
+        <div class="tpl-category">Barbing & Grooming</div>
         <div class="tpl-name">Heritage Studio</div>
-        <p class="tpl-desc">Services list, pricing, booking form + WhatsApp. For salons, electricians, plumbers, cleaners, repair services.</p>
+        <p class="tpl-desc">Services, pricing, gallery & WhatsApp booking. For barbers & salons.</p>
         <div class="tpl-footer">
-          <div class="tpl-price">₦35,000 <span>customised for you</span></div>
+          <div class="tpl-price">₦35,000 <span>customised</span></div>
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
     </div>
 
-    <!-- Template 4 -->
-    <div class="tpl-card reveal" onclick="window.open('https://ifetech.name.ng/templates/hairsalon/index0.html','_blank')">
+    <div class="tpl-card sr" style="transition-delay:.2s" onclick="window.open('https://ifetech.name.ng/templates/hairsalon/index0.html','_blank')">
       <div class="tpl-thumb">
-        <div class="tpl-mock t4">
-          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-          <div class="mock-body">
-            <div class="m-hero-block">
-              <div class="m-line heading"></div>
-              <div class="m-line sub"></div>
-              <div class="m-btn"></div>
+        <div class="tpl-mock-fallback t-beauty">
+          <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
+          <div class="mock-content">
+            <div class="mc-hero" style="background:#f4d8e8;">
+              <div style="height:8px;width:64%;background:#8b2252;border-radius:3px;"></div>
+              <div style="height:6px;width:42%;background:#c47090;border-radius:3px;margin-top:4px;"></div>
+              <div style="height:9px;width:50px;background:#8b2252;border-radius:3px;margin-top:6px;"></div>
             </div>
-            <div class="m-grid">
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-            </div>
+            <div class="mc-row"><div class="mc-box" style="background:#ecc0d4;"></div><div class="mc-box" style="background:#e0a8c0;"></div><div class="mc-box" style="background:#f4d8e8;"></div></div>
           </div>
         </div>
-        <div class="tpl-overlay">
-          <div class="preview-btn">👁 Preview Live</div>
-        </div>
+        <div class="tpl-overlay"><div class="preview-btn">👁 Preview Live</div></div>
       </div>
       <div class="tpl-body">
         <div class="tpl-category">Beauty & Wellness</div>
         <div class="tpl-name">The Glam</div>
-        <p class="tpl-desc">Gallery, services & prices, appointment booking. For salons, makeup artists & beauty brands.</p>
+        <p class="tpl-desc">Gallery, services, booking. For hair salons, makeup artists & beauty brands.</p>
         <div class="tpl-footer">
-          <div class="tpl-price">₦35,000 <span>customised for you</span></div>
+          <div class="tpl-price">₦35,000 <span>customised</span></div>
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
     </div>
 
-    <!-- Template 5 - Coming Soon -->
-    <div class="tpl-card reveal">
+    <div class="tpl-card sr" style="transition-delay:.25s" onclick="window.open('https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20the%20Tech%2FAgency%20template','_blank')"  title="Coming soon — message Kelvin to request this template">
       <div class="tpl-thumb">
-        <div class="tpl-mock t5">
-          <div class="mock-nav-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-          <div class="mock-body">
-            <div class="m-hero-block">
-              <div class="m-line heading"></div>
-              <div class="m-line sub"></div>
-              <div class="m-btn"></div>
+        <div class="tpl-mock-fallback t-tech">
+          <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
+          <div class="mock-content">
+            <div class="mc-hero" style="background:#0c0c0c;">
+              <div style="height:8px;width:70%;background:#fff;border-radius:3px;"></div>
+              <div style="height:6px;width:44%;background:#555;border-radius:3px;margin-top:4px;"></div>
+              <div style="height:9px;width:50px;background:#00e5aa;border-radius:3px;margin-top:6px;"></div>
             </div>
-            <div class="m-grid">
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-              <div class="m-grid-item"></div>
-            </div>
+            <div class="mc-row"><div class="mc-box" style="background:#111;"></div><div class="mc-box" style="background:#0d0d0d;"></div><div class="mc-box" style="background:#101010;"></div></div>
           </div>
-        </div>
-        <div class="tpl-overlay">
-          <div class="preview-btn">👁 Preview Live</div>
         </div>
       </div>
       <div class="tpl-body">
         <div class="tpl-category">Tech & Agency</div>
         <div class="tpl-name">The Studio</div>
-        <p class="tpl-desc">Portfolio, case studies, contact form. For freelancers, creatives, and small agencies.</p>
+        <p class="tpl-desc">Portfolio, case studies & contact. For freelancers, creatives & agencies.</p>
         <div class="tpl-footer">
-          <div class="tpl-price">₦40,000 <span>customised for you</span></div>
+          <div class="tpl-price">₦40,000 <span>customised</span></div>
           <div class="tpl-action">Coming Soon →</div>
         </div>
       </div>
     </div>
 
-    <!-- Coming Soon Slot -->
-    <div class="tpl-card reveal">
+    <div class="tpl-card sr" style="transition-delay:.3s">
       <div class="tpl-coming">+ Coming Soon</div>
       <div class="tpl-body">
         <div class="tpl-category">New Template</div>
         <div class="tpl-name">More dropping soon</div>
-        <p class="tpl-desc">New industry templates are being built regularly. Drop me a message if you need something specific.</p>
+        <p class="tpl-desc">New templates added regularly. Message me if you need something specific.</p>
         <div class="tpl-footer">
           <div class="tpl-price" style="color:var(--muted);">TBA</div>
           <a href="https://wa.me/2349041999098?text=I%20want%20a%20custom%20template" target="_blank" class="tpl-action" onclick="event.stopPropagation()">Request one →</a>
@@ -1141,25 +362,78 @@
   </div>
 </section>
 
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="cases-intro">
+    <div>
+      <div class="label sr">Real Results</div>
+      <h2 class="section-h sr">Projects I've built.<br>Problems I've solved.</h2>
+    </div>
+    <p class="section-p sr" style="max-width:38ch;">Every client had a problem. Here's what happened after they got a website.</p>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card sr" style="transition-delay:.05s">
+      <div class="case-thumb ct-estate"><div class="case-thumb-icon">🏠</div></div>
+      <div class="case-body">
+        <div class="case-client">🏠 Real Estate · Lagos</div>
+        <h3 class="case-title">MKA Dream Home — From zero presence to Google-visible listings</h3>
+        <div class="case-flow">
+          <span class="case-tag">No website</span><span class="case-arrow">→</span>
+          <span class="case-tag">Full property site</span><span class="case-arrow">→</span>
+          <span class="case-tag">WhatsApp inquiries</span>
+        </div>
+        <div class="case-result"><span class="case-result-icon">📈</span>Clients browse all listings, see photos & contact agent directly — without calling first.</div>
+        <a href="https://ifetech123.github.io/MKADreamHomeProperty/" target="_blank" class="case-link">View live site →</a>
+      </div>
+    </div>
+    <div class="case-card sr" style="transition-delay:.1s">
+      <div class="case-thumb ct-food"><div class="case-thumb-icon">🛒</div></div>
+      <div class="case-body">
+        <div class="case-client">🛒 Food & Retail · Nigeria</div>
+        <h3 class="case-title">Kelvin Store — A vendor page that takes orders while you sleep</h3>
+        <div class="case-flow">
+          <span class="case-tag">Instagram only</span><span class="case-arrow">→</span>
+          <span class="case-tag">Product site</span><span class="case-arrow">→</span>
+          <span class="case-tag">WhatsApp orders</span>
+        </div>
+        <div class="case-result"><span class="case-result-icon">💬</span>Products & prices live 24/7. Customers tap to order directly — no more "how much?" DMs.</div>
+        <a href="https://ifetech.name.ng/templates/clientproject/index.html" target="_blank" class="case-link">View live site →</a>
+      </div>
+    </div>
+    <div class="case-card sr" style="transition-delay:.15s">
+      <div class="case-thumb ct-barber"><div class="case-thumb-icon">✂️</div></div>
+      <div class="case-body">
+        <div class="case-client">✂️ Grooming · Lagos</div>
+        <h3 class="case-title">Heritage Studio — A barber shop that now books through its website</h3>
+        <div class="case-flow">
+          <span class="case-tag">Word of mouth</span><span class="case-arrow">→</span>
+          <span class="case-tag">Full site + booking</span><span class="case-arrow">→</span>
+          <span class="case-tag">Looks premium</span>
+        </div>
+        <div class="case-result"><span class="case-result-icon">⚡</span>Clients see services, pricing & gallery before they arrive. Booking via WhatsApp is seamless.</div>
+        <a href="https://ifetech.name.ng/templates/BarbingSalon/index.html" target="_blank" class="case-link">View live site →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PACKAGES -->
 <section id="services">
-  <div class="label">Pricing</div>
-  <h2 class="section-h reveal">Simple packages.<br>No surprises.</h2>
-  <p class="section-p reveal">Whether you want a ready template or something fully custom — there's a clear option for you.</p>
-
+  <div class="label sr">Pricing</div>
+  <h2 class="section-h sr">Simple packages.<br>No surprises.</h2>
+  <p class="section-p sr">Whether you want a ready template or something fully custom — there's a clear option for you.</p>
   <div class="packages-wrap">
-
-    <div class="pkg reveal">
+    <div class="pkg sr" style="transition-delay:.05s">
       <div class="pkg-icon">🏪</div>
       <div class="pkg-name">Starter</div>
       <div class="pkg-tagline">Get online fast</div>
-      <p class="pkg-desc">A clean 1-page site that tells the world who you are and how to reach you. Perfect starting point.</p>
+      <p class="pkg-desc">A clean 1-page site that tells the world who you are and how to reach you.</p>
       <ul class="pkg-list">
         <li><span class="ck">✓</span> 1-page professional website</li>
-        <li><span class="ck">✓</span> Your services, info & location</li>
+        <li><span class="ck">✓</span> Services, info & location</li>
         <li><span class="ck">✓</span> WhatsApp contact button</li>
-        <li><span class="ck">✓</span> Mobile-optimised</li>
-        <li><span class="ck">✓</span> Basic Google setup (SEO)  </li>
+        <li><span class="ck">✓</span> 100% mobile-optimised</li>
+        <li><span class="ck">✓</span> Basic Google (SEO) setup</li>
         <li><span class="ck">✓</span> Delivered in 3 days</li>
       </ul>
       <div class="pkg-price-row">
@@ -1167,15 +441,14 @@
         <div class="pkg-price-val">₦29,999</div>
         <div class="pkg-price-note">One-time. No monthly fees.</div>
       </div>
-      <a href="https://wa.me/2349041999098?text=I%20want%20the%20Starter%20package" target="_blank" class="pkg-btn">Get Started →</a>
+      <a href="https://wa.me/2349041999098?text=I%20want%20the%20Starter%20package" target="_blank" class="pkg-btn"><span>Get Started →</span></a>
     </div>
-
-    <div class="pkg popular reveal">
+    <div class="pkg popular sr" style="transition-delay:.1s">
       <div class="pop-badge">Most Popular</div>
       <div class="pkg-icon">🛒</div>
       <div class="pkg-name">Vendor / Business</div>
       <div class="pkg-tagline">Turn visitors into orders</div>
-      <p class="pkg-desc">For vendors, sellers & service providers who want a full site with products, prices & direct WhatsApp ordering.</p>
+      <p class="pkg-desc">For vendors, sellers & service providers who want products, prices & direct WhatsApp ordering.</p>
       <ul class="pkg-list">
         <li><span class="ck">✓</span> Multi-page website</li>
         <li><span class="ck">✓</span> Product / service gallery</li>
@@ -1190,14 +463,13 @@
         <div class="pkg-price-val">₦49,999</div>
         <div class="pkg-price-note">Delivered in 5–7 days.</div>
       </div>
-      <a href="https://wa.me/2349041999098?text=I%20want%20the%20Vendor%20package" target="_blank" class="pkg-btn">Get Started →</a>
+      <a href="https://wa.me/2349041999098?text=I%20want%20the%20Vendor%20package" target="_blank" class="pkg-btn"><span>Get Started →</span></a>
     </div>
-
-    <div class="pkg reveal">
+    <div class="pkg sr" style="transition-delay:.15s">
       <div class="pkg-icon">⚡</div>
       <div class="pkg-name">Custom Build</div>
       <div class="pkg-tagline">Built for your exact needs</div>
-      <p class="pkg-desc">Booking systems, full brand sites, custom features. If you need something specific, we'll build it right.</p>
+      <p class="pkg-desc">Booking systems, full brand sites, custom features. Something specific in mind? Let's build it right.</p>
       <ul class="pkg-list">
         <li><span class="ck">✓</span> Full custom design</li>
         <li><span class="ck">✓</span> Booking or order forms</li>
@@ -1211,145 +483,181 @@
         <div class="pkg-price-val">₦100,000</div>
         <div class="pkg-price-note">Timeline depends on scope.</div>
       </div>
-      <a href="https://wa.me/2349041999098?text=I%20need%20a%20custom%20website" target="_blank" class="pkg-btn">Let's Talk →</a>
+      <a href="https://wa.me/2349041999098?text=I%20need%20a%20custom%20website" target="_blank" class="pkg-btn"><span>Let's Talk →</span></a>
     </div>
-
   </div>
 </section>
 
 <!-- PROCESS -->
 <section id="process">
-  <div class="label">How It Works</div>
-  <h2 class="section-h reveal">From first message<br>to live in days.</h2>
-  <p class="section-p reveal">No long meetings. No tech confusion. Just four simple steps.</p>
-
+  <div class="label sr">How It Works</div>
+  <h2 class="section-h sr">From first message<br>to live in days.</h2>
+  <p class="section-p sr">No long meetings. No tech confusion. Just four simple steps.</p>
   <div class="process-row">
-    <div class="step reveal">
-      <div class="step-circle">01</div>
-      <h4>We Chat on WhatsApp</h4>
-      <p>Tell me about your business. I'll ask a few quick questions to understand what you need. Takes 10 minutes.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-circle">02</div>
-      <h4>I Send You a Clear Plan</h4>
-      <p>I'll tell you exactly what you'll get, what it looks like, and what it costs. No surprises, nothing hidden.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-circle">03</div>
-      <h4>I Build It Fast</h4>
-      <p>You get a preview before anything goes live. Most projects are done within 3–7 days.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-circle">04</div>
-      <h4>You Go Live & Grow</h4>
-      <p>Site goes live. I hand it over fully and show you how to share it. Then watch your business grow online.</p>
-    </div>
+    <div class="step sr" style="transition-delay:.05s"><div class="step-circle">01</div><h4>We Chat on WhatsApp</h4><p>Tell me about your business. Quick questions, 10 minutes.</p></div>
+    <div class="step sr" style="transition-delay:.12s"><div class="step-circle">02</div><h4>I Send You a Plan</h4><p>Exactly what you'll get, what it looks like, what it costs.</p></div>
+    <div class="step sr" style="transition-delay:.19s"><div class="step-circle">03</div><h4>I Build It Fast</h4><p>Preview before anything goes live. Done in 3–7 days.</p></div>
+    <div class="step sr" style="transition-delay:.26s"><div class="step-circle">04</div><h4>You Go Live & Grow</h4><p>Site goes live. I hand it over fully. Watch your business grow.</p></div>
   </div>
 </section>
 
 <!-- TRUST -->
 <section id="trust">
-  <div class="label">Why Trust Kelvin</div>
-  <h2 class="section-h reveal">Real feedback.<br>Solid guarantees.</h2>
-
+  <div class="label sr">Why Trust Kelvin</div>
+  <h2 class="section-h sr">Real feedback.<br>Solid guarantees.</h2>
   <div class="trust-layout">
     <div class="testi-stack">
-      <div class="testi reveal">
+      <div class="testi sr" style="transition-delay:.05s">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Within the first week I got 4 new orders from people who found me on Google. That never happened with just Instagram. Kelvin made it so easy."</p>
-        <div class="testi-who">
-          <div class="testi-ava a1">👩🏾</div>
-          <div>
-            <div class="testi-nm">Mrs Margret O.</div>
-            <div class="testi-rl">Real Estate Agent, Lagos</div>
-          </div>
-        </div>
+        <p class="testi-text">"Within the first week I got 4 new orders from people who found me on Google. That never happened with just Instagram."</p>
+        <div class="testi-who"><div class="testi-ava a1">👩🏾</div><div><div class="testi-nm">Mrs Margret O.</div><div class="testi-rl">Real Estate Agent, Lagos</div></div></div>
       </div>
-      <div class="testi reveal">
+      <div class="testi sr" style="transition-delay:.1s">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"The WhatsApp button is everything. Customers just tap and they're already talking to me. It's like having someone selling for me around the clock."</p>
-        <div class="testi-who">
-          <div class="testi-ava a2">👨🏾</div>
-          <div>
-            <div class="testi-nm">Joseph A.</div>
-            <div class="testi-rl">Food Business, Abuja</div>
-          </div>
-        </div>
+        <p class="testi-text">"The WhatsApp button is everything. It's like having someone selling for me around the clock."</p>
+        <div class="testi-who"><div class="testi-ava a2">👨🏾</div><div><div class="testi-nm">Joseph A.</div><div class="testi-rl">Food Business, Abuja</div></div></div>
       </div>
-      <div class="testi reveal">
+      <div class="testi sr" style="transition-delay:.15s">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"I was scared it would be complicated but Kelvin explained everything in plain English. Delivered in 4 days and my business finally looks legit."</p>
-        <div class="testi-who">
-          <div class="testi-ava a3">👩🏽</div>
-          <div>
-            <div class="testi-nm">Tolu F.</div>
-            <div class="testi-rl">Beauty Services, PH</div>
-          </div>
-        </div>
+        <p class="testi-text">"Delivered in 4 days and my business finally looks legit. Kelvin explained everything in plain English."</p>
+        <div class="testi-who"><div class="testi-ava a3">👩🏽</div><div><div class="testi-nm">Tolu F.</div><div class="testi-rl">Beauty Services, PH</div></div></div>
       </div>
     </div>
-
     <div class="guarantees-stack">
-      <div class="guar reveal">
-        <div class="guar-icon">⚡</div>
-        <div>
-          <h4>Fast Delivery — 3 to 7 Working Days</h4>
-          <p>I know your time matters. Basic sites in 3 days, bigger projects max 7. I don't sit on your project.</p>
-        </div>
-      </div>
-      <div class="guar reveal">
-        <div class="guar-icon">📱</div>
-        <div>
-          <h4>100% Mobile-Friendly. Guaranteed.</h4>
-          <p>Over 80% of your customers browse on their phones. Every site I build is perfect on mobile — or I fix it free.</p>
-        </div>
-      </div>
-      <div class="guar reveal">
-        <div class="guar-icon">💬</div>
-        <div>
-          <h4>WhatsApp Integration on Every Site</h4>
-          <p>Every single site includes a WhatsApp button that makes it dead easy for customers to reach you.</p>
-        </div>
-      </div>
-      <div class="guar reveal">
-        <div class="guar-icon">🔒</div>
-        <div>
-          <h4>Zero Hidden Fees</h4>
-          <p>The price we agree is what you pay. I'll always be upfront about hosting and domain costs — nothing sneaks up on you.</p>
-        </div>
-      </div>
-      <div class="guar reveal">
-        <div class="guar-icon">🛠️</div>
-        <div>
-          <h4>Support After Launch</h4>
-          <p>Questions after your site goes live? I'm on WhatsApp. I don't disappear once I've been paid.</p>
-        </div>
-      </div>
+      <div class="guar sr" style="transition-delay:.05s"><div class="guar-icon">⚡</div><div><h4>Fast Delivery — 3 to 7 Working Days</h4><p>Basic sites in 3 days, bigger projects max 7.</p></div></div>
+      <div class="guar sr" style="transition-delay:.1s"><div class="guar-icon">📱</div><div><h4>100% Mobile-Friendly. Guaranteed.</h4><p>Perfect on mobile — or I fix it free.</p></div></div>
+      <div class="guar sr" style="transition-delay:.15s"><div class="guar-icon">💬</div><div><h4>WhatsApp Integration on Every Site</h4><p>One tap to reach you — on every page.</p></div></div>
+      <div class="guar sr" style="transition-delay:.2s"><div class="guar-icon">🔒</div><div><h4>Zero Hidden Fees</h4><p>The price we agree is what you pay. Always.</p></div></div>
+      <div class="guar sr" style="transition-delay:.25s"><div class="guar-icon">🛠️</div><div><h4>Support After Launch</h4><p>I'm on WhatsApp after launch. I don't disappear.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- CTA -->
 <section id="cta">
-  <div class="label" style="justify-content:center; color:rgba(255,255,255,0.4);">Let's Build Something</div>
-  <h2 class="section-h reveal">Ready to get your business online?</h2>
-  <p class="section-p reveal" style="color:rgba(255,255,255,0.55);">
-    Message me on WhatsApp now. Tell me about your business, pick a template, or just ask a question. Zero pressure — just a real conversation.
+  <div class="label sr" style="justify-content:center;color:rgba(255,255,255,.4);">Let's Build Something</div>
+  <h2 class="section-h sr">Ready to get your<br>business online?</h2>
+  <p class="section-p sr" style="color:rgba(255,255,255,.55);margin:0 auto 2.5rem;text-align:center;">
+    Message me on WhatsApp now. Tell me about your business, pick a template, or just ask a question. Zero pressure.
   </p>
-  <div class="cta-btns reveal">
-    <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online.%20Can%20we%20talk%3F" target="_blank" class="wa-btn">
-      💬 Message Kelvin on WhatsApp
-    </a>
+  <div class="cta-btns sr">
+    <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online.%20Can%20we%20talk%3F" target="_blank" class="wa-btn"><span>💬 Message Kelvin on WhatsApp</span></a>
     <a href="mailto:ifeoluwakelvin123@gmail.com" class="email-btn">📧 Send an Email</a>
   </div>
-  <p class="cta-reassure">⚡ Usually replies within 1–2 hours &nbsp;·&nbsp; Free consultation &nbsp;·&nbsp; No spam</p>
+  <p class="cta-reassure sr">⚡ Usually replies within 1–2 hours &nbsp;·&nbsp; Free consultation &nbsp;·&nbsp; No spam</p>
 </section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="label sr">Quick Answers</div>
+  <h2 class="section-h sr">Questions I hear<br>all the time.</h2>
+
+  <div class="faq-layout">
+    <div class="faq-left sr-left">
+      <h3>Still unsure? These are the most common things clients ask before they message me.</h3>
+      <p>If your question isn't here, just send me a WhatsApp — I reply fast and I don't do hard sells.</p>
+      <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20have%20a%20question%20about%20getting%20a%20website" target="_blank" class="faq-cta">💬 Ask me directly</a>
+    </div>
+
+    <div class="faq-list sr-right">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How long does my website stay live?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>Your site stays live as long as you keep the hosting and domain active — typically ₦15,000–₦30,000 per year. I'll remind you before it's due so you never go offline unexpectedly. No surprise bills.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I edit my website myself after it's built?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>Yes — for simple updates like changing prices, adding photos, or editing text, I'll show you exactly how to do it yourself. For bigger changes, I'm available on WhatsApp and typically turn around edits the same day.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Do you do SEO so people can find me on Google?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>Every site includes basic on-page SEO — proper page titles, meta descriptions, fast loading, mobile-friendliness, and Google My Business setup. This gets you ranking for local searches. Deeper SEO work (blog content, backlinks) is available as an add-on.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What if I don't like the design after it's built?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>We agree on the design direction before I start. You'll see a preview before anything goes live, and every package includes 2 rounds of free revisions. I don't consider a project done until you're happy with it.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Do you work with clients outside Lagos?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>100% yes. Everything is handled via WhatsApp and email — no need to meet in person. I've built sites for clients in Lagos, Abuja, Port Harcourt, Ibadan, and more. Your location doesn't matter.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How do I pay? Is it safe?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p>I accept bank transfer. We typically do 50% upfront to start and 50% on delivery — so you only pay the balance when you've seen and approved the finished site. Simple, fair, transparent.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP AVAILABILITY WIDGET -->
+<div id="wa-widget" role="complementary" aria-label="Chat with Kelvin">
+  <div class="wa-card" id="waCard">
+    <div class="wa-card-header">
+      <div class="wa-avatar">
+        👨🏾‍💻
+        <div class="wa-avatar-dot" id="waAvatarDot"></div>
+      </div>
+      <div>
+        <div class="wa-name">Kelvin</div>
+        <div class="wa-status-text" id="waStatusText">Checking availability...</div>
+      </div>
+    </div>
+    <div class="wa-card-msg" id="waCardMsg">
+      Hi! 👋 Ready to get your business online? Tell me what you need and I'll give you a clear plan.
+    </div>
+    <a href="https://wa.me/2349041999098?text=Hi%20Kelvin!%20I%20want%20to%20get%20my%20business%20online.%20Can%20we%20talk%3F" target="_blank" class="wa-card-btn" rel="noopener">
+      💬 Start a Conversation
+    </a>
+    <p class="wa-response-time" id="waResponseTime">⚡ Usually replies in 1–2 hours</p>
+  </div>
+  <div class="wa-bubble" id="waBubble" role="button" tabindex="0" aria-label="Chat on WhatsApp" aria-expanded="false">
+    💬
+    <div class="wa-status-dot" id="waStatusDot"></div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><span class="footer-eyebrow"></span> Kelvin Web Studio</div>
+  <div class="footer-logo"><span class="logo-dot"></span> Kelvin Web Studio</div>
   <div class="footer-links">
     <a href="#templates">Templates</a>
+    <a href="#cases">Case Studies</a>
     <a href="#services">Packages</a>
     <a href="#process">Process</a>
     <a href="https://wa.me/2349041999098" target="_blank">WhatsApp</a>
@@ -1358,37 +666,294 @@
 </footer>
 
 <script>
-  // Scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('in'), i * 70);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* ══════════════════════════════════════
+   LOADER
+══════════════════════════════════════ */
+const loaderText = "Kelvin Web Studio";
+const loaderEl = document.getElementById('loaderLogo');
+loaderText.split('').forEach(ch => {
+  const s = document.createElement('span');
+  s.textContent = ch === ' ' ? '\u00A0' : ch;
+  loaderEl.appendChild(s);
+});
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('done'), 1600);
+});
 
-  // Nav hide on scroll down
-  let lastY = 0;
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
-    lastY = y;
-  }, { passive: true });
+/* ══════════════════════════════════════
+   CUSTOM CURSOR (desktop only)
+══════════════════════════════════════ */
+if (window.innerWidth > 600) {
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
+  });
+  (function animRing() {
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a,button,.tpl-card,.pkg,.case-card,.prob-card,.guar,.testi,.faq-item').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+}
+
+/* ══════════════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════════════ */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / total * 100) + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════
+   NAV — hide/show + scrolled state
+══════════════════════════════════════ */
+let lastY = 0;
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 30);
+  nav.style.transform = (y > lastY && y > 120) ? 'translateY(-100%)' : 'translateY(0)';
+  lastY = y;
+}, { passive: true });
+
+/* ══════════════════════════════════════
+   HAMBURGER — with keyboard + aria
+══════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const drawer    = document.getElementById('navDrawer');
+
+function openDrawer() {
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded','true');
+  drawer.style.display = 'flex';
+  requestAnimationFrame(() => drawer.classList.add('open'));
+}
+function closeDrawer() {
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded','false');
+  drawer.classList.remove('open');
+  setTimeout(() => { drawer.style.display = 'none'; }, 300);
+}
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+hamburger.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hamburger.click(); }
+});
+
+document.querySelectorAll('#navDrawer a').forEach(a => a.addEventListener('click', closeDrawer));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !drawer.contains(e.target)) closeDrawer();
+});
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDrawer();
+});
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+const srObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      srObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.sr,.sr-left,.sr-right,.sr-scale,.solution-panel').forEach(el => srObs.observe(el));
+
+/* ══════════════════════════════════════
+   3D CARD TILT
+══════════════════════════════════════ */
+if (window.innerWidth > 960 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  function initTilt(selector, intensity) {
+    document.querySelectorAll(selector).forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - .5;
+        const y = (e.clientY - r.top)  / r.height - .5;
+        card.style.transform = `perspective(800px) rotateY(${x*intensity}deg) rotateX(${-y*intensity}deg) translateZ(10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1),box-shadow .3s';
+      });
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform .1s,box-shadow .3s';
+      });
+    });
+  }
+  initTilt('.tpl-card', 7);
+  initTilt('.pkg', 5);
+  initTilt('.case-card', 5);
+}
+
+/* ══════════════════════════════════════
+   MAGNETIC BUTTONS
+══════════════════════════════════════ */
+if (window.innerWidth > 600) {
+  document.querySelectorAll('.btn-primary,.wa-btn,.nav-cta,.sol-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2)  * .25;
+      const y = (e.clientY - r.top  - r.height/2) * .25;
+      btn.style.transform = `translate(${x}px,${y}px) translateY(-2px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1)';
+    });
+    btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform .1s'; });
+  });
+}
+
+/* ══════════════════════════════════════
+   COUNT-UP NUMBERS — FIXED
+   Handles prefix, suffix, ₦0 static case
+══════════════════════════════════════ */
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el     = entry.target;
+    const target = +el.dataset.target;
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    if (isNaN(target)) return;
+    let count = 0;
+    const increment = target / (1600/16);
+    const timer = setInterval(() => {
+      count = Math.min(count + increment, target);
+      el.textContent = prefix + Math.round(count) + suffix;
+      if (count >= target) clearInterval(timer);
+    }, 16);
+    countObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.proof-num[data-target]').forEach(el => countObs.observe(el));
+
+/* ══════════════════════════════════════
+   HERO HEADLINE WORD SPLIT
+══════════════════════════════════════ */
+(function splitHero() {
+  const h = document.getElementById('heroHeadline');
+  if (!h) return;
+  const nodes = Array.from(h.childNodes);
+  h.innerHTML = '';
+  let delay = 2.0;
+  function wrapWords(container, textContent) {
+    textContent.split(/(\s+)/).forEach(word => {
+      if (!word.trim()) { container.appendChild(document.createTextNode(word)); return; }
+      const span = document.createElement('span');
+      span.className = 'hero-word';
+      span.style.animationDelay = delay + 's';
+      span.textContent = word;
+      container.appendChild(span);
+      delay += 0.08;
+    });
+  }
+  nodes.forEach(node => {
+    if (node.nodeType === 3) { wrapWords(h, node.textContent); }
+    else if (node.nodeName === 'EM') {
+      const em = document.createElement('em');
+      wrapWords(em, node.textContent);
+      h.appendChild(em);
+    }
+  });
+})();
+
+/* ══════════════════════════════════════
+   FAQ ACCORDION
+══════════════════════════════════════ */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item    = btn.closest('.faq-item');
+    const isOpen  = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    // Open this one if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+  // Keyboard support
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+  });
+});
+
+/* ══════════════════════════════════════
+   WHATSAPP AVAILABILITY WIDGET
+   Shows online (green) 8am–10pm WAT,
+   offline otherwise
+══════════════════════════════════════ */
+(function initWidget() {
+  const bubble     = document.getElementById('waBubble');
+  const card       = document.getElementById('waCard');
+  const statusDot  = document.getElementById('waStatusDot');
+  const avatarDot  = document.getElementById('waAvatarDot');
+  const statusText = document.getElementById('waStatusText');
+  const responseTime = document.getElementById('waResponseTime');
+  const cardMsg    = document.getElementById('waCardMsg');
+
+  // Check if online based on Lagos time (UTC+1)
+  const lagosHour = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Lagos' })).getHours();
+  const isOnline  = lagosHour >= 8 && lagosHour < 22;
+
+  if (isOnline) {
+    statusDot.classList.add('online');
+    avatarDot.classList.add('online');
+    statusText.textContent = '🟢 Online now';
+    statusText.classList.add('online');
+    responseTime.textContent = '⚡ Usually replies in minutes';
+    cardMsg.textContent = "Hi! 👋 I'm online right now. Tell me about your business and I'll get back to you instantly.";
+  } else {
+    statusDot.classList.add('offline');
+    avatarDot.classList.add('offline');
+    statusText.textContent = '💤 Away — back at 8am';
+    responseTime.textContent = '⏰ Will reply first thing in the morning';
+    cardMsg.textContent = "Hi! 👋 I'm offline right now but I check messages first thing in the morning. Leave a message!";
+  }
+
+  // Toggle card
+  let cardOpen = false;
+  function toggleCard() {
+    cardOpen = !cardOpen;
+    card.classList.toggle('open', cardOpen);
+    bubble.setAttribute('aria-expanded', String(cardOpen));
+  }
+
+  bubble.addEventListener('click', toggleCard);
+  bubble.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCard(); }
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!document.getElementById('wa-widget').contains(e.target)) {
+      cardOpen = false;
+      card.classList.remove('open');
+      bubble.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // Auto-open after 8s if user hasn't interacted
+  setTimeout(() => {
+    if (!cardOpen) toggleCard();
+  }, 8000);
+})();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
