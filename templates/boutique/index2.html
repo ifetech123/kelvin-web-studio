@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MAISON ÉLARA — Premium luxury fashion boutique. Discover exclusive gowns, designer handbags, and curated accessories for the discerning woman.">
+<meta name="keywords" content="luxury fashion Nigeria, designer boutique Lagos, luxury gowns, designer handbags, premium accessories">
+<meta property="og:title" content="MAISON ÉLARA — Luxury Fashion Boutique">
+<meta property="og:description" content="Where elegance meets identity. Shop premium fashion curated for the modern luxury woman.">
+<title>MAISON ÉLARA — Luxury Fashion Boutique</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Cormorant Garamond', 'serif'],
+          sans: ['Jost', 'sans-serif'],
+        },
+        colors: {
+          frosted: '#7bdff2',
+          aqua: '#b2f7ef',
+          mint: '#eff7f6',
+          petal: '#f7d6e0',
+          blush: '#f2b5d4',
+          charcoal: '#1a1a1a',
+          mink: '#3d2b2b',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root {
+    --frosted-blue: #7bdff2;
+    --icy-aqua: #b2f7ef;
+    --mint-cream: #eff7f6;
+    --petal-frost: #f7d6e0;
+    --blush-pop: #f2b5d4;
+    --charcoal: #1a1a1a;
+    --off-white: #faf9f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--off-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ─── CUSTOM CURSOR ─── */
+  #cursor-glow {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--blush-pop);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.3s ease, border-color 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+  #cursor-dot {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: var(--frosted-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s ease;
+  }
+  .cursor-expand { transform: translate(-50%, -50%) scale(2.5) !important; border-color: var(--frosted-blue) !important; }
+
+  /* ─── LOADER ─── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--charcoal);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    animation: loaderFade 0.6s ease forwards;
+  }
+  .loader-bar {
+    margin-top: 2rem;
+    width: 120px;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-bar::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--frosted-blue), var(--blush-pop));
+    animation: loaderLine 1.8s ease forwards;
+  }
+  .loader-sub {
+    margin-top: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+  @keyframes loaderLine { to { left: 0; } }
+  @keyframes loaderFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* ─── NAVBAR ─── */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  #navbar.scrolled {
+    background: rgba(250, 249, 247, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(242, 181, 212, 0.25);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    transition: color 0.4s ease;
+  }
+  #navbar.scrolled .nav-logo { color: var(--charcoal); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  #navbar.scrolled .nav-links a { color: var(--charcoal); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--blush-pop);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-actions { display: flex; align-items: center; gap: 1.2rem; }
+  .nav-icon {
+    color: rgba(255,255,255,0.85);
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    text-decoration: none;
+    cursor: none;
+  }
+  #navbar.scrolled .nav-icon { color: var(--charcoal); }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: white;
+    transition: background 0.4s;
+  }
+  #navbar.scrolled .hamburger span { background: var(--charcoal); }
+
+  /* ─── MOBILE MENU ─── */
+  #mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--charcoal);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+  }
+  #mobile-menu.open { transform: translateX(0); }
+  #mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+  }
+  #mobile-menu a:hover { color: var(--blush-pop); }
+  #menu-close {
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: none;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    transition: transform 8s ease;
+  }
+  .hero-slide.active img { transform: scale(1); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26,26,26,0.6) 0%,
+      rgba(26,26,26,0.3) 50%,
+      rgba(123,223,242,0.08) 100%
+    );
+  }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--frosted-blue);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 2.5s ease forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    color: white;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 2.7s ease forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--petal-frost); }
+  .hero-sub {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 2.9s ease forwards;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.9s 3.1s ease forwards;
+  }
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    background: white;
+    color: var(--charcoal);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover {
+    background: var(--blush-pop);
+    color: white;
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: white;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    cursor: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .btn-outline:hover {
+    border-color: var(--frosted-blue);
+    color: var(--frosted-blue);
+    transform: translateY(-2px);
+  }
+
+  /* Social proof badge */
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    left: 2.5rem;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.9rem 1.5rem;
+    color: white;
+    animation: fadeUp 1s 3.5s ease forwards;
+    opacity: 0;
+  }
+  .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .badge-text { font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+  /* Slide dots */
+  .hero-dots {
+    position: absolute;
+    bottom: 3rem;
+    right: 2.5rem;
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 24px; height: 1px;
+    background: rgba(255,255,255,0.3);
+    cursor: none;
+    transition: background 0.3s, width 0.3s;
+  }
+  .dot.active { background: white; width: 40px; }
+
+  /* Scroll cue */
+  .scroll-cue {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: fadeUp 1s 3.8s ease forwards;
+    opacity: 0;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--frosted-blue), transparent);
+    animation: scrollLine 2s 4s infinite ease;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 6rem 2rem; }
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--frosted-blue);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+  }
+  .section-title em { font-style: italic; color: var(--blush-pop); }
+  .section-divider {
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, var(--frosted-blue), var(--blush-pop));
+    margin: 1.5rem 0;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    background: var(--charcoal);
+    padding: 1.2rem 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marqueeScroll 25s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .marquee-item::after { content: '◆'; color: var(--blush-pop); font-size: 0.5rem; }
+  @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── COLLECTIONS ─── */
+  #collections { background: white; }
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1px;
+    background: #e8e4e0;
+    margin-top: 4rem;
+  }
+  .collection-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    cursor: none;
+  }
+  .collection-card.large { grid-column: span 2; height: 55vw; max-height: 600px; }
+  .collection-card.medium { height: 45vw; max-height: 450px; }
+  .collection-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .collection-card:hover img { transform: scale(1.06); }
+  .collection-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,26,26,0.7) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    transition: background 0.4s ease;
+  }
+  .collection-card:hover .collection-overlay {
+    background: linear-gradient(to top, rgba(26,26,26,0.8) 0%, rgba(123,223,242,0.05) 100%);
+  }
+  .collection-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--frosted-blue);
+    margin-bottom: 0.5rem;
+  }
+  .collection-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300;
+    color: white;
+    line-height: 1.1;
+  }
+  .collection-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s;
+  }
+  .collection-cta::after { content: '→'; }
+  .collection-card:hover .collection-cta { opacity: 1; transform: none; color: var(--frosted-blue); }
+
+  /* ─── PRODUCTS ─── */
+  #products { background: var(--mint); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 4rem;
+    background: #dde8e6;
+  }
+  .product-card {
+    background: var(--off-white);
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+  }
+  .product-card:hover { z-index: 2; box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #f0ede8;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+  .product-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .badge-new { background: var(--charcoal); color: white; }
+  .badge-hot { background: var(--blush-pop); color: white; }
+  .badge-limited { background: transparent; border: 1px solid var(--frosted-blue); color: var(--frosted-blue); }
+  .product-quick-view {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,26,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .product-card:hover .product-quick-view { opacity: 1; }
+  .quick-view-btn {
+    padding: 0.7rem 1.5rem;
+    background: white;
+    color: var(--charcoal);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: none;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover .quick-view-btn { transform: translateY(0); }
+  .product-info { padding: 1.5rem; }
+  .product-cat {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--frosted-blue);
+    margin-bottom: 0.4rem;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .stars { color: var(--blush-pop); font-size: 0.75rem; margin-bottom: 0.6rem; letter-spacing: 2px; }
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .product-price-old {
+    font-size: 0.85rem;
+    color: #aaa;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+  }
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.85rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: none;
+    text-decoration: none;
+    margin-top: 1.2rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .whatsapp-btn:hover { background: #128C7E; transform: translateY(-1px); }
+  .whatsapp-btn svg { width: 16px; height: 16px; }
+
+  /* ─── ABOUT ─── */
+  #about { background: white; }
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-img-stack { position: relative; }
+  .about-img-main {
+    width: 85%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .about-img-accent {
+    position: absolute;
+    bottom: -3rem;
+    right: 0;
+    width: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 6px solid white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  }
+  .about-stat {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid #ede9e4;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 0.25rem;
+  }
+
+  /* ─── WHY US ─── */
+  #why-us {
+    background: var(--charcoal);
+  }
+  #why-us .section-title { color: white; }
+  #why-us .section-label { color: var(--frosted-blue); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    margin-top: 4rem;
+    background: rgba(255,255,255,0.06);
+  }
+  .why-card {
+    padding: 2.5rem 2rem;
+    background: var(--charcoal);
+    transition: background 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .why-card:hover { background: rgba(123,223,242,0.05); border-color: rgba(123,223,242,0.2); }
+  .why-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+  }
+  .why-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+  .why-text { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--petal-frost); overflow: hidden; }
+  #testimonials .section-title { color: var(--charcoal); }
+  .testimonials-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: testScroll 30s linear infinite;
+    margin-top: 3rem;
+  }
+  .testimonials-track:hover { animation-play-state: paused; }
+  @keyframes testScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .test-card {
+    min-width: 380px;
+    background: white;
+    padding: 2.5rem;
+    border: 1px solid rgba(242,181,212,0.3);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .test-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--blush-pop);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .test-text {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+  }
+  .test-author { display: flex; align-items: center; gap: 1rem; }
+  .test-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--petal-frost);
+  }
+  .test-name { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; }
+  .test-handle { font-size: 0.7rem; color: var(--frosted-blue); margin-top: 2px; }
+
+  /* ─── INSTAGRAM ─── */
+  #instagram { background: white; }
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 3px;
+    margin-top: 3rem;
+  }
+  .insta-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: none;
+  }
+  .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .insta-item:hover img { transform: scale(1.08); }
+  .insta-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,26,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .insta-item:hover .insta-overlay { opacity: 1; }
+  .insta-icon { color: white; font-size: 1.5rem; }
+
+  /* ─── CTA ─── */
+  #cta {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  #cta img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,26,26,0.75), rgba(61,43,43,0.6));
+  }
+  .cta-content { position: relative; padding: 4rem 2rem; max-width: 700px; }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .cta-title em { font-style: italic; color: var(--petal-frost); }
+  .cta-text { font-size: 0.88rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; margin-bottom: 3rem; line-height: 1.8; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-whatsapp {
+    padding: 1rem 2rem;
+    background: #25D366;
+    color: white;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.3s, transform 0.2s;
+    cursor: none;
+  }
+  .btn-whatsapp:hover { background: #128C7E; transform: translateY(-2px); }
+  .btn-instagram {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: white;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    cursor: none;
+  }
+  .btn-instagram:hover { border-color: var(--blush-pop); color: var(--blush-pop); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0f0f0f;
+    color: white;
+    padding: 5rem 2rem 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: white;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .footer-desc { font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.8; margin-bottom: 1.5rem; }
+  .footer-social { display: flex; gap: 1rem; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: border-color 0.3s, color 0.3s;
+    cursor: none;
+  }
+  .social-link:hover { border-color: var(--blush-pop); color: var(--blush-pop); }
+  .footer-col-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1.5rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .footer-links a:hover { color: white; }
+  .newsletter-form { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+  .newsletter-input {
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+  .newsletter-input:focus { border-color: var(--frosted-blue); }
+  .newsletter-btn {
+    padding: 0.85rem;
+    background: var(--blush-pop);
+    color: white;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .newsletter-btn:hover { background: var(--frosted-blue); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+  /* ─── FLOATING WIDGETS ─── */
+  #whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+  .float-bubble {
+    background: white;
+    padding: 0.75rem 1.2rem;
+    font-size: 0.75rem;
+    color: var(--charcoal);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    animation: bubblePop 0.4s 5s ease backwards;
+    position: relative;
+    letter-spacing: 0.05em;
+  }
+  .float-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; right: 18px;
+    width: 12px; height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  }
+  @keyframes bubblePop { from { opacity: 0; transform: scale(0.8) translateY(10px); } to { opacity: 1; transform: scale(1); } }
+  .float-btn {
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    cursor: none;
+    animation: floatPulse 3s infinite ease;
+    text-decoration: none;
+  }
+  @keyframes floatPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 8px 40px rgba(37, 211, 102, 0.7); }
+  }
+
+  /* Back to top */
+  #back-top {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 900;
+    width: 44px; height: 44px;
+    background: white;
+    border: 1px solid #ede9e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: opacity 0.3s, transform 0.3s, background 0.3s;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  #back-top.visible { opacity: 1; transform: none; }
+  #back-top:hover { background: var(--charcoal); color: white; }
+
+  /* ─── MODAL ─── */
+  #modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.7);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  #modal-overlay.open { opacity: 1; visibility: visible; }
+  .modal {
+    background: var(--off-white);
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  #modal-overlay.open .modal { transform: none; }
+  .modal-img { aspect-ratio: 3/4; object-fit: cover; width: 100%; height: 100%; }
+  .modal-info { padding: 2.5rem; display: flex; flex-direction: column; }
+  .modal-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: none;
+    color: #aaa;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+  .modal-close:hover { color: var(--charcoal); }
+  .modal-cat { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--frosted-blue); margin-bottom: 0.5rem; }
+  .modal-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .modal-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--charcoal); margin-bottom: 1rem; }
+  .modal-desc { font-size: 0.82rem; color: #666; line-height: 1.8; margin-bottom: 1.5rem; flex: 1; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .about-split { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-accent { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    #cursor-glow, #cursor-dot { display: none; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 1.5rem; }
+    .collections-grid { grid-template-columns: 1fr; }
+    .collection-card.large { height: 80vw; max-height: none; }
+    .collection-card.medium { height: 70vw; }
+    .test-card { min-width: 300px; }
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { aspect-ratio: 4/3; height: 250px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-badge { display: none; }
+    .about-stat { gap: 1.5rem; flex-wrap: wrap; }
+    .hero-dots { bottom: 1.5rem; right: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOADER
+══════════════════════════════════════════════════════════ -->
+<div id="loader">
+  <div class="loader-logo">Maison Élara</div>
+  <div class="loader-bar"></div>
+  <div class="loader-sub">Curated Luxury · Lagos</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CUSTOM CURSOR
+══════════════════════════════════════════════════════════ -->
+<div id="cursor-glow"></div>
+<div id="cursor-dot"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo">Maison Élara</a>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#products">New Arrivals</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#instagram" class="nav-icon" aria-label="Instagram">✦</a>
+    <button class="hamburger" id="menu-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true">
+  <button id="menu-close" aria-label="Close menu">✕</button>
+  <a href="#collections" class="mobile-nav-link">Collections</a>
+  <a href="#products" class="mobile-nav-link">New Arrivals</a>
+  <a href="#about" class="mobile-nav-link">Our Story</a>
+  <a href="#testimonials" class="mobile-nav-link">Reviews</a>
+  <a href="#cta" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero" aria-label="Hero">
+  <!-- Slides -->
+  <div class="hero-slide active" id="slide-0">
+    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&q=90&auto=format&fit=crop" alt="Luxury fashion editorial" loading="eager">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-slide" id="slide-1">
+    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1800&q=90&auto=format&fit=crop" alt="Premium fashion look" loading="lazy">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-slide" id="slide-2">
+    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1800&q=90&auto=format&fit=crop" alt="Designer wardrobe editorial" loading="lazy">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">New Season · Luxury Ready-to-Wear</p>
+    <h1 class="hero-title">Luxury Fashion That<br><em>Defines Presence</em></h1>
+    <p class="hero-sub">Curated for the woman who commands every room she enters</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary">Shop Collection</a>
+      <a href="https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%27d%20like%20to%20book%20a%20personal%20styling%20session" class="btn-outline" target="_blank" rel="noopener">Book Styling</a>
+    </div>
+  </div>
+
+  <!-- Social proof -->
+  <div class="hero-badge">
+    <div class="badge-num">2,400+</div>
+    <div class="badge-text">Luxury clients served</div>
+  </div>
+
+  <!-- Dots -->
+  <div class="hero-dots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+    <div class="dot" onclick="goToSlide(2)"></div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     MARQUEE
+══════════════════════════════════════════════════════════ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- Double for seamless loop -->
+    <span class="marquee-item">Luxury Gowns</span>
+    <span class="marquee-item">Designer Handbags</span>
+    <span class="marquee-item">Premium Shoes</span>
+    <span class="marquee-item">Exclusive Accessories</span>
+    <span class="marquee-item">Personal Styling</span>
+    <span class="marquee-item">Nationwide Delivery</span>
+    <span class="marquee-item">Authentic Products</span>
+    <span class="marquee-item">Lagos · Abuja · PH</span>
+    <span class="marquee-item">Luxury Gowns</span>
+    <span class="marquee-item">Designer Handbags</span>
+    <span class="marquee-item">Premium Shoes</span>
+    <span class="marquee-item">Exclusive Accessories</span>
+    <span class="marquee-item">Personal Styling</span>
+    <span class="marquee-item">Nationwide Delivery</span>
+    <span class="marquee-item">Authentic Products</span>
+    <span class="marquee-item">Lagos · Abuja · PH</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURED COLLECTIONS
+══════════════════════════════════════════════════════════ -->
+<section id="collections">
+  <div style="max-width:1400px; margin:0 auto;">
+    <span class="section-label reveal">Featured Collections</span>
+    <h2 class="section-title reveal reveal-delay-1">Pieces That <em>Speak</em> Before You Do</h2>
+    <div class="section-divider reveal reveal-delay-2"></div>
+
+    <div class="collections-grid">
+      <!-- Large hero card -->
+      <div class="collection-card large">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1400&q=85&auto=format&fit=crop" alt="Luxury Gown Collection" loading="lazy">
+        <div class="collection-overlay">
+          <span class="collection-tag">Signature Line</span>
+          <h3 class="collection-name">The Élara Gown Collection</h3>
+          <a href="#products" class="collection-cta">Explore Gowns</a>
+        </div>
+      </div>
+
+      <!-- Medium cards -->
+      <div class="collection-card medium">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=85&auto=format&fit=crop" alt="Designer Handbags" loading="lazy">
+        <div class="collection-overlay">
+          <span class="collection-tag">Statement Pieces</span>
+          <h3 class="collection-name">Designer Handbags</h3>
+          <a href="#products" class="collection-cta">Shop Bags</a>
+        </div>
+      </div>
+
+      <div class="collection-card medium">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=85&auto=format&fit=crop" alt="Luxury Shoes" loading="lazy">
+        <div class="collection-overlay">
+          <span class="collection-tag">The Walk</span>
+          <h3 class="collection-name">Luxury Footwear</h3>
+          <a href="#products" class="collection-cta">Shop Shoes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEW ARRIVALS / PRODUCTS
+══════════════════════════════════════════════════════════ -->
+<section id="products">
+  <div style="max-width:1400px; margin:0 auto;">
+    <span class="section-label reveal">New Arrivals</span>
+    <h2 class="section-title reveal reveal-delay-1">Handpicked for<br><em>Her Reign</em></h2>
+    <div class="section-divider reveal reveal-delay-2"></div>
+
+    <div class="products-grid" id="products-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-split">
+    <div class="about-img-stack reveal">
+      <img class="about-img-main" src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=700&q=85&auto=format&fit=crop" alt="Luxury boutique interior">
+      <img class="about-img-accent" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=85&auto=format&fit=crop" alt="Premium fashion detail">
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Where Elegance<br>Meets <em>Identity</em></h2>
+      <div class="section-divider"></div>
+      <p style="font-size:0.9rem; color:#555; line-height:1.9; margin-bottom:1.5rem;">
+        Maison Élara was born from a singular belief — that every woman deserves to feel extraordinary, not just on occasion, but always. We source the most exquisite pieces from top designers globally, bringing world-class fashion to the African luxury market.
+      </p>
+      <p style="font-size:0.9rem; color:#555; line-height:1.9;">
+        Our boutique experience is intimate, intentional, and deeply personal. Each garment is selected for its craftsmanship, drape, and ability to command presence. Because you are not just dressing — you are making a statement the world will not forget.
+      </p>
+      <div class="about-stat">
+        <div>
+          <div class="stat-num">7+</div>
+          <div class="stat-label">Years of Luxury Curation</div>
+        </div>
+        <div>
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Designer Brands</div>
+        </div>
+        <div>
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY US
+══════════════════════════════════════════════════════════ -->
+<section id="why-us">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="section-label reveal">The Élara Promise</span>
+    <h2 class="section-title reveal reveal-delay-1">Why Our Clients<br><em>Return, Always</em></h2>
+    <div class="section-divider reveal reveal-delay-2" style="background: linear-gradient(90deg, var(--frosted-blue), var(--blush-pop));"></div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon" style="color: var(--frosted-blue);">🎁</div>
+        <h3 class="why-title">Premium Packaging</h3>
+        <p class="why-text">Every order arrives in signature Maison Élara packaging — a gift-worthy unboxing experience that reflects the luxury within.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon" style="color: var(--blush-pop);">🚚</div>
+        <h3 class="why-title">Nationwide Delivery</h3>
+        <p class="why-text">Same-day delivery in Lagos, and swift nationwide shipping to Abuja, Port Harcourt, Ibadan, and beyond. Discreet, insured, and tracked.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon" style="color: var(--frosted-blue);">✅</div>
+        <h3 class="why-title">100% Authentic</h3>
+        <p class="why-text">Every single piece is sourced directly from verified designer houses and premium fashion distributors. Authenticity guaranteed, always.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon" style="color: var(--blush-pop);">💎</div>
+        <h3 class="why-title">Personal Styling</h3>
+        <p class="why-text">Our in-house stylists provide one-on-one consultations to help you curate a wardrobe that speaks your truth — and demands attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════════ -->
+<section id="testimonials" style="overflow:hidden;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="section-label reveal">Client Love</span>
+    <h2 class="section-title reveal reveal-delay-1" style="color:var(--charcoal)">They Said It Better<br><em>Than We Could</em></h2>
+    <div class="section-divider reveal reveal-delay-2"></div>
+  </div>
+
+  <div style="overflow:hidden; margin-top:0;">
+    <div class="testimonials-track" id="test-track">
+      <!-- Cards doubled for loop -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     INSTAGRAM GALLERY
+══════════════════════════════════════════════════════════ -->
+<section id="instagram">
+  <div style="max-width:1400px; margin:0 auto;">
+    <span class="section-label reveal">@maisonelara</span>
+    <h2 class="section-title reveal reveal-delay-1">Follow Our <em>World</em></h2>
+    <div class="section-divider reveal reveal-delay-2"></div>
+
+    <div class="insta-grid" id="insta-grid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="https://instagram.com" target="_blank" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; color:var(--charcoal); background:transparent; border:1px solid var(--charcoal);">
+        Follow on Instagram ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA SECTION
+══════════════════════════════════════════════════════════ -->
+<section id="cta" style="padding:0;">
+  <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=85&auto=format&fit=crop" alt="Luxury fashion editorial" loading="lazy">
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <p style="font-size:0.68rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--frosted-blue); margin-bottom:1rem;">Your Style Awaits</p>
+    <h2 class="cta-title">She Doesn't Follow<br><em>Trends.</em> She Sets Them.</h2>
+    <p class="cta-text">Connect with us today and let's build the wardrobe your life deserves. WhatsApp orders, personal styling, and exclusive previews — all at your fingertips.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%27d%20like%20to%20place%20an%20order" class="btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a href="https://instagram.com" target="_blank" class="btn-instagram" rel="noopener">
+        ✦ View Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">Maison Élara</span>
+      <p class="footer-desc">Where elegance meets identity. Nigeria's premier luxury fashion boutique, delivering world-class style to the discerning African woman.</p>
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">✦</a>
+        <a href="#" class="social-link" aria-label="WhatsApp">⊕</a>
+        <a href="#" class="social-link" aria-label="Facebook">◈</a>
+        <a href="#" class="social-link" aria-label="Pinterest">◉</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Collections</p>
+      <ul class="footer-links">
+        <li><a href="#collections">Luxury Gowns</a></li>
+        <li><a href="#collections">Designer Handbags</a></li>
+        <li><a href="#products">New Arrivals</a></li>
+        <li><a href="#products">Sale</a></li>
+        <li><a href="#products">Accessories</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Information</p>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Returns Policy</a></li>
+        <li><a href="#">Styling Guide</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Get First Access</p>
+      <p style="font-size:0.78rem; color:rgba(255,255,255,0.35); line-height:1.7; margin-bottom:1rem;">New arrivals, exclusive drops, and private sale events — straight to your inbox.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address" class="newsletter-input">
+        <button class="newsletter-btn" onclick="handleNewsletter(this)">Subscribe to Inner Circle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Maison Élara. All rights reserved. Lagos, Nigeria.</p>
+    <p class="footer-copy" style="color: rgba(255,255,255,0.12);">Crafted with intention.</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     FLOATING WIDGETS
+══════════════════════════════════════════════════════════ -->
+<div id="whatsapp-float">
+  <div class="float-bubble">Need help? Chat with us ✦</div>
+  <a href="https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%20need%20help%20with%20an%20order" class="float-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ══════════════════════════════════════════════════════════
+     PRODUCT QUICK-VIEW MODAL
+══════════════════════════════════════════════════════════ -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-label="Product detail">
+  <div class="modal">
+    <img id="modal-img" class="modal-img" src="" alt="">
+    <div class="modal-info">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <p class="modal-cat" id="modal-cat"></p>
+      <h3 class="modal-name" id="modal-name"></h3>
+      <div class="stars">★★★★★</div>
+      <p class="modal-price" id="modal-price"></p>
+      <p class="modal-desc" id="modal-desc"></p>
+      <a id="modal-whatsapp" href="#" target="_blank" class="whatsapp-btn" style="justify-content:center; text-decoration:none; cursor:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order This Now
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════ -->
+<script>
+// ─── PRODUCT DATA ───────────────────────────────────────────
+const products = [
+  {
+    id: 1,
+    name: 'Velour Noir Gown',
+    category: 'Luxury Gowns',
+    price: '₦285,000',
+    oldPrice: '₦320,000',
+    badge: 'hot',
+    badgeLabel: 'Bestseller',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1566479179817-0c3e9c2bce04?w=600&q=85&auto=format&fit=crop',
+    desc: 'Draped in midnight velour with a structured corset silhouette. This piece was made for women who own every room they enter. Floor-length, fully lined, with concealed back zip.',
+  },
+  {
+    id: 2,
+    name: 'Elara Silk Slip Dress',
+    category: 'Luxury Gowns',
+    price: '₦175,000',
+    badge: 'new',
+    badgeLabel: 'New In',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&q=85&auto=format&fit=crop',
+    desc: 'Pure silk, bias-cut. The Elara Slip Dress is the epitome of understated luxury — whispering of Paris and speaking volumes without a word. Available in champagne, blush, and noir.',
+  },
+  {
+    id: 3,
+    name: 'Maison Structured Tote',
+    category: 'Designer Handbags',
+    price: '₦220,000',
+    oldPrice: '₦260,000',
+    badge: 'hot',
+    badgeLabel: 'Trending',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=85&auto=format&fit=crop',
+    desc: 'Genuine Italian leather, gold-tone hardware, and a silhouette that reads power. Spacious enough for your world, refined enough to sit at the most exclusive table.',
+  },
+  {
+    id: 4,
+    name: 'Croc-Embossed Clutch',
+    category: 'Designer Handbags',
+    price: '₦98,000',
+    badge: 'limited',
+    badgeLabel: 'Limited',
+    rating: 4,
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=85&auto=format&fit=crop',
+    desc: 'Limited run croc-embossed evening clutch in champagne gold. Chain strap. Magnetic closure. The finishing touch your evening was missing.',
+  },
+  {
+    id: 5,
+    name: 'Plunge Satin Evening Gown',
+    category: 'Luxury Gowns',
+    price: '₦340,000',
+    badge: 'new',
+    badgeLabel: 'New In',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=85&auto=format&fit=crop',
+    desc: 'Deep plunge neckline, pooling train, duchess satin construction. This is the dress that stops rooms, steals conversations, and ends up in every photographer\'s portfolio.',
+  },
+  {
+    id: 6,
+    name: 'Kitten Heel Mule — Nude',
+    category: 'Luxury Footwear',
+    price: '₦85,000',
+    badge: 'new',
+    badgeLabel: 'New In',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&q=85&auto=format&fit=crop',
+    desc: 'Nude nappa leather kitten heel mule. Barely-there silhouette that makes your legs look longer and your confidence immeasurable. A classic that never speaks too loudly.',
+  },
+  {
+    id: 7,
+    name: 'Pearl & Gold Ear Set',
+    category: 'Accessories',
+    price: '₦45,000',
+    badge: 'new',
+    badgeLabel: 'New In',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=85&auto=format&fit=crop',
+    desc: 'South Sea freshwater pearls set in 18k gold-tone. Drop length, hypoallergenic posts. The kind of jewelry that gets complimented at every event, every time.',
+  },
+  {
+    id: 8,
+    name: 'Cinch-Waist Blazer Dress',
+    category: 'Ready-to-Wear',
+    price: '₦155,000',
+    oldPrice: '₦185,000',
+    badge: 'hot',
+    badgeLabel: 'Sale',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1548778943-5bbeeb1ba6c1?w=600&q=85&auto=format&fit=crop',
+    desc: 'Power dressing redefined. Double-breasted blazer dress with cinched waist and statement lapels. From boardroom to bar — this piece does it all effortlessly.',
+  },
+];
+
+// ─── TESTIMONIAL DATA ────────────────────────────────────────
+const testimonials = [
+  {
+    text: "I ordered the Velour Noir Gown for my husband's 50th birthday dinner and I have never received so many compliments in my entire life. Maison Élara is on a different level entirely.",
+    name: "Adaeze Okonkwo",
+    handle: "@adaeze.lagos",
+    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&q=80&auto=format&fit=crop&faces&facepad=2",
+    stars: 5,
+  },
+  {
+    text: "The packaging alone is worth it. I felt like I was unboxing a gift to myself. The Elara Slip Dress fits like it was made for my body. Absolutely worth every naira.",
+    name: "Temi Badmus",
+    handle: "@themissbadmus",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop",
+    stars: 5,
+  },
+  {
+    text: "I reached out on WhatsApp at 9pm and they responded immediately with size guides and styling tips. The handbag arrived the next morning. Exceptional service. Period.",
+    name: "Chiamaka Eze",
+    handle: "@chiamaka.ceo",
+    avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&q=80&auto=format&fit=crop",
+    stars: 5,
+  },
+  {
+    text: "I've shopped luxury brands in Dubai and London. Maison Élara competes with all of them — the quality, the curation, the service. I'm a forever customer.",
+    name: "Ngozi Amadi",
+    handle: "@ngozi.amadi",
+    avatar: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=100&q=80&auto=format&fit=crop",
+    stars: 5,
+  },
+  {
+    text: "Wore the Plunge Satin Gown to the Arise Fashion afterparty. Three journalists asked who I was wearing. Maison Élara is the answer I gave proudly.",
+    name: "Funke Adeleke",
+    handle: "@funkeadeleke",
+    avatar: "https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?w=100&q=80&auto=format&fit=crop",
+    stars: 5,
+  },
+];
+
+// ─── INSTAGRAM IMAGES ────────────────────────────────────────
+const instaImages = [
+  'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=400&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1535695765898-cb67c39e25ea?w=400&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=400&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80&auto=format&fit=crop',
+];
+
+// ─── RENDER PRODUCTS ─────────────────────────────────────────
+function renderProducts() {
+  const grid = document.getElementById('products-grid');
+  grid.innerHTML = products.map(p => `
+    <article class="product-card reveal">
+      <div class="product-img-wrap">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badgeLabel}</span>` : ''}
+        <div class="product-quick-view">
+          <button class="quick-view-btn" onclick="openModal(${p.id})">Quick View</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-cat">${p.category}</p>
+        <h3 class="product-name">${p.name}</h3>
+        <div class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</div>
+        <p>
+          <span class="product-price">${p.price}</span>
+          ${p.oldPrice ? `<span class="product-price-old">${p.oldPrice}</span>` : ''}
+        </p>
+        <a href="https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%27d%20like%20to%20order%20the%20${encodeURIComponent(p.name)}%20(${encodeURIComponent(p.price)})"
+           class="whatsapp-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </article>
+  `).join('');
+}
+
+// ─── RENDER TESTIMONIALS ──────────────────────────────────────
+function renderTestimonials() {
+  const track = document.getElementById('test-track');
+  const cards = [...testimonials, ...testimonials].map(t => `
+    <div class="test-card">
+      <div class="test-quote">"</div>
+      <p class="test-text">${t.text}</p>
+      <div class="stars" style="margin-bottom:1rem;">★★★★★</div>
+      <div class="test-author">
+        <img class="test-avatar" src="${t.avatar}" alt="${t.name}" loading="lazy">
+        <div>
+          <p class="test-name">${t.name}</p>
+          <p class="test-handle">${t.handle}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  track.innerHTML = cards;
+}
+
+// ─── RENDER INSTAGRAM ─────────────────────────────────────────
+function renderInsta() {
+  const grid = document.getElementById('insta-grid');
+  grid.innerHTML = instaImages.map(src => `
+    <div class="insta-item">
+      <img src="${src}" alt="Maison Elara on Instagram" loading="lazy">
+      <div class="insta-overlay">
+        <span class="insta-icon">✦</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── MODAL ────────────────────────────────────────────────────
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modal-img').src = p.image;
+  document.getElementById('modal-img').alt = p.name;
+  document.getElementById('modal-cat').textContent = p.category;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-whatsapp').href = `https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%27d%20like%20to%20order%20the%20${encodeURIComponent(p.name)}%20(${encodeURIComponent(p.price)})`;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ─── HERO SLIDER ─────────────────────────────────────────────
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.dot');
+
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+setInterval(() => {
+  goToSlide((currentSlide + 1) % slides.length);
+}, 6000);
+
+// ─── NAVBAR SCROLL ────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  const backTop = document.getElementById('back-top');
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+    backTop.classList.add('visible');
+  } else {
+    nav.classList.remove('scrolled');
+    backTop.classList.remove('visible');
+  }
+});
+
+// ─── MOBILE MENU ─────────────────────────────────────────────
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.add('open');
+});
+document.getElementById('menu-close').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.remove('open');
+});
+document.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('open');
+  });
+});
+
+// ─── CURSOR ───────────────────────────────────────────────────
+const cursorGlow = document.getElementById('cursor-glow');
+const cursorDot = document.getElementById('cursor-dot');
+let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+});
+
+function animateCursor() {
+  glowX += (mouseX - glowX) * 0.12;
+  glowY += (mouseY - glowY) * 0.12;
+  cursorGlow.style.left = glowX + 'px';
+  cursorGlow.style.top = glowY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll('a, button, .collection-card, .product-card, .insta-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursorGlow.classList.add('cursor-expand'));
+  el.addEventListener('mouseleave', () => cursorGlow.classList.remove('cursor-expand'));
+});
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+function observeReveal() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ─── LOADER ───────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    // Remove from DOM after transition
+    setTimeout(() => {
+      document.getElementById('loader').remove();
+    }, 900);
+  }, 2000);
+});
+
+// ─── NEWSLETTER ───────────────────────────────────────────────
+function handleNewsletter(btn) {
+  const input = btn.previousElementSibling;
+  if (!input.value.includes('@')) {
+    input.style.borderColor = '#e24b4a';
+    return;
+  }
+  btn.textContent = '✦ You\'re In the Inner Circle';
+  btn.style.background = '#128C7E';
+  input.value = '';
+  input.style.borderColor = 'rgba(123, 223, 242, 0.4)';
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+renderProducts();
+renderTestimonials();
+renderInsta();
+observeReveal();
+
+// Observe dynamically rendered elements
+setTimeout(observeReveal, 100);
+</script>
+</body>
+</html>

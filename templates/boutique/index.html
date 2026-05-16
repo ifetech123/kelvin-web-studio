@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAISON ELARA — Luxury Fashion Boutique Lagos</title>
+  <meta name="description" content="Discover curated luxury fashion, designer handbags, and exclusive collections at Maison Elara — Lagos' premier luxury boutique. Shop gowns, accessories, and more." />
+  <meta name="keywords" content="luxury fashion lagos, designer boutique nigeria, luxury gowns lagos, designer handbags nigeria" />
+  <meta property="og:title" content="MAISON ELARA — Luxury Fashion Boutique" />
+  <meta property="og:description" content="Redefining elegance. Shop the finest curated luxury fashion in Lagos." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cormorant Garamond + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant:ital,wght@1,300;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'obsidian': '#0a0908',
+            'dark':     '#111010',
+            'warm-dark':'#1a1814',
+            'cream':    '#f5f0e8',
+            'ivory':    '#faf7f2',
+            'gold':     '#c9a96e',
+            'gold-light':'#e2c99a',
+            'gold-muted':'#a08046',
+          },
+          fontFamily: {
+            serif:  ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:   ['DM Sans', 'sans-serif'],
+            italic: ['Cormorant', 'Georgia', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ===== GLOBAL RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0a0908;
+      color: #f5f0e8;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: #c9a96e;
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,169,110,0.5);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+    .cursor-ring.hovered {
+      width: 56px; height: 56px;
+      border-color: #c9a96e;
+      background: rgba(201,169,110,0.05);
+    }
+
+    /* ===== LOADER ===== */
+    #loader {
+      position: fixed; inset: 0;
+      background: #0a0908;
+      z-index: 99997;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 0.5rem;
+      color: #f5f0e8;
+    }
+    .loader-bar-track {
+      width: 200px; height: 1px;
+      background: rgba(245,240,232,0.15);
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #c9a96e, #e2c99a);
+      width: 0%;
+      animation: loadProgress 2.2s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    @keyframes loadProgress {
+      0%   { width: 0%; }
+      60%  { width: 75%; }
+      100% { width: 100%; }
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .display-text { font-family: 'Cormorant Garamond', serif; }
+    .italic-serif  { font-family: 'Cormorant', serif; font-style: italic; }
+
+    /* ===== GOLD GRADIENT ===== */
+    .gold-gradient { background: linear-gradient(135deg, #c9a96e 0%, #e2c99a 50%, #a08046 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #c9a96e, transparent); }
+    .gold-line-solid { height: 1px; background: #c9a96e; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.5rem 2rem;
+      transition: all 0.5s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(10,9,8,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+    }
+    .nav-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.18rem;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.75);
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: #c9a96e;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .nav-link:hover { color: #c9a96e; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ===== HERO ===== */
+    #hero { height: 100vh; min-height: 600px; position: relative; overflow: hidden; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.25) 0%,
+        rgba(10,9,8,0.1) 30%,
+        rgba(10,9,8,0.55) 70%,
+        rgba(10,9,8,0.85) 100%
+      );
+    }
+    .hero-slide-indicators {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem; z-index: 10;
+    }
+    .slide-dot {
+      width: 24px; height: 2px;
+      background: rgba(245,240,232,0.35);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .slide-dot.active { width: 48px; background: #c9a96e; }
+
+    /* ===== SECTION REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ===== COLLECTION CARDS ===== */
+    .collection-card {
+      position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .collection-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .collection-card:hover img { transform: scale(1.08); }
+    .collection-card .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,9,8,0.85) 0%, rgba(10,9,8,0.1) 60%);
+      transition: background 0.5s ease;
+    }
+    .collection-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(10,9,8,0.9) 0%, rgba(10,9,8,0.25) 60%);
+    }
+    .card-cta-line {
+      width: 0; height: 1px;
+      background: #c9a96e;
+      transition: width 0.5s ease;
+      display: inline-block;
+    }
+    .collection-card:hover .card-cta-line { width: 2rem; }
+
+    /* ===== PRODUCT CARDS ===== */
+    .product-card {
+      background: #111010;
+      border: 1px solid rgba(201,169,110,0.1);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      border-color: rgba(201,169,110,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .product-card .product-img-wrap {
+      overflow: hidden; position: relative;
+    }
+    .product-card img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .product-card:hover img { transform: scale(1.06); }
+    .product-quick-view {
+      position: absolute; inset: 0;
+      background: rgba(10,9,8,0.65);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .product-card:hover .product-quick-view { opacity: 1; }
+    .star-rating { color: #c9a96e; font-size: 0.75rem; letter-spacing: 0.1rem; }
+
+    /* ===== WHATSAPP BUTTON ===== */
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #c9a96e, #a08046);
+      color: #0a0908;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12rem;
+      text-transform: uppercase;
+      padding: 0.65rem 1rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #e2c99a, #c9a96e);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(201,169,110,0.3);
+    }
+    .btn-primary {
+      background: transparent;
+      border: 1px solid #c9a96e;
+      color: #c9a96e;
+      font-size: 0.65rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: #c9a96e;
+      color: #0a0908;
+    }
+    .btn-fill {
+      background: linear-gradient(135deg, #c9a96e, #a08046);
+      border: none;
+      color: #0a0908;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-fill:hover {
+      background: linear-gradient(135deg, #e2c99a, #c9a96e);
+      box-shadow: 0 8px 32px rgba(201,169,110,0.35);
+      transform: translateY(-2px);
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .testimonial-card {
+      min-width: 100%;
+      padding: 0 1rem;
+    }
+    @media (min-width: 768px) { .testimonial-card { min-width: 50%; } }
+    @media (min-width: 1024px) { .testimonial-card { min-width: 33.333%; } }
+
+    /* ===== INSTAGRAM GRID ===== */
+    .insta-item {
+      position: relative; overflow: hidden; aspect-ratio: 1;
+      cursor: pointer;
+    }
+    .insta-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .insta-item:hover img { transform: scale(1.1); }
+    .insta-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,9,8,0.6);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .insta-item:hover .insta-overlay { opacity: 1; }
+
+    /* ===== MODAL ===== */
+    #quickview-modal {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,9,8,0.9);
+      backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    #quickview-modal.open { display: flex; }
+    .modal-box {
+      background: #111010;
+      border: 1px solid rgba(201,169,110,0.2);
+      max-width: 900px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      animation: modalIn 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    @media (min-width: 640px) { .modal-box { grid-template-columns: 1fr 1fr; } }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ===== FLOAT BUTTONS ===== */
+    #wa-float {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 990;
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #c9a96e, #a08046);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(201,169,110,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: floatPulse 2.5s ease-in-out infinite;
+    }
+    #wa-float:hover { transform: scale(1.12); box-shadow: 0 12px 36px rgba(201,169,110,0.5); }
+    @keyframes floatPulse {
+      0%, 100% { box-shadow: 0 8px 24px rgba(201,169,110,0.4); }
+      50% { box-shadow: 0 8px 36px rgba(201,169,110,0.6); }
+    }
+
+    #back-top {
+      position: fixed; bottom: 2rem; left: 2rem; z-index: 990;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,169,110,0.4);
+      background: rgba(10,9,8,0.8);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0; visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    #back-top.visible { opacity: 1; visibility: visible; }
+    #back-top:hover { border-color: #c9a96e; background: rgba(201,169,110,0.1); }
+
+    /* ===== SOCIAL PROOF BADGE ===== */
+    .proof-badge {
+      background: rgba(10,9,8,0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 0.75rem 1.25rem;
+      animation: badgePop 0.6s 2.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes badgePop {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== WHY CARDS ===== */
+    .why-card {
+      border: 1px solid rgba(201,169,110,0.12);
+      background: rgba(26,24,20,0.5);
+      padding: 2rem 1.5rem;
+      transition: all 0.4s ease;
+      position: relative; overflow: hidden;
+    }
+    .why-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+      transform: scaleX(0);
+      transition: transform 0.5s ease;
+    }
+    .why-card:hover { border-color: rgba(201,169,110,0.3); background: rgba(26,24,20,0.8); }
+    .why-card:hover::before { transform: scaleX(1); }
+    .why-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-input {
+      background: rgba(245,240,232,0.05);
+      border: 1px solid rgba(201,169,110,0.2);
+      color: #f5f0e8;
+      padding: 0.875rem 1.25rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .newsletter-input::placeholder { color: rgba(245,240,232,0.35); }
+    .newsletter-input:focus { border-color: #c9a96e; }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35rem;
+      text-transform: uppercase;
+      color: #c9a96e;
+      display: block;
+    }
+
+    /* ===== NOISE OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 99990; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    #mobile-menu {
+      position: fixed; inset: 0; z-index: 5000;
+      background: #0a0908;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.7);
+      letter-spacing: 0.1rem;
+      display: block;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(201,169,110,0.1);
+      transition: color 0.3s ease;
+    }
+    .mobile-nav-link:hover { color: #c9a96e; }
+
+    /* ===== STAGGER DELAYS ===== */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-img-frame {
+      position: relative;
+    }
+    .about-img-frame::before {
+      content: '';
+      position: absolute;
+      top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 1px solid rgba(201,169,110,0.25);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0908; }
+    ::-webkit-scrollbar-thumb { background: #c9a96e; }
+
+    /* mobile cursor off */
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===== LOADER ===== -->
+<div id="loader">
+  <div>
+    <p class="section-label text-center mb-3" style="font-size:0.6rem;">Est. 2019 — Lagos, Nigeria</p>
+    <p class="loader-logo tracking-widest text-center">MAISON ELARA</p>
+    <div class="loader-bar-track">
+      <div class="loader-bar"></div>
+    </div>
+    <p class="text-center mt-4" style="font-size:0.6rem; letter-spacing:0.2rem; color:rgba(245,240,232,0.3);">CURATING YOUR EXPERIENCE</p>
+  </div>
+</div>
+
+<!-- ===== QUICK-VIEW MODAL ===== -->
+<div id="quickview-modal">
+  <div class="modal-box">
+    <div id="modal-img-wrap" style="min-height:400px; overflow:hidden; position:relative;">
+      <img id="modal-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;" />
+    </div>
+    <div style="padding:2.5rem 2rem; display:flex; flex-direction:column; justify-content:center;">
+      <span class="section-label mb-3" id="modal-category">Category</span>
+      <h2 class="display-text mb-2" style="font-size:1.8rem; font-weight:400;" id="modal-name">Product Name</h2>
+      <p class="gold-gradient display-text mb-1" style="font-size:1.5rem; font-weight:500;" id="modal-price">₦0</p>
+      <div class="star-rating mb-4" id="modal-stars">★★★★★</div>
+      <div class="gold-line mb-4"></div>
+      <p class="mb-6" style="font-size:0.82rem; line-height:1.8; color:rgba(245,240,232,0.65);" id="modal-desc">Description</p>
+      <a id="modal-wa-link" href="https://wa.me/2349041999098?text=Hello%20Maison%20Elara%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank">
+        <button class="btn-whatsapp" style="font-size:0.7rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.144.565 4.155 1.55 5.893L0 24l6.232-1.633A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.052-1.4l-.361-.216-3.722.976.997-3.633-.237-.376A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12 17.418 21.818 12 21.818z"/></svg>
+          Order via WhatsApp
+        </button>
+      </a>
+      <button onclick="closeModal()" class="mt-3" style="font-size:0.65rem; letter-spacing:0.2rem; color:rgba(245,240,232,0.4); text-transform:uppercase; cursor:pointer; background:none; border:none;">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOBILE MENU ===== -->
+<div id="mobile-menu">
+  <div style="padding:2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(201,169,110,0.15);">
+    <span class="display-text" style="font-size:1.2rem; letter-spacing:0.3rem;">MAISON ELARA</span>
+    <button onclick="toggleMenu()" style="background:none; border:none; cursor:pointer;">
+      <svg width="24" height="24" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav style="padding:3rem 2rem; display:flex; flex-direction:column; gap:0.5rem;">
+    <a href="#collections" onclick="toggleMenu()" class="mobile-nav-link">Collections</a>
+    <a href="#new-arrivals" onclick="toggleMenu()" class="mobile-nav-link">New Arrivals</a>
+    <a href="#about" onclick="toggleMenu()" class="mobile-nav-link">Our Story</a>
+    <a href="#testimonials" onclick="toggleMenu()" class="mobile-nav-link">Reviews</a>
+    <a href="#contact" onclick="toggleMenu()" class="mobile-nav-link">Contact</a>
+  </nav>
+  <div style="padding:0 2rem;">
+    <div class="gold-line mb-6"></div>
+    <p class="section-label mb-2">Follow Us</p>
+    <p style="font-size:0.8rem; color:rgba(245,240,232,0.5);">@maisonelara</p>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div style="max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;">
+    <!-- Left links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#collections" class="nav-link">Collections</a>
+      <a href="#new-arrivals" class="nav-link">New Arrivals</a>
+      <a href="#about" class="nav-link">Our Story</a>
+    </div>
+
+    <!-- Logo -->
+    <div class="text-center">
+      <p class="display-text" style="font-size:1.3rem; letter-spacing:0.45rem; font-weight:400; color:#f5f0e8;">MAISON ELARA</p>
+      <p class="section-label" style="font-size:0.5rem; letter-spacing:0.25rem; color:rgba(201,169,110,0.6); margin-top:2px;">LUXURY BOUTIQUE</p>
+    </div>
+
+    <!-- Right links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#testimonials" class="nav-link">Reviews</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="https://wa.me/2349041999098" target="_blank">
+        <button class="btn-primary" style="padding:0.6rem 1.4rem; font-size:0.6rem;">Shop Now</button>
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="md:hidden" onclick="toggleMenu()" style="background:none; border:none; cursor:pointer;">
+      <svg width="24" height="24" fill="none" stroke="#f5f0e8" stroke-width="1.5" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="hero">
+  <!-- Slides -->
+  <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=90&fit=crop&crop=center');"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&q=90&fit=crop&crop=top');"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1920&q=90&fit=crop&crop=center');"></div>
+
+  <div class="hero-overlay"></div>
+
+  <!-- Hero Content -->
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:5;">
+    <div style="text-align:center; max-width:800px; padding:0 2rem;">
+      <p class="section-label mb-6 reveal" style="letter-spacing:0.4rem;">Lagos · Paris · New York</p>
+      <h1 class="display-text reveal delay-1" style="font-size:clamp(2.8rem, 7vw, 6.5rem); font-weight:300; line-height:1.05; color:#faf7f2; margin-bottom:1.5rem;">
+        Luxury Fashion<br />
+        <span class="italic-serif gold-gradient" style="font-size:clamp(3rem, 7.5vw, 7rem);">That Defines Presence</span>
+      </h1>
+      <p class="reveal delay-2" style="font-size:0.9rem; letter-spacing:0.08rem; color:rgba(245,240,232,0.65); margin-bottom:3rem; line-height:1.8;">
+        Curated exclusivity for the woman who commands every room.
+      </p>
+      <div class="reveal delay-3" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="#collections"><button class="btn-fill">Shop Collection</button></a>
+        <a href="https://wa.me/2349041999098?text=Hi%20Maison%20Elara%2C%20I'd%20like%20to%20book%20a%20personal%20styling%20session" target="_blank"><button class="btn-primary">Book Styling</button></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Proof Badge -->
+  <div style="position:absolute; bottom:5rem; left:2rem; z-index:10;" class="hidden md:block">
+    <div class="proof-badge">
+      <p style="font-size:0.6rem; letter-spacing:0.2rem; color:rgba(201,169,110,0.8); text-transform:uppercase; margin-bottom:0.25rem;">Trusted by</p>
+      <p class="display-text" style="font-size:1.4rem; font-weight:500; color:#f5f0e8;">2,400+ Clients</p>
+      <div style="display:flex; gap:2px; margin-top:0.25rem;">
+        <span style="color:#c9a96e; font-size:0.7rem;">★★★★★</span>
+        <span style="font-size:0.6rem; color:rgba(245,240,232,0.5); margin-left:0.25rem;">5.0 Rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Indicators -->
+  <div class="hero-slide-indicators">
+    <div class="slide-dot active" onclick="goToSlide(0)"></div>
+    <div class="slide-dot" onclick="goToSlide(1)"></div>
+    <div class="slide-dot" onclick="goToSlide(2)"></div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute; bottom:2rem; right:2rem; z-index:10; text-align:center;">
+    <p style="font-size:0.55rem; letter-spacing:0.25rem; color:rgba(245,240,232,0.4); text-transform:uppercase; writing-mode:vertical-rl; margin-bottom:0.5rem;">Scroll</p>
+    <div style="width:1px; height:48px; background:linear-gradient(to bottom, rgba(201,169,110,0.6), transparent); margin:0 auto;"></div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE STRIP ===== -->
+<div style="background:#1a1814; border-top:1px solid rgba(201,169,110,0.15); border-bottom:1px solid rgba(201,169,110,0.15); padding:1rem 0; overflow:hidden;">
+  <div id="marquee-inner" style="display:flex; gap:0; white-space:nowrap; animation:marqueeScroll 30s linear infinite;">
+    <span style="display:inline-flex; align-items:center; gap:2rem; padding:0 2rem; font-size:0.65rem; letter-spacing:0.3rem; color:rgba(245,240,232,0.45); text-transform:uppercase;">
+      New Arrivals Weekly &nbsp;✦&nbsp; Designer Gowns &nbsp;✦&nbsp; Handbags &amp; Accessories &nbsp;✦&nbsp; Personal Styling &nbsp;✦&nbsp; Nationwide Delivery &nbsp;✦&nbsp; Authentic Luxury &nbsp;✦&nbsp; New Arrivals Weekly &nbsp;✦&nbsp; Designer Gowns &nbsp;✦&nbsp; Handbags &amp; Accessories &nbsp;✦&nbsp; Personal Styling &nbsp;✦&nbsp; Nationwide Delivery &nbsp;✦&nbsp; Authentic Luxury &nbsp;✦&nbsp; New Arrivals Weekly &nbsp;✦&nbsp; Designer Gowns &nbsp;✦&nbsp; Handbags &amp; Accessories
+    </span>
+  </div>
+</div>
+<style>
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+</style>
+
+<!-- ===== FEATURED COLLECTIONS ===== -->
+<section id="collections" style="padding:7rem 2rem; max-width:1400px; margin:0 auto;">
+  <div style="text-align:center; margin-bottom:4rem;">
+    <span class="section-label reveal mb-3 inline-block">Curated For You</span>
+    <h2 class="display-text reveal delay-1" style="font-size:clamp(2.2rem, 4vw, 3.5rem); font-weight:300; line-height:1.1;">Shop By Category</h2>
+    <div class="gold-line reveal delay-2" style="max-width:80px; margin:1.5rem auto 0;"></div>
+  </div>
+
+  <!-- Grid Layout -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:1rem;" class="reveal">
+    <!-- Big left card -->
+    <div class="collection-card" style="grid-row:span 2; min-height:600px;">
+      <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=85&fit=crop&crop=center" alt="Luxury Gowns" style="height:100%; min-height:600px;" loading="lazy" />
+      <div class="card-overlay"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:2rem; z-index:5;">
+        <span class="section-label mb-2 block" style="color:rgba(201,169,110,0.7);">New Season</span>
+        <h3 class="display-text" style="font-size:2rem; font-weight:300; color:#faf7f2; margin-bottom:0.5rem;">Designer Gowns</h3>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-top:0.75rem;">
+          <span class="card-cta-line"></span>
+          <span style="font-size:0.65rem; letter-spacing:0.2rem; color:#c9a96e; text-transform:uppercase;">Explore</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top right -->
+    <div class="collection-card" style="height:295px;">
+      <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&q=85&fit=crop" alt="Designer Handbags" style="height:295px;" loading="lazy" />
+      <div class="card-overlay"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem; z-index:5;">
+        <h3 class="display-text" style="font-size:1.5rem; font-weight:300; color:#faf7f2;">Designer Handbags</h3>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-top:0.5rem;">
+          <span class="card-cta-line"></span>
+          <span style="font-size:0.6rem; letter-spacing:0.2rem; color:#c9a96e; text-transform:uppercase;">Explore</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom right - 2 cards side by side -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; height:295px;">
+      <div class="collection-card" style="height:295px;">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=85&fit=crop&crop=center" alt="Luxury Shoes" style="height:295px;" loading="lazy" />
+        <div class="card-overlay"></div>
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:1.25rem; z-index:5;">
+          <h3 class="display-text" style="font-size:1.2rem; font-weight:300; color:#faf7f2;">Shoes</h3>
+        </div>
+      </div>
+      <div class="collection-card" style="height:295px;">
+        <img src="https://images.unsplash.com/photo-1611923134239-b9be5816e23c?w=400&q=85&fit=crop&crop=center" alt="Accessories" style="height:295px;" loading="lazy" />
+        <div class="card-overlay"></div>
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:1.25rem; z-index:5;">
+          <h3 class="display-text" style="font-size:1.2rem; font-weight:300; color:#faf7f2;">Accessories</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEW ARRIVALS ===== -->
+<section id="new-arrivals" style="padding:5rem 2rem 7rem; background:#111010;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="section-label reveal mb-3 inline-block">Just Arrived</span>
+        <h2 class="display-text reveal delay-1" style="font-size:clamp(2rem, 4vw, 3.2rem); font-weight:300;">New Arrivals</h2>
+      </div>
+      <a href="https://wa.me/2349041999098?text=Hi%2C%20I'd%20like%20to%20see%20all%20new%20arrivals" target="_blank">
+        <span style="font-size:0.65rem; letter-spacing:0.2rem; color:#c9a96e; text-transform:uppercase; border-bottom:1px solid rgba(201,169,110,0.3); padding-bottom:2px;">View All</span>
+      </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="products-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:1.5rem;">
+      <!-- JS will render products here -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT BRAND ===== -->
+<section id="about" style="padding:7rem 2rem; max-width:1400px; margin:0 auto;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;" class="md:gap-20">
+    <!-- Image -->
+    <div class="about-img-frame reveal-left" style="position:relative; z-index:1;">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=85&fit=crop&crop=center"
+           alt="Maison Elara Boutique Interior"
+           style="width:100%; aspect-ratio:3/4; object-fit:cover; position:relative; z-index:1;"
+           loading="lazy" />
+      <!-- Gold accent block -->
+      <div style="position:absolute; bottom:-20px; right:-20px; width:120px; height:120px; background:rgba(201,169,110,0.08); border:1px solid rgba(201,169,110,0.2); z-index:0;"></div>
+    </div>
+
+    <!-- Text -->
+    <div class="reveal-right">
+      <span class="section-label mb-4 inline-block">Our Story</span>
+      <h2 class="display-text" style="font-size:clamp(2rem, 3.5vw, 3rem); font-weight:300; line-height:1.15; margin-bottom:2rem;">
+        Born From a Passion<br />
+        <span class="italic-serif gold-gradient">for Extraordinary Style</span>
+      </h2>
+      <div class="gold-line mb-6"></div>
+      <p style="font-size:0.88rem; line-height:2; color:rgba(245,240,232,0.65); margin-bottom:1.5rem;">
+        Maison Elara was founded with a singular vision — to bring the world's most coveted fashion to the hearts of African women who live boldly, love deeply, and refuse to settle for anything less than extraordinary.
+      </p>
+      <p style="font-size:0.88rem; line-height:2; color:rgba(245,240,232,0.65); margin-bottom:2.5rem;">
+        From our boutique in Lagos, we curate each piece with obsessive attention to craft, fabric, and silhouette — because we believe true luxury isn't about price. It's about how it makes you feel when you walk into a room.
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2.5rem;">
+        <div>
+          <p class="display-text gold-gradient" style="font-size:2.5rem; font-weight:400;">2,400+</p>
+          <p style="font-size:0.7rem; letter-spacing:0.15rem; color:rgba(245,240,232,0.4); text-transform:uppercase;">Happy Clients</p>
+        </div>
+        <div>
+          <p class="display-text gold-gradient" style="font-size:2.5rem; font-weight:400;">6+</p>
+          <p style="font-size:0.7rem; letter-spacing:0.15rem; color:rgba(245,240,232,0.4); text-transform:uppercase;">Years of Excellence</p>
+        </div>
+      </div>
+      <a href="https://wa.me/2349041999098?text=Hi%20Maison%20Elara%2C%20I'd%20love%20to%20learn%20more%20about%20your%20boutique" target="_blank">
+        <button class="btn-primary">Meet The Team</button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CLIENTS LOVE US ===== -->
+<section id="why-us" style="padding:5rem 2rem 7rem; background:linear-gradient(180deg, #0a0908 0%, #111010 100%);">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <span class="section-label reveal mb-3 inline-block">The Maison Experience</span>
+      <h2 class="display-text reveal delay-1" style="font-size:clamp(2rem, 4vw, 3.2rem); font-weight:300; line-height:1.1;">Why Clients Love Us</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem;">
+      <div class="why-card reveal delay-1">
+        <div class="why-icon">🎁</div>
+        <h3 class="display-text" style="font-size:1.2rem; font-weight:400; margin-bottom:0.75rem; color:#f5f0e8;">Luxury Packaging</h3>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.5);">Every order arrives in signature black boxes with gold ribbon — an unboxing experience as beautiful as what's inside.</p>
+      </div>
+      <div class="why-card reveal delay-2">
+        <div class="why-icon">🚚</div>
+        <h3 class="display-text" style="font-size:1.2rem; font-weight:400; margin-bottom:0.75rem; color:#f5f0e8;">Nationwide Delivery</h3>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.5);">Fast, discreet delivery to your door across all 36 states. Lagos same-day available for select items.</p>
+      </div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon">✦</div>
+        <h3 class="display-text" style="font-size:1.2rem; font-weight:400; margin-bottom:0.75rem; color:#f5f0e8;">100% Authentic</h3>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.5);">Every piece is authenticated and sourced directly from verified luxury suppliers. Zero compromise, always.</p>
+      </div>
+      <div class="why-card reveal delay-4">
+        <div class="why-icon">👗</div>
+        <h3 class="display-text" style="font-size:1.2rem; font-weight:400; margin-bottom:0.75rem; color:#f5f0e8;">Personal Styling</h3>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.5);">One-on-one styling sessions via WhatsApp or in-person. Our experts find pieces built for your life.</p>
+      </div>
+      <div class="why-card reveal delay-5">
+        <div class="why-icon">💬</div>
+        <h3 class="display-text" style="font-size:1.2rem; font-weight:400; margin-bottom:0.75rem; color:#f5f0e8;">Concierge Service</h3>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.5);">Dedicated WhatsApp support from discovery to delivery. We handle every detail so you don't have to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" style="padding:7rem 2rem; background:#0a0908; overflow:hidden;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <span class="section-label reveal mb-3 inline-block">Client Reviews</span>
+      <h2 class="display-text reveal delay-1" style="font-size:clamp(2rem, 4vw, 3.2rem); font-weight:300;">
+        Words From Our<br/><span class="italic-serif gold-gradient">Beloved Clients</span>
+      </h2>
+    </div>
+
+    <div style="overflow:hidden; position:relative;">
+      <div class="testimonial-track" id="testimonialTrack">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div style="background:#1a1814; border:1px solid rgba(201,169,110,0.12); padding:2rem; margin:0 0.5rem; height:100%;">
+            <div style="color:#c9a96e; font-size:2.5rem; margin-bottom:1rem; line-height:1;">"</div>
+            <p class="display-text" style="font-size:1.05rem; font-style:italic; font-weight:300; line-height:1.8; color:rgba(245,240,232,0.8); margin-bottom:1.5rem;">
+              Maison Elara is not just a boutique — it's an experience. The midnight gown I ordered for my gala arrived in the most stunning packaging, and fit like it was made for me.
+            </p>
+            <div class="gold-line mb-4"></div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&q=80&fit=crop&crop=face" alt="Adaeze O." style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:1px solid rgba(201,169,110,0.3);" />
+              <div>
+                <p style="font-size:0.85rem; font-weight:500; color:#f5f0e8;">Adaeze O.</p>
+                <p style="font-size:0.65rem; color:#c9a96e; letter-spacing:0.1rem;">Lagos, Nigeria</p>
+              </div>
+              <div class="star-rating ml-auto">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div style="background:#1a1814; border:1px solid rgba(201,169,110,0.12); padding:2rem; margin:0 0.5rem; height:100%;">
+            <div style="color:#c9a96e; font-size:2.5rem; margin-bottom:1rem; line-height:1;">"</div>
+            <p class="display-text" style="font-size:1.05rem; font-style:italic; font-weight:300; line-height:1.8; color:rgba(245,240,232,0.8); margin-bottom:1.5rem;">
+              I've shopped at boutiques across London and Dubai — Maison Elara matches them all. The curation, the quality, the service. Absolutely world-class.
+            </p>
+            <div class="gold-line mb-4"></div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&q=80&fit=crop&crop=face" alt="Temi A." style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:1px solid rgba(201,169,110,0.3);" />
+              <div>
+                <p style="font-size:0.85rem; font-weight:500; color:#f5f0e8;">Temi A.</p>
+                <p style="font-size:0.65rem; color:#c9a96e; letter-spacing:0.1rem;">Abuja, Nigeria</p>
+              </div>
+              <div class="star-rating ml-auto">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div style="background:#1a1814; border:1px solid rgba(201,169,110,0.12); padding:2rem; margin:0 0.5rem; height:100%;">
+            <div style="color:#c9a96e; font-size:2.5rem; margin-bottom:1rem; line-height:1;">"</div>
+            <p class="display-text" style="font-size:1.05rem; font-style:italic; font-weight:300; line-height:1.8; color:rgba(245,240,232,0.8); margin-bottom:1.5rem;">
+              The personal styling session changed how I see fashion. They understood my body, my lifestyle, and my budget — and found pieces I now wear everywhere.
+            </p>
+            <div class="gold-line mb-4"></div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&q=80&fit=crop&crop=face" alt="Chisom N." style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:1px solid rgba(201,169,110,0.3);" />
+              <div>
+                <p style="font-size:0.85rem; font-weight:500; color:#f5f0e8;">Chisom N.</p>
+                <p style="font-size:0.65rem; color:#c9a96e; letter-spacing:0.1rem;">Port Harcourt, Nigeria</p>
+              </div>
+              <div class="star-rating ml-auto">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <div style="background:#1a1814; border:1px solid rgba(201,169,110,0.12); padding:2rem; margin:0 0.5rem; height:100%;">
+            <div style="color:#c9a96e; font-size:2.5rem; margin-bottom:1rem; line-height:1;">"</div>
+            <p class="display-text" style="font-size:1.05rem; font-style:italic; font-weight:300; line-height:1.8; color:rgba(245,240,232,0.8); margin-bottom:1.5rem;">
+              The chain bucket bag I purchased has gotten more compliments than anything I own. The authenticity certificate and the packaging were next level.
+            </p>
+            <div class="gold-line mb-4"></div>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=80&h=80&q=80&fit=crop&crop=face" alt="Nkechi B." style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:1px solid rgba(201,169,110,0.3);" />
+              <div>
+                <p style="font-size:0.85rem; font-weight:500; color:#f5f0e8;">Nkechi B.</p>
+                <p style="font-size:0.65rem; color:#c9a96e; letter-spacing:0.1rem;">Lagos, Nigeria</p>
+              </div>
+              <div class="star-rating ml-auto">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Testimonial controls -->
+      <div style="display:flex; justify-content:center; align-items:center; gap:1.5rem; margin-top:3rem;">
+        <button onclick="prevTestimonial()" style="width:44px; height:44px; border:1px solid rgba(201,169,110,0.3); background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s ease;" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(201,169,110,0.3)'">
+          <svg width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div id="testimonial-dots" style="display:flex; gap:0.5rem;"></div>
+        <button onclick="nextTestimonial()" style="width:44px; height:44px; border:1px solid rgba(201,169,110,0.3); background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s ease;" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(201,169,110,0.3)'">
+          <svg width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTAGRAM GALLERY ===== -->
+<section id="instagram" style="padding:5rem 0 0;">
+  <div style="text-align:center; margin-bottom:3rem; padding:0 2rem;">
+    <span class="section-label reveal mb-3 inline-block">Follow Our World</span>
+    <h2 class="display-text reveal delay-1" style="font-size:clamp(1.8rem, 3.5vw, 3rem); font-weight:300;">
+      <span class="gold-gradient">@maisonelara</span>
+    </h2>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:3px;" class="reveal">
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&fit=crop" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80&fit=crop" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80&fit=crop" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&q=80&fit=crop" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=80&fit=crop" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+    <div class="insta-item">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80&fit=crop&crop=face" alt="" loading="lazy" />
+      <div class="insta-overlay">
+        <svg width="24" height="24" fill="#f5f0e8" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section id="contact" style="padding:8rem 2rem; position:relative; overflow:hidden; background:#0a0908;">
+  <!-- BG Image -->
+  <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=70&fit=crop'); background-size:cover; background-position:center top; opacity:0.18;"></div>
+  <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.7) 100%);"></div>
+
+  <div style="max-width:700px; margin:0 auto; text-align:center; position:relative; z-index:5;">
+    <span class="section-label reveal mb-4 inline-block">Ready To Elevate Your Wardrobe?</span>
+    <h2 class="display-text reveal delay-1" style="font-size:clamp(2.2rem, 5vw, 4rem); font-weight:300; line-height:1.1; margin-bottom:1.5rem;">
+      Your Next Statement Piece<br/><span class="italic-serif gold-gradient">Is One Message Away</span>
+    </h2>
+    <div class="gold-line reveal delay-2" style="max-width:80px; margin:0 auto 2rem;"></div>
+    <p class="reveal delay-2" style="font-size:0.9rem; line-height:1.9; color:rgba(245,240,232,0.6); margin-bottom:3rem;">
+      Join 2,400+ women across Nigeria who trust Maison Elara for their most important fashion moments. Reach out now — our style concierge is ready for you.
+    </p>
+    <div class="reveal delay-3" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="https://wa.me/2349041999098?text=Hi%20Maison%20Elara%2C%20I%27d%20like%20to%20shop%20your%20collection" target="_blank">
+        <button class="btn-fill" style="display:inline-flex; align-items:center; gap:0.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.144.565 4.155 1.55 5.893L0 24l6.232-1.633A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.052-1.4l-.361-.216-3.722.976.997-3.633-.237-.376A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12 17.418 21.818 12 21.818z"/></svg>
+          Shop on WhatsApp
+        </button>
+      </a>
+      <a href="https://instagram.com/maisonelara" target="_blank">
+        <button class="btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem;">
+          <svg width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Follow on Instagram
+        </button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer" style="background:#0a0908; border-top:1px solid rgba(201,169,110,0.12); padding:5rem 2rem 2rem;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <!-- Top footer grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:3rem; margin-bottom:4rem;">
+      <!-- Brand -->
+      <div>
+        <p class="display-text" style="font-size:1.4rem; letter-spacing:0.35rem; font-weight:300; margin-bottom:0.5rem;">MAISON ELARA</p>
+        <p style="font-size:0.6rem; letter-spacing:0.2rem; color:#c9a96e; text-transform:uppercase; margin-bottom:1.5rem;">Luxury Boutique · Lagos</p>
+        <p style="font-size:0.8rem; line-height:1.9; color:rgba(245,240,232,0.45); max-width:260px;">
+          Curating the finest luxury fashion for the modern African woman. Elegance is not a style — it's a lifestyle.
+        </p>
+        <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+          <a href="https://instagram.com/maisonelara" target="_blank" style="width:36px; height:36px; border:1px solid rgba(201,169,110,0.2); display:flex; align-items:center; justify-content:center; transition:all 0.3s ease;" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+            <svg width="14" height="14" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="#c9a96e"/></svg>
+          </a>
+          <a href="https://wa.me/2349041999098" target="_blank" style="width:36px; height:36px; border:1px solid rgba(201,169,110,0.2); display:flex; align-items:center; justify-content:center; transition:all 0.3s ease;" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a96e"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.144.565 4.155 1.55 5.893L0 24l6.232-1.633A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.052-1.4l-.361-.216-3.722.976.997-3.633-.237-.376A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12 17.418 21.818 12 21.818z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Shop Links -->
+      <div>
+        <p style="font-size:0.6rem; letter-spacing:0.25rem; text-transform:uppercase; color:#c9a96e; margin-bottom:1.5rem;">Shop</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem;">
+          <li><a href="#collections" style="font-size:0.82rem; color:rgba(245,240,232,0.45); transition:color 0.3s ease;" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(245,240,232,0.45)'">Designer Gowns</a></li>
+          <li><a href="#collections" style="font-size:0.82rem; color:rgba(245,240,232,0.45); transition:color 0.3s ease;" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(245,240,232,0.45)'">Handbags</a></li>
+          <li><a href="#collections" style="font-size:0.82rem; color:rgba(245,240,232,0.45); transition:color 0.3s ease;" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(245,240,232,0.45)'">Shoes</a></li>
+          <li><a href="#collections" style="font-size:0.82rem; color:rgba(245,240,232,0.45); transition:color 0.3s ease;" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(245,240,232,0.45)'">Accessories</a></li>
+          <li><a href="#new-arrivals" style="font-size:0.82rem; color:rgba(245,240,232,0.45); transition:color 0.3s ease;" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(245,240,232,0.45)'">New Arrivals</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p style="font-size:0.6rem; letter-spacing:0.25rem; text-transform:uppercase; color:#c9a96e; margin-bottom:1.5rem;">Contact</p>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div>
+            <p style="font-size:0.65rem; letter-spacing:0.1rem; color:rgba(245,240,232,0.3); text-transform:uppercase; margin-bottom:0.25rem;">WhatsApp</p>
+            <a href="https://wa.me/2349041999098" target="_blank" style="font-size:0.85rem; color:rgba(245,240,232,0.65);">+234 904 199 9098</a>
+          </div>
+          <div>
+            <p style="font-size:0.65rem; letter-spacing:0.1rem; color:rgba(245,240,232,0.3); text-transform:uppercase; margin-bottom:0.25rem;">Email</p>
+            <a href="mailto:hello@maisonelara.com" style="font-size:0.85rem; color:rgba(245,240,232,0.65);">hello@maisonelara.com</a>
+          </div>
+          <div>
+            <p style="font-size:0.65rem; letter-spacing:0.1rem; color:rgba(245,240,232,0.3); text-transform:uppercase; margin-bottom:0.25rem;">Location</p>
+            <p style="font-size:0.85rem; color:rgba(245,240,232,0.65);">Victoria Island, Lagos<br/>Nigeria</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <p style="font-size:0.6rem; letter-spacing:0.25rem; text-transform:uppercase; color:#c9a96e; margin-bottom:1.5rem;">Stay Inspired</p>
+        <p style="font-size:0.8rem; line-height:1.75; color:rgba(245,240,232,0.45); margin-bottom:1.5rem;">New arrivals, exclusive previews, and private sale access — curated for you.</p>
+        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+          <input type="email" placeholder="Your email address" class="newsletter-input" style="width:100%;" />
+          <button class="btn-fill" style="padding:0.875rem 1rem; font-size:0.6rem; letter-spacing:0.2rem;">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="gold-line"></div>
+
+    <!-- Bottom footer -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding-top:2rem; flex-wrap:wrap; gap:1rem;">
+      <p style="font-size:0.65rem; color:rgba(245,240,232,0.25); letter-spacing:0.05rem;">© 2025 Maison Elara. All rights reserved.</p>
+      <p class="italic-serif" style="font-size:0.9rem; color:rgba(201,169,110,0.4);">Luxury is in every detail.</p>
+      <div style="display:flex; gap:2rem;">
+        <a href="#" style="font-size:0.6rem; letter-spacing:0.1rem; color:rgba(245,240,232,0.25); text-transform:uppercase;">Privacy</a>
+        <a href="#" style="font-size:0.6rem; letter-spacing:0.1rem; color:rgba(245,240,232,0.25); text-transform:uppercase;">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== FLOATING BUTTONS ===== -->
+<a href="https://wa.me/2349041999098?text=Hi%20Maison%20Elara%2C%20I%27d%20like%20to%20shop" target="_blank" id="wa-float" title="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#0a0908"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.144.565 4.155 1.55 5.893L0 24l6.232-1.633A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.052-1.4l-.361-.216-3.722.976.997-3.633-.237-.376A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12 17.418 21.818 12 21.818z"/></svg>
+</a>
+
+<div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ---- PRODUCT DATA ----
+  const products = [
+    {
+      id: 1,
+      name: "Midnight Silk Gown",
+      category: "Gowns",
+      price: "₦185,000",
+      priceNum: 185000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=85&fit=crop&crop=top",
+      desc: "Floor-length midnight blue silk gown with a draped cowl neck and open back. Cut for the woman who commands every room she walks into. Available in sizes XS–XL.",
+    },
+    {
+      id: 2,
+      name: "Gold Embroidered Blazer",
+      category: "Ready-to-Wear",
+      price: "₦145,000",
+      priceNum: 145000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=85&fit=crop",
+      desc: "Structured double-breasted blazer with hand-sewn gold thread embroidery at the cuffs and lapels. A power piece for events and boardrooms alike.",
+    },
+    {
+      id: 3,
+      name: "Croc Embossed Tote",
+      category: "Handbags",
+      price: "₦98,000",
+      priceNum: 98000,
+      stars: 4,
+      img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=85&fit=crop",
+      desc: "Oversized tote in honey-cognac croc-embossed leather. Spacious interior with suede lining, gold hardware, and adjustable strap. A daily statement.",
+    },
+    {
+      id: 4,
+      name: "Crystal Drop Earrings",
+      category: "Accessories",
+      price: "₦35,000",
+      priceNum: 35000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1611923134239-b9be5816e23c?w=600&q=85&fit=crop&crop=center",
+      desc: "Cascading Austrian crystal drops in an 18k gold-plated setting. Catches light from every angle. The finishing touch every outfit deserves.",
+    },
+    {
+      id: 5,
+      name: "Velvet Court Heels",
+      category: "Shoes",
+      price: "₦78,000",
+      priceNum: 78000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=85&fit=crop",
+      desc: "Deep forest green velvet court heels with a 10cm stiletto heel and gold toe cap. Padded insole for all-night comfort. Available UK 36–41.",
+    },
+    {
+      id: 6,
+      name: "Satin Wrap Midi Dress",
+      category: "Gowns",
+      price: "₦125,000",
+      priceNum: 125000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=85&fit=crop&crop=top",
+      desc: "Champagne satin wrap midi dress with an adjustable tie waist and bias-cut skirt that flows beautifully in motion. For brunches, galas, and everything between.",
+    },
+    {
+      id: 7,
+      name: "Chain Bucket Bag",
+      category: "Handbags",
+      price: "₦115,000",
+      priceNum: 115000,
+      stars: 4,
+      img: "https://images.unsplash.com/photo-1566150905458-1bf1fb99b4ff?w=600&q=85&fit=crop",
+      desc: "Minimalist black pebbled leather bucket bag with an interlocking chain strap. Compact yet impactful — the silhouette of modern luxury.",
+    },
+    {
+      id: 8,
+      name: "Ivory Corset Dress",
+      category: "Gowns",
+      price: "₦165,000",
+      priceNum: 165000,
+      stars: 5,
+      img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=85&fit=crop&crop=top",
+      desc: "Boned ivory corset bodice paired with a high-slit draped skirt. Sculpting, seductive, and unforgettable. The gown for your most important night.",
+    },
+  ];
+
+  // ---- RENDER PRODUCTS ----
+  function renderProducts() {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    grid.innerHTML = products.map(p => `
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" />
+          <div class="product-quick-view">
+            <button onclick="openModal(${p.id})" style="background:rgba(10,9,8,0.85); border:1px solid rgba(201,169,110,0.5); color:#c9a96e; font-size:0.6rem; letter-spacing:0.2rem; text-transform:uppercase; padding:0.75rem 1.5rem; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='rgba(201,169,110,0.15)'" onmouseout="this.style.background='rgba(10,9,8,0.85)'">
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div style="padding:1.25rem 1rem 1rem;">
+          <p style="font-size:0.6rem; letter-spacing:0.2rem; color:rgba(201,169,110,0.7); text-transform:uppercase; margin-bottom:0.4rem;">${p.category}</p>
+          <h3 class="display-text" style="font-size:1.1rem; font-weight:400; color:#f5f0e8; margin-bottom:0.5rem;">${p.name}</h3>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <p class="gold-gradient display-text" style="font-size:1rem; font-weight:500;">${p.price}</p>
+            <div class="star-rating">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+          </div>
+          <button class="btn-whatsapp" onclick="orderWhatsApp('${p.name}', '${p.price}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.144.565 4.155 1.55 5.893L0 24l6.232-1.633A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.052-1.4l-.361-.216-3.722.976.997-3.633-.237-.376A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12 17.418 21.818 12 21.818z"/></svg>
+            Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    `).join('');
+    // Re-trigger reveal observer for newly added cards
+    observeReveal();
+  }
+
+  function orderWhatsApp(name, price) {
+    const msg = encodeURIComponent(`Hi Maison Elara, I'd like to order the ${name} (${price}). Please share more details.`);
+    window.open(`https://wa.me/2349041999098?text=${msg}`, '_blank');
+  }
+
+  // ---- MODAL ----
+  function openModal(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('modal-img').src = p.img;
+    document.getElementById('modal-img').alt = p.name;
+    document.getElementById('modal-category').textContent = p.category;
+    document.getElementById('modal-name').textContent = p.name;
+    document.getElementById('modal-price').textContent = p.price;
+    document.getElementById('modal-stars').textContent = '★'.repeat(p.stars) + '☆'.repeat(5-p.stars);
+    document.getElementById('modal-desc').textContent = p.desc;
+    const msg = encodeURIComponent(`Hi Maison Elara, I'd like to order the ${p.name} (${p.price}). Please share more details.`);
+    document.getElementById('modal-wa-link').href = `https://wa.me/2349041999098?text=${msg}`;
+    document.getElementById('quickview-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('quickview-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('quickview-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ---- HERO SLIDER ----
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slide-dot');
+  let currentSlide = 0;
+  let slideInterval;
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+  slideInterval = setInterval(nextSlide, 5500);
+
+  // ---- NAVBAR ----
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    const backTop = document.getElementById('back-top');
+    if (window.scrollY > 500) backTop.classList.add('visible');
+    else backTop.classList.remove('visible');
+  });
+
+  // ---- MOBILE MENU ----
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // ---- SCROLL REVEAL ----
+  function observeReveal() {
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+  }
+
+  // ---- TESTIMONIALS CAROUSEL ----
+  let testIndex = 0;
+  const track = document.getElementById('testimonialTrack');
+  const totalTestimonials = 4;
+
+  function getVisible() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+  }
+
+  function updateTestimonial() {
+    const visible = getVisible();
+    const maxIndex = totalTestimonials - visible;
+    testIndex = Math.min(testIndex, maxIndex);
+    const pct = (100 / visible) * testIndex;
+    track.style.transform = `translateX(-${pct}%)`;
+    // Update dots
+    const dotsEl = document.getElementById('testimonial-dots');
+    if (dotsEl) {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('div');
+        dot.style.cssText = `width:${i===testIndex?'24px':'8px'};height:2px;background:${i===testIndex?'#c9a96e':'rgba(201,169,110,0.3)'};transition:all 0.3s ease;cursor:pointer;`;
+        dot.onclick = () => { testIndex = i; updateTestimonial(); };
+        dotsEl.appendChild(dot);
+      }
+    }
+  }
+  function nextTestimonial() {
+    const visible = getVisible();
+    const maxIndex = totalTestimonials - visible;
+    testIndex = testIndex >= maxIndex ? 0 : testIndex + 1;
+    updateTestimonial();
+  }
+  function prevTestimonial() {
+    const visible = getVisible();
+    const maxIndex = totalTestimonials - visible;
+    testIndex = testIndex <= 0 ? maxIndex : testIndex - 1;
+    updateTestimonial();
+  }
+
+  // Auto-advance testimonials
+  setInterval(nextTestimonial, 4500);
+  window.addEventListener('resize', updateTestimonial);
+
+  // ---- CUSTOM CURSOR ----
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+  });
+
+  // Smooth ring follow
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Cursor hover state
+  document.querySelectorAll('a, button, .collection-card, .product-card, .insta-item').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+  });
+
+  // ---- LOADER ----
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+      // Trigger initial reveals
+      observeReveal();
+      renderProducts();
+      updateTestimonial();
+    }, 2400);
+  });
+
+  // Fallback if load event already fired
+  if (document.readyState === 'complete') {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+      observeReveal();
+      renderProducts();
+      updateTestimonial();
+    }, 2400);
+  }
+</script>
+</body>
+</html>
