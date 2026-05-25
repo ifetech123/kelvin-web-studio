@@ -1,607 +1,1009 @@
+cat > /mnt/user-data/outputs/index.html << 'OCTIS_REFINED'
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>OCTIS — Omni-Channel Triage &amp; Intake System</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════════════
-   OCTIS — UNIFIED DESIGN SYSTEM  v3.0  (Phase 1+2)
-═══════════════════════════════════════════════════ */
-:root{
-  --em:#10b981; --cy:#06b6d4; --bg:#020617;
-  --r-card:20px; --r-inner:14px; --r-btn:12px;
+/* ═══════════════════════════════════════════════════════════════
+   OCTIS DESIGN SYSTEM v4.0 — PREMIUM LIGHT ENTERPRISE
+   Palette: #f8fafc bg / #edf2fb secondary / rgba(255,255,255,.72) surface
+            #0f172a text / #475569 muted / #abc4ff accent / #dbeafe border
+═══════════════════════════════════════════════════════════════ */
+:root {
+  /* Palette */
+  --bg:       #f8fafc;
+  --bg-sec:   #edf2fb;
+  --surface:  rgba(255,255,255,0.80);
+  --surface-solid: #ffffff;
+  --text:     #0f172a;
+  --text-2:   #475569;
+  --text-3:   #94a3b8;
+  --accent:   #abc4ff;
+  --accent-h: #7aa2ff;
+  --accent-d: #3b6bff;
+  --border:   #dbeafe;
+  --border-2: #c7d9f8;
+  --shadow-sm: 0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+  --shadow-md: 0 4px 16px rgba(15,23,42,.08), 0 1px 4px rgba(15,23,42,.04);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,.10), 0 4px 12px rgba(15,23,42,.06);
+  --shadow-xl: 0 20px 60px rgba(15,23,42,.12), 0 8px 24px rgba(15,23,42,.08);
+  /* Status */
+  --red:      #ef4444; --red-bg:  rgba(239,68,68,.08);  --red-bd:  rgba(239,68,68,.25);
+  --orange:   #f97316; --or-bg:   rgba(249,115,22,.08); --or-bd:   rgba(249,115,22,.25);
+  --amber:    #f59e0b; --am-bg:   rgba(245,158,11,.08); --am-bd:   rgba(245,158,11,.22);
+  --green:    #059669; --gr-bg:   rgba(5,150,105,.08);  --gr-bd:   rgba(5,150,105,.22);
+  /* Geometry */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 14px; --r-lg: 18px; --r-xl: 22px;
+  /* Spacing scale (8px) */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px; --s9:48px; --s10:64px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Inter',sans-serif;
-  background:#020617;
-  color:#f8fafc;
+
+/* ── Reset ── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
 }
-/* Noise overlay */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-}
+img,svg { display:block; }
+a { color:inherit; }
 
-/* ── Typography helpers ── */
-.fd{font-family:'Syne',sans-serif;}
-.fm{font-family:'DM Mono',monospace;}
+/* ── Typography ── */
+.fs  { font-family:'Sora',sans-serif; }
+.fi  { font-family:'Inter',sans-serif; }
 
-/* ─────────────────────────────
-   PHASE 1 — PAGE STYLES
-───────────────────────────── */
-
-/* Grid bg */
-.grid-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(16,185,129,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.04) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 40%,transparent 100%);
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
 }
 
-/* NAV */
-#main-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(2,6,23,.82);
-  backdrop-filter:blur(16px) saturate(1.4);
-  -webkit-backdrop-filter:blur(16px) saturate(1.4);
-  border-bottom:1px solid rgba(16,185,129,.1);
-  transition:border-color .3s,background .3s;
+/* ══════════════════════════════════════
+   LAYOUT PRIMITIVES
+══════════════════════════════════════ */
+.container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 var(--s6);
 }
-#main-nav.scrolled{border-bottom-color:rgba(16,185,129,.25);background:rgba(2,6,23,.97);}
+@media(max-width:640px) { .container { padding:0 var(--s4); } }
 
-.nav-link{
-  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;
-  color:#64748b;text-decoration:none;transition:color .2s;
+/* ══════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════ */
+#nav {
+  position:fixed;top:0;left:0;right:0;
+  z-index:200;
+  height:64px;
+  background:rgba(248,250,252,.88);
+  backdrop-filter:blur(20px) saturate(1.8);
+  -webkit-backdrop-filter:blur(20px) saturate(1.8);
+  border-bottom:1px solid var(--border);
+  transition:background .3s, box-shadow .3s, border-color .3s;
 }
-.nav-link:hover{color:#10b981;}
-
-/* Emergency button */
-.em-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(135deg,#059669,#0d9488);
-  font-family:'DM Mono',monospace;letter-spacing:.1em;
-  border:none;border-radius:10px;cursor:pointer;
-  color:#fff;font-weight:600;text-decoration:none;
-  position:relative;overflow:hidden;
-  transition:transform .2s,box-shadow .2s;
+#nav.elevated {
+  background:rgba(255,255,255,.96);
+  box-shadow:var(--shadow-sm);
+  border-bottom-color:var(--border-2);
 }
-.em-btn::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.14));
-  opacity:0;transition:opacity .2s;
-}
-.em-btn:hover::after{opacity:1;}
-.em-btn:hover{transform:translateY(-1px);box-shadow:0 0 28px rgba(16,185,129,.45),0 6px 20px rgba(0,0,0,.4);}
-.em-btn:active{transform:scale(.97);}
-
-/* Pulse dot */
-.pdot{
-  width:8px;height:8px;border-radius:50%;
-  background:#10b981;display:inline-block;
-  position:relative;flex-shrink:0;
-}
-.pdot::after{
-  content:'';position:absolute;inset:-3px;border-radius:50%;
-  background:rgba(16,185,129,.45);
-  animation:pdot-ring 1.6s ease-out infinite;
-}
-@keyframes pdot-ring{0%{transform:scale(.7);opacity:1;}100%{transform:scale(2.4);opacity:0;}}
-
-/* HERO */
-#hero{min-height:100vh;padding-top:72px;position:relative;overflow:hidden;display:flex;align-items:center;}
-.glow-1{position:absolute;width:650px;height:650px;top:-120px;left:-120px;pointer-events:none;background:radial-gradient(circle,rgba(16,185,129,.12) 0%,transparent 70%);animation:gfloat 9s ease-in-out infinite;}
-.glow-2{position:absolute;width:500px;height:500px;bottom:-80px;right:-80px;pointer-events:none;background:radial-gradient(circle,rgba(6,182,212,.09) 0%,transparent 70%);animation:gfloat 11s ease-in-out infinite reverse;}
-@keyframes gfloat{0%,100%{transform:translate(0,0);}50%{transform:translate(24px,32px);}}
-
-.glass{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(12px);border-radius:16px;}
-.glass-em{background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.18);backdrop-filter:blur(12px);border-radius:16px;}
-
-.fcrd{animation:flt 6s ease-in-out infinite;}
-.fcrd:nth-child(2){animation-delay:-2.2s;animation-duration:7.5s;}
-.fcrd:nth-child(3){animation-delay:-4s;animation-duration:5.5s;}
-@keyframes flt{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
-
-/* Hero CTAs */
-.cta-p{
-  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
-  background:linear-gradient(135deg,#059669,#0d9488);
-  font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;font-weight:600;
-  color:#fff;border:none;border-radius:12px;cursor:pointer;
-  transition:transform .22s,box-shadow .22s;position:relative;overflow:hidden;
-}
-.cta-p::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.12));opacity:0;transition:opacity .22s;}
-.cta-p:hover::after{opacity:1;}
-.cta-p:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(16,185,129,.5),0 10px 28px rgba(0,0,0,.4);}
-.cta-p:active{transform:scale(.97);}
-
-.cta-s{
-  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
-  background:transparent;border:1px solid rgba(16,185,129,.35);
-  font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;font-weight:500;
-  color:#10b981;border-radius:12px;cursor:pointer;
-  transition:border-color .22s,background .22s,box-shadow .22s;
-}
-.cta-s:hover{border-color:rgba(16,185,129,.7);background:rgba(16,185,129,.07);box-shadow:0 0 24px rgba(16,185,129,.18);}
-
-/* Metric cards */
-.mc{position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;cursor:default;}
-.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#10b981,transparent);opacity:0;transition:opacity .3s;}
-.mc:hover{border-color:rgba(16,185,129,.35)!important;box-shadow:0 0 30px rgba(16,185,129,.12);transform:translateY(-4px);}
-.mc:hover::before{opacity:1;}
-.cnum{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:2.8rem;line-height:1;
-  background:linear-gradient(135deg,#fff 0%,#10b981 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.nav-inner {
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--s4);
 }
 
-/* Section utils */
-.slbl{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:#10b981;text-transform:uppercase;}
-.sdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,.2),transparent);}
-.chip{font-family:'DM Mono',monospace;font-size:.64rem;letter-spacing:.1em;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#10b981;border-radius:6px;padding:3px 10px;}
-.hgrad{background:linear-gradient(135deg,#f8fafc 0%,#94a3b8 55%,#10b981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+/* Logo */
+.logo { display:flex; align-items:center; gap:var(--s3); text-decoration:none; flex-shrink:0; }
+.logo-mark {
+  width:36px; height:36px;
+  background:linear-gradient(135deg,#3b6bff,#6b8fff);
+  border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 12px rgba(59,107,255,.3);
+  flex-shrink:0;
+}
+.logo-text { line-height:1; }
+.logo-name { font-family:'Sora',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:-.02em; color:var(--text); }
+.logo-sub  { font-size:.5rem; letter-spacing:.16em; color:var(--text-3); margin-top:1px; text-transform:uppercase; }
 
-/* Service cards */
-.scard{
-  position:relative;background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;
-  cursor:default;overflow:hidden;
-  transition:border-color .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,transform .3s;
+/* Nav links */
+.nav-links { display:flex; align-items:center; gap:var(--s7); }
+@media(max-width:768px) { .nav-links { display:none; } }
+.nav-link {
+  font-size:.72rem; letter-spacing:.06em; font-weight:500;
+  color:var(--text-2); text-decoration:none;
+  transition:color .18s;
+  text-transform:uppercase;
 }
-.scard::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(16,185,129,.07) 0%,transparent 60%);
-  opacity:0;transition:opacity .3s;
-}
-.scard:hover{border-color:rgba(16,185,129,.28);box-shadow:0 0 40px rgba(16,185,129,.09),0 20px 40px rgba(0,0,0,.4);transform:translateY(-6px);}
-.scard:hover::after{opacity:1;}
-.sico{
-  width:48px;height:48px;border-radius:12px;
-  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:20px;transition:background .3s,box-shadow .3s;
-}
-.scard:hover .sico{background:rgba(16,185,129,.18);box-shadow:0 0 20px rgba(16,185,129,.25);}
+.nav-link:hover { color:var(--accent-d); }
 
-/* Fade-up animation */
-.fu{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1);}
-.fu.vis{opacity:1;transform:translateY(0);}
-
-/* Mobile nav */
-#mob-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:rgba(2,6,23,.92);
-  backdrop-filter:blur(22px) saturate(1.6);
-  -webkit-backdrop-filter:blur(22px) saturate(1.6);
-  border-top:1px solid rgba(16,185,129,.15);
-  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-  gap:10px;
+/* Nav CTA */
+.nav-cta {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:var(--accent-d);
+  color:#fff; font-size:.72rem; font-weight:600; letter-spacing:.06em;
+  padding:10px 18px; border-radius:var(--r-sm);
+  text-decoration:none; border:none; cursor:pointer;
+  transition:background .18s, box-shadow .18s, transform .18s;
+  white-space:nowrap;
+  text-transform:uppercase;
 }
-@media(max-width:767px){#mob-nav{display:flex;}body{padding-bottom:86px;}}
-.mbtn{
-  flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
-  padding:10px 8px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.06);
-  background:rgba(255,255,255,.03);
-  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;
-  color:#64748b;cursor:pointer;text-decoration:none;
-  transition:all .2s;-webkit-tap-highlight-color:transparent;
-}
-.mbtn:active,.mbtn.on{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4);color:#10b981;box-shadow:0 0 16px rgba(16,185,129,.18);}
+.nav-cta:hover { background:#2d5ee8; box-shadow:0 4px 16px rgba(59,107,255,.35); transform:translateY(-1px); }
+.nav-cta:active { transform:scale(.97); }
 
-/* Scrollbar */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:#020617;}
-::-webkit-scrollbar-thumb{background:rgba(16,185,129,.3);border-radius:4px;}
-::-webkit-scrollbar-thumb:hover{background:rgba(16,185,129,.5);}
-
-/* ─────────────────────────────────────────
-   PHASE 2 — INTAKE ENGINE STYLES
-───────────────────────────────────────── */
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+/* Live dot */
+.live-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:#22c55e; flex-shrink:0;
+  position:relative;
 }
+.live-dot::after {
+  content:''; position:absolute; inset:-2px; border-radius:50%;
+  background:rgba(34,197,94,.4);
+  animation:live-ring 1.8s ease-out infinite;
+}
+@keyframes live-ring { 0%{transform:scale(.8);opacity:1;} 100%{transform:scale(2.2);opacity:0;} }
+
+/* Mobile compact nav-cta */
+.nav-cta-mobile {
+  display:none;
+  align-items:center; gap:var(--s2);
+  background:var(--accent-d);
+  color:#fff; font-size:.65rem; font-weight:600; letter-spacing:.05em;
+  padding:9px 14px; border-radius:var(--r-sm);
+  text-decoration:none; border:none; cursor:pointer;
+  transition:background .18s, transform .18s;
+  white-space:nowrap;
+}
+@media(max-width:768px) { .nav-cta-mobile { display:inline-flex; } }
+.nav-cta-mobile:active { transform:scale(.97); }
+
+/* ══════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════ */
+#hero {
+  min-height:100vh;
+  padding-top:64px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  background:linear-gradient(160deg, #f8fafc 0%, #edf2fb 50%, #e0eaff 100%);
+}
+
+/* Geometric pattern */
+.hero-pattern {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 70% 70% at 60% 40%, black 30%, transparent 80%);
+  opacity:.5;
+}
+
+/* Soft glow orbs */
+.orb { position:absolute; border-radius:50%; pointer-events:none; }
+.orb-1 {
+  width:500px; height:500px; top:-100px; right:-80px;
+  background:radial-gradient(circle,rgba(171,196,255,.35) 0%,transparent 70%);
+  animation:orb-drift 12s ease-in-out infinite;
+}
+.orb-2 {
+  width:400px; height:400px; bottom:-60px; left:-60px;
+  background:radial-gradient(circle,rgba(122,162,255,.2) 0%,transparent 70%);
+  animation:orb-drift 15s ease-in-out infinite reverse;
+}
+@keyframes orb-drift { 0%,100%{transform:translate(0,0);} 50%{transform:translate(20px,30px);} }
+
+.hero-inner {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--s9);
+  align-items:center;
+  padding:var(--s9) 0;
+  position:relative; z-index:1;
+}
+@media(min-width:1024px) { .hero-inner { grid-template-columns:1fr 1fr; gap:var(--s10); } }
+
+/* Hero badge */
+.hero-badge {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--border);
+  border-radius:99px;
+  padding:var(--s1) var(--s3) var(--s1) var(--s2);
+  font-size:.68rem; font-weight:500; letter-spacing:.04em;
+  color:var(--text-2);
+  margin-bottom:var(--s6);
+  box-shadow:var(--shadow-sm);
+}
+.badge-dot {
+  width:18px; height:18px; border-radius:50%;
+  background:linear-gradient(135deg,#3b6bff,#6b8fff);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+
+/* Hero headline */
+.hero-h1 {
+  font-family:'Sora',sans-serif;
+  font-weight:800;
+  font-size:clamp(2.2rem, 5.5vw, 3.8rem);
+  line-height:1.07;
+  letter-spacing:-.03em;
+  color:var(--text);
+  margin-bottom:var(--s5);
+}
+.hero-h1 .accent-line {
+  background:linear-gradient(135deg,#3b6bff 0%,#7aa2ff 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* Hero body */
+.hero-body {
+  font-size:1rem; line-height:1.75; color:var(--text-2);
+  max-width:480px; margin-bottom:var(--s7); font-weight:400;
+}
+
+/* CTA group */
+.cta-group { display:flex; flex-wrap:wrap; gap:var(--s3); margin-bottom:var(--s8); align-items:center; }
+@media(max-width:400px) { .cta-group { flex-direction:column; align-items:flex-start; } }
+
+.btn-primary {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:var(--accent-d);
+  color:#fff; font-size:.82rem; font-weight:600; letter-spacing:.03em;
+  padding:14px 24px; border-radius:var(--r-md);
+  text-decoration:none; border:none; cursor:pointer;
+  transition:background .2s, box-shadow .2s, transform .2s;
+  position:relative; overflow:hidden;
+  white-space:nowrap;
+}
+.btn-primary::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.1));
+  opacity:0; transition:opacity .2s;
+}
+.btn-primary:hover::after { opacity:1; }
+.btn-primary:hover { background:#2d5ee8; box-shadow:0 8px 24px rgba(59,107,255,.35); transform:translateY(-2px); }
+.btn-primary:active { transform:scale(.97); }
+
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:rgba(255,255,255,.8);
+  color:var(--text); font-size:.82rem; font-weight:500; letter-spacing:.02em;
+  padding:14px 22px; border-radius:var(--r-md);
+  border:1.5px solid var(--border-2);
+  text-decoration:none; cursor:pointer;
+  transition:background .2s, border-color .2s, box-shadow .2s, transform .2s;
+  white-space:nowrap;
+}
+.btn-secondary:hover { background:var(--surface-solid); border-color:var(--accent); box-shadow:var(--shadow-sm); transform:translateY(-1px); }
+.btn-secondary:active { transform:scale(.97); }
+
+/* Trust row */
+.trust-row { display:flex; align-items:center; gap:var(--s4); }
+.trust-avatars { display:flex; }
+.trust-avatar {
+  width:32px; height:32px; border-radius:50%;
+  border:2px solid #fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.7rem; font-weight:700; color:#fff;
+  margin-right:-9px; flex-shrink:0;
+}
+.trust-text { font-size:.75rem; color:var(--text-3); padding-left:var(--s3); font-weight:500; }
+
+/* Hero visual (desktop) */
+.hero-visual {
+  display:none;
+  position:relative;
+  min-height:480px;
+  align-items:center;
+  justify-content:center;
+}
+@media(min-width:1024px) { .hero-visual { display:flex; } }
+
+/* Floating cards */
+.fcard {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-xl);
+  backdrop-filter:blur(16px);
+}
+.fcard-main {
+  padding:var(--s5);
+  width:288px;
+  position:relative; z-index:20;
+  animation:float-a 7s ease-in-out infinite;
+}
+.fcard-sm-1 {
+  position:absolute; top:8px; right:-8px;
+  width:160px; padding:var(--s4);
+  z-index:15;
+  animation:float-b 9s ease-in-out infinite;
+}
+.fcard-sm-2 {
+  position:absolute; bottom:8px; left:-8px;
+  width:176px; padding:var(--s4);
+  z-index:15;
+  animation:float-c 8s ease-in-out infinite;
+}
+@keyframes float-a { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+@keyframes float-b { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+@keyframes float-c { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+
+/* Queue items inside hero card */
+.q-item {
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg-sec);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:var(--s2) var(--s3);
+  margin-bottom:var(--s2);
+}
+.q-item:last-child { margin-bottom:0; }
+.q-badge {
+  font-size:.6rem; font-weight:600; letter-spacing:.06em;
+  padding:2px 8px; border-radius:var(--r-xs);
+}
+
+/* ══════════════════════════════════════
+   SECTION PRIMITIVES
+══════════════════════════════════════ */
+.section { padding:var(--s10) 0; }
+.section-sm { padding:var(--s9) 0; }
+
+.section-label {
+  font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent-d); margin-bottom:var(--s3);
+}
+.section-title {
+  font-family:'Sora',sans-serif; font-weight:800;
+  font-size:clamp(1.75rem,4vw,2.5rem);
+  letter-spacing:-.025em; color:var(--text); line-height:1.15;
+}
+.section-body { font-size:.95rem; color:var(--text-2); line-height:1.75; max-width:540px; margin-top:var(--s3); }
+.divider { height:1px; background:var(--border); }
+
+/* ══════════════════════════════════════
+   METRICS STRIP
+══════════════════════════════════════ */
+#metrics { background:var(--bg); }
+.metrics-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:var(--s4);
+}
+@media(min-width:1024px) { .metrics-grid { grid-template-columns:repeat(4,1fr); } }
+
+.metric-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:var(--s6) var(--s5);
+  position:relative; overflow:hidden;
+  transition:transform .22s cubic-bezier(.4,0,.2,1), box-shadow .22s, border-color .22s;
+  box-shadow:var(--shadow-sm);
+}
+.metric-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--accent-d),var(--accent));
+  opacity:0; transition:opacity .22s;
+}
+.metric-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--border-2); }
+.metric-card:hover::before { opacity:1; }
+
+.metric-label { font-size:.65rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); margin-bottom:var(--s2); }
+.metric-num {
+  font-family:'Sora',sans-serif; font-weight:800;
+  font-size:clamp(2rem,4vw,2.6rem); line-height:1;
+  color:var(--text); margin-bottom:var(--s2);
+}
+.metric-sub { font-size:.72rem; color:var(--text-3); font-weight:400; }
+
+/* ══════════════════════════════════════
+   INTAKE ENGINE WRAPPER
+══════════════════════════════════════ */
+#intake-section { background:var(--bg-sec); }
+#intake-engine-container {
+  position:relative;
+  border:none; background:none;
+  overflow:visible;
+  min-height:0;
+}
+#intake-engine-container::before { display:none; }
+
+/* ══════════════════════════════════════
+   SERVICE CARDS
+══════════════════════════════════════ */
+#services { background:var(--bg); }
+.svc-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--s4);
+}
+@media(min-width:640px)  { .svc-grid { grid-template-columns:repeat(2,1fr); } }
+@media(min-width:1024px) { .svc-grid { grid-template-columns:repeat(3,1fr); } }
+
+.svc-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:var(--s7);
+  position:relative; overflow:hidden;
+  transition:transform .22s cubic-bezier(.4,0,.2,1), box-shadow .22s, border-color .22s;
+  box-shadow:var(--shadow-sm);
+  /* Equalize heights */
+  display:flex; flex-direction:column;
+}
+.svc-card::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(59,107,255,.05) 0%,transparent 60%);
+  opacity:0; transition:opacity .25s;
+}
+.svc-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:var(--border-2); }
+.svc-card:hover::after { opacity:1; }
+
+.svc-icon {
+  width:48px; height:48px; border-radius:var(--r-md);
+  background:linear-gradient(135deg,rgba(59,107,255,.1),rgba(107,143,255,.08));
+  border:1px solid rgba(59,107,255,.15);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:var(--s5);
+  transition:background .22s, box-shadow .22s;
+  flex-shrink:0;
+}
+.svc-card:hover .svc-icon { background:rgba(59,107,255,.14); box-shadow:0 0 16px rgba(59,107,255,.2); }
+
+.svc-title { font-family:'Sora',sans-serif; font-weight:700; font-size:1rem; color:var(--text); margin-bottom:var(--s2); }
+.svc-body  { font-size:.875rem; color:var(--text-2); line-height:1.7; flex:1; }
+.svc-tag   {
+  display:inline-flex; align-items:center;
+  font-size:.62rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--accent-d); margin-top:var(--s5);
+  margin-top:auto; padding-top:var(--s5);
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:var(--s7) 0;
+}
+.footer-inner {
+  display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:space-between; gap:var(--s4);
+}
+.footer-logo { display:flex; align-items:center; gap:var(--s3); text-decoration:none; }
+.footer-copy { font-size:.72rem; color:var(--text-3); letter-spacing:.04em; }
+
+/* Emergency pill */
+.em-pill {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:var(--accent-d);
+  color:#fff; font-size:.7rem; font-weight:600; letter-spacing:.05em;
+  padding:9px 16px; border-radius:var(--r-sm);
+  text-decoration:none; border:none; cursor:pointer;
+  transition:background .18s, box-shadow .18s, transform .18s;
+  text-transform:uppercase;
+}
+.em-pill:hover { background:#2d5ee8; box-shadow:0 4px 16px rgba(59,107,255,.35); transform:translateY(-1px); }
+.em-pill:active { transform:scale(.97); }
+
+/* ══════════════════════════════════════
+   MOBILE BOTTOM NAV
+══════════════════════════════════════ */
+#mob-nav {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; z-index:300;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px) saturate(1.8);
+  -webkit-backdrop-filter:blur(20px) saturate(1.8);
+  border-top:1px solid var(--border);
+  padding:var(--s2) var(--s4) calc(var(--s2) + env(safe-area-inset-bottom));
+  gap:var(--s2);
+}
+@media(max-width:767px) {
+  #mob-nav { display:flex; }
+  body { padding-bottom:calc(68px + env(safe-area-inset-bottom)); }
+}
+
+.mob-btn {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:var(--s2) var(--s2);
+  border-radius:var(--r-sm);
+  border:1.5px solid transparent;
+  background:transparent;
+  font-size:.58rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--text-3); cursor:pointer; text-decoration:none;
+  transition:all .18s; min-height:52px; justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.mob-btn:active, .mob-btn.on {
+  background:rgba(59,107,255,.07);
+  border-color:rgba(59,107,255,.2);
+  color:var(--accent-d);
+}
+
+/* ══════════════════════════════════════
+   HOURS MODAL
+══════════════════════════════════════ */
+#hours-modal {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(15,23,42,.4);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  align-items:flex-end; justify-content:center;
+  padding:0 var(--s4) calc(var(--s4) + env(safe-area-inset-bottom));
+  opacity:0; transition:opacity .25s;
+}
+.hours-card {
+  width:100%; max-width:420px;
+  background:var(--surface-solid);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl) var(--r-xl) var(--r-lg) var(--r-lg);
+  padding:var(--s6);
+  box-shadow:var(--shadow-xl);
+}
+.hours-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s3) var(--s4); border-radius:var(--r-sm);
+  margin-bottom:var(--s2);
+  font-size:.82rem;
+}
+.close-btn {
+  width:32px; height:32px; border-radius:var(--r-xs);
+  background:var(--bg-sec); border:1px solid var(--border);
+  color:var(--text-2); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, color .15s;
+}
+.close-btn:hover { background:var(--border); color:var(--text); }
+
+/* ══════════════════════════════════════
+   FADE-UP ANIMATION
+══════════════════════════════════════ */
+.fu {
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.fu.vis { opacity:1; transform:translateY(0); }
+
+/* ══════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════ */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg-sec); }
+::-webkit-scrollbar-thumb { background:var(--border-2); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:var(--accent); }
+
+/* ═══════════════════════════════════════════════════
+   PHASE 2 — INTAKE ENGINE STYLES (light edition)
+═══════════════════════════════════════════════════ */
 
 /* Keyframes */
-@keyframes ie-ring{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}50%{box-shadow:0 0 0 4px rgba(16,185,129,.18);}}
-@keyframes ie-check{0%{transform:scale(0) rotate(-12deg);opacity:0;}60%{transform:scale(1.2) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(0);opacity:1;}}
-@keyframes ie-success{0%{transform:scale(.55);opacity:0;}65%{transform:scale(1.06);}100%{transform:scale(1);opacity:1;}}
-@keyframes ie-blink{0%,80%,100%{opacity:.25;transform:scale(.75);}40%{opacity:1;transform:scale(1);}}
-@keyframes ie-slide-r{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes ie-slide-l{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes ie-up{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-@keyframes ie-bpulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+@keyframes ie-pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(59,107,255,0);}  50%{box-shadow:0 0 0 4px rgba(59,107,255,.15);} }
+@keyframes ie-check  { 0%{transform:scale(0) rotate(-12deg);opacity:0;} 65%{transform:scale(1.15) rotate(2deg);opacity:1;} 100%{transform:scale(1) rotate(0);opacity:1;} }
+@keyframes ie-success{ 0%{transform:scale(.55);opacity:0;} 65%{transform:scale(1.06);} 100%{transform:scale(1);opacity:1;} }
+@keyframes ie-blink  { 0%,80%,100%{opacity:.2;transform:scale(.7);}  40%{opacity:1;transform:scale(1);} }
+@keyframes ie-pbar   { 0%,100%{opacity:.6;} 50%{opacity:1;} }
 
-/* Intake container override — remove placeholder styles, engine handles it */
-#intake-engine-container{
-  position:relative;
-  border-radius:var(--r-card);
-  overflow:visible; /* allow engine shadow to show */
-  min-height:0;
-  /* Remove phase-1 border/bg since engine renders its own shell */
-  border:none;
-  background:none;
-}
-/* Remove the ::before glow border from container — engine shell handles its own border */
-#intake-engine-container::before{display:none;}
-
-/* Engine shell */
-.ie-shell{
-  background:rgba(8,12,28,.85);
-  backdrop-filter:blur(28px) saturate(1.5);
-  -webkit-backdrop-filter:blur(28px) saturate(1.5);
-  border:1px solid rgba(51,65,85,.6);
-  border-radius:22px;
+/* Shell */
+.ie-shell {
+  background:var(--surface-solid);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
   overflow:hidden;
+  box-shadow:var(--shadow-xl);
   position:relative;
-  box-shadow:0 0 0 1px rgba(16,185,129,.06),0 32px 80px rgba(0,0,0,.6),0 0 60px rgba(16,185,129,.05);
 }
-/* Animated top edge glow */
-.ie-shell::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 10%,rgba(16,185,129,.5) 50%,transparent 90%);
-  animation:ie-bpulse 3s ease-in-out infinite;
+.ie-shell::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--accent-d) 0%, var(--accent) 50%, #a5b4fc 100%);
 }
 
 /* Header */
-.ie-hdr{padding:24px 28px 20px;border-bottom:1px solid rgba(51,65,85,.4);}
-@media(max-width:480px){.ie-hdr{padding:20px 18px 16px;}}
+.ie-hdr {
+  padding:var(--s6) var(--s7) var(--s5);
+  border-bottom:1px solid var(--border);
+  background:var(--bg);
+}
+@media(max-width:480px) { .ie-hdr { padding:var(--s5) var(--s5) var(--s4); } }
 
-/* Step dot stepper */
-.ie-dot{
-  width:28px;height:28px;border-radius:50%;
-  border:1.5px solid rgba(71,85,105,.5);
-  background:rgba(8,12,28,.9);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'DM Mono',monospace;font-size:.6rem;color:#475569;
-  flex-shrink:0;position:relative;
-  transition:border-color .35s,background .35s,color .35s,box-shadow .35s;
+/* Dot stepper */
+.ie-dot {
+  width:28px; height:28px; border-radius:50%;
+  border:1.5px solid var(--border-2);
+  background:var(--surface-solid);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.6rem; font-weight:600; color:var(--text-3);
+  flex-shrink:0; position:relative;
+  transition:border-color .3s, background .3s, color .3s, box-shadow .3s;
 }
-.ie-dot.active{
-  border-color:#10b981;color:#10b981;
-  background:rgba(16,185,129,.1);
-  box-shadow:0 0 0 3px rgba(16,185,129,.14);
-  animation:ie-ring 2.5s ease-in-out infinite;
+.ie-dot.active {
+  border-color:var(--accent-d); color:var(--accent-d);
+  background:rgba(59,107,255,.07);
+  box-shadow:0 0 0 3px rgba(59,107,255,.12);
+  animation:ie-pulse 2.5s ease-in-out infinite;
 }
-.ie-dot.done{
-  border-color:#059669;
-  background:rgba(5,150,105,.18);
-  color:transparent;animation:none;
+.ie-dot.done {
+  border-color:var(--green); background:var(--gr-bg);
+  color:transparent; animation:none;
 }
-.ie-dot.done::after{
-  content:'';position:absolute;
-  width:8px;height:5px;
-  border-left:1.5px solid #10b981;
-  border-bottom:1.5px solid #10b981;
+.ie-dot.done::after {
+  content:''; position:absolute;
+  width:8px; height:5px;
+  border-left:1.5px solid var(--green);
+  border-bottom:1.5px solid var(--green);
   transform:rotate(-45deg) translate(1px,-1px);
 }
-.ie-line{flex:1;height:1px;background:rgba(71,85,105,.2);margin:0 3px;transition:background .45s ease;}
-.ie-line.done{background:rgba(16,185,129,.45);}
+.ie-line {
+  flex:1; height:1px; background:var(--border); margin:0 3px;
+  transition:background .4s ease;
+}
+.ie-line.done { background:var(--accent); }
 
 /* Progress bar */
-.ie-pbar{height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin-top:14px;}
-.ie-pfill{
-  height:100%;border-radius:2px;
-  background:linear-gradient(90deg,#10b981,#06b6d4);
-  transition:width .55s cubic-bezier(.4,0,.2,1);
+.ie-pbar { height:3px; background:var(--bg-sec); border-radius:3px; overflow:hidden; margin-top:var(--s4); }
+.ie-pfill {
+  height:100%; border-radius:3px;
+  background:linear-gradient(90deg, var(--accent-d), var(--accent));
+  transition:width .5s cubic-bezier(.4,0,.2,1);
   position:relative;
 }
-.ie-pfill::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:36px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5));
+.ie-pfill::after {
+  content:''; position:absolute; right:0; top:0; bottom:0; width:32px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.7));
 }
 
-/* Body area */
-.ie-body{
-  padding:26px 28px 8px;
-  min-height:280px;
-  position:relative;
-  transition:opacity .3s ease,transform .3s cubic-bezier(.4,0,.2,1);
+/* Step tag */
+.ie-tag   { font-size:.6rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-d); margin-bottom:3px; }
+.ie-title { font-family:'Sora',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text); letter-spacing:-.01em; }
+
+/* Body */
+.ie-body {
+  padding:var(--s6) var(--s7) var(--s4);
+  min-height:280px; position:relative;
+  transition:opacity .28s ease, transform .28s cubic-bezier(.4,0,.2,1);
 }
-@media(max-width:480px){.ie-body{padding:20px 18px 8px;}}
+@media(max-width:480px) { .ie-body { padding:var(--s5) var(--s5) var(--s3); } }
 
 /* Footer */
-.ie-ftr{
-  padding:16px 28px 24px;
-  border-top:1px solid rgba(51,65,85,.25);
-  display:flex;justify-content:space-between;align-items:center;gap:12px;
+.ie-ftr {
+  padding:var(--s4) var(--s7) var(--s6);
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; gap:var(--s3);
+  background:var(--bg);
 }
-@media(max-width:480px){.ie-ftr{padding:14px 18px 20px;}}
+@media(max-width:480px) { .ie-ftr { padding:var(--s3) var(--s5) var(--s5); } }
 
-/* Step tag + title */
-.ie-tag{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;color:#10b981;margin-bottom:3px;}
-.ie-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;letter-spacing:-.01em;}
-
-/* ── Service option cards (Step 1) ── */
-.ie-opt{
-  background:rgba(8,12,28,.7);
-  border:1.5px solid rgba(51,65,85,.6);
-  border-radius:var(--r-inner);
-  padding:16px 12px;
+/* Option cards (Step 1) */
+.ie-opt {
+  background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-md);
+  padding:var(--s4) var(--s3);
   cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;
-  min-height:104px;justify-content:center;
-  position:relative;overflow:hidden;user-select:none;
+  display:flex; flex-direction:column; align-items:center; gap:var(--s2); text-align:center;
+  min-height:104px; justify-content:center;
+  position:relative; overflow:hidden; user-select:none;
   -webkit-tap-highlight-color:transparent;
-  transition:border-color .2s,background .2s,transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s;
+  transition:border-color .2s, background .2s, transform .18s cubic-bezier(.4,0,.2,1), box-shadow .2s;
 }
-.ie-opt::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 0%,rgba(16,185,129,.09),transparent 70%);
-  opacity:0;transition:opacity .25s;
+.ie-opt:hover { transform:translateY(-2px); border-color:var(--border-2); box-shadow:var(--shadow-md); background:var(--surface-solid); }
+.ie-opt:active { transform:scale(.96); }
+.ie-opt.sel {
+  border-color:var(--accent-d);
+  background:rgba(59,107,255,.06);
+  box-shadow:0 0 0 2px rgba(59,107,255,.15), var(--shadow-sm);
+  animation:ie-pulse 3s ease-in-out infinite;
 }
-.ie-opt:hover{transform:translateY(-2px);border-color:rgba(16,185,129,.35);box-shadow:0 8px 24px rgba(0,0,0,.3);}
-.ie-opt:hover::before{opacity:1;}
-.ie-opt:active{transform:scale(.96);}
-.ie-opt.sel{
-  border-color:#10b981;background:rgba(16,185,129,.08);
-  box-shadow:0 0 0 1px rgba(16,185,129,.22),0 8px 32px rgba(16,185,129,.1);
-  animation:ie-ring 2.8s ease-in-out infinite;
+.ie-oico {
+  width:40px; height:40px; border-radius:var(--r-sm);
+  background:rgba(59,107,255,.08); border:1px solid rgba(59,107,255,.15);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s, box-shadow .2s;
 }
-.ie-opt.sel::before{opacity:1;}
+.ie-opt.sel .ie-oico { background:rgba(59,107,255,.14); box-shadow:0 0 12px rgba(59,107,255,.2); }
+.ie-olbl { font-size:.65rem; font-weight:600; letter-spacing:.04em; color:var(--text-2); line-height:1.3; transition:color .2s; }
+.ie-opt.sel .ie-olbl { color:var(--accent-d); }
+.ie-opt .ie-osub { font-size:.6rem; color:var(--text-3); }
+.ie-ochk {
+  position:absolute; top:7px; right:8px;
+  width:17px; height:17px; border-radius:50%;
+  background:var(--accent-d);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:scale(0); pointer-events:none;
+}
+.ie-opt.sel .ie-ochk { animation:ie-check .28s cubic-bezier(.34,1.56,.64,1) forwards; }
 
-.ie-oico{
-  width:40px;height:40px;border-radius:10px;
-  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,box-shadow .2s,border-color .2s;
+/* Urgency cards (Step 2) */
+.ie-urg {
+  border:1.5px solid var(--border);
+  border-radius:var(--r-md);
+  padding:var(--s4) var(--s5); cursor:pointer;
+  display:flex; align-items:center; gap:var(--s4);
+  min-height:68px; position:relative; overflow:hidden;
+  user-select:none; -webkit-tap-highlight-color:transparent;
+  background:var(--bg);
+  transition:transform .18s cubic-bezier(.4,0,.2,1), box-shadow .2s, border-color .2s, background .2s;
 }
-.ie-opt.sel .ie-oico{background:rgba(16,185,129,.2);border-color:rgba(16,185,129,.45);box-shadow:0 0 16px rgba(16,185,129,.22);}
+.ie-urg:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); background:var(--surface-solid); }
+.ie-urg:active { transform:scale(.98); }
+.ie-urg.sel { box-shadow:0 0 0 2px var(--uc), var(--shadow-sm); }
+.urg-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; background:var(--uc); }
+.urg-title { font-family:'Sora',sans-serif; font-weight:700; font-size:.95rem; color:var(--text); margin-bottom:2px; }
+.urg-desc  { font-size:.8rem; color:var(--text-2); line-height:1.45; }
+.urg-badge { font-size:.6rem; font-weight:600; letter-spacing:.1em; padding:2px 8px; border-radius:var(--r-xs); flex-shrink:0; display:none; }
+.ie-urg.sel .urg-badge { display:block; }
 
-.ie-olbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.05em;color:#94a3b8;line-height:1.3;transition:color .2s;}
-.ie-opt.sel .ie-olbl{color:#10b981;}
-
-.ie-ochk{
-  position:absolute;top:7px;right:8px;
-  width:17px;height:17px;border-radius:50%;
-  background:#10b981;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:scale(0);pointer-events:none;
-}
-.ie-opt.sel .ie-ochk{animation:ie-check .28s cubic-bezier(.34,1.56,.64,1) forwards;}
-
-/* ── Urgency cards (Step 2) ── */
-.ie-urg{
-  border:1.5px solid rgba(51,65,85,.6);
-  border-radius:var(--r-inner);
-  padding:16px 18px;cursor:pointer;
-  display:flex;align-items:center;gap:14px;
-  min-height:66px;position:relative;overflow:hidden;user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s,border-color .2s,background .2s;
-}
-.ie-urg:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
-.ie-urg:active{transform:scale(.98);}
-.ie-urg.sel{box-shadow:0 0 0 1px var(--uc),0 8px 32px rgba(0,0,0,.25);}
-.urg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:var(--uc);}
-.urg-badge{
-  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;
-  padding:2px 8px;border-radius:5px;flex-shrink:0;
-  display:none;
-}
-.ie-urg.sel .urg-badge{display:block;}
-
-/* ── Form inputs ── */
-.ie-inp{
+/* Form inputs */
+.ie-inp {
   width:100%;
-  background:rgba(2,6,23,.85);
-  border:1.5px solid rgba(51,65,85,.65);
-  border-radius:12px;
-  color:#f1f5f9;
-  font-family:'Inter',sans-serif;font-size:.9rem;
-  padding:13px 15px;outline:none;
-  transition:border-color .2s,box-shadow .2s,background .2s;
-  -webkit-appearance:none;appearance:none;
+  background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-md);
+  color:var(--text);
+  font-family:'Inter',sans-serif; font-size:.9rem;
+  padding:13px var(--s4); outline:none;
+  transition:border-color .18s, box-shadow .18s, background .18s;
+  -webkit-appearance:none; appearance:none;
 }
-.ie-inp::placeholder{color:#334155;}
-.ie-inp:focus{border-color:#06b6d4;box-shadow:0 0 0 3px rgba(6,182,212,.13);background:rgba(6,182,212,.025);}
-.ie-inp.err{border-color:rgba(239,68,68,.65);box-shadow:0 0 0 3px rgba(239,68,68,.1);}
-textarea.ie-inp{resize:none;line-height:1.65;}
-.ie-lbl{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:#475569;margin-bottom:6px;display:block;}
-.ie-em{font-family:'DM Mono',monospace;font-size:.62rem;color:#f87171;margin-top:5px;display:none;}
-.ie-em.on{display:block;}
-.ie-cct{font-family:'DM Mono',monospace;font-size:.62rem;color:#475569;text-align:right;margin-top:5px;transition:color .2s;}
-.ie-cct.warn{color:#f59e0b;}
+.ie-inp::placeholder { color:var(--text-3); }
+.ie-inp:focus { border-color:var(--accent-d); box-shadow:0 0 0 3px rgba(59,107,255,.12); background:var(--surface-solid); }
+.ie-inp.err { border-color:rgba(239,68,68,.6); box-shadow:0 0 0 3px rgba(239,68,68,.1); }
+textarea.ie-inp { resize:none; line-height:1.65; }
+.ie-lbl { font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; display:block; }
+.ie-em  { font-size:.7rem; color:#dc2626; margin-top:5px; display:none; font-weight:500; }
+.ie-em.on { display:block; }
+.ie-cct { font-size:.68rem; color:var(--text-3); text-align:right; margin-top:5px; transition:color .2s; }
+.ie-cct.warn { color:#d97706; }
 
-/* Select wrapper */
-.sel-w{position:relative;}
-.sel-w::after{
-  content:'';position:absolute;right:13px;top:50%;transform:translateY(-50%);
-  border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #475569;
+/* Select */
+.sel-w { position:relative; }
+.sel-w::after {
+  content:''; position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  border-left:5px solid transparent; border-right:5px solid transparent; border-top:5px solid var(--text-3);
   pointer-events:none;
 }
-select.ie-inp{cursor:pointer;padding-right:34px;}
-select.ie-inp option{background:#0f172a;}
+select.ie-inp { cursor:pointer; padding-right:36px; }
+select.ie-inp option { background:#fff; color:var(--text); }
 
-/* ── Buttons ── */
-.ie-btn-n{
-  background:linear-gradient(135deg,#059669,#0d9488);
-  border:none;border-radius:var(--r-btn);color:#fff;
-  font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.1em;font-weight:500;
-  padding:13px 26px;cursor:pointer;min-height:48px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  position:relative;overflow:hidden;
-  transition:transform .2s,box-shadow .2s,opacity .2s;
+/* Buttons */
+.ie-btn-n {
+  background:var(--accent-d);
+  border:none; border-radius:var(--r-md); color:#fff;
+  font-family:'Inter',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.04em;
+  padding:13px 24px; cursor:pointer; min-height:48px;
+  display:flex; align-items:center; justify-content:center; gap:var(--s2);
+  position:relative; overflow:hidden;
+  transition:background .2s, box-shadow .2s, transform .18s;
 }
-.ie-btn-n::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.13));opacity:0;transition:opacity .2s;}
-.ie-btn-n:hover::after{opacity:1;}
-.ie-btn-n:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(16,185,129,.45),0 8px 24px rgba(0,0,0,.4);}
-.ie-btn-n:active{transform:scale(.97);}
-.ie-btn-n:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none;}
-.ie-btn-n:disabled::after{display:none;}
+.ie-btn-n::after { content:''; position:absolute; inset:0; background:rgba(255,255,255,0); transition:background .2s; }
+.ie-btn-n:hover::after { background:rgba(255,255,255,.08); }
+.ie-btn-n:hover { background:#2d5ee8; box-shadow:0 6px 20px rgba(59,107,255,.35); transform:translateY(-2px); }
+.ie-btn-n:active { transform:scale(.97); }
+.ie-btn-n:disabled { opacity:.38; cursor:not-allowed; transform:none; box-shadow:none; }
 
-.ie-btn-b{
-  background:transparent;border:1.5px solid rgba(51,65,85,.75);border-radius:var(--r-btn);
-  color:#64748b;font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.1em;
-  padding:13px 18px;cursor:pointer;min-height:48px;
-  display:flex;align-items:center;gap:8px;
-  transition:border-color .2s,color .2s,transform .2s;
+.ie-btn-b {
+  background:transparent;
+  border:1.5px solid var(--border-2);
+  border-radius:var(--r-md);
+  color:var(--text-2);
+  font-family:'Inter',sans-serif; font-size:.78rem; font-weight:500; letter-spacing:.03em;
+  padding:13px var(--s5); cursor:pointer; min-height:48px;
+  display:flex; align-items:center; gap:var(--s2);
+  transition:border-color .18s, color .18s, background .18s, transform .18s;
   visibility:hidden;
 }
-.ie-btn-b.show{visibility:visible;}
-.ie-btn-b:hover{border-color:rgba(100,116,139,.65);color:#94a3b8;transform:translateX(-2px);}
-.ie-btn-b:active{transform:scale(.97);}
+.ie-btn-b.show { visibility:visible; }
+.ie-btn-b:hover { border-color:var(--accent-d); color:var(--accent-d); background:rgba(59,107,255,.04); transform:translateX(-1px); }
+.ie-btn-b:active { transform:scale(.97); }
 
 /* Review rows */
-.rv-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(51,65,85,.25);gap:16px;}
-.rv-row:last-child{border-bottom:none;}
-.rv-k{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:#475569;flex-shrink:0;padding-top:2px;}
-.rv-v{font-family:'Inter',sans-serif;font-size:.87rem;color:#e2e8f0;text-align:right;line-height:1.5;max-width:58%;}
+.rv-row { display:flex; justify-content:space-between; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--border); gap:var(--s4); }
+.rv-row:last-child { border-bottom:none; }
+.rv-k { font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); flex-shrink:0; padding-top:2px; }
+.rv-v { font-size:.88rem; color:var(--text); text-align:right; line-height:1.5; max-width:60%; }
 
-/* Success */
-.ie-sring{
-  width:80px;height:80px;border-radius:50%;
-  background:rgba(16,185,129,.1);border:2px solid rgba(16,185,129,.35);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 22px;
-  box-shadow:0 0 40px rgba(16,185,129,.2);
-  animation:ie-success .5s cubic-bezier(.34,1.56,.64,1) both;
+/* Success ring */
+.ie-sring {
+  width:76px; height:76px; border-radius:50%;
+  background:var(--gr-bg); border:2px solid var(--gr-bd);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto var(--s5);
+  box-shadow:0 0 32px rgba(5,150,105,.2);
+  animation:ie-success .45s cubic-bezier(.34,1.56,.64,1) both;
 }
-.ie-rid{
-  font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.14em;color:#10b981;
-  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);
-  padding:9px 22px;border-radius:10px;display:inline-block;margin-top:10px;
+.ie-rid {
+  font-size:.9rem; font-weight:700; letter-spacing:.12em;
+  color:var(--accent-d);
+  background:rgba(59,107,255,.06); border:1px solid rgba(59,107,255,.2);
+  padding:8px 20px; border-radius:var(--r-sm); display:inline-block; margin-top:var(--s3);
 }
 
 /* Loading dots */
-.ie-dots{display:flex;gap:5px;align-items:center;justify-content:center;}
-.ie-dots span{width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block;animation:ie-blink 1.4s ease-in-out infinite;}
-.ie-dots span:nth-child(2){animation-delay:.18s;}
-.ie-dots span:nth-child(3){animation-delay:.36s;}
+.ie-dots { display:flex; gap:5px; align-items:center; justify-content:center; }
+.ie-dots span {
+  width:6px; height:6px; border-radius:50%; background:#fff;
+  display:inline-block; animation:ie-blink 1.4s ease-in-out infinite;
+}
+.ie-dots span:nth-child(2) { animation-delay:.18s; }
+.ie-dots span:nth-child(3) { animation-delay:.36s; }
+
+/* Info box */
+.ie-info {
+  display:flex; gap:var(--s3); align-items:flex-start;
+  background:rgba(59,107,255,.04); border:1px solid rgba(59,107,255,.12);
+  border-radius:var(--r-md); padding:var(--s3) var(--s4);
+  margin-top:var(--s5);
+}
+.ie-info-text { font-size:.75rem; line-height:1.6; color:var(--text-2); }
+
+/* Error global */
+.ie-gerr { font-size:.72rem; color:#dc2626; font-weight:500; }
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   NAVIGATION
-════════════════════════════════════════ -->
-<nav id="main-nav">
-  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
 
-    <!-- Logo -->
-    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-      <div style="width:34px;height:34px;background:linear-gradient(135deg,#059669,#0d9488);border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(16,185,129,.4);flex-shrink:0;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div>
-        <div class="fd" style="font-weight:800;font-size:1.1rem;letter-spacing:-.02em;line-height:1;color:#fff;">OCTIS</div>
-        <div class="fm" style="font-size:.52rem;letter-spacing:.14em;color:#475569;">TRIAGE SYSTEM</div>
-      </div>
-    </a>
-
-    <!-- Desktop links + CTA -->
-    <div style="display:flex;align-items:center;gap:32px;" class="hidden md:flex">
-      <a href="#services" class="nav-link">SERVICES</a>
-      <a href="#metrics"  class="nav-link">NETWORK</a>
-      <a href="#intake-section" class="nav-link">INTAKE</a>
-      <a href="tel:+2349041999098" class="em-btn" style="padding:10px 18px;font-size:.7rem;">
-        <span class="pdot"></span>EMERGENCY CALL PROTOCOL
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-name">OCTIS</div>
+          <div class="logo-sub">Triage System</div>
+        </div>
       </a>
-    </div>
 
-    <!-- Mobile: compact emergency btn -->
-    <a href="tel:+2349041999098" class="em-btn md:hidden" style="padding:9px 14px;font-size:.62rem;">
-      <span class="pdot" style="width:6px;height:6px;"></span>EMERGENCY
-    </a>
+      <div class="nav-links">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#metrics"  class="nav-link">Network</a>
+        <a href="#intake-section" class="nav-link">Intake</a>
+        <a href="tel:+2341234567890" class="nav-cta">
+          <span class="live-dot"></span>Emergency Protocol
+        </a>
+      </div>
+
+      <a href="tel:+2341234567890" class="nav-cta-mobile">
+        <span class="live-dot"></span>Emergency
+      </a>
+
+    </div>
   </div>
 </nav>
 
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   HERO
-════════════════════════════════════════ -->
+════════════════════════════════════ -->
 <section id="hero">
-  <div class="grid-bg"></div>
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
+  <div class="hero-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-  <div style="max-width:1280px;margin:0 auto;padding:60px 24px;width:100%;position:relative;z-index:1;">
-    <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:center;" class="lg:grid-cols-2-custom">
+  <div class="container" style="width:100%;position:relative;z-index:1;">
+    <div class="hero-inner">
 
-      <!-- Left: Copy -->
-      <div class="fu" style="max-width:600px;">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
-          <span class="chip">ENTERPRISE MEDICAL INFRASTRUCTURE</span>
-          <span class="pdot"></span>
+      <!-- Copy -->
+      <div class="fu">
+        <div class="hero-badge">
+          <div class="badge-dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M5 1L8.5 3V7L5 9L1.5 7V3L5 1Z" stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Enterprise Medical Infrastructure
         </div>
 
-        <h1 class="fd hgrad" style="font-weight:800;font-size:clamp(2.1rem,5.5vw,3.8rem);line-height:1.06;letter-spacing:-.025em;margin-bottom:24px;">
-          Streamlined<br/>Medical<br/>Infrastructure.<br/>
-          <span style="background:linear-gradient(90deg,#10b981,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zero Friction<br/>Admissions.</span>
+        <h1 class="hero-h1">
+          Streamlined Medical<br/>
+          Infrastructure.<br/>
+          <span class="accent-line">Zero Friction<br/>Admissions.</span>
         </h1>
 
-        <p style="color:#64748b;font-size:.95rem;line-height:1.75;max-width:480px;margin-bottom:36px;font-weight:300;">
+        <p class="hero-body">
           Rapid scheduling automation, real-time emergency intake routing, and intelligent triage handling — purpose-built for clinics and diagnostic centers operating at scale.
         </p>
 
-        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;">
-          <a href="#intake-section" class="cta-p" style="padding:14px 26px;">
+        <div class="cta-group">
+          <a href="#intake-section" class="btn-primary">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7 1L14 7.5L7 14M1 7.5H14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            LAUNCH INTAKE PORTAL
+            Launch Intake Portal
           </a>
-          <a href="#services" class="cta-s" style="padding:14px 26px;">
-            VIEW SERVICE NETWORK
+          <a href="#services" class="btn-secondary">
+            View Service Network
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5H12M7 1.5L12 6.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
 
-        <!-- Trust badges -->
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="display:flex;">
-            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#059669,#0d9488);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-right:-8px;">A</div>
-            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#0e7490,#0891b2);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-right:-8px;">C</div>
-            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#065f46,#059669);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">M</div>
+        <div class="trust-row">
+          <div class="trust-avatars">
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#3b6bff,#6b8fff);">A</div>
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4);">C</div>
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#059669,#34d399);">M</div>
           </div>
-          <div class="fm" style="font-size:.65rem;letter-spacing:.06em;color:#334155;">TRUSTED BY 340+ FACILITIES</div>
+          <div class="trust-text">Trusted by 340+ medical facilities</div>
         </div>
       </div>
 
-      <!-- Right: Floating UI panel (desktop only) -->
-      <div style="display:none;position:relative;min-height:520px;align-items:center;justify-content:center;" id="hero-visual">
-        <div class="fcrd glass-em" style="padding:24px;width:296px;position:relative;z-index:20;box-shadow:0 0 60px rgba(16,185,129,.12),0 32px 64px rgba(0,0,0,.55);">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <!-- Visual (desktop) -->
+      <div class="hero-visual fu" style="transition-delay:.15s;">
+        <div class="fcard fcard-main">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
             <div>
-              <div class="slbl" style="font-size:.6rem;margin-bottom:3px;">LIVE TRIAGE</div>
-              <div class="fd" style="font-weight:700;font-size:.95rem;color:#fff;">Queue Status</div>
+              <div style="font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);margin-bottom:3px;">Live Triage</div>
+              <div class="fs" style="font-weight:700;font-size:.95rem;color:var(--text);">Queue Status</div>
             </div>
-            <div style="width:9px;height:9px;background:#10b981;border-radius:50%;box-shadow:0 0 8px rgba(16,185,129,.8);animation:pdot-ring 1.6s ease-out infinite;"></div>
+            <div class="live-dot"></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
-              <div><div class="fm" style="font-size:.7rem;color:#fff;">EMG-0042</div><div class="fm" style="font-size:.58rem;color:#475569;">Emergency Admit</div></div>
-              <span class="fm" style="font-size:.58rem;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.3);color:#f87171;padding:2px 8px;border-radius:5px;">CRITICAL</span>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">EMG-0042</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Emergency Admit</div>
             </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
-              <div><div class="fm" style="font-size:.7rem;color:#fff;">SCH-0198</div><div class="fm" style="font-size:.58rem;color:#475569;">Scheduled Intake</div></div>
-              <span class="fm" style="font-size:.58rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#10b981;padding:2px 8px;border-radius:5px;">ACTIVE</span>
-            </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
-              <div><div class="fm" style="font-size:.7rem;color:#fff;">DGN-0317</div><div class="fm" style="font-size:.58rem;color:#475569;">Diagnostic Queue</div></div>
-              <span class="fm" style="font-size:.58rem;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3);color:#06b6d4;padding:2px 8px;border-radius:5px;">PENDING</span>
-            </div>
+            <span class="q-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);">CRITICAL</span>
           </div>
-          <div class="sdiv" style="margin:14px 0;"></div>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">SCH-0198</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Scheduled Intake</div>
+            </div>
+            <span class="q-badge" style="background:var(--gr-bg);color:var(--green);border:1px solid var(--gr-bd);">ACTIVE</span>
+          </div>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">DGN-0317</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Diagnostic Queue</div>
+            </div>
+            <span class="q-badge" style="background:rgba(59,107,255,.08);color:var(--accent-d);border:1px solid rgba(59,107,255,.2);">PENDING</span>
+          </div>
+          <div style="height:1px;background:var(--border);margin:14px 0;"></div>
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div class="fm" style="font-size:.6rem;color:#475569;">AVG RESPONSE</div>
-            <div class="fd" style="font-weight:700;font-size:1rem;color:#10b981;">3.2 MIN</div>
+            <div style="font-size:.65rem;color:var(--text-3);font-weight:500;">Avg Response</div>
+            <div class="fs" style="font-weight:800;font-size:1rem;color:var(--accent-d);">3.2 MIN</div>
           </div>
         </div>
-        <div class="fcrd glass" style="position:absolute;top:10px;right:0;width:152px;padding:16px;z-index:15;box-shadow:0 0 30px rgba(6,182,212,.1),0 16px 40px rgba(0,0,0,.4);">
-          <div class="slbl" style="font-size:.58rem;color:#06b6d4;margin-bottom:4px;">UPTIME</div>
-          <div class="fd" style="font-weight:800;font-size:1.7rem;color:#fff;line-height:1;">99.98%</div>
-          <div class="fm" style="font-size:.55rem;color:#334155;margin-top:3px;">PLATFORM SLA</div>
-          <div style="margin-top:10px;height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:99.98%;background:linear-gradient(90deg,#06b6d4,#10b981);border-radius:3px;"></div></div>
+
+        <div class="fcard fcard-sm-1">
+          <div style="font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);margin-bottom:4px;">Uptime</div>
+          <div class="fs" style="font-weight:800;font-size:1.6rem;color:var(--text);line-height:1;">99.98%</div>
+          <div style="font-size:.6rem;color:var(--text-3);margin-top:3px;">Platform SLA</div>
+          <div style="margin-top:10px;height:4px;background:var(--bg-sec);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:99.98%;background:linear-gradient(90deg,var(--accent-d),var(--accent));border-radius:4px;"></div>
+          </div>
         </div>
-        <div class="fcrd glass" style="position:absolute;bottom:10px;left:0;width:168px;padding:16px;z-index:15;box-shadow:0 0 30px rgba(16,185,129,.1),0 16px 40px rgba(0,0,0,.4);">
-          <div class="slbl" style="font-size:.58rem;margin-bottom:4px;">INTAKE TODAY</div>
-          <div class="fd" style="font-weight:800;font-size:1.65rem;color:#fff;line-height:1;">2,481</div>
-          <div class="fm" style="font-size:.58rem;color:#10b981;margin-top:5px;">&#9650; 12.4% vs yesterday</div>
+
+        <div class="fcard fcard-sm-2">
+          <div style="font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);margin-bottom:4px;">Intake Today</div>
+          <div class="fs" style="font-weight:800;font-size:1.5rem;color:var(--text);line-height:1;">2,481</div>
+          <div style="font-size:.65rem;color:#059669;font-weight:600;margin-top:5px;">▲ 12.4% vs yesterday</div>
         </div>
       </div>
 
@@ -609,219 +1011,241 @@ select.ie-inp option{background:#0f172a;}
   </div>
 </section>
 
-<style>
-/* Hero 2-col layout on large screens */
-@media(min-width:1024px){
-  #hero > div > div{grid-template-columns:1fr 1fr!important;}
-  #hero-visual{display:flex!important;}
-}
-</style>
 
-
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   METRICS STRIP
-════════════════════════════════════════ -->
-<section id="metrics" style="padding:64px 0;position:relative;">
-  <div class="sdiv" style="margin-bottom:64px;"></div>
-  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;" class="metrics-grid">
-      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);">
-        <div class="slbl" style="margin-bottom:10px;">RESPONSE TIME</div>
-        <div class="cnum" data-target="3" data-suffix="MIN">0</div>
-        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">AVG EMERGENCY INTAKE</div>
-      </div>
-      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.1s;">
-        <div class="slbl" style="margin-bottom:10px;">AUTOMATION</div>
-        <div class="cnum" data-target="94" data-suffix="%">0</div>
-        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">INTAKE PROCESSES AUTO</div>
-      </div>
-      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.2s;">
-        <div class="slbl" style="margin-bottom:10px;">FACILITIES</div>
-        <div class="cnum" data-target="340" data-suffix="+">0</div>
-        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">ACTIVE IN NETWORK</div>
-      </div>
-      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.3s;">
-        <div class="slbl" style="margin-bottom:10px;">SUPPORT</div>
-        <div class="cnum" data-target="24" data-suffix="/7">0</div>
-        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">OPERATIONAL COVERAGE</div>
-      </div>
-    </div>
-  </div>
-  <div class="sdiv" style="margin-top:64px;"></div>
-</section>
-<style>
-@media(min-width:1024px){.metrics-grid{grid-template-columns:repeat(4,1fr)!important;}}
-</style>
+════════════════════════════════════ -->
+<section id="metrics" class="section-sm" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="metrics-grid">
 
-
-<!-- ════════════════════════════════════════
-  INTAKE ENGINE SECTION
-════════════════════════════════════════ -->
-<section id="intake-section" style="padding:64px 0;position:relative;">
-  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
-
-    <!-- Section header -->
-    <div style="text-align:center;margin-bottom:36px;" class="fu">
-      <div class="slbl" style="margin-bottom:10px;">LIVE PORTAL</div>
-      <h2 class="fd" style="font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.025em;color:#fff;margin-bottom:12px;">Intake Engine</h2>
-      <p style="color:#475569;font-size:.9rem;max-width:480px;margin:0 auto;line-height:1.7;">Complete your intake in under 3 minutes. Encrypted, secure, and routed instantly to our triage grid.</p>
-    </div>
-
-    <!-- ★ PHASE 2 INJECTION TARGET ★ -->
-    <div id="intake-engine-container"></div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════
-  SERVICES GRID
-════════════════════════════════════════ -->
-<section id="services" style="padding:64px 0;position:relative;">
-  <div class="sdiv" style="margin-bottom:64px;"></div>
-  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
-
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;" class="fu">
-      <div class="slbl">CORE CAPABILITIES</div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
-        <h2 class="fd" style="font-weight:800;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.025em;color:#fff;">Service Network</h2>
-        <p style="color:#475569;font-size:.85rem;max-width:320px;text-align:right;line-height:1.65;">Six specialized pillars engineered for zero-friction medical operations.</p>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(1,1fr);gap:16px;" class="svc-grid">
-
-      <div class="scard fu" data-card>
-        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 1L20 6V16L11 21L2 16V6L11 1Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 7V15M7 11H15" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Emergency Admissions</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Real-time triage routing with automated severity classification. Critical cases prioritized in under 90 seconds.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">RESPONSE &lt; 90s</div>
+      <div class="metric-card fu">
+        <div class="metric-label">Response Time</div>
+        <div class="metric-num" data-target="3" data-suffix=" MIN">0</div>
+        <div class="metric-sub">Avg emergency intake</div>
       </div>
 
-      <div class="scard fu" data-card style="transition-delay:.07s;">
-        <div class="sico" style="background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.2);"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#06b6d4" stroke-width="1.5"/><path d="M6 11H9L10.5 8L12 14L13.5 11H16" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Mobile Diagnostics</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Field diagnostic units connected to the OCTIS grid. Results streamed and routed instantly to specialist queues.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;color:#06b6d4;">FIELD READY</div>
+      <div class="metric-card fu" style="transition-delay:.1s;">
+        <div class="metric-label">Automation Rate</div>
+        <div class="metric-num" data-target="94" data-suffix="%">0</div>
+        <div class="metric-sub">Intake processes automated</div>
       </div>
 
-      <div class="scard fu" data-card style="transition-delay:.14s;">
-        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8H18M4 14H14M2 5H20V19H2V5Z" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Specialized Logistics</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Cold chain, pharmaceutical transport, and specimen handling tracked in real-time with automated compliance documentation.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">COMPLIANT CHAIN</div>
+      <div class="metric-card fu" style="transition-delay:.2s;">
+        <div class="metric-label">Active Facilities</div>
+        <div class="metric-num" data-target="340" data-suffix="+">0</div>
+        <div class="metric-sub">In triage network</div>
       </div>
 
-      <div class="scard fu" data-card style="transition-delay:.21s;">
-        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><path d="M15.5 15.5H12V19M12 15.5H19V19" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Rapid Scheduling</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">AI-assisted appointment allocation with conflict resolution and real-time calendar sync across all facilities.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">AI-ASSISTED</div>
-      </div>
-
-      <div class="scard fu" data-card style="transition-delay:.28s;">
-        <div class="sico" style="background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.2);"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#06b6d4" stroke-width="1.5"/><path d="M3 11H19M11 3V19" stroke="#06b6d4" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Medical Dispatch</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Geo-intelligent dispatch with ETA tracking, resource availability mapping, and automated incident documentation.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;color:#06b6d4;">GEO-INTELLIGENT</div>
-      </div>
-
-      <div class="scard fu" data-card style="transition-delay:.35s;">
-        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 8H20L14.5 11.5L17 18L11 14.5L5 18L7.5 11.5L2 8H8.5L11 2Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Secure Case Routing</div>
-        <div style="color:#475569;font-size:.85rem;line-height:1.65;">End-to-end encrypted patient case management with role-based access, full audit trails, and HIPAA-aligned data handling.</div>
-        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">HIPAA ALIGNED</div>
+      <div class="metric-card fu" style="transition-delay:.3s;">
+        <div class="metric-label">Support Coverage</div>
+        <div class="metric-num" data-target="24" data-suffix="/7">0</div>
+        <div class="metric-sub">Always operational</div>
       </div>
 
     </div>
   </div>
 </section>
-<style>
-@media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)!important;}}
-@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)!important;}}
-</style>
 
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
+  INTAKE ENGINE
+════════════════════════════════════ -->
+<section id="intake-section" class="section">
+  <div class="container" style="max-width:800px;">
+
+    <div class="fu" style="text-align:center;margin-bottom:var(--s8);">
+      <div class="section-label">Live Portal</div>
+      <h2 class="section-title">Intake Engine</h2>
+      <p class="section-body" style="margin:var(--s3) auto 0;text-align:center;">Complete your intake in under 3 minutes. Secure, encrypted, and routed instantly to our triage grid.</p>
+    </div>
+
+    <div id="intake-engine-container" class="fu" style="transition-delay:.1s;"></div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  SERVICES
+════════════════════════════════════ -->
+<section id="services" class="section" style="background:var(--bg-sec);">
+  <div class="container">
+
+    <div class="fu" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--s5);margin-bottom:var(--s8);">
+      <div>
+        <div class="section-label">Core Capabilities</div>
+        <h2 class="section-title">Service Network</h2>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-2);max-width:300px;line-height:1.7;">Six specialized pillars engineered for zero-friction medical operations.</p>
+    </div>
+
+    <div class="svc-grid">
+
+      <div class="svc-card fu" data-card>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 1L20 6V16L11 21L2 16V6L11 1Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 7V15M7 11H15" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="svc-title">Emergency Admissions</div>
+        <div class="svc-body">Real-time triage routing with automated severity classification. Critical cases prioritized in under 90 seconds.</div>
+        <div class="svc-tag">Response &lt; 90s →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.07s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#3b6bff" stroke-width="1.5"/><path d="M6 11H9L10.5 8L12 14L13.5 11H16" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Mobile Diagnostics</div>
+        <div class="svc-body">Field diagnostic units connected to the OCTIS grid. Results streamed and routed instantly to specialist queues.</div>
+        <div class="svc-tag">Field Ready →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.14s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8H18M4 14H14M2 5H20V19H2V5Z" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Specialized Logistics</div>
+        <div class="svc-body">Cold chain, pharmaceutical transport, and specimen handling tracked in real-time with automated compliance documentation.</div>
+        <div class="svc-tag">Compliant Chain →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.21s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#3b6bff" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="#3b6bff" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="#3b6bff" stroke-width="1.5"/><path d="M15.5 15.5H12V19M12 15.5H19V19" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="svc-title">Rapid Scheduling</div>
+        <div class="svc-body">AI-assisted appointment allocation with conflict resolution and real-time calendar sync across all facilities.</div>
+        <div class="svc-tag">AI-Assisted →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.28s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#3b6bff" stroke-width="1.5"/><path d="M3 11H19M11 3V19" stroke="#3b6bff" stroke-width="1.2" stroke-linecap="round" opacity=".5"/></svg>
+        </div>
+        <div class="svc-title">Medical Dispatch</div>
+        <div class="svc-body">Geo-intelligent dispatch with ETA tracking, resource availability mapping, and automated incident documentation.</div>
+        <div class="svc-tag">Geo-Intelligent →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.35s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 8H20L14.5 11.5L17 18L11 14.5L5 18L7.5 11.5L2 8H8.5L11 2Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Secure Case Routing</div>
+        <div class="svc-body">End-to-end encrypted patient case management with role-based access, full audit trails, and HIPAA-aligned data handling.</div>
+        <div class="svc-tag">HIPAA Aligned →</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
   FOOTER
-════════════════════════════════════════ -->
-<footer style="padding:48px 0;position:relative;">
-  <div class="sdiv" style="margin-bottom:48px;"></div>
-  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div style="width:28px;height:28px;background:linear-gradient(135deg,#059669,#0d9488);border-radius:7px;display:flex;align-items:center;justify-content:center;">
-        <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <span class="fd" style="font-weight:800;font-size:1rem;letter-spacing:-.02em;color:#fff;">OCTIS</span>
-      <span class="fm" style="font-size:.55rem;letter-spacing:.12em;color:#1e293b;">v3.0.0</span>
+════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">
+        <div class="logo-mark" style="width:30px;height:30px;border-radius:8px;">
+          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <span class="fs" style="font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:var(--text);">OCTIS</span>
+        <span style="font-size:.6rem;color:var(--text-3);letter-spacing:.1em;">v4.0</span>
+      </a>
+      <div class="footer-copy">© 2026 OCTIS Systems — All rights reserved</div>
+      <a href="tel:+2341234567890" class="em-pill">
+        <span class="live-dot" style="width:6px;height:6px;"></span>Call Now
+      </a>
     </div>
-    <div class="fm" style="font-size:.62rem;letter-spacing:.06em;color:#1e293b;">&#169; 2026 OCTIS SYSTEMS &#8212; ALL RIGHTS RESERVED</div>
-    <a href="tel:+2349041999098" class="em-btn" style="padding:9px 16px;font-size:.65rem;">
-      <span class="pdot" style="width:6px;height:6px;"></span>CALL NOW
-    </a>
   </div>
 </footer>
 
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   MOBILE BOTTOM NAV
-════════════════════════════════════════ -->
+════════════════════════════════════ -->
 <nav id="mob-nav">
-  <a href="tel:+2349041999098" class="mbtn">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.5 12.75C16.5 13.12 16.33 13.49 16.04 13.73L14.52 15.25C13.72 16.05 12.6 16.46 11.47 16.33C9.44 16.08 7.27 14.83 5.38 12.94C3.49 11.05 2.24 8.88 1.99 6.85C1.86 5.72 2.27 4.6 3.07 3.8L4.59 2.28C5.03 1.84 5.74 1.84 6.18 2.28L8.21 4.31C8.65 4.75 8.65 5.46 8.21 5.9L7.37 6.74C7.23 6.88 7.21 7.1 7.32 7.26C7.94 8.22 8.75 9.12 9.69 9.88C9.85 9.99 10.07 9.97 10.21 9.83L11.05 8.99C11.49 8.55 12.2 8.55 12.64 8.99L14.67 11.02C15.11 11.46 15.11 12.17 14.67 12.61Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    CALL CENTER
+  <a href="tel:+2341234567890" class="mob-btn">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.3 14.2C18.3 14.6 18.1 15 17.8 15.3L16.3 16.8C15.6 17.5 14.6 17.9 13.5 17.7C11.6 17.5 9.5 16.3 7.7 14.5C5.9 12.7 4.7 10.6 4.5 8.7C4.3 7.6 4.7 6.6 5.4 5.9L6.9 4.4C7.3 4 8 4 8.4 4.4L10.3 6.3C10.7 6.7 10.7 7.4 10.3 7.8L9.5 8.6C9.4 8.7 9.4 8.9 9.5 9.1C10 9.9 10.8 10.8 11.7 11.5C11.8 11.6 12 11.6 12.1 11.5L12.9 10.7C13.3 10.3 14 10.3 14.4 10.7L16.3 12.6C16.7 13 16.7 13.7 16.3 14.1Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Call Center
   </a>
-  <a href="#intake-section" class="mbtn" id="mob-portal">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.4"/><path d="M9 6V12M6 9H12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    OPEN PORTAL
+  <a href="#intake-section" class="mob-btn">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.4"/><path d="M10 6V14M6 10H14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    Open Portal
   </a>
-  <button class="mbtn" onclick="showHoursModal()">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M9 5V9L11.5 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    HOURS
+  <button class="mob-btn" onclick="showHoursModal()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M10 6V10L12.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Hours
   </button>
 </nav>
 
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   HOURS MODAL
-════════════════════════════════════════ -->
-<div id="hours-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(2,6,23,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;padding:0 16px 100px;opacity:0;transition:opacity .25s;">
-  <div class="glass-em" style="width:100%;max-width:420px;padding:26px;border-radius:20px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div class="fd" style="font-weight:700;font-size:1.05rem;color:#fff;">Operating Hours</div>
-      <button onclick="hideHoursModal()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);color:#64748b;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">&#10005;</button>
+════════════════════════════════════ -->
+<div id="hours-modal" role="dialog" aria-modal="true" aria-labelledby="hours-title">
+  <div class="hours-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s5);">
+      <div class="fs" id="hours-title" style="font-weight:700;font-size:1.05rem;color:var(--text);">Operating Hours</div>
+      <button class="close-btn" onclick="hideHoursModal()" aria-label="Close operating hours">✕</button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(16,185,129,.07);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#cbd5e1;">EMERGENCY LINE</span><span class="fm" style="font-size:.76rem;color:#10b981;font-weight:500;">24 / 7</span></div>
-      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">MON &#8211; FRI</span><span class="fm" style="font-size:.76rem;color:#fff;">7:00 AM &#8211; 10:00 PM</span></div>
-      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">SAT &#8211; SUN</span><span class="fm" style="font-size:.76rem;color:#fff;">8:00 AM &#8211; 6:00 PM</span></div>
-      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">HOLIDAYS</span><span class="fm" style="font-size:.76rem;color:#06b6d4;">EMERGENCY ONLY</span></div>
+    <div class="hours-row" style="background:rgba(59,107,255,.06);border:1px solid rgba(59,107,255,.15);">
+      <span style="font-weight:600;color:var(--text);">Emergency Line</span>
+      <span style="font-weight:700;color:var(--accent-d);">24 / 7</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);">
+      <span style="color:var(--text-2);">Mon – Fri</span>
+      <span style="font-weight:500;color:var(--text);">7:00 AM – 10:00 PM</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);">
+      <span style="color:var(--text-2);">Sat – Sun</span>
+      <span style="font-weight:500;color:var(--text);">8:00 AM – 6:00 PM</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);margin-bottom:0;">
+      <span style="color:var(--text-2);">Holidays</span>
+      <span style="font-weight:600;color:#059669;">Emergency Only</span>
     </div>
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════
+<!-- ════════════════════════════════════
   JAVASCRIPT
-════════════════════════════════════════ -->
+════════════════════════════════════ -->
 <script>
 (function(){
 'use strict';
 
-/* ──────────────────────────────
-   PHASE 1 — BASE INTERACTIONS
-────────────────────────────── */
+// Configuration
+const APP_CONFIG = {
+  operationsPhone: '+2349041999098',
+  apiEndpoint: '/api/intake/submit',
+  submissionTimeout: 8000,
+  version: '4.0.0'
+};
 
-// Nav scroll state
-const NAV = document.getElementById('main-nav');
+/* ─────────────────────────────────
+   PHASE 1 — INTERACTIONS
+───────────────────────────────── */
+
+// Nav elevation on scroll
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.href = `tel:${APP_CONFIG.operationsPhone}`;
+});
+
+const NAV = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  NAV.classList.toggle('scrolled', window.scrollY > 40);
+  NAV.classList.toggle('elevated', window.scrollY > 20);
 }, { passive: true });
 
-// Smooth anchor scroll
+// Smooth anchor scroll (offset for fixed nav)
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
     const y = target.getBoundingClientRect().top + window.scrollY - 72;
@@ -834,306 +1258,247 @@ const fuObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('vis'); fuObs.unobserve(e.target); }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
 document.querySelectorAll('.fu').forEach(el => fuObs.observe(el));
 
-// Counter animation
+// Metric counter animation
 function runCounter(el) {
   const end = parseInt(el.dataset.target, 10);
   const suf = el.dataset.suffix || '';
   const dur = 1600;
   const t0 = performance.now();
   (function tick(now) {
-    const p = Math.min((now - t0) / dur, 1);
+    const p    = Math.min((now - t0) / dur, 1);
     const ease = 1 - Math.pow(2, -10 * p);
     el.textContent = Math.round(ease * end) + suf;
     if (p < 1) requestAnimationFrame(tick);
   })(t0);
 }
 const cObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { runCounter(e.target); cObs.unobserve(e.target); }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.cnum[data-target]').forEach(el => cObs.observe(el));
+  entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cObs.unobserve(e.target); } });
+}, { threshold: 0.6 });
+document.querySelectorAll('.metric-num[data-target]').forEach(el => cObs.observe(el));
 
-// Service card mouse glow
-document.querySelectorAll('[data-card]').forEach(c => {
-  c.addEventListener('mousemove', e => {
-    const r = c.getBoundingClientRect();
-    c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-    c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+// Service card mouse-tracked glow
+document.querySelectorAll('[data-card]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--mx', '50%');
+    card.style.setProperty('--my', '50%');
   });
 });
 
 // Mobile nav tap feedback
-document.querySelectorAll('.mbtn').forEach(b => {
+document.querySelectorAll('.mob-btn').forEach(b => {
   b.addEventListener('click', function() {
-    document.querySelectorAll('.mbtn').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.mob-btn').forEach(x => x.classList.remove('on'));
     this.classList.add('on');
     setTimeout(() => this.classList.remove('on'), 500);
   });
 });
 
 // Hours modal
+let hoursModalOpen = false;
 window.showHoursModal = function() {
   const m = document.getElementById('hours-modal');
+  if (!m) return;
   m.style.display = 'flex';
-  requestAnimationFrame(() => requestAnimationFrame(() => { m.style.opacity = '1'; }));
+  hoursModalOpen = true;
+  const closeBtn = m.querySelector('.close-btn');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    m.style.opacity = '1';
+    if (closeBtn) closeBtn.focus();
+  }));
 };
 window.hideHoursModal = function() {
   const m = document.getElementById('hours-modal');
+  if (!m) return;
   m.style.opacity = '0';
+  hoursModalOpen = false;
   setTimeout(() => { m.style.display = 'none'; }, 260);
 };
 document.getElementById('hours-modal').addEventListener('click', e => {
   if (e.target === e.currentTarget) window.hideHoursModal();
 });
-
-// CTA ripple
-document.querySelectorAll('.cta-p, .em-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    const r = this.getBoundingClientRect();
-    const rip = document.createElement('span');
-    rip.style.cssText = `
-      position:absolute;border-radius:50%;background:rgba(255,255,255,.2);
-      pointer-events:none;transform:scale(0);
-      animation:rip .5s ease-out forwards;
-      width:80px;height:80px;
-      left:${e.clientX - r.left - 40}px;
-      top:${e.clientY - r.top - 40}px;
-    `;
-    if (!document.getElementById('rip-kf')) {
-      const s = document.createElement('style');
-      s.id = 'rip-kf';
-      s.textContent = '@keyframes rip{to{transform:scale(3.5);opacity:0;}}';
-      document.head.appendChild(s);
-    }
-    this.style.position = 'relative';
-    this.appendChild(rip);
-    setTimeout(() => rip.remove(), 500);
-  });
+document.getElementById('hours-modal').addEventListener('keydown', e => {
+  if (e.key === 'Escape') window.hideHoursModal();
 });
 
 
-/* ──────────────────────────────────────────
-   PHASE 2 — OCTIS INTAKE ENGINE  v3.0
-────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   PHASE 2 — OCTIS INTAKE ENGINE v4.0
+───────────────────────────────────────────── */
 const IE = (function() {
 
-  // ── Centralized state object ──
+  // Centralized state
   const S = {
-    step: 1,
-    total: 5,
-    service: null,
-    urgency: null,
-    name: '',
-    phone: '',
-    location: '',
-    description: '',
-    routingId: null
+    step:1, total:5,
+    service:null, urgency:null,
+    name:'', phone:'', location:'', description:'',
+    routingId:null,
+    isSubmitting:false
   };
 
-  // ── Static data ──
+  // Data
   const SVCS = [
-    { id: 'emergency',   label: 'EMERGENCY CARE',     sub: 'Immediate dispatch',
-      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6V14M6 10H14" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg>` },
-    { id: 'diagnostics', label: 'DIAGNOSTICS',         sub: 'Lab & imaging',
-      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#10b981" stroke-width="1.5"/><path d="M5 10H8L9.5 7L11 13L12.5 10H15" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
-    { id: 'home_visit',  label: 'HOME VISIT',          sub: 'In-home care',
-      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 9L10 3L17 9V17H13V13H7V17H3V9Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
-    { id: 'logistics',   label: 'LOGISTICS',           sub: 'Transport & chain',
-      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="7" width="11" height="9" rx="2" stroke="#10b981" stroke-width="1.5"/><path d="M13 10H15.5L18 13V16H13V10Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="17" r="1.5" fill="#10b981"/><circle cx="15" cy="17" r="1.5" fill="#10b981"/></svg>` },
-    { id: 'consult',     label: 'CONSULTATION',        sub: 'Expert review',
-      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 9C17 12.87 13.87 16 10 16C8.77 16 7.62 15.67 6.63 15.1L3 16L3.9 12.37C3.33 11.38 3 10.23 3 9C3 5.13 6.13 2 10 2C13.87 2 17 5.13 17 9Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+    { id:'emergency',   label:'Emergency Care',      sub:'Immediate dispatch',
+      icon:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6V14M6 10H14" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round"/></svg>` },
+    { id:'diagnostics', label:'Diagnostics',          sub:'Lab & imaging',
+      icon:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#3b6bff" stroke-width="1.5"/><path d="M5 10H8L9.5 7L11 13L12.5 10H15" stroke="#3b6bff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+    { id:'home_visit',  label:'Home Visit',           sub:'In-home care',
+      icon:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 9L10 3L17 9V17H13V13H7V17H3V9Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+    { id:'logistics',   label:'Logistics',            sub:'Transport & chain',
+      icon:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="7" width="11" height="9" rx="2" stroke="#3b6bff" stroke-width="1.5"/><path d="M13 10H15.5L18 13V16H13V10Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="17" r="1.5" fill="#3b6bff"/><circle cx="15" cy="17" r="1.5" fill="#3b6bff"/></svg>` },
+    { id:'consult',     label:'Consultation',         sub:'Expert review',
+      icon:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 9C17 12.87 13.87 16 10 16C8.77 16 7.62 15.67 6.63 15.1L3 16L3.9 12.37C3.33 11.38 3 10.23 3 9C3 5.13 6.13 2 10 2C13.87 2 17 5.13 17 9Z" stroke="#3b6bff" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
   ];
 
   const URGS = [
-    { id: 'critical', label: 'CRITICAL', desc: 'Life-threatening. Immediate response required.',    clr: '#ef4444', bg: 'rgba(239,68,68,.09)',   bd: 'rgba(239,68,68,.4)',  eta: '< 5 MIN' },
-    { id: 'high',     label: 'HIGH',     desc: 'Serious condition. Urgent care within 30 minutes.', clr: '#f97316', bg: 'rgba(249,115,22,.09)',  bd: 'rgba(249,115,22,.4)', eta: '< 30 MIN' },
-    { id: 'medium',   label: 'MEDIUM',   desc: 'Stable but requires prompt medical attention.',      clr: '#f59e0b', bg: 'rgba(245,158,11,.09)',  bd: 'rgba(245,158,11,.35)',eta: '< 2 HRS' },
-    { id: 'low',      label: 'LOW',      desc: 'Routine. Scheduled intake is appropriate.',          clr: '#10b981', bg: 'rgba(16,185,129,.08)',  bd: 'rgba(16,185,129,.35)',eta: 'SCHEDULED' },
+    { id:'critical', label:'Critical', desc:'Life-threatening. Immediate response required.',    clr:'#dc2626', bg:'rgba(220,38,38,.07)',   bd:'rgba(220,38,38,.22)',  eta:'< 5 MIN' },
+    { id:'high',     label:'High',     desc:'Serious condition. Urgent care within 30 minutes.', clr:'#ea580c', bg:'rgba(234,88,12,.07)',   bd:'rgba(234,88,12,.22)',  eta:'< 30 MIN' },
+    { id:'medium',   label:'Medium',   desc:'Stable but requires prompt medical attention.',      clr:'#d97706', bg:'rgba(217,119,6,.07)',   bd:'rgba(217,119,6,.2)',   eta:'< 2 HRS' },
+    { id:'low',      label:'Low',      desc:'Routine. Scheduled intake is appropriate.',          clr:'#059669', bg:'rgba(5,150,105,.07)',   bd:'rgba(5,150,105,.2)',   eta:'Scheduled' },
   ];
 
   const REGIONS = ['Lagos Island','Lagos Mainland','Ikeja','Surulere','Lekki','Victoria Island','Ajah','Ikorodu','Yaba','Apapa','Gbagada','Magodo','Other Region'];
-
   const META = [
-    { tag: 'STEP 1 OF 5', title: 'Select Service' },
-    { tag: 'STEP 2 OF 5', title: 'Urgency Level' },
-    { tag: 'STEP 3 OF 5', title: 'Your Information' },
-    { tag: 'STEP 4 OF 5', title: 'Situation Detail' },
-    { tag: 'STEP 5 OF 5', title: 'Review &amp; Confirm' },
+    { tag:'Step 1 of 5', title:'Select Service' },
+    { tag:'Step 2 of 5', title:'Urgency Level' },
+    { tag:'Step 3 of 5', title:'Your Information' },
+    { tag:'Step 4 of 5', title:'Situation Detail' },
+    { tag:'Step 5 of 5', title:'Review & Confirm' },
   ];
 
-  // ── Utilities ──
+  // Helpers
   function esc(s) {
     return String(s == null ? '' : s)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function find(arr, id) { return arr.find(x => x.id === id) || {}; }
-  function phoneOK(p) { return /^[0-9+\-\s()]{7,20}$/.test(p.trim()); }
+  function phoneOK(p)    { return /^[0-9+\-\s()]{10,20}$/.test(p.trim()) && /\d/.test(p); }
   function genID() {
-    const pfx = { emergency:'EMG', diagnostics:'DGN', home_visit:'HMV', logistics:'LGS', consult:'CON' };
-    return (pfx[S.service] || 'OTC') + '-' + String(Math.floor(1000 + Math.random() * 8999));
+    const p = { emergency:'EMG', diagnostics:'DGN', home_visit:'HMV', logistics:'LGS', consult:'CON' };
+    return (p[S.service] || 'OTC') + '-' + String(Math.floor(1000 + Math.random() * 8999));
   }
   function pct(step) { return Math.round(((step - 1) / (S.total - 1)) * 100); }
 
-  // ── Mount / bootstrap ──
+  // Mount
   function mount() {
     const wrap = document.getElementById('intake-engine-container');
     if (!wrap) return;
-
-    // Reset state
-    Object.assign(S, { step:1, service:null, urgency:null, name:'', phone:'', location:'', description:'', routingId:null });
-
+    Object.assign(S, { step:1, service:null, urgency:null, name:'', phone:'', location:'', description:'', routingId:null, isSubmitting:false });
     wrap.innerHTML = '';
     const shell = document.createElement('div');
     shell.className = 'ie-shell';
     shell.innerHTML = buildShell();
     wrap.appendChild(shell);
-
-    // Initial render without animation
     updateHeader(1);
-    setBodyContent(buildBody(1));
+    setBody(buildBody(1));
+    bindBody(1);
     syncFooter(1);
   }
 
-  // ── Shell scaffold ──
   function buildShell() {
     const dots = [1,2,3,4,5].map((n, i) =>
       `<div class="ie-dot" id="ied${n}">${n}</div>${i < 4 ? `<div class="ie-line" id="iel${n}"></div>` : ''}`
     ).join('');
-
     return `
       <div class="ie-hdr">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
           <div>
-            <div class="ie-tag fm" id="ie-tag">STEP 1 OF 5</div>
+            <div class="ie-tag" id="ie-tag">Step 1 of 5</div>
             <div class="ie-title" id="ie-title">Select Service</div>
           </div>
-          <div style="text-align:right;">
-            <div class="fm" style="font-size:.55rem;letter-spacing:.1em;color:#334155;">PROGRESS</div>
-            <div class="fd" id="ie-pct" style="font-weight:700;font-size:1rem;color:#10b981;line-height:1;">0%</div>
+          <div style="text-align:right;flex-shrink:0;padding-left:12px;">
+            <div style="font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Progress</div>
+            <div class="fs" id="ie-pct" style="font-weight:800;font-size:1rem;color:var(--accent-d);line-height:1.2;">0%</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;" id="ie-dots">${dots}</div>
         <div class="ie-pbar"><div class="ie-pfill" id="ie-pfill" style="width:0%;"></div></div>
       </div>
-
       <div class="ie-body" id="ie-body"></div>
-
       <div class="ie-ftr">
         <button class="ie-btn-b" id="ie-back" onclick="window.OCTIS_IE.back()">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8 2L3 6.5L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          BACK
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
         </button>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div class="fm ie-em" id="ie-gerr" style="font-size:.62rem;text-align:right;"></div>
+          <div class="ie-gerr" id="ie-gerr"></div>
           <button class="ie-btn-n" id="ie-next" onclick="window.OCTIS_IE.next()">
-            <span id="ie-nlbl">CONTINUE</span>
-            <svg id="ie-narr" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M5 2L10 6.5L5 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="ie-nlbl">Continue</span>
+            <svg id="ie-narr" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
     `;
   }
 
-  // ── Set body content (no animation on first render) ──
-  function setBodyContent(html) {
-    const body = document.getElementById('ie-body');
-    if (!body) return;
-    body.innerHTML = html;
+  function setBody(html) {
+    const b = document.getElementById('ie-body');
+    if (b) b.innerHTML = html;
   }
 
-  // ── Animated step transition ──
   function transition(step, dir) {
     const body = document.getElementById('ie-body');
     if (!body) return;
-
-    // Fade out
     body.style.opacity = '0';
-    body.style.transform = dir === 'fwd' ? 'translateX(16px)' : 'translateX(-16px)';
-
+    body.style.transform = dir === 'fwd' ? 'translateX(14px)' : 'translateX(-14px)';
     setTimeout(() => {
       updateHeader(step);
       body.innerHTML = buildBody(step);
       bindBody(step);
       syncFooter(step);
-
-      // Reset position for slide-in
       body.style.transition = 'none';
       body.style.opacity = '0';
-      body.style.transform = dir === 'fwd' ? 'translateX(-16px)' : 'translateX(16px)';
-
-      // Trigger slide-in on next frame
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          body.style.transition = 'opacity .32s ease, transform .32s cubic-bezier(.4,0,.2,1)';
-          body.style.opacity = '1';
-          body.style.transform = 'translateX(0)';
-        });
-      });
-    }, 160);
+      body.style.transform = dir === 'fwd' ? 'translateX(-14px)' : 'translateX(14px)';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.style.transition = 'opacity .28s ease, transform .28s cubic-bezier(.4,0,.2,1)';
+        body.style.opacity = '1';
+        body.style.transform = 'translateX(0)';
+      }));
+    }, 150);
   }
 
-  // ── Update header bar ──
   function updateHeader(step) {
     const m = META[step - 1];
     const tag = document.getElementById('ie-tag');
     const ttl = document.getElementById('ie-title');
     const pEl = document.getElementById('ie-pct');
     const bar = document.getElementById('ie-pfill');
-
     if (tag) tag.textContent = m.tag;
-    if (ttl) ttl.innerHTML = m.title;
-
+    if (ttl) ttl.textContent = m.title;
     const p = pct(step);
     if (pEl) pEl.textContent = p + '%';
     if (bar) bar.style.width = p + '%';
-
-    // Dots + lines
     for (let i = 1; i <= 5; i++) {
-      const dot = document.getElementById('ied' + i);
-      const line = document.getElementById('iel' + i);
-      if (!dot) continue;
-      if (i < step) {
-        dot.className = 'ie-dot done';
-        dot.textContent = '';
-      } else if (i === step) {
-        dot.className = 'ie-dot active';
-        dot.textContent = i;
-      } else {
-        dot.className = 'ie-dot';
-        dot.textContent = i;
-      }
-      if (line) line.className = 'ie-line' + (i < step ? ' done' : '');
+      const d = document.getElementById('ied' + i);
+      const l = document.getElementById('iel' + i);
+      if (!d) continue;
+      if (i < step)       { d.className = 'ie-dot done'; d.textContent = ''; }
+      else if (i === step) { d.className = 'ie-dot active'; d.textContent = i; }
+      else                 { d.className = 'ie-dot'; d.textContent = i; }
+      if (l) l.className = 'ie-line' + (i < step ? ' done' : '');
     }
   }
 
-  // ── Sync footer buttons ──
   function syncFooter(step) {
     const back = document.getElementById('ie-back');
     const next = document.getElementById('ie-next');
     const lbl  = document.getElementById('ie-nlbl');
     const arr  = document.getElementById('ie-narr');
-
-    if (back) {
-      back.className = step > 1 ? 'ie-btn-b show' : 'ie-btn-b';
-    }
-    if (next) {
-      next.disabled = false;
-      next.style.opacity = '1';
-    }
-    // Restore label + arrow (may have been replaced by loading dots)
-    if (lbl) lbl.textContent = step === 5 ? 'CONFIRM INTAKE' : 'CONTINUE';
-    if (arr) arr.style.display = 'block';
-
-    // Clear global error
     const gerr = document.getElementById('ie-gerr');
-    if (gerr) { gerr.textContent = ''; gerr.classList.remove('on'); }
+    if (back) back.className = step > 1 ? 'ie-btn-b show' : 'ie-btn-b';
+    if (next) { next.disabled = false; }
+    if (lbl)  lbl.textContent = step === 5 ? 'Confirm Intake' : 'Continue';
+    if (arr)  arr.style.display = 'block';
+    if (gerr) gerr.textContent = '';
   }
 
-  // ── Build step body HTML ──
   function buildBody(step) {
     switch(step) {
       case 1: return buildStep1();
@@ -1145,178 +1510,139 @@ const IE = (function() {
     }
   }
 
-  /* ── STEP 1: Service selection ── */
   function buildStep1() {
-    const cards = SVCS.map(svc => `
-      <div class="ie-opt${S.service === svc.id ? ' sel' : ''}" data-svc="${svc.id}" role="button" tabindex="0" aria-pressed="${S.service === svc.id}">
+    const cards = SVCS.map(s => `
+      <div class="ie-opt${S.service === s.id ? ' sel' : ''}" data-svc="${s.id}" role="button" tabindex="0" aria-pressed="${S.service === s.id}" aria-label="Select ${esc(s.label)} service">
         <div class="ie-ochk">
           <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="ie-oico">${svc.icon}</div>
-        <div class="ie-olbl">${svc.label}</div>
-        <div class="fm" style="font-size:.58rem;color:#334155;">${svc.sub}</div>
+        <div class="ie-oico">${s.icon}</div>
+        <div class="ie-olbl">${esc(s.label)}</div>
+        <div class="ie-osub">${esc(s.sub)}</div>
       </div>
     `).join('');
-
     return `
-      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Select the type of service you need. This determines how your case is routed through the triage grid.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:20px;">
-        ${cards}
-      </div>
-      <div class="fm ie-em" id="err1" style="font-size:.62rem;">Please select a service type to continue.</div>
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">Select the type of service you need. This determines how your case is routed through the triage grid.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-bottom:16px;">${cards}</div>
+      <div class="ie-em" id="err1" role="alert" aria-live="polite">Please select a service type to continue.</div>
     `;
   }
 
-  /* ── STEP 2: Urgency level ── */
   function buildStep2() {
     const cards = URGS.map(u => {
       const isSel = S.urgency === u.id;
       return `
-        <div class="ie-urg${isSel ? ' sel' : ''}" data-urg="${u.id}" role="button" tabindex="0"
-             style="background:${isSel ? u.bg : 'rgba(8,12,28,.7)'};border-color:${isSel ? u.bd : 'rgba(51,65,85,.6)'};--uc:${u.clr};">
-          <div class="urg-dot" style="background:${u.clr};box-shadow:0 0 8px ${u.clr}55;"></div>
-          <div style="flex:1;">
-            <div class="fd" style="font-weight:700;font-size:.95rem;color:#fff;margin-bottom:3px;">${u.label}</div>
-            <div style="font-size:.8rem;color:#64748b;line-height:1.45;">${u.desc}</div>
+        <div class="ie-urg${isSel ? ' sel' : ''}" data-urg="${u.id}" role="button" tabindex="0" aria-label="${esc(u.label)} urgency: ${esc(u.desc)}"
+             style="background:${isSel ? u.bg : 'var(--bg)'};border-color:${isSel ? u.bd : 'var(--border)'};--uc:${u.clr};">
+          <div class="urg-dot" style="background:${u.clr};"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="urg-title">${esc(u.label)}</div>
+            <div class="urg-desc">${esc(u.desc)}</div>
           </div>
-          <div class="urg-badge fm" style="background:${u.clr}20;color:${u.clr};border:1px solid ${u.clr}50;">&#10003;</div>
+          <div class="urg-badge" style="background:${u.bg};color:${u.clr};border:1px solid ${u.bd};">✓</div>
         </div>
       `;
     }).join('');
-
     return `
-      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">How critical is your situation? This determines response priority and resource allocation.</p>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
-        ${cards}
-      </div>
-      <div class="fm ie-em" id="err2" style="font-size:.62rem;">Please select an urgency level to continue.</div>
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">How critical is your situation? This determines response priority and resource allocation.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">${cards}</div>
+      <div class="ie-em" id="err2" role="alert" aria-live="polite">Please select an urgency level to continue.</div>
     `;
   }
 
-  /* ── STEP 3: User information ── */
   function buildStep3() {
     const opts = REGIONS.map(r =>
       `<option value="${esc(r)}"${S.location === r ? ' selected' : ''}>${esc(r)}</option>`
     ).join('');
-
     return `
-      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:16px;">
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:8px;">
         <div>
-          <label class="ie-lbl" for="ie-name">FULL NAME</label>
-          <input class="ie-inp${S.name && S.name.trim().length < 2 ? ' err' : ''}" id="ie-name" type="text"
-            placeholder="e.g. Adaora Okafor" value="${esc(S.name)}" autocomplete="name" maxlength="80"/>
-          <div class="fm ie-em" id="err-name">Please enter your full name (min. 2 characters).</div>
+          <label class="ie-lbl" for="ie-name">Full Name</label>
+          <input class="ie-inp" id="ie-name" type="text" placeholder="e.g. Adaora Okafor" value="${esc(S.name)}" autocomplete="name" maxlength="80"/>
+          <div class="ie-em" id="err-name">Please enter your full name (min. 2 characters).</div>
         </div>
         <div>
-          <label class="ie-lbl" for="ie-phone">PHONE NUMBER</label>
-          <input class="ie-inp" id="ie-phone" type="tel"
-            placeholder="e.g. 0812 345 6789" value="${esc(S.phone)}" autocomplete="tel" maxlength="20"/>
-          <div class="fm ie-em" id="err-phone">Please enter a valid phone number.</div>
+          <label class="ie-lbl" for="ie-phone">Phone Number</label>
+          <input class="ie-inp" id="ie-phone" type="tel" placeholder="e.g. 0812 345 6789" value="${esc(S.phone)}" autocomplete="tel" maxlength="20"/>
+          <div class="ie-em" id="err-phone">Please enter a valid phone number.</div>
         </div>
         <div>
-          <label class="ie-lbl" for="ie-loc">LOCATION / REGION</label>
+          <label class="ie-lbl" for="ie-loc">Location / Region</label>
           <div class="sel-w">
             <select class="ie-inp" id="ie-loc">
-              <option value="" disabled${!S.location ? ' selected' : ''}>Select your area&hellip;</option>
+              <option value="" disabled${!S.location ? ' selected' : ''}>Select your area…</option>
               ${opts}
             </select>
           </div>
-          <div class="fm ie-em" id="err-loc">Please select your location.</div>
+          <div class="ie-em" id="err-loc">Please select your location.</div>
         </div>
       </div>
     `;
   }
 
-  /* ── STEP 4: Situation description ── */
   function buildStep4() {
     const MAX = 400;
     const cur = S.description.length;
     return `
-      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Describe the situation clearly. Include symptoms, duration, and any relevant medical history.</p>
-      <div style="margin-bottom:6px;">
-        <label class="ie-lbl" for="ie-desc">SITUATION DESCRIPTION</label>
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">Describe the situation clearly. Include symptoms, duration, and any relevant medical history.</p>
+      <div>
+        <label class="ie-lbl" for="ie-desc">Situation Description</label>
         <textarea class="ie-inp" id="ie-desc" rows="6" maxlength="${MAX}"
           placeholder="e.g. Patient, 54M, presenting with chest pain and difficulty breathing for the past 2 hours…">${esc(S.description)}</textarea>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
-          <div class="fm ie-em" id="err-desc">Please provide at least 20 characters.</div>
-          <div class="fm ie-cct${cur >= MAX * 0.85 ? ' warn' : ''}" id="ie-cct">${cur} / ${MAX}</div>
+          <div class="ie-em" id="err-desc">Please provide at least 20 characters.</div>
+          <div class="ie-cct${cur >= MAX * .85 ? ' warn' : ''}" id="ie-cct">${cur} / ${MAX}</div>
         </div>
       </div>
-      <div style="margin-top:18px;padding:13px 15px;background:rgba(6,182,212,.04);border:1px solid rgba(6,182,212,.12);border-radius:12px;display:flex;gap:11px;align-items:flex-start;margin-bottom:16px;">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7.5" cy="7.5" r="6.5" stroke="#06b6d4" stroke-width="1.3"/><path d="M7.5 6.5V10.5M7.5 5V4.5" stroke="#06b6d4" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <div class="fm" style="font-size:.66rem;line-height:1.55;letter-spacing:.02em;color:#475569;">All data is encrypted in transit. Only authorized OCTIS triage personnel will access this information.</div>
+      <div class="ie-info">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="8" cy="8" r="7" stroke="#3b6bff" stroke-width="1.3"/><path d="M8 7V11M8 5V4.5" stroke="#3b6bff" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div class="ie-info-text">All data is encrypted in transit. Only authorized OCTIS triage personnel will access this information.</div>
       </div>
     `;
   }
 
-  /* ── STEP 5: Review & confirm ── */
   function buildStep5() {
     const svc = find(SVCS, S.service);
     const urg = find(URGS, S.urgency);
     return `
-      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Review your case details carefully before submitting. Once confirmed, your intake is routed immediately.</p>
-
-      <div style="background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.45);border-radius:16px;padding:18px 20px;margin-bottom:16px;">
-        <div class="slbl" style="font-size:.58rem;margin-bottom:14px;">CASE SUMMARY</div>
-
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">Review your case details carefully before submitting. Once confirmed, your intake is routed immediately.</p>
+      <div style="background:var(--bg-sec);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;">
+        <div style="font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px;">Case Summary</div>
         <div class="rv-row">
-          <div class="rv-k">SERVICE</div>
-          <div class="rv-v">${esc(svc.label || S.service)}<br/><span style="font-size:.75rem;color:#334155;">${esc(svc.sub || '')}</span></div>
+          <div class="rv-k">Service</div>
+          <div class="rv-v">${esc(svc.label || '')}<br/><span style="font-size:.78rem;color:var(--text-3);">${esc(svc.sub || '')}</span></div>
         </div>
         <div class="rv-row">
-          <div class="rv-k">URGENCY</div>
-          <div class="rv-v">
-            <span class="fm" style="font-size:.65rem;padding:3px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label || '')}</span>
-          </div>
+          <div class="rv-k">Urgency</div>
+          <div class="rv-v"><span style="font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label || '')}</span></div>
         </div>
+        <div class="rv-row"><div class="rv-k">Patient</div><div class="rv-v">${esc(S.name)}</div></div>
+        <div class="rv-row"><div class="rv-k">Contact</div><div class="rv-v">${esc(S.phone)}</div></div>
+        <div class="rv-row"><div class="rv-k">Location</div><div class="rv-v">${esc(S.location)}</div></div>
         <div class="rv-row">
-          <div class="rv-k">PATIENT</div>
-          <div class="rv-v">${esc(S.name)}</div>
-        </div>
-        <div class="rv-row">
-          <div class="rv-k">CONTACT</div>
-          <div class="rv-v">${esc(S.phone)}</div>
-        </div>
-        <div class="rv-row">
-          <div class="rv-k">LOCATION</div>
-          <div class="rv-v">${esc(S.location)}</div>
-        </div>
-        <div class="rv-row">
-          <div class="rv-k">DETAILS</div>
-          <div class="rv-v" style="font-size:.82rem;color:#64748b;">
-            ${esc(S.description.length > 120 ? S.description.slice(0, 120) + '…' : S.description)}
-          </div>
+          <div class="rv-k">Details</div>
+          <div class="rv-v" style="font-size:.82rem;color:var(--text-2);">${esc(S.description.length > 100 ? S.description.slice(0,100) + '…' : S.description)}</div>
         </div>
       </div>
-
-      <div style="display:flex;align-items:center;gap:10px;padding:12px 15px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:12px;margin-bottom:16px;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M7 1L13 3.5V7C13 10.2 10.3 12.8 7 13C3.7 12.8 1 10.2 1 7V3.5L7 1Z" stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/><path d="M4.5 7L6.3 8.8L9.5 5.5" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div class="fm" style="font-size:.65rem;letter-spacing:.03em;color:#475569;">Submission is end-to-end encrypted and routed directly to OCTIS triage operations.</div>
+      <div class="ie-info" style="background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.18);">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M7 1L13 3.5V7C13 10.2 10.3 12.8 7 13C3.7 12.8 1 10.2 1 7V3.5L7 1Z" stroke="#059669" stroke-width="1.3" stroke-linejoin="round"/><path d="M4.5 7L6.3 8.8L9.5 5.5" stroke="#059669" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="ie-info-text">Submission is end-to-end encrypted and routed directly to OCTIS triage operations.</div>
       </div>
     `;
   }
 
-  // ── Bind interactions after body render ──
   function bindBody(step) {
     if (step === 1) {
       document.querySelectorAll('[data-svc]').forEach(card => {
         card.addEventListener('click', () => {
           S.service = card.dataset.svc;
-          document.querySelectorAll('[data-svc]').forEach(c => {
-            c.classList.remove('sel');
-            c.setAttribute('aria-pressed', 'false');
-          });
-          card.classList.add('sel');
-          card.setAttribute('aria-pressed', 'true');
-          const err = document.getElementById('err1');
-          if (err) err.classList.remove('on');
+          document.querySelectorAll('[data-svc]').forEach(c => { c.classList.remove('sel'); c.setAttribute('aria-pressed','false'); });
+          card.classList.add('sel'); card.setAttribute('aria-pressed','true');
+          const e = document.getElementById('err1'); if (e) e.classList.remove('on');
         });
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-        });
+        card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();card.click();} });
       });
     }
-
     if (step === 2) {
       document.querySelectorAll('[data-urg]').forEach(card => {
         const u = find(URGS, card.dataset.urg);
@@ -1325,132 +1651,65 @@ const IE = (function() {
           document.querySelectorAll('[data-urg]').forEach(c => {
             const cu = find(URGS, c.dataset.urg);
             c.classList.remove('sel');
-            c.style.background = 'rgba(8,12,28,.7)';
-            c.style.borderColor = 'rgba(51,65,85,.6)';
-            const badge = c.querySelector('.urg-badge');
-            if (badge) badge.style.display = 'none';
+            c.style.background = 'var(--bg)';
+            c.style.borderColor = 'var(--border)';
+            const b = c.querySelector('.urg-badge'); if (b) b.style.display = 'none';
           });
           card.classList.add('sel');
           card.style.background = u.bg;
           card.style.borderColor = u.bd;
-          const badge = card.querySelector('.urg-badge');
-          if (badge) badge.style.display = 'block';
-          const err = document.getElementById('err2');
-          if (err) err.classList.remove('on');
+          const badge = card.querySelector('.urg-badge'); if (badge) badge.style.display = 'block';
+          const e = document.getElementById('err2'); if (e) e.classList.remove('on');
         });
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-        });
+        card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' '){e.preventDefault();card.click();} });
       });
     }
-
     if (step === 3) {
       const nm = document.getElementById('ie-name');
       const ph = document.getElementById('ie-phone');
       const lc = document.getElementById('ie-loc');
-
-      if (nm) nm.addEventListener('input', () => {
-        S.name = nm.value;
-        nm.classList.remove('err');
-        const e = document.getElementById('err-name');
-        if (e) e.classList.remove('on');
-      });
-      if (ph) ph.addEventListener('input', () => {
-        S.phone = ph.value;
-        ph.classList.remove('err');
-        const e = document.getElementById('err-phone');
-        if (e) e.classList.remove('on');
-      });
-      if (lc) lc.addEventListener('change', () => {
-        S.location = lc.value;
-        lc.classList.remove('err');
-        const e = document.getElementById('err-loc');
-        if (e) e.classList.remove('on');
-      });
+      if (nm) nm.addEventListener('input', () => { S.name=nm.value; nm.classList.remove('err'); const e=document.getElementById('err-name'); if(e) e.classList.remove('on'); });
+      if (ph) ph.addEventListener('input', () => { S.phone=ph.value; ph.classList.remove('err'); const e=document.getElementById('err-phone'); if(e) e.classList.remove('on'); });
+      if (lc) lc.addEventListener('change', () => { S.location=lc.value; lc.classList.remove('err'); const e=document.getElementById('err-loc'); if(e) e.classList.remove('on'); });
     }
-
     if (step === 4) {
       const ta = document.getElementById('ie-desc');
       const cc = document.getElementById('ie-cct');
       const MAX = 400;
       if (ta) ta.addEventListener('input', () => {
         S.description = ta.value;
-        if (cc) {
-          cc.textContent = ta.value.length + ' / ' + MAX;
-          cc.className = 'fm ie-cct' + (ta.value.length >= MAX * 0.85 ? ' warn' : '');
-        }
+        if (cc) { cc.textContent = ta.value.length+' / '+MAX; cc.className='ie-cct'+(ta.value.length>=MAX*.85?' warn':''); }
         ta.classList.remove('err');
-        const e = document.getElementById('err-desc');
-        if (e) e.classList.remove('on');
+        const e = document.getElementById('err-desc'); if (e) e.classList.remove('on');
       });
     }
   }
 
-  // ── Validate current step ──
   function validate() {
     switch(S.step) {
       case 1:
-        if (!S.service) {
-          const e = document.getElementById('err1');
-          if (e) e.classList.add('on');
-          return false;
-        }
+        if (!S.service) { const e=document.getElementById('err1'); if(e) e.classList.add('on'); return false; }
         return true;
-
       case 2:
-        if (!S.urgency) {
-          const e = document.getElementById('err2');
-          if (e) e.classList.add('on');
-          return false;
-        }
+        if (!S.urgency) { const e=document.getElementById('err2'); if(e) e.classList.add('on'); return false; }
         return true;
-
       case 3: {
         let ok = true;
-        if (!S.name.trim() || S.name.trim().length < 2) {
-          const nm = document.getElementById('ie-name');
-          const e  = document.getElementById('err-name');
-          if (nm) nm.classList.add('err');
-          if (e)  e.classList.add('on');
-          ok = false;
-        }
-        if (!phoneOK(S.phone)) {
-          const ph = document.getElementById('ie-phone');
-          const e  = document.getElementById('err-phone');
-          if (ph) ph.classList.add('err');
-          if (e)  e.classList.add('on');
-          ok = false;
-        }
-        if (!S.location) {
-          const lc = document.getElementById('ie-loc');
-          const e  = document.getElementById('err-loc');
-          if (lc) lc.classList.add('err');
-          if (e)  e.classList.add('on');
-          ok = false;
-        }
+        if (!S.name.trim() || S.name.trim().length < 2) { const nm=document.getElementById('ie-name'); if(nm) nm.classList.add('err'); const e=document.getElementById('err-name'); if(e) e.classList.add('on'); ok=false; }
+        if (!phoneOK(S.phone)) { const ph=document.getElementById('ie-phone'); if(ph) ph.classList.add('err'); const e=document.getElementById('err-phone'); if(e) e.classList.add('on'); ok=false; }
+        if (!S.location) { const lc=document.getElementById('ie-loc'); if(lc) lc.classList.add('err'); const e=document.getElementById('err-loc'); if(e) e.classList.add('on'); ok=false; }
         return ok;
       }
-
       case 4:
-        if (S.description.trim().length < 20) {
-          const ta = document.getElementById('ie-desc');
-          const e  = document.getElementById('err-desc');
-          if (ta) ta.classList.add('err');
-          if (e)  e.classList.add('on');
-          return false;
-        }
+        if (S.description.trim().length < 20) { const ta=document.getElementById('ie-desc'); if(ta) ta.classList.add('err'); const e=document.getElementById('err-desc'); if(e) e.classList.add('on'); return false; }
         return true;
-
-      default:
-        return true;
+      default: return true;
     }
   }
 
-  // ── Navigation ──
   function next() {
     if (!validate()) return;
     if (S.step === 5) { submit(); return; }
-    const prev = S.step;
     S.step++;
     transition(S.step, 'fwd');
   }
@@ -1461,159 +1720,186 @@ const IE = (function() {
     transition(S.step, 'back');
   }
 
-  // ── Submit ──
   function submit() {
+    if (S.isSubmitting) return;
+
     const nextBtn = document.getElementById('ie-next');
     const lbl     = document.getElementById('ie-nlbl');
     const arr     = document.getElementById('ie-narr');
     const backBtn = document.getElementById('ie-back');
 
-    // Loading state
+    S.isSubmitting = true;
     if (nextBtn) nextBtn.disabled = true;
-    if (lbl)  lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
-    if (arr)  arr.style.display = 'none';
-    if (backBtn) backBtn.className = 'ie-btn-b'; // hide during submit
+    if (lbl) lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
+    if (arr) arr.style.display = 'none';
+    if (backBtn) backBtn.className = 'ie-btn-b';
 
     S.routingId = genID();
-
     const payload = {
       routingId:  S.routingId,
       timestamp:  new Date().toISOString(),
       service:    S.service,
       urgency:    S.urgency,
-      patient: {
-        name:     S.name.trim(),
-        phone:    S.phone.trim(),
-        location: S.location
-      },
+      patient: { name: S.name.trim(), phone: S.phone.trim(), location: S.location },
       situation:  S.description.trim(),
-      meta: {
-        engine:  'OCTIS-IntakeEngine',
-        version: '3.0.0',
-        phase:   2
-      }
+      meta: { engine:'OCTIS-IntakeEngine', version:'4.0.0', phase:2 }
     };
 
-    // Log payload
-    console.log(
-      '%c[OCTIS INTAKE] ✓ Payload compiled',
-      'color:#10b981;font-weight:bold;font-size:13px;',
-      JSON.stringify(payload, null, 2)
-    );
-
-    setTimeout(() => {
-      initiateRouting(payload);
-      showSuccess(payload);
-    }, 1800);
+    submitIntake(payload);
   }
 
-  // ── Phase 3 routing hook ──
-  function initiateRouting(payload) {
-    console.log(
-      '%c[OCTIS ROUTING] initiateRouting() fired — Phase 3 deep-link ready',
-      'color:#06b6d4;font-weight:bold;font-size:13px;',
-      payload
-    );
-    // Phase 3: POST to /api/v3/intake or open WebSocket triage channel
+  function generateWhatsAppTicket(payload) {
+    const svc = find(SVCS, payload.service);
+    const urg = find(URGS, payload.urgency);
+    const timestamp = new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' });
+
+    return `🚨 OCTIS OPERATIONS DESK: NEW INTAKE TICKET
+---------------------------------------
+SERVICE LEVEL: ${svc.label || 'N/A'}
+URGENCY TIER: ${urg.label || 'N/A'}
+---------------------------------------
+DISPATCH TO: ${payload.patient.name}
+CONTACT PHONE: ${payload.patient.phone}
+LOCATION TARGET: ${payload.patient.location}
+---------------------------------------
+CASE DETAILS:
+${payload.situation}
+---------------------------------------
+Routing ID: ${payload.routingId}
+Generated: ${timestamp}`;
   }
 
-  // ── Success screen ──
-  function showSuccess(payload) {
-    // Header to 100%
-    updateHeader(5);
-    const pEl  = document.getElementById('ie-pct');
-    const bar  = document.getElementById('ie-pfill');
+  function launchWhatsAppRouting(payload) {
+    try {
+      const message = generateWhatsAppTicket(payload);
+      const encodedMessage = encodeURIComponent(message);
+      const phone = APP_CONFIG.operationsPhone.replace(/\D/g, '');
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+
+      setTimeout(() => { window.open(whatsappUrl, '_blank'); }, 600);
+    } catch (err) {
+      // Silently fail WhatsApp routing — doesn't block submission success
+    }
+  }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), APP_CONFIG.submissionTimeout);
+
+    fetch(APP_CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    })
+    .then(r => {
+      clearTimeout(timeout);
+      if (!r.ok) throw new Error('Intake submission failed');
+      return r.json();
+    })
+    .then(() => { showSuccess(); })
+    .catch(err => {
+      clearTimeout(timeout);
+      S.isSubmitting = false;
+      if (err.name !== 'AbortError') {
+        const nextBtn = document.getElementById('ie-next');
+        const gerr = document.getElementById('ie-gerr');
+        if (nextBtn) { nextBtn.disabled = false; }
+        const lbl = document.getElementById('ie-nlbl');
+        if (lbl) lbl.textContent = 'Confirm Intake';
+        const arr = document.getElementById('ie-narr');
+        if (arr) arr.style.display = 'block';
+        if (gerr) gerr.textContent = 'Unable to submit intake. Please check your connection and try again.';
+      }
+    });
+  }
+
+  function showSuccess() {
+    // Complete the header
+    const pEl = document.getElementById('ie-pct');
+    const bar = document.getElementById('ie-pfill');
     if (pEl) pEl.textContent = '100%';
     if (bar) bar.style.width = '100%';
-    for (let i = 1; i <= 5; i++) {
-      const d = document.getElementById('ied' + i);
-      const l = document.getElementById('iel' + i);
-      if (d) { d.className = 'ie-dot done'; d.textContent = ''; }
-      if (l) l.className = 'ie-line done';
+    for (let i=1;i<=5;i++) {
+      const d=document.getElementById('ied'+i); const l=document.getElementById('iel'+i);
+      if (d) { d.className='ie-dot done'; d.textContent=''; }
+      if (l) l.className='ie-line done';
     }
+    const tag=document.getElementById('ie-tag'); if(tag) tag.textContent='Complete';
+    const ttl=document.getElementById('ie-title'); if(ttl) ttl.textContent='Case Routed';
+    const ftr = document.querySelector('.ie-ftr'); if (ftr) ftr.style.display='none';
 
-    // Hide footer
-    const ftr = document.querySelector('.ie-ftr');
-    if (ftr) ftr.style.display = 'none';
-
-    const urg = find(URGS, S.urgency);
+    const urg  = find(URGS, S.urgency);
     const body = document.getElementById('ie-body');
     if (!body) return;
+    body.style.opacity='0'; body.style.transform='translateY(10px)';
 
-    body.style.opacity = '0';
-    body.style.transform = 'translateY(12px)';
+    // Create announcement for screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'assertive');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.style.position = 'absolute';
+    announcement.style.left = '-9999px';
+    announcement.textContent = `Case submitted successfully. Routing ID: ${S.routingId}. Expected response time: ${urg.eta}`;
+    document.body.appendChild(announcement);
 
     setTimeout(() => {
       body.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 28px;">
-
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 24px;">
           <div class="ie-sring">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <path d="M9 18L15 24L27 12" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+              <path d="M8 17L14 23L26 11" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
+          <div class="fs" style="font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);margin-bottom:10px;">Case Routed Successfully</div>
+          <p style="color:var(--text-2);font-size:.9rem;max-width:340px;line-height:1.7;margin-bottom:22px;">Your intake has been dispatched to the OCTIS triage grid. Our team will contact you within the target response window.</p>
 
-          <div class="fd" style="font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:#fff;margin-bottom:10px;">Case Routed Successfully</div>
-          <p style="color:#475569;font-size:.87rem;max-width:340px;line-height:1.7;margin-bottom:24px;">
-            Your intake has been dispatched to the OCTIS triage grid. Our team will contact you within the target response window.
-          </p>
-
-          <!-- ETA card -->
-          <div style="width:100%;max-width:360px;background:${urg.bg};border:1px solid ${urg.bd};border-radius:14px;padding:16px 20px;margin-bottom:18px;">
+          <div style="width:100%;max-width:340px;background:${urg.bg};border:1px solid ${urg.bd};border-radius:var(--r-lg);padding:16px 20px;margin-bottom:18px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <div class="fm" style="font-size:.63rem;letter-spacing:.1em;color:#64748b;">URGENCY TIER</div>
-              <span class="fm" style="font-size:.63rem;padding:2px 10px;border-radius:5px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${urg.label}</span>
+              <div style="font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Urgency Tier</div>
+              <span style="font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label)}</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div class="fm" style="font-size:.63rem;letter-spacing:.1em;color:#64748b;">TARGET RESPONSE</div>
-              <div class="fd" style="font-weight:700;font-size:1.1rem;color:${urg.clr};">${urg.eta}</div>
+              <div style="font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Target Response</div>
+              <div class="fs" style="font-weight:800;font-size:1.05rem;color:${urg.clr};">${esc(urg.eta)}</div>
             </div>
           </div>
 
-          <!-- Reference ID -->
           <div class="ie-rid">${esc(S.routingId)}</div>
-          <div class="fm" style="font-size:.6rem;letter-spacing:.12em;color:#334155;margin-top:8px;margin-bottom:28px;">SAVE THIS REFERENCE ID</div>
+          <div style="font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:8px;margin-bottom:24px;">Save This Reference ID</div>
 
-          <!-- Actions -->
           <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-            <a href="tel:+2349041999098" class="ie-btn-n" style="text-decoration:none;">
+            <a href="tel:${APP_CONFIG.operationsPhone}" class="ie-btn-n" style="text-decoration:none;">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13 9.5C13 9.9 12.83 10.29 12.51 10.57L11.24 11.84C10.55 12.53 9.58 12.88 8.59 12.76C6.83 12.54 4.96 11.49 3.36 9.89C1.76 8.29 0.71 6.42 0.49 4.66C0.37 3.67 0.72 2.7 1.41 2.01L2.68 0.74C3.07 0.35 3.7 0.35 4.09 0.74L5.84 2.49C6.23 2.88 6.23 3.51 5.84 3.9L5.12 4.62C5 4.74 4.98 4.92 5.07 5.06C5.59 5.91 6.28 6.7 7.09 7.36C7.23 7.45 7.41 7.43 7.53 7.31L8.25 6.59C8.64 6.2 9.27 6.2 9.66 6.59L11.41 8.34C11.8 8.73 11.8 9.36 11.41 9.75Z" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
-              CALL DISPATCH
+              Call Dispatch
             </a>
-            <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()" style="border-color:rgba(16,185,129,.3);color:#10b981;">
-              NEW INTAKE
+            <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()" style="border-color:rgba(59,107,255,.25);color:var(--accent-d);">
+              New Intake
             </button>
           </div>
         </div>
       `;
-
-      body.style.transition = 'opacity .38s ease, transform .38s cubic-bezier(.4,0,.2,1)';
+      body.style.transition = 'opacity .35s ease, transform .35s cubic-bezier(.4,0,.2,1)';
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        body.style.opacity = '1';
-        body.style.transform = 'translateY(0)';
+        body.style.opacity = '1'; body.style.transform = 'translateY(0)';
       }));
+
+      setTimeout(() => { document.body.removeChild(announcement); }, 5000);
     }, 140);
   }
 
-  // ── Restart ──
   function restart() {
-    // Show footer again
-    const ftr = document.querySelector('.ie-ftr');
-    if (ftr) ftr.style.display = '';
+    const ftr = document.querySelector('.ie-ftr'); if (ftr) ftr.style.display = '';
     mount();
   }
 
-  // First render
   mount();
-
   return { next, back, restart };
 
-})(); // end IE IIFE
+})();
 
-// Expose to global for inline onclick handlers
 window.OCTIS_IE = IE;
 
-})(); // end main IIFE
+})();
 </script>
 </body>
 </html>
