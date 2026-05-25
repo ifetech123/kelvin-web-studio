@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OCTIS — Omni-Channel Triage &amp; Intake System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════
+   OCTIS — UNIFIED DESIGN SYSTEM  v3.0  (Phase 1+2)
+═══════════════════════════════════════════════════ */
+:root{
+  --em:#10b981; --cy:#06b6d4; --bg:#020617;
+  --r-card:20px; --r-inner:14px; --r-btn:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:#020617;
+  color:#f8fafc;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* Noise overlay */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── Typography helpers ── */
+.fd{font-family:'Syne',sans-serif;}
+.fm{font-family:'DM Mono',monospace;}
+
+/* ─────────────────────────────
+   PHASE 1 — PAGE STYLES
+───────────────────────────── */
+
+/* Grid bg */
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(16,185,129,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 40%,transparent 100%);
+}
+
+/* NAV */
+#main-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px) saturate(1.4);
+  -webkit-backdrop-filter:blur(16px) saturate(1.4);
+  border-bottom:1px solid rgba(16,185,129,.1);
+  transition:border-color .3s,background .3s;
+}
+#main-nav.scrolled{border-bottom-color:rgba(16,185,129,.25);background:rgba(2,6,23,.97);}
+
+.nav-link{
+  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+  color:#64748b;text-decoration:none;transition:color .2s;
+}
+.nav-link:hover{color:#10b981;}
+
+/* Emergency button */
+.em-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#059669,#0d9488);
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
+  border:none;border-radius:10px;cursor:pointer;
+  color:#fff;font-weight:600;text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.em-btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.14));
+  opacity:0;transition:opacity .2s;
+}
+.em-btn:hover::after{opacity:1;}
+.em-btn:hover{transform:translateY(-1px);box-shadow:0 0 28px rgba(16,185,129,.45),0 6px 20px rgba(0,0,0,.4);}
+.em-btn:active{transform:scale(.97);}
+
+/* Pulse dot */
+.pdot{
+  width:8px;height:8px;border-radius:50%;
+  background:#10b981;display:inline-block;
+  position:relative;flex-shrink:0;
+}
+.pdot::after{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:rgba(16,185,129,.45);
+  animation:pdot-ring 1.6s ease-out infinite;
+}
+@keyframes pdot-ring{0%{transform:scale(.7);opacity:1;}100%{transform:scale(2.4);opacity:0;}}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:72px;position:relative;overflow:hidden;display:flex;align-items:center;}
+.glow-1{position:absolute;width:650px;height:650px;top:-120px;left:-120px;pointer-events:none;background:radial-gradient(circle,rgba(16,185,129,.12) 0%,transparent 70%);animation:gfloat 9s ease-in-out infinite;}
+.glow-2{position:absolute;width:500px;height:500px;bottom:-80px;right:-80px;pointer-events:none;background:radial-gradient(circle,rgba(6,182,212,.09) 0%,transparent 70%);animation:gfloat 11s ease-in-out infinite reverse;}
+@keyframes gfloat{0%,100%{transform:translate(0,0);}50%{transform:translate(24px,32px);}}
+
+.glass{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(12px);border-radius:16px;}
+.glass-em{background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.18);backdrop-filter:blur(12px);border-radius:16px;}
+
+.fcrd{animation:flt 6s ease-in-out infinite;}
+.fcrd:nth-child(2){animation-delay:-2.2s;animation-duration:7.5s;}
+.fcrd:nth-child(3){animation-delay:-4s;animation-duration:5.5s;}
+@keyframes flt{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+/* Hero CTAs */
+.cta-p{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  background:linear-gradient(135deg,#059669,#0d9488);
+  font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;font-weight:600;
+  color:#fff;border:none;border-radius:12px;cursor:pointer;
+  transition:transform .22s,box-shadow .22s;position:relative;overflow:hidden;
+}
+.cta-p::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.12));opacity:0;transition:opacity .22s;}
+.cta-p:hover::after{opacity:1;}
+.cta-p:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(16,185,129,.5),0 10px 28px rgba(0,0,0,.4);}
+.cta-p:active{transform:scale(.97);}
+
+.cta-s{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  background:transparent;border:1px solid rgba(16,185,129,.35);
+  font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;font-weight:500;
+  color:#10b981;border-radius:12px;cursor:pointer;
+  transition:border-color .22s,background .22s,box-shadow .22s;
+}
+.cta-s:hover{border-color:rgba(16,185,129,.7);background:rgba(16,185,129,.07);box-shadow:0 0 24px rgba(16,185,129,.18);}
+
+/* Metric cards */
+.mc{position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;cursor:default;}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#10b981,transparent);opacity:0;transition:opacity .3s;}
+.mc:hover{border-color:rgba(16,185,129,.35)!important;box-shadow:0 0 30px rgba(16,185,129,.12);transform:translateY(-4px);}
+.mc:hover::before{opacity:1;}
+.cnum{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:2.8rem;line-height:1;
+  background:linear-gradient(135deg,#fff 0%,#10b981 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* Section utils */
+.slbl{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:#10b981;text-transform:uppercase;}
+.sdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,.2),transparent);}
+.chip{font-family:'DM Mono',monospace;font-size:.64rem;letter-spacing:.1em;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#10b981;border-radius:6px;padding:3px 10px;}
+.hgrad{background:linear-gradient(135deg,#f8fafc 0%,#94a3b8 55%,#10b981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* Service cards */
+.scard{
+  position:relative;background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;
+  cursor:default;overflow:hidden;
+  transition:border-color .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,transform .3s;
+}
+.scard::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(16,185,129,.07) 0%,transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.scard:hover{border-color:rgba(16,185,129,.28);box-shadow:0 0 40px rgba(16,185,129,.09),0 20px 40px rgba(0,0,0,.4);transform:translateY(-6px);}
+.scard:hover::after{opacity:1;}
+.sico{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;transition:background .3s,box-shadow .3s;
+}
+.scard:hover .sico{background:rgba(16,185,129,.18);box-shadow:0 0 20px rgba(16,185,129,.25);}
+
+/* Fade-up animation */
+.fu{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1);}
+.fu.vis{opacity:1;transform:translateY(0);}
+
+/* Mobile nav */
+#mob-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(2,6,23,.92);
+  backdrop-filter:blur(22px) saturate(1.6);
+  -webkit-backdrop-filter:blur(22px) saturate(1.6);
+  border-top:1px solid rgba(16,185,129,.15);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  gap:10px;
+}
+@media(max-width:767px){#mob-nav{display:flex;}body{padding-bottom:86px;}}
+.mbtn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:10px 8px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.03);
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;
+  color:#64748b;cursor:pointer;text-decoration:none;
+  transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.mbtn:active,.mbtn.on{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4);color:#10b981;box-shadow:0 0 16px rgba(16,185,129,.18);}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:#020617;}
+::-webkit-scrollbar-thumb{background:rgba(16,185,129,.3);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(16,185,129,.5);}
+
+/* ─────────────────────────────────────────
+   PHASE 2 — INTAKE ENGINE STYLES
+───────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+
+/* Keyframes */
+@keyframes ie-ring{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}50%{box-shadow:0 0 0 4px rgba(16,185,129,.18);}}
+@keyframes ie-check{0%{transform:scale(0) rotate(-12deg);opacity:0;}60%{transform:scale(1.2) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(0);opacity:1;}}
+@keyframes ie-success{0%{transform:scale(.55);opacity:0;}65%{transform:scale(1.06);}100%{transform:scale(1);opacity:1;}}
+@keyframes ie-blink{0%,80%,100%{opacity:.25;transform:scale(.75);}40%{opacity:1;transform:scale(1);}}
+@keyframes ie-slide-r{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes ie-slide-l{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes ie-up{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ie-bpulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+/* Intake container override — remove placeholder styles, engine handles it */
+#intake-engine-container{
+  position:relative;
+  border-radius:var(--r-card);
+  overflow:visible; /* allow engine shadow to show */
+  min-height:0;
+  /* Remove phase-1 border/bg since engine renders its own shell */
+  border:none;
+  background:none;
+}
+/* Remove the ::before glow border from container — engine shell handles its own border */
+#intake-engine-container::before{display:none;}
+
+/* Engine shell */
+.ie-shell{
+  background:rgba(8,12,28,.85);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
+  border:1px solid rgba(51,65,85,.6);
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 0 0 1px rgba(16,185,129,.06),0 32px 80px rgba(0,0,0,.6),0 0 60px rgba(16,185,129,.05);
+}
+/* Animated top edge glow */
+.ie-shell::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 10%,rgba(16,185,129,.5) 50%,transparent 90%);
+  animation:ie-bpulse 3s ease-in-out infinite;
+}
+
+/* Header */
+.ie-hdr{padding:24px 28px 20px;border-bottom:1px solid rgba(51,65,85,.4);}
+@media(max-width:480px){.ie-hdr{padding:20px 18px 16px;}}
+
+/* Step dot stepper */
+.ie-dot{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid rgba(71,85,105,.5);
+  background:rgba(8,12,28,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:.6rem;color:#475569;
+  flex-shrink:0;position:relative;
+  transition:border-color .35s,background .35s,color .35s,box-shadow .35s;
+}
+.ie-dot.active{
+  border-color:#10b981;color:#10b981;
+  background:rgba(16,185,129,.1);
+  box-shadow:0 0 0 3px rgba(16,185,129,.14);
+  animation:ie-ring 2.5s ease-in-out infinite;
+}
+.ie-dot.done{
+  border-color:#059669;
+  background:rgba(5,150,105,.18);
+  color:transparent;animation:none;
+}
+.ie-dot.done::after{
+  content:'';position:absolute;
+  width:8px;height:5px;
+  border-left:1.5px solid #10b981;
+  border-bottom:1.5px solid #10b981;
+  transform:rotate(-45deg) translate(1px,-1px);
+}
+.ie-line{flex:1;height:1px;background:rgba(71,85,105,.2);margin:0 3px;transition:background .45s ease;}
+.ie-line.done{background:rgba(16,185,129,.45);}
+
+/* Progress bar */
+.ie-pbar{height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin-top:14px;}
+.ie-pfill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,#10b981,#06b6d4);
+  transition:width .55s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.ie-pfill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:36px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5));
+}
+
+/* Body area */
+.ie-body{
+  padding:26px 28px 8px;
+  min-height:280px;
+  position:relative;
+  transition:opacity .3s ease,transform .3s cubic-bezier(.4,0,.2,1);
+}
+@media(max-width:480px){.ie-body{padding:20px 18px 8px;}}
+
+/* Footer */
+.ie-ftr{
+  padding:16px 28px 24px;
+  border-top:1px solid rgba(51,65,85,.25);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+@media(max-width:480px){.ie-ftr{padding:14px 18px 20px;}}
+
+/* Step tag + title */
+.ie-tag{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;color:#10b981;margin-bottom:3px;}
+.ie-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;letter-spacing:-.01em;}
+
+/* ── Service option cards (Step 1) ── */
+.ie-opt{
+  background:rgba(8,12,28,.7);
+  border:1.5px solid rgba(51,65,85,.6);
+  border-radius:var(--r-inner);
+  padding:16px 12px;
+  cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;
+  min-height:104px;justify-content:center;
+  position:relative;overflow:hidden;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .2s,background .2s,transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s;
+}
+.ie-opt::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(16,185,129,.09),transparent 70%);
+  opacity:0;transition:opacity .25s;
+}
+.ie-opt:hover{transform:translateY(-2px);border-color:rgba(16,185,129,.35);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.ie-opt:hover::before{opacity:1;}
+.ie-opt:active{transform:scale(.96);}
+.ie-opt.sel{
+  border-color:#10b981;background:rgba(16,185,129,.08);
+  box-shadow:0 0 0 1px rgba(16,185,129,.22),0 8px 32px rgba(16,185,129,.1);
+  animation:ie-ring 2.8s ease-in-out infinite;
+}
+.ie-opt.sel::before{opacity:1;}
+
+.ie-oico{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,box-shadow .2s,border-color .2s;
+}
+.ie-opt.sel .ie-oico{background:rgba(16,185,129,.2);border-color:rgba(16,185,129,.45);box-shadow:0 0 16px rgba(16,185,129,.22);}
+
+.ie-olbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.05em;color:#94a3b8;line-height:1.3;transition:color .2s;}
+.ie-opt.sel .ie-olbl{color:#10b981;}
+
+.ie-ochk{
+  position:absolute;top:7px;right:8px;
+  width:17px;height:17px;border-radius:50%;
+  background:#10b981;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0);pointer-events:none;
+}
+.ie-opt.sel .ie-ochk{animation:ie-check .28s cubic-bezier(.34,1.56,.64,1) forwards;}
+
+/* ── Urgency cards (Step 2) ── */
+.ie-urg{
+  border:1.5px solid rgba(51,65,85,.6);
+  border-radius:var(--r-inner);
+  padding:16px 18px;cursor:pointer;
+  display:flex;align-items:center;gap:14px;
+  min-height:66px;position:relative;overflow:hidden;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .2s cubic-bezier(.4,0,.2,1),box-shadow .2s,border-color .2s,background .2s;
+}
+.ie-urg:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.ie-urg:active{transform:scale(.98);}
+.ie-urg.sel{box-shadow:0 0 0 1px var(--uc),0 8px 32px rgba(0,0,0,.25);}
+.urg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:var(--uc);}
+.urg-badge{
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;
+  padding:2px 8px;border-radius:5px;flex-shrink:0;
+  display:none;
+}
+.ie-urg.sel .urg-badge{display:block;}
+
+/* ── Form inputs ── */
+.ie-inp{
+  width:100%;
+  background:rgba(2,6,23,.85);
+  border:1.5px solid rgba(51,65,85,.65);
+  border-radius:12px;
+  color:#f1f5f9;
+  font-family:'Inter',sans-serif;font-size:.9rem;
+  padding:13px 15px;outline:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+  -webkit-appearance:none;appearance:none;
+}
+.ie-inp::placeholder{color:#334155;}
+.ie-inp:focus{border-color:#06b6d4;box-shadow:0 0 0 3px rgba(6,182,212,.13);background:rgba(6,182,212,.025);}
+.ie-inp.err{border-color:rgba(239,68,68,.65);box-shadow:0 0 0 3px rgba(239,68,68,.1);}
+textarea.ie-inp{resize:none;line-height:1.65;}
+.ie-lbl{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:#475569;margin-bottom:6px;display:block;}
+.ie-em{font-family:'DM Mono',monospace;font-size:.62rem;color:#f87171;margin-top:5px;display:none;}
+.ie-em.on{display:block;}
+.ie-cct{font-family:'DM Mono',monospace;font-size:.62rem;color:#475569;text-align:right;margin-top:5px;transition:color .2s;}
+.ie-cct.warn{color:#f59e0b;}
+
+/* Select wrapper */
+.sel-w{position:relative;}
+.sel-w::after{
+  content:'';position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #475569;
+  pointer-events:none;
+}
+select.ie-inp{cursor:pointer;padding-right:34px;}
+select.ie-inp option{background:#0f172a;}
+
+/* ── Buttons ── */
+.ie-btn-n{
+  background:linear-gradient(135deg,#059669,#0d9488);
+  border:none;border-radius:var(--r-btn);color:#fff;
+  font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.1em;font-weight:500;
+  padding:13px 26px;cursor:pointer;min-height:48px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
+}
+.ie-btn-n::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.13));opacity:0;transition:opacity .2s;}
+.ie-btn-n:hover::after{opacity:1;}
+.ie-btn-n:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(16,185,129,.45),0 8px 24px rgba(0,0,0,.4);}
+.ie-btn-n:active{transform:scale(.97);}
+.ie-btn-n:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none;}
+.ie-btn-n:disabled::after{display:none;}
+
+.ie-btn-b{
+  background:transparent;border:1.5px solid rgba(51,65,85,.75);border-radius:var(--r-btn);
+  color:#64748b;font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.1em;
+  padding:13px 18px;cursor:pointer;min-height:48px;
+  display:flex;align-items:center;gap:8px;
+  transition:border-color .2s,color .2s,transform .2s;
+  visibility:hidden;
+}
+.ie-btn-b.show{visibility:visible;}
+.ie-btn-b:hover{border-color:rgba(100,116,139,.65);color:#94a3b8;transform:translateX(-2px);}
+.ie-btn-b:active{transform:scale(.97);}
+
+/* Review rows */
+.rv-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(51,65,85,.25);gap:16px;}
+.rv-row:last-child{border-bottom:none;}
+.rv-k{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:#475569;flex-shrink:0;padding-top:2px;}
+.rv-v{font-family:'Inter',sans-serif;font-size:.87rem;color:#e2e8f0;text-align:right;line-height:1.5;max-width:58%;}
+
+/* Success */
+.ie-sring{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(16,185,129,.1);border:2px solid rgba(16,185,129,.35);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 22px;
+  box-shadow:0 0 40px rgba(16,185,129,.2);
+  animation:ie-success .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+.ie-rid{
+  font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.14em;color:#10b981;
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);
+  padding:9px 22px;border-radius:10px;display:inline-block;margin-top:10px;
+}
+
+/* Loading dots */
+.ie-dots{display:flex;gap:5px;align-items:center;justify-content:center;}
+.ie-dots span{width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block;animation:ie-blink 1.4s ease-in-out infinite;}
+.ie-dots span:nth-child(2){animation-delay:.18s;}
+.ie-dots span:nth-child(3){animation-delay:.36s;}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+  NAVIGATION
+════════════════════════════════════════ -->
+<nav id="main-nav">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+
+    <!-- Logo -->
+    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <div style="width:34px;height:34px;background:linear-gradient(135deg,#059669,#0d9488);border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(16,185,129,.4);flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="fd" style="font-weight:800;font-size:1.1rem;letter-spacing:-.02em;line-height:1;color:#fff;">OCTIS</div>
+        <div class="fm" style="font-size:.52rem;letter-spacing:.14em;color:#475569;">TRIAGE SYSTEM</div>
+      </div>
+    </a>
+
+    <!-- Desktop links + CTA -->
+    <div style="display:flex;align-items:center;gap:32px;" class="hidden md:flex">
+      <a href="#services" class="nav-link">SERVICES</a>
+      <a href="#metrics"  class="nav-link">NETWORK</a>
+      <a href="#intake-section" class="nav-link">INTAKE</a>
+      <a href="tel:+2341234567890" class="em-btn" style="padding:10px 18px;font-size:.7rem;">
+        <span class="pdot"></span>EMERGENCY CALL PROTOCOL
+      </a>
+    </div>
+
+    <!-- Mobile: compact emergency btn -->
+    <a href="tel:+2341234567890" class="em-btn md:hidden" style="padding:9px 14px;font-size:.62rem;">
+      <span class="pdot" style="width:6px;height:6px;"></span>EMERGENCY
+    </a>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+  HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:60px 24px;width:100%;position:relative;z-index:1;">
+    <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:center;" class="lg:grid-cols-2-custom">
+
+      <!-- Left: Copy -->
+      <div class="fu" style="max-width:600px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+          <span class="chip">ENTERPRISE MEDICAL INFRASTRUCTURE</span>
+          <span class="pdot"></span>
+        </div>
+
+        <h1 class="fd hgrad" style="font-weight:800;font-size:clamp(2.1rem,5.5vw,3.8rem);line-height:1.06;letter-spacing:-.025em;margin-bottom:24px;">
+          Streamlined<br/>Medical<br/>Infrastructure.<br/>
+          <span style="background:linear-gradient(90deg,#10b981,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zero Friction<br/>Admissions.</span>
+        </h1>
+
+        <p style="color:#64748b;font-size:.95rem;line-height:1.75;max-width:480px;margin-bottom:36px;font-weight:300;">
+          Rapid scheduling automation, real-time emergency intake routing, and intelligent triage handling — purpose-built for clinics and diagnostic centers operating at scale.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;">
+          <a href="#intake-section" class="cta-p" style="padding:14px 26px;">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7 1L14 7.5L7 14M1 7.5H14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            LAUNCH INTAKE PORTAL
+          </a>
+          <a href="#services" class="cta-s" style="padding:14px 26px;">
+            VIEW SERVICE NETWORK
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5H12M7 1.5L12 6.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="display:flex;">
+            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#059669,#0d9488);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-right:-8px;">A</div>
+            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#0e7490,#0891b2);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-right:-8px;">C</div>
+            <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#065f46,#059669);border:2px solid #020617;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">M</div>
+          </div>
+          <div class="fm" style="font-size:.65rem;letter-spacing:.06em;color:#334155;">TRUSTED BY 340+ FACILITIES</div>
+        </div>
+      </div>
+
+      <!-- Right: Floating UI panel (desktop only) -->
+      <div style="display:none;position:relative;min-height:520px;align-items:center;justify-content:center;" id="hero-visual">
+        <div class="fcrd glass-em" style="padding:24px;width:296px;position:relative;z-index:20;box-shadow:0 0 60px rgba(16,185,129,.12),0 32px 64px rgba(0,0,0,.55);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+            <div>
+              <div class="slbl" style="font-size:.6rem;margin-bottom:3px;">LIVE TRIAGE</div>
+              <div class="fd" style="font-weight:700;font-size:.95rem;color:#fff;">Queue Status</div>
+            </div>
+            <div style="width:9px;height:9px;background:#10b981;border-radius:50%;box-shadow:0 0 8px rgba(16,185,129,.8);animation:pdot-ring 1.6s ease-out infinite;"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
+              <div><div class="fm" style="font-size:.7rem;color:#fff;">EMG-0042</div><div class="fm" style="font-size:.58rem;color:#475569;">Emergency Admit</div></div>
+              <span class="fm" style="font-size:.58rem;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.3);color:#f87171;padding:2px 8px;border-radius:5px;">CRITICAL</span>
+            </div>
+            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
+              <div><div class="fm" style="font-size:.7rem;color:#fff;">SCH-0198</div><div class="fm" style="font-size:.58rem;color:#475569;">Scheduled Intake</div></div>
+              <span class="fm" style="font-size:.58rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#10b981;padding:2px 8px;border-radius:5px;">ACTIVE</span>
+            </div>
+            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px;display:flex;align-items:center;justify-content:space-between;">
+              <div><div class="fm" style="font-size:.7rem;color:#fff;">DGN-0317</div><div class="fm" style="font-size:.58rem;color:#475569;">Diagnostic Queue</div></div>
+              <span class="fm" style="font-size:.58rem;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3);color:#06b6d4;padding:2px 8px;border-radius:5px;">PENDING</span>
+            </div>
+          </div>
+          <div class="sdiv" style="margin:14px 0;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="fm" style="font-size:.6rem;color:#475569;">AVG RESPONSE</div>
+            <div class="fd" style="font-weight:700;font-size:1rem;color:#10b981;">3.2 MIN</div>
+          </div>
+        </div>
+        <div class="fcrd glass" style="position:absolute;top:10px;right:0;width:152px;padding:16px;z-index:15;box-shadow:0 0 30px rgba(6,182,212,.1),0 16px 40px rgba(0,0,0,.4);">
+          <div class="slbl" style="font-size:.58rem;color:#06b6d4;margin-bottom:4px;">UPTIME</div>
+          <div class="fd" style="font-weight:800;font-size:1.7rem;color:#fff;line-height:1;">99.98%</div>
+          <div class="fm" style="font-size:.55rem;color:#334155;margin-top:3px;">PLATFORM SLA</div>
+          <div style="margin-top:10px;height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:99.98%;background:linear-gradient(90deg,#06b6d4,#10b981);border-radius:3px;"></div></div>
+        </div>
+        <div class="fcrd glass" style="position:absolute;bottom:10px;left:0;width:168px;padding:16px;z-index:15;box-shadow:0 0 30px rgba(16,185,129,.1),0 16px 40px rgba(0,0,0,.4);">
+          <div class="slbl" style="font-size:.58rem;margin-bottom:4px;">INTAKE TODAY</div>
+          <div class="fd" style="font-weight:800;font-size:1.65rem;color:#fff;line-height:1;">2,481</div>
+          <div class="fm" style="font-size:.58rem;color:#10b981;margin-top:5px;">&#9650; 12.4% vs yesterday</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* Hero 2-col layout on large screens */
+@media(min-width:1024px){
+  #hero > div > div{grid-template-columns:1fr 1fr!important;}
+  #hero-visual{display:flex!important;}
+}
+</style>
+
+
+<!-- ════════════════════════════════════════
+  METRICS STRIP
+════════════════════════════════════════ -->
+<section id="metrics" style="padding:64px 0;position:relative;">
+  <div class="sdiv" style="margin-bottom:64px;"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;" class="metrics-grid">
+      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);">
+        <div class="slbl" style="margin-bottom:10px;">RESPONSE TIME</div>
+        <div class="cnum" data-target="3" data-suffix="MIN">0</div>
+        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">AVG EMERGENCY INTAKE</div>
+      </div>
+      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.1s;">
+        <div class="slbl" style="margin-bottom:10px;">AUTOMATION</div>
+        <div class="cnum" data-target="94" data-suffix="%">0</div>
+        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">INTAKE PROCESSES AUTO</div>
+      </div>
+      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.2s;">
+        <div class="slbl" style="margin-bottom:10px;">FACILITIES</div>
+        <div class="cnum" data-target="340" data-suffix="+">0</div>
+        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">ACTIVE IN NETWORK</div>
+      </div>
+      <div class="mc glass fu" style="padding:28px 24px;border:1px solid rgba(255,255,255,.07);transition-delay:.3s;">
+        <div class="slbl" style="margin-bottom:10px;">SUPPORT</div>
+        <div class="cnum" data-target="24" data-suffix="/7">0</div>
+        <div class="fm" style="font-size:.65rem;color:#334155;margin-top:8px;">OPERATIONAL COVERAGE</div>
+      </div>
+    </div>
+  </div>
+  <div class="sdiv" style="margin-top:64px;"></div>
+</section>
+<style>
+@media(min-width:1024px){.metrics-grid{grid-template-columns:repeat(4,1fr)!important;}}
+</style>
+
+
+<!-- ════════════════════════════════════════
+  INTAKE ENGINE SECTION
+════════════════════════════════════════ -->
+<section id="intake-section" style="padding:64px 0;position:relative;">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+
+    <!-- Section header -->
+    <div style="text-align:center;margin-bottom:36px;" class="fu">
+      <div class="slbl" style="margin-bottom:10px;">LIVE PORTAL</div>
+      <h2 class="fd" style="font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.025em;color:#fff;margin-bottom:12px;">Intake Engine</h2>
+      <p style="color:#475569;font-size:.9rem;max-width:480px;margin:0 auto;line-height:1.7;">Complete your intake in under 3 minutes. Encrypted, secure, and routed instantly to our triage grid.</p>
+    </div>
+
+    <!-- ★ PHASE 2 INJECTION TARGET ★ -->
+    <div id="intake-engine-container"></div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+  SERVICES GRID
+════════════════════════════════════════ -->
+<section id="services" style="padding:64px 0;position:relative;">
+  <div class="sdiv" style="margin-bottom:64px;"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;" class="fu">
+      <div class="slbl">CORE CAPABILITIES</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
+        <h2 class="fd" style="font-weight:800;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.025em;color:#fff;">Service Network</h2>
+        <p style="color:#475569;font-size:.85rem;max-width:320px;text-align:right;line-height:1.65;">Six specialized pillars engineered for zero-friction medical operations.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(1,1fr);gap:16px;" class="svc-grid">
+
+      <div class="scard fu" data-card>
+        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 1L20 6V16L11 21L2 16V6L11 1Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 7V15M7 11H15" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Emergency Admissions</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Real-time triage routing with automated severity classification. Critical cases prioritized in under 90 seconds.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">RESPONSE &lt; 90s</div>
+      </div>
+
+      <div class="scard fu" data-card style="transition-delay:.07s;">
+        <div class="sico" style="background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.2);"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#06b6d4" stroke-width="1.5"/><path d="M6 11H9L10.5 8L12 14L13.5 11H16" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Mobile Diagnostics</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Field diagnostic units connected to the OCTIS grid. Results streamed and routed instantly to specialist queues.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;color:#06b6d4;">FIELD READY</div>
+      </div>
+
+      <div class="scard fu" data-card style="transition-delay:.14s;">
+        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8H18M4 14H14M2 5H20V19H2V5Z" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Specialized Logistics</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Cold chain, pharmaceutical transport, and specimen handling tracked in real-time with automated compliance documentation.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">COMPLIANT CHAIN</div>
+      </div>
+
+      <div class="scard fu" data-card style="transition-delay:.21s;">
+        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="#10b981" stroke-width="1.5"/><path d="M15.5 15.5H12V19M12 15.5H19V19" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Rapid Scheduling</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">AI-assisted appointment allocation with conflict resolution and real-time calendar sync across all facilities.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">AI-ASSISTED</div>
+      </div>
+
+      <div class="scard fu" data-card style="transition-delay:.28s;">
+        <div class="sico" style="background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.2);"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#06b6d4" stroke-width="1.5"/><path d="M3 11H19M11 3V19" stroke="#06b6d4" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Medical Dispatch</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">Geo-intelligent dispatch with ETA tracking, resource availability mapping, and automated incident documentation.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;color:#06b6d4;">GEO-INTELLIGENT</div>
+      </div>
+
+      <div class="scard fu" data-card style="transition-delay:.35s;">
+        <div class="sico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 8H20L14.5 11.5L17 18L11 14.5L5 18L7.5 11.5L2 8H8.5L11 2Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="fd" style="font-weight:700;font-size:1rem;color:#fff;margin-bottom:8px;">Secure Case Routing</div>
+        <div style="color:#475569;font-size:.85rem;line-height:1.65;">End-to-end encrypted patient case management with role-based access, full audit trails, and HIPAA-aligned data handling.</div>
+        <div class="slbl" style="margin-top:18px;font-size:.6rem;opacity:.7;">HIPAA ALIGNED</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<style>
+@media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)!important;}}
+@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)!important;}}
+</style>
+
+
+<!-- ════════════════════════════════════════
+  FOOTER
+════════════════════════════════════════ -->
+<footer style="padding:48px 0;position:relative;">
+  <div class="sdiv" style="margin-bottom:48px;"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,#059669,#0d9488);border-radius:7px;display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <span class="fd" style="font-weight:800;font-size:1rem;letter-spacing:-.02em;color:#fff;">OCTIS</span>
+      <span class="fm" style="font-size:.55rem;letter-spacing:.12em;color:#1e293b;">v3.0.0</span>
+    </div>
+    <div class="fm" style="font-size:.62rem;letter-spacing:.06em;color:#1e293b;">&#169; 2026 OCTIS SYSTEMS &#8212; ALL RIGHTS RESERVED</div>
+    <a href="tel:+2341234567890" class="em-btn" style="padding:9px 16px;font-size:.65rem;">
+      <span class="pdot" style="width:6px;height:6px;"></span>CALL NOW
+    </a>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════
+  MOBILE BOTTOM NAV
+════════════════════════════════════════ -->
+<nav id="mob-nav">
+  <a href="tel:+2341234567890" class="mbtn">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.5 12.75C16.5 13.12 16.33 13.49 16.04 13.73L14.52 15.25C13.72 16.05 12.6 16.46 11.47 16.33C9.44 16.08 7.27 14.83 5.38 12.94C3.49 11.05 2.24 8.88 1.99 6.85C1.86 5.72 2.27 4.6 3.07 3.8L4.59 2.28C5.03 1.84 5.74 1.84 6.18 2.28L8.21 4.31C8.65 4.75 8.65 5.46 8.21 5.9L7.37 6.74C7.23 6.88 7.21 7.1 7.32 7.26C7.94 8.22 8.75 9.12 9.69 9.88C9.85 9.99 10.07 9.97 10.21 9.83L11.05 8.99C11.49 8.55 12.2 8.55 12.64 8.99L14.67 11.02C15.11 11.46 15.11 12.17 14.67 12.61Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    CALL CENTER
+  </a>
+  <a href="#intake-section" class="mbtn" id="mob-portal">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.4"/><path d="M9 6V12M6 9H12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    OPEN PORTAL
+  </a>
+  <button class="mbtn" onclick="showHoursModal()">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M9 5V9L11.5 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    HOURS
+  </button>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+  HOURS MODAL
+════════════════════════════════════════ -->
+<div id="hours-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(2,6,23,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;padding:0 16px 100px;opacity:0;transition:opacity .25s;">
+  <div class="glass-em" style="width:100%;max-width:420px;padding:26px;border-radius:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div class="fd" style="font-weight:700;font-size:1.05rem;color:#fff;">Operating Hours</div>
+      <button onclick="hideHoursModal()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);color:#64748b;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">&#10005;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(16,185,129,.07);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#cbd5e1;">EMERGENCY LINE</span><span class="fm" style="font-size:.76rem;color:#10b981;font-weight:500;">24 / 7</span></div>
+      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">MON &#8211; FRI</span><span class="fm" style="font-size:.76rem;color:#fff;">7:00 AM &#8211; 10:00 PM</span></div>
+      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">SAT &#8211; SUN</span><span class="fm" style="font-size:.76rem;color:#fff;">8:00 AM &#8211; 6:00 PM</span></div>
+      <div style="display:flex;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border-radius:10px;"><span class="fm" style="font-size:.76rem;color:#94a3b8;">HOLIDAYS</span><span class="fm" style="font-size:.76rem;color:#06b6d4;">EMERGENCY ONLY</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ──────────────────────────────
+   PHASE 1 — BASE INTERACTIONS
+────────────────────────────── */
+
+// Nav scroll state
+const NAV = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  NAV.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const y = target.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  });
+});
+
+// Fade-up on scroll
+const fuObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); fuObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.fu').forEach(el => fuObs.observe(el));
+
+// Counter animation
+function runCounter(el) {
+  const end = parseInt(el.dataset.target, 10);
+  const suf = el.dataset.suffix || '';
+  const dur = 1600;
+  const t0 = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    const ease = 1 - Math.pow(2, -10 * p);
+    el.textContent = Math.round(ease * end) + suf;
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { runCounter(e.target); cObs.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.cnum[data-target]').forEach(el => cObs.observe(el));
+
+// Service card mouse glow
+document.querySelectorAll('[data-card]').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+    c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+  });
+});
+
+// Mobile nav tap feedback
+document.querySelectorAll('.mbtn').forEach(b => {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.mbtn').forEach(x => x.classList.remove('on'));
+    this.classList.add('on');
+    setTimeout(() => this.classList.remove('on'), 500);
+  });
+});
+
+// Hours modal
+window.showHoursModal = function() {
+  const m = document.getElementById('hours-modal');
+  m.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => { m.style.opacity = '1'; }));
+};
+window.hideHoursModal = function() {
+  const m = document.getElementById('hours-modal');
+  m.style.opacity = '0';
+  setTimeout(() => { m.style.display = 'none'; }, 260);
+};
+document.getElementById('hours-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) window.hideHoursModal();
+});
+
+// CTA ripple
+document.querySelectorAll('.cta-p, .em-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const r = this.getBoundingClientRect();
+    const rip = document.createElement('span');
+    rip.style.cssText = `
+      position:absolute;border-radius:50%;background:rgba(255,255,255,.2);
+      pointer-events:none;transform:scale(0);
+      animation:rip .5s ease-out forwards;
+      width:80px;height:80px;
+      left:${e.clientX - r.left - 40}px;
+      top:${e.clientY - r.top - 40}px;
+    `;
+    if (!document.getElementById('rip-kf')) {
+      const s = document.createElement('style');
+      s.id = 'rip-kf';
+      s.textContent = '@keyframes rip{to{transform:scale(3.5);opacity:0;}}';
+      document.head.appendChild(s);
+    }
+    this.style.position = 'relative';
+    this.appendChild(rip);
+    setTimeout(() => rip.remove(), 500);
+  });
+});
+
+
+/* ──────────────────────────────────────────
+   PHASE 2 — OCTIS INTAKE ENGINE  v3.0
+────────────────────────────────────────── */
+const IE = (function() {
+
+  // ── Centralized state object ──
+  const S = {
+    step: 1,
+    total: 5,
+    service: null,
+    urgency: null,
+    name: '',
+    phone: '',
+    location: '',
+    description: '',
+    routingId: null
+  };
+
+  // ── Static data ──
+  const SVCS = [
+    { id: 'emergency',   label: 'EMERGENCY CARE',     sub: 'Immediate dispatch',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6V14M6 10H14" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg>` },
+    { id: 'diagnostics', label: 'DIAGNOSTICS',         sub: 'Lab & imaging',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#10b981" stroke-width="1.5"/><path d="M5 10H8L9.5 7L11 13L12.5 10H15" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+    { id: 'home_visit',  label: 'HOME VISIT',          sub: 'In-home care',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 9L10 3L17 9V17H13V13H7V17H3V9Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+    { id: 'logistics',   label: 'LOGISTICS',           sub: 'Transport & chain',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="7" width="11" height="9" rx="2" stroke="#10b981" stroke-width="1.5"/><path d="M13 10H15.5L18 13V16H13V10Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="17" r="1.5" fill="#10b981"/><circle cx="15" cy="17" r="1.5" fill="#10b981"/></svg>` },
+    { id: 'consult',     label: 'CONSULTATION',        sub: 'Expert review',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 9C17 12.87 13.87 16 10 16C8.77 16 7.62 15.67 6.63 15.1L3 16L3.9 12.37C3.33 11.38 3 10.23 3 9C3 5.13 6.13 2 10 2C13.87 2 17 5.13 17 9Z" stroke="#10b981" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+  ];
+
+  const URGS = [
+    { id: 'critical', label: 'CRITICAL', desc: 'Life-threatening. Immediate response required.',    clr: '#ef4444', bg: 'rgba(239,68,68,.09)',   bd: 'rgba(239,68,68,.4)',  eta: '< 5 MIN' },
+    { id: 'high',     label: 'HIGH',     desc: 'Serious condition. Urgent care within 30 minutes.', clr: '#f97316', bg: 'rgba(249,115,22,.09)',  bd: 'rgba(249,115,22,.4)', eta: '< 30 MIN' },
+    { id: 'medium',   label: 'MEDIUM',   desc: 'Stable but requires prompt medical attention.',      clr: '#f59e0b', bg: 'rgba(245,158,11,.09)',  bd: 'rgba(245,158,11,.35)',eta: '< 2 HRS' },
+    { id: 'low',      label: 'LOW',      desc: 'Routine. Scheduled intake is appropriate.',          clr: '#10b981', bg: 'rgba(16,185,129,.08)',  bd: 'rgba(16,185,129,.35)',eta: 'SCHEDULED' },
+  ];
+
+  const REGIONS = ['Lagos Island','Lagos Mainland','Ikeja','Surulere','Lekki','Victoria Island','Ajah','Ikorodu','Yaba','Apapa','Gbagada','Magodo','Other Region'];
+
+  const META = [
+    { tag: 'STEP 1 OF 5', title: 'Select Service' },
+    { tag: 'STEP 2 OF 5', title: 'Urgency Level' },
+    { tag: 'STEP 3 OF 5', title: 'Your Information' },
+    { tag: 'STEP 4 OF 5', title: 'Situation Detail' },
+    { tag: 'STEP 5 OF 5', title: 'Review &amp; Confirm' },
+  ];
+
+  // ── Utilities ──
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function find(arr, id) { return arr.find(x => x.id === id) || {}; }
+  function phoneOK(p) { return /^[0-9+\-\s()]{7,20}$/.test(p.trim()); }
+  function genID() {
+    const pfx = { emergency:'EMG', diagnostics:'DGN', home_visit:'HMV', logistics:'LGS', consult:'CON' };
+    return (pfx[S.service] || 'OTC') + '-' + String(Math.floor(1000 + Math.random() * 8999));
+  }
+  function pct(step) { return Math.round(((step - 1) / (S.total - 1)) * 100); }
+
+  // ── Mount / bootstrap ──
+  function mount() {
+    const wrap = document.getElementById('intake-engine-container');
+    if (!wrap) return;
+
+    // Reset state
+    Object.assign(S, { step:1, service:null, urgency:null, name:'', phone:'', location:'', description:'', routingId:null });
+
+    wrap.innerHTML = '';
+    const shell = document.createElement('div');
+    shell.className = 'ie-shell';
+    shell.innerHTML = buildShell();
+    wrap.appendChild(shell);
+
+    // Initial render without animation
+    updateHeader(1);
+    setBodyContent(buildBody(1));
+    syncFooter(1);
+  }
+
+  // ── Shell scaffold ──
+  function buildShell() {
+    const dots = [1,2,3,4,5].map((n, i) =>
+      `<div class="ie-dot" id="ied${n}">${n}</div>${i < 4 ? `<div class="ie-line" id="iel${n}"></div>` : ''}`
+    ).join('');
+
+    return `
+      <div class="ie-hdr">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+          <div>
+            <div class="ie-tag fm" id="ie-tag">STEP 1 OF 5</div>
+            <div class="ie-title" id="ie-title">Select Service</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="fm" style="font-size:.55rem;letter-spacing:.1em;color:#334155;">PROGRESS</div>
+            <div class="fd" id="ie-pct" style="font-weight:700;font-size:1rem;color:#10b981;line-height:1;">0%</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;" id="ie-dots">${dots}</div>
+        <div class="ie-pbar"><div class="ie-pfill" id="ie-pfill" style="width:0%;"></div></div>
+      </div>
+
+      <div class="ie-body" id="ie-body"></div>
+
+      <div class="ie-ftr">
+        <button class="ie-btn-b" id="ie-back" onclick="window.OCTIS_IE.back()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8 2L3 6.5L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          BACK
+        </button>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="fm ie-em" id="ie-gerr" style="font-size:.62rem;text-align:right;"></div>
+          <button class="ie-btn-n" id="ie-next" onclick="window.OCTIS_IE.next()">
+            <span id="ie-nlbl">CONTINUE</span>
+            <svg id="ie-narr" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M5 2L10 6.5L5 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // ── Set body content (no animation on first render) ──
+  function setBodyContent(html) {
+    const body = document.getElementById('ie-body');
+    if (!body) return;
+    body.innerHTML = html;
+  }
+
+  // ── Animated step transition ──
+  function transition(step, dir) {
+    const body = document.getElementById('ie-body');
+    if (!body) return;
+
+    // Fade out
+    body.style.opacity = '0';
+    body.style.transform = dir === 'fwd' ? 'translateX(16px)' : 'translateX(-16px)';
+
+    setTimeout(() => {
+      updateHeader(step);
+      body.innerHTML = buildBody(step);
+      bindBody(step);
+      syncFooter(step);
+
+      // Reset position for slide-in
+      body.style.transition = 'none';
+      body.style.opacity = '0';
+      body.style.transform = dir === 'fwd' ? 'translateX(-16px)' : 'translateX(16px)';
+
+      // Trigger slide-in on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          body.style.transition = 'opacity .32s ease, transform .32s cubic-bezier(.4,0,.2,1)';
+          body.style.opacity = '1';
+          body.style.transform = 'translateX(0)';
+        });
+      });
+    }, 160);
+  }
+
+  // ── Update header bar ──
+  function updateHeader(step) {
+    const m = META[step - 1];
+    const tag = document.getElementById('ie-tag');
+    const ttl = document.getElementById('ie-title');
+    const pEl = document.getElementById('ie-pct');
+    const bar = document.getElementById('ie-pfill');
+
+    if (tag) tag.textContent = m.tag;
+    if (ttl) ttl.innerHTML = m.title;
+
+    const p = pct(step);
+    if (pEl) pEl.textContent = p + '%';
+    if (bar) bar.style.width = p + '%';
+
+    // Dots + lines
+    for (let i = 1; i <= 5; i++) {
+      const dot = document.getElementById('ied' + i);
+      const line = document.getElementById('iel' + i);
+      if (!dot) continue;
+      if (i < step) {
+        dot.className = 'ie-dot done';
+        dot.textContent = '';
+      } else if (i === step) {
+        dot.className = 'ie-dot active';
+        dot.textContent = i;
+      } else {
+        dot.className = 'ie-dot';
+        dot.textContent = i;
+      }
+      if (line) line.className = 'ie-line' + (i < step ? ' done' : '');
+    }
+  }
+
+  // ── Sync footer buttons ──
+  function syncFooter(step) {
+    const back = document.getElementById('ie-back');
+    const next = document.getElementById('ie-next');
+    const lbl  = document.getElementById('ie-nlbl');
+    const arr  = document.getElementById('ie-narr');
+
+    if (back) {
+      back.className = step > 1 ? 'ie-btn-b show' : 'ie-btn-b';
+    }
+    if (next) {
+      next.disabled = false;
+      next.style.opacity = '1';
+    }
+    // Restore label + arrow (may have been replaced by loading dots)
+    if (lbl) lbl.textContent = step === 5 ? 'CONFIRM INTAKE' : 'CONTINUE';
+    if (arr) arr.style.display = 'block';
+
+    // Clear global error
+    const gerr = document.getElementById('ie-gerr');
+    if (gerr) { gerr.textContent = ''; gerr.classList.remove('on'); }
+  }
+
+  // ── Build step body HTML ──
+  function buildBody(step) {
+    switch(step) {
+      case 1: return buildStep1();
+      case 2: return buildStep2();
+      case 3: return buildStep3();
+      case 4: return buildStep4();
+      case 5: return buildStep5();
+      default: return '';
+    }
+  }
+
+  /* ── STEP 1: Service selection ── */
+  function buildStep1() {
+    const cards = SVCS.map(svc => `
+      <div class="ie-opt${S.service === svc.id ? ' sel' : ''}" data-svc="${svc.id}" role="button" tabindex="0" aria-pressed="${S.service === svc.id}">
+        <div class="ie-ochk">
+          <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="ie-oico">${svc.icon}</div>
+        <div class="ie-olbl">${svc.label}</div>
+        <div class="fm" style="font-size:.58rem;color:#334155;">${svc.sub}</div>
+      </div>
+    `).join('');
+
+    return `
+      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Select the type of service you need. This determines how your case is routed through the triage grid.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:20px;">
+        ${cards}
+      </div>
+      <div class="fm ie-em" id="err1" style="font-size:.62rem;">Please select a service type to continue.</div>
+    `;
+  }
+
+  /* ── STEP 2: Urgency level ── */
+  function buildStep2() {
+    const cards = URGS.map(u => {
+      const isSel = S.urgency === u.id;
+      return `
+        <div class="ie-urg${isSel ? ' sel' : ''}" data-urg="${u.id}" role="button" tabindex="0"
+             style="background:${isSel ? u.bg : 'rgba(8,12,28,.7)'};border-color:${isSel ? u.bd : 'rgba(51,65,85,.6)'};--uc:${u.clr};">
+          <div class="urg-dot" style="background:${u.clr};box-shadow:0 0 8px ${u.clr}55;"></div>
+          <div style="flex:1;">
+            <div class="fd" style="font-weight:700;font-size:.95rem;color:#fff;margin-bottom:3px;">${u.label}</div>
+            <div style="font-size:.8rem;color:#64748b;line-height:1.45;">${u.desc}</div>
+          </div>
+          <div class="urg-badge fm" style="background:${u.clr}20;color:${u.clr};border:1px solid ${u.clr}50;">&#10003;</div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">How critical is your situation? This determines response priority and resource allocation.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+        ${cards}
+      </div>
+      <div class="fm ie-em" id="err2" style="font-size:.62rem;">Please select an urgency level to continue.</div>
+    `;
+  }
+
+  /* ── STEP 3: User information ── */
+  function buildStep3() {
+    const opts = REGIONS.map(r =>
+      `<option value="${esc(r)}"${S.location === r ? ' selected' : ''}>${esc(r)}</option>`
+    ).join('');
+
+    return `
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:16px;">
+        <div>
+          <label class="ie-lbl" for="ie-name">FULL NAME</label>
+          <input class="ie-inp${S.name && S.name.trim().length < 2 ? ' err' : ''}" id="ie-name" type="text"
+            placeholder="e.g. Adaora Okafor" value="${esc(S.name)}" autocomplete="name" maxlength="80"/>
+          <div class="fm ie-em" id="err-name">Please enter your full name (min. 2 characters).</div>
+        </div>
+        <div>
+          <label class="ie-lbl" for="ie-phone">PHONE NUMBER</label>
+          <input class="ie-inp" id="ie-phone" type="tel"
+            placeholder="e.g. 0812 345 6789" value="${esc(S.phone)}" autocomplete="tel" maxlength="20"/>
+          <div class="fm ie-em" id="err-phone">Please enter a valid phone number.</div>
+        </div>
+        <div>
+          <label class="ie-lbl" for="ie-loc">LOCATION / REGION</label>
+          <div class="sel-w">
+            <select class="ie-inp" id="ie-loc">
+              <option value="" disabled${!S.location ? ' selected' : ''}>Select your area&hellip;</option>
+              ${opts}
+            </select>
+          </div>
+          <div class="fm ie-em" id="err-loc">Please select your location.</div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ── STEP 4: Situation description ── */
+  function buildStep4() {
+    const MAX = 400;
+    const cur = S.description.length;
+    return `
+      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Describe the situation clearly. Include symptoms, duration, and any relevant medical history.</p>
+      <div style="margin-bottom:6px;">
+        <label class="ie-lbl" for="ie-desc">SITUATION DESCRIPTION</label>
+        <textarea class="ie-inp" id="ie-desc" rows="6" maxlength="${MAX}"
+          placeholder="e.g. Patient, 54M, presenting with chest pain and difficulty breathing for the past 2 hours…">${esc(S.description)}</textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <div class="fm ie-em" id="err-desc">Please provide at least 20 characters.</div>
+          <div class="fm ie-cct${cur >= MAX * 0.85 ? ' warn' : ''}" id="ie-cct">${cur} / ${MAX}</div>
+        </div>
+      </div>
+      <div style="margin-top:18px;padding:13px 15px;background:rgba(6,182,212,.04);border:1px solid rgba(6,182,212,.12);border-radius:12px;display:flex;gap:11px;align-items:flex-start;margin-bottom:16px;">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7.5" cy="7.5" r="6.5" stroke="#06b6d4" stroke-width="1.3"/><path d="M7.5 6.5V10.5M7.5 5V4.5" stroke="#06b6d4" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div class="fm" style="font-size:.66rem;line-height:1.55;letter-spacing:.02em;color:#475569;">All data is encrypted in transit. Only authorized OCTIS triage personnel will access this information.</div>
+      </div>
+    `;
+  }
+
+  /* ── STEP 5: Review & confirm ── */
+  function buildStep5() {
+    const svc = find(SVCS, S.service);
+    const urg = find(URGS, S.urgency);
+    return `
+      <p style="color:#475569;font-size:.85rem;line-height:1.65;margin-bottom:20px;">Review your case details carefully before submitting. Once confirmed, your intake is routed immediately.</p>
+
+      <div style="background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.45);border-radius:16px;padding:18px 20px;margin-bottom:16px;">
+        <div class="slbl" style="font-size:.58rem;margin-bottom:14px;">CASE SUMMARY</div>
+
+        <div class="rv-row">
+          <div class="rv-k">SERVICE</div>
+          <div class="rv-v">${esc(svc.label || S.service)}<br/><span style="font-size:.75rem;color:#334155;">${esc(svc.sub || '')}</span></div>
+        </div>
+        <div class="rv-row">
+          <div class="rv-k">URGENCY</div>
+          <div class="rv-v">
+            <span class="fm" style="font-size:.65rem;padding:3px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label || '')}</span>
+          </div>
+        </div>
+        <div class="rv-row">
+          <div class="rv-k">PATIENT</div>
+          <div class="rv-v">${esc(S.name)}</div>
+        </div>
+        <div class="rv-row">
+          <div class="rv-k">CONTACT</div>
+          <div class="rv-v">${esc(S.phone)}</div>
+        </div>
+        <div class="rv-row">
+          <div class="rv-k">LOCATION</div>
+          <div class="rv-v">${esc(S.location)}</div>
+        </div>
+        <div class="rv-row">
+          <div class="rv-k">DETAILS</div>
+          <div class="rv-v" style="font-size:.82rem;color:#64748b;">
+            ${esc(S.description.length > 120 ? S.description.slice(0, 120) + '…' : S.description)}
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 15px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:12px;margin-bottom:16px;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M7 1L13 3.5V7C13 10.2 10.3 12.8 7 13C3.7 12.8 1 10.2 1 7V3.5L7 1Z" stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/><path d="M4.5 7L6.3 8.8L9.5 5.5" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="fm" style="font-size:.65rem;letter-spacing:.03em;color:#475569;">Submission is end-to-end encrypted and routed directly to OCTIS triage operations.</div>
+      </div>
+    `;
+  }
+
+  // ── Bind interactions after body render ──
+  function bindBody(step) {
+    if (step === 1) {
+      document.querySelectorAll('[data-svc]').forEach(card => {
+        card.addEventListener('click', () => {
+          S.service = card.dataset.svc;
+          document.querySelectorAll('[data-svc]').forEach(c => {
+            c.classList.remove('sel');
+            c.setAttribute('aria-pressed', 'false');
+          });
+          card.classList.add('sel');
+          card.setAttribute('aria-pressed', 'true');
+          const err = document.getElementById('err1');
+          if (err) err.classList.remove('on');
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+        });
+      });
+    }
+
+    if (step === 2) {
+      document.querySelectorAll('[data-urg]').forEach(card => {
+        const u = find(URGS, card.dataset.urg);
+        card.addEventListener('click', () => {
+          S.urgency = card.dataset.urg;
+          document.querySelectorAll('[data-urg]').forEach(c => {
+            const cu = find(URGS, c.dataset.urg);
+            c.classList.remove('sel');
+            c.style.background = 'rgba(8,12,28,.7)';
+            c.style.borderColor = 'rgba(51,65,85,.6)';
+            const badge = c.querySelector('.urg-badge');
+            if (badge) badge.style.display = 'none';
+          });
+          card.classList.add('sel');
+          card.style.background = u.bg;
+          card.style.borderColor = u.bd;
+          const badge = card.querySelector('.urg-badge');
+          if (badge) badge.style.display = 'block';
+          const err = document.getElementById('err2');
+          if (err) err.classList.remove('on');
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+        });
+      });
+    }
+
+    if (step === 3) {
+      const nm = document.getElementById('ie-name');
+      const ph = document.getElementById('ie-phone');
+      const lc = document.getElementById('ie-loc');
+
+      if (nm) nm.addEventListener('input', () => {
+        S.name = nm.value;
+        nm.classList.remove('err');
+        const e = document.getElementById('err-name');
+        if (e) e.classList.remove('on');
+      });
+      if (ph) ph.addEventListener('input', () => {
+        S.phone = ph.value;
+        ph.classList.remove('err');
+        const e = document.getElementById('err-phone');
+        if (e) e.classList.remove('on');
+      });
+      if (lc) lc.addEventListener('change', () => {
+        S.location = lc.value;
+        lc.classList.remove('err');
+        const e = document.getElementById('err-loc');
+        if (e) e.classList.remove('on');
+      });
+    }
+
+    if (step === 4) {
+      const ta = document.getElementById('ie-desc');
+      const cc = document.getElementById('ie-cct');
+      const MAX = 400;
+      if (ta) ta.addEventListener('input', () => {
+        S.description = ta.value;
+        if (cc) {
+          cc.textContent = ta.value.length + ' / ' + MAX;
+          cc.className = 'fm ie-cct' + (ta.value.length >= MAX * 0.85 ? ' warn' : '');
+        }
+        ta.classList.remove('err');
+        const e = document.getElementById('err-desc');
+        if (e) e.classList.remove('on');
+      });
+    }
+  }
+
+  // ── Validate current step ──
+  function validate() {
+    switch(S.step) {
+      case 1:
+        if (!S.service) {
+          const e = document.getElementById('err1');
+          if (e) e.classList.add('on');
+          return false;
+        }
+        return true;
+
+      case 2:
+        if (!S.urgency) {
+          const e = document.getElementById('err2');
+          if (e) e.classList.add('on');
+          return false;
+        }
+        return true;
+
+      case 3: {
+        let ok = true;
+        if (!S.name.trim() || S.name.trim().length < 2) {
+          const nm = document.getElementById('ie-name');
+          const e  = document.getElementById('err-name');
+          if (nm) nm.classList.add('err');
+          if (e)  e.classList.add('on');
+          ok = false;
+        }
+        if (!phoneOK(S.phone)) {
+          const ph = document.getElementById('ie-phone');
+          const e  = document.getElementById('err-phone');
+          if (ph) ph.classList.add('err');
+          if (e)  e.classList.add('on');
+          ok = false;
+        }
+        if (!S.location) {
+          const lc = document.getElementById('ie-loc');
+          const e  = document.getElementById('err-loc');
+          if (lc) lc.classList.add('err');
+          if (e)  e.classList.add('on');
+          ok = false;
+        }
+        return ok;
+      }
+
+      case 4:
+        if (S.description.trim().length < 20) {
+          const ta = document.getElementById('ie-desc');
+          const e  = document.getElementById('err-desc');
+          if (ta) ta.classList.add('err');
+          if (e)  e.classList.add('on');
+          return false;
+        }
+        return true;
+
+      default:
+        return true;
+    }
+  }
+
+  // ── Navigation ──
+  function next() {
+    if (!validate()) return;
+    if (S.step === 5) { submit(); return; }
+    const prev = S.step;
+    S.step++;
+    transition(S.step, 'fwd');
+  }
+
+  function back() {
+    if (S.step <= 1) return;
+    S.step--;
+    transition(S.step, 'back');
+  }
+
+  // ── Submit ──
+  function submit() {
+    const nextBtn = document.getElementById('ie-next');
+    const lbl     = document.getElementById('ie-nlbl');
+    const arr     = document.getElementById('ie-narr');
+    const backBtn = document.getElementById('ie-back');
+
+    // Loading state
+    if (nextBtn) nextBtn.disabled = true;
+    if (lbl)  lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
+    if (arr)  arr.style.display = 'none';
+    if (backBtn) backBtn.className = 'ie-btn-b'; // hide during submit
+
+    S.routingId = genID();
+
+    const payload = {
+      routingId:  S.routingId,
+      timestamp:  new Date().toISOString(),
+      service:    S.service,
+      urgency:    S.urgency,
+      patient: {
+        name:     S.name.trim(),
+        phone:    S.phone.trim(),
+        location: S.location
+      },
+      situation:  S.description.trim(),
+      meta: {
+        engine:  'OCTIS-IntakeEngine',
+        version: '3.0.0',
+        phase:   2
+      }
+    };
+
+    // Log payload
+    console.log(
+      '%c[OCTIS INTAKE] ✓ Payload compiled',
+      'color:#10b981;font-weight:bold;font-size:13px;',
+      JSON.stringify(payload, null, 2)
+    );
+
+    setTimeout(() => {
+      initiateRouting(payload);
+      showSuccess(payload);
+    }, 1800);
+  }
+
+  // ── Phase 3 routing hook ──
+  function initiateRouting(payload) {
+    console.log(
+      '%c[OCTIS ROUTING] initiateRouting() fired — Phase 3 deep-link ready',
+      'color:#06b6d4;font-weight:bold;font-size:13px;',
+      payload
+    );
+    // Phase 3: POST to /api/v3/intake or open WebSocket triage channel
+  }
+
+  // ── Success screen ──
+  function showSuccess(payload) {
+    // Header to 100%
+    updateHeader(5);
+    const pEl  = document.getElementById('ie-pct');
+    const bar  = document.getElementById('ie-pfill');
+    if (pEl) pEl.textContent = '100%';
+    if (bar) bar.style.width = '100%';
+    for (let i = 1; i <= 5; i++) {
+      const d = document.getElementById('ied' + i);
+      const l = document.getElementById('iel' + i);
+      if (d) { d.className = 'ie-dot done'; d.textContent = ''; }
+      if (l) l.className = 'ie-line done';
+    }
+
+    // Hide footer
+    const ftr = document.querySelector('.ie-ftr');
+    if (ftr) ftr.style.display = 'none';
+
+    const urg = find(URGS, S.urgency);
+    const body = document.getElementById('ie-body');
+    if (!body) return;
+
+    body.style.opacity = '0';
+    body.style.transform = 'translateY(12px)';
+
+    setTimeout(() => {
+      body.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 28px;">
+
+          <div class="ie-sring">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <path d="M9 18L15 24L27 12" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="fd" style="font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:#fff;margin-bottom:10px;">Case Routed Successfully</div>
+          <p style="color:#475569;font-size:.87rem;max-width:340px;line-height:1.7;margin-bottom:24px;">
+            Your intake has been dispatched to the OCTIS triage grid. Our team will contact you within the target response window.
+          </p>
+
+          <!-- ETA card -->
+          <div style="width:100%;max-width:360px;background:${urg.bg};border:1px solid ${urg.bd};border-radius:14px;padding:16px 20px;margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div class="fm" style="font-size:.63rem;letter-spacing:.1em;color:#64748b;">URGENCY TIER</div>
+              <span class="fm" style="font-size:.63rem;padding:2px 10px;border-radius:5px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${urg.label}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="fm" style="font-size:.63rem;letter-spacing:.1em;color:#64748b;">TARGET RESPONSE</div>
+              <div class="fd" style="font-weight:700;font-size:1.1rem;color:${urg.clr};">${urg.eta}</div>
+            </div>
+          </div>
+
+          <!-- Reference ID -->
+          <div class="ie-rid">${esc(S.routingId)}</div>
+          <div class="fm" style="font-size:.6rem;letter-spacing:.12em;color:#334155;margin-top:8px;margin-bottom:28px;">SAVE THIS REFERENCE ID</div>
+
+          <!-- Actions -->
+          <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+            <a href="tel:+2341234567890" class="ie-btn-n" style="text-decoration:none;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13 9.5C13 9.9 12.83 10.29 12.51 10.57L11.24 11.84C10.55 12.53 9.58 12.88 8.59 12.76C6.83 12.54 4.96 11.49 3.36 9.89C1.76 8.29 0.71 6.42 0.49 4.66C0.37 3.67 0.72 2.7 1.41 2.01L2.68 0.74C3.07 0.35 3.7 0.35 4.09 0.74L5.84 2.49C6.23 2.88 6.23 3.51 5.84 3.9L5.12 4.62C5 4.74 4.98 4.92 5.07 5.06C5.59 5.91 6.28 6.7 7.09 7.36C7.23 7.45 7.41 7.43 7.53 7.31L8.25 6.59C8.64 6.2 9.27 6.2 9.66 6.59L11.41 8.34C11.8 8.73 11.8 9.36 11.41 9.75Z" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              CALL DISPATCH
+            </a>
+            <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()" style="border-color:rgba(16,185,129,.3);color:#10b981;">
+              NEW INTAKE
+            </button>
+          </div>
+        </div>
+      `;
+
+      body.style.transition = 'opacity .38s ease, transform .38s cubic-bezier(.4,0,.2,1)';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.style.opacity = '1';
+        body.style.transform = 'translateY(0)';
+      }));
+    }, 140);
+  }
+
+  // ── Restart ──
+  function restart() {
+    // Show footer again
+    const ftr = document.querySelector('.ie-ftr');
+    if (ftr) ftr.style.display = '';
+    mount();
+  }
+
+  // First render
+  mount();
+
+  return { next, back, restart };
+
+})(); // end IE IIFE
+
+// Expose to global for inline onclick handlers
+window.OCTIS_IE = IE;
+
+})(); // end main IIFE
+</script>
+</body>
+</html>
