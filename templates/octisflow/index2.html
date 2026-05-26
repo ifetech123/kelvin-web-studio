@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -886,12 +885,12 @@ select.ie-inp option { background:#fff; color:var(--text); }
         <a href="#services" class="nav-link">Services</a>
         <a href="#metrics"  class="nav-link">Network</a>
         <a href="#intake-section" class="nav-link">Intake</a>
-        <a href="tel:+2341234567890" class="nav-cta">
+        <a href="tel:+2349041999098" class="nav-cta">
           <span class="live-dot"></span>Emergency Protocol
         </a>
       </div>
 
-      <a href="tel:+2341234567890" class="nav-cta-mobile">
+      <a href="tel:+2349041999098" class="nav-cta-mobile">
         <span class="live-dot"></span>Emergency
       </a>
 
@@ -1155,7 +1154,7 @@ select.ie-inp option { background:#fff; color:var(--text); }
         <span style="font-size:.6rem;color:var(--text-3);letter-spacing:.1em;">v4.0</span>
       </a>
       <div class="footer-copy">© 2026 OCTIS Systems — All rights reserved</div>
-      <a href="tel:+2341234567890" class="em-pill">
+      <a href="tel:+2349041999098" class="em-pill">
         <span class="live-dot" style="width:6px;height:6px;"></span>Call Now
       </a>
     </div>
@@ -1167,7 +1166,7 @@ select.ie-inp option { background:#fff; color:var(--text); }
   MOBILE BOTTOM NAV
 ════════════════════════════════════ -->
 <nav id="mob-nav">
-  <a href="tel:+2341234567890" class="mob-btn">
+  <a href="tel:+2349041999098" class="mob-btn">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.3 14.2C18.3 14.6 18.1 15 17.8 15.3L16.3 16.8C15.6 17.5 14.6 17.9 13.5 17.7C11.6 17.5 9.5 16.3 7.7 14.5C5.9 12.7 4.7 10.6 4.5 8.7C4.3 7.6 4.7 6.6 5.4 5.9L6.9 4.4C7.3 4 8 4 8.4 4.4L10.3 6.3C10.7 6.7 10.7 7.4 10.3 7.8L9.5 8.6C9.4 8.7 9.4 8.9 9.5 9.1C10 9.9 10.8 10.8 11.7 11.5C11.8 11.6 12 11.6 12.1 11.5L12.9 10.7C13.3 10.3 14 10.3 14.4 10.7L16.3 12.6C16.7 13 16.7 13.7 16.3 14.1Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Call Center
   </a>
@@ -1185,11 +1184,11 @@ select.ie-inp option { background:#fff; color:var(--text); }
 <!-- ════════════════════════════════════
   HOURS MODAL
 ════════════════════════════════════ -->
-<div id="hours-modal" role="dialog" aria-modal="true" aria-labelledby="hours-title">
+<div id="hours-modal">
   <div class="hours-card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s5);">
-      <div class="fs" id="hours-title" style="font-weight:700;font-size:1.05rem;color:var(--text);">Operating Hours</div>
-      <button class="close-btn" onclick="hideHoursModal()" aria-label="Close operating hours">✕</button>
+      <div class="fs" style="font-weight:700;font-size:1.05rem;color:var(--text);">Operating Hours</div>
+      <button class="close-btn" onclick="hideHoursModal()">✕</button>
     </div>
     <div class="hours-row" style="background:rgba(59,107,255,.06);border:1px solid rgba(59,107,255,.15);">
       <span style="font-weight:600;color:var(--text);">Emergency Line</span>
@@ -1218,23 +1217,11 @@ select.ie-inp option { background:#fff; color:var(--text); }
 (function(){
 'use strict';
 
-// Configuration
-const APP_CONFIG = {
-  operationsPhone: '+2349041999098',
-  apiEndpoint: '/api/intake/submit',
-  submissionTimeout: 8000,
-  version: '4.0.0'
-};
-
 /* ─────────────────────────────────
    PHASE 1 — INTERACTIONS
 ───────────────────────────────── */
 
 // Nav elevation on scroll
-document.querySelectorAll('a[href^="tel:"]').forEach(link => {
-  link.href = `tel:${APP_CONFIG.operationsPhone}`;
-});
-
 const NAV = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   NAV.classList.toggle('elevated', window.scrollY > 20);
@@ -1302,32 +1289,29 @@ document.querySelectorAll('.mob-btn').forEach(b => {
 });
 
 // Hours modal
-let hoursModalOpen = false;
 window.showHoursModal = function() {
   const m = document.getElementById('hours-modal');
-  if (!m) return;
   m.style.display = 'flex';
-  hoursModalOpen = true;
-  const closeBtn = m.querySelector('.close-btn');
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    m.style.opacity = '1';
-    if (closeBtn) closeBtn.focus();
-  }));
+  requestAnimationFrame(() => requestAnimationFrame(() => { m.style.opacity = '1'; }));
 };
 window.hideHoursModal = function() {
   const m = document.getElementById('hours-modal');
-  if (!m) return;
   m.style.opacity = '0';
-  hoursModalOpen = false;
   setTimeout(() => { m.style.display = 'none'; }, 260);
 };
 document.getElementById('hours-modal').addEventListener('click', e => {
   if (e.target === e.currentTarget) window.hideHoursModal();
 });
-document.getElementById('hours-modal').addEventListener('keydown', e => {
-  if (e.key === 'Escape') window.hideHoursModal();
-});
 
+
+/* ─────────────────────────────────────────────
+   APP CONFIG — update phone/endpoint here only
+───────────────────────────────────────────── */
+const APP_CONFIG = Object.freeze({
+  operationsPhone: '2348100000000', // WhatsApp-format: country code + number, no +/spaces
+  platformName:    'OCTIS Operations Desk',
+  version:         '4.0.0',
+});
 
 /* ─────────────────────────────────────────────
    PHASE 2 — OCTIS INTAKE ENGINE v4.0
@@ -1339,8 +1323,7 @@ const IE = (function() {
     step:1, total:5,
     service:null, urgency:null,
     name:'', phone:'', location:'', description:'',
-    routingId:null,
-    isSubmitting:false
+    routingId:null
   };
 
   // Data
@@ -1379,7 +1362,16 @@ const IE = (function() {
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function find(arr, id) { return arr.find(x => x.id === id) || {}; }
-  function phoneOK(p)    { return /^[0-9+\-\s()]{10,20}$/.test(p.trim()) && /\d/.test(p); }
+  // Nigerian phone validation — 0XXXXXXXXX or +234/234 prefix, 10–15 digits
+  function phoneOK(p) {
+    const stripped = p.trim().replace(/[\s\-().]/g, '');
+    if (!/^\+?[0-9]{10,15}$/.test(stripped)) return false;
+    return /^(0[7-9][0-1]\d{8}|(\+?234)[7-9][0-1]\d{8})$/.test(stripped);
+  }
+
+  // Submission lock — prevents duplicate dispatch on double-tap
+  let _isSubmitting = false;
+
   function genID() {
     const p = { emergency:'EMG', diagnostics:'DGN', home_visit:'HMV', logistics:'LGS', consult:'CON' };
     return (p[S.service] || 'OTC') + '-' + String(Math.floor(1000 + Math.random() * 8999));
@@ -1390,7 +1382,7 @@ const IE = (function() {
   function mount() {
     const wrap = document.getElementById('intake-engine-container');
     if (!wrap) return;
-    Object.assign(S, { step:1, service:null, urgency:null, name:'', phone:'', location:'', description:'', routingId:null, isSubmitting:false });
+    Object.assign(S, { step:1, service:null, urgency:null, name:'', phone:'', location:'', description:'', routingId:null });
     wrap.innerHTML = '';
     const shell = document.createElement('div');
     shell.className = 'ie-shell';
@@ -1512,7 +1504,7 @@ const IE = (function() {
 
   function buildStep1() {
     const cards = SVCS.map(s => `
-      <div class="ie-opt${S.service === s.id ? ' sel' : ''}" data-svc="${s.id}" role="button" tabindex="0" aria-pressed="${S.service === s.id}" aria-label="Select ${esc(s.label)} service">
+      <div class="ie-opt${S.service === s.id ? ' sel' : ''}" data-svc="${s.id}" role="button" tabindex="0" aria-pressed="${S.service === s.id}">
         <div class="ie-ochk">
           <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -1524,7 +1516,7 @@ const IE = (function() {
     return `
       <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">Select the type of service you need. This determines how your case is routed through the triage grid.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-bottom:16px;">${cards}</div>
-      <div class="ie-em" id="err1" role="alert" aria-live="polite">Please select a service type to continue.</div>
+      <div class="ie-em" id="err1">Please select a service type to continue.</div>
     `;
   }
 
@@ -1532,7 +1524,7 @@ const IE = (function() {
     const cards = URGS.map(u => {
       const isSel = S.urgency === u.id;
       return `
-        <div class="ie-urg${isSel ? ' sel' : ''}" data-urg="${u.id}" role="button" tabindex="0" aria-label="${esc(u.label)} urgency: ${esc(u.desc)}"
+        <div class="ie-urg${isSel ? ' sel' : ''}" data-urg="${u.id}" role="button" tabindex="0"
              style="background:${isSel ? u.bg : 'var(--bg)'};border-color:${isSel ? u.bd : 'var(--border)'};--uc:${u.clr};">
           <div class="urg-dot" style="background:${u.clr};"></div>
           <div style="flex:1;min-width:0;">
@@ -1546,7 +1538,7 @@ const IE = (function() {
     return `
       <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">How critical is your situation? This determines response priority and resource allocation.</p>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">${cards}</div>
-      <div class="ie-em" id="err2" role="alert" aria-live="polite">Please select an urgency level to continue.</div>
+      <div class="ie-em" id="err2">Please select an urgency level to continue.</div>
     `;
   }
 
@@ -1721,101 +1713,121 @@ const IE = (function() {
   }
 
   function submit() {
-    if (S.isSubmitting) return;
+    // ── Duplicate submission guard ──
+    if (_isSubmitting) return;
+    _isSubmitting = true;
 
     const nextBtn = document.getElementById('ie-next');
     const lbl     = document.getElementById('ie-nlbl');
     const arr     = document.getElementById('ie-narr');
     const backBtn = document.getElementById('ie-back');
+    const gerr    = document.getElementById('ie-gerr');
 
-    S.isSubmitting = true;
+    // Lock UI
     if (nextBtn) nextBtn.disabled = true;
-    if (lbl) lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
-    if (arr) arr.style.display = 'none';
+    if (lbl)     lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
+    if (arr)     arr.style.display = 'none';
     if (backBtn) backBtn.className = 'ie-btn-b';
+    if (gerr)    gerr.textContent = '';
 
-    S.routingId = genID();
-    const payload = {
-      routingId:  S.routingId,
-      timestamp:  new Date().toISOString(),
-      service:    S.service,
-      urgency:    S.urgency,
-      patient: { name: S.name.trim(), phone: S.phone.trim(), location: S.location },
-      situation:  S.description.trim(),
-      meta: { engine:'OCTIS-IntakeEngine', version:'4.0.0', phase:2 }
-    };
-
-    submitIntake(payload);
-  }
-
-  function generateWhatsAppTicket(payload) {
-    const svc = find(SVCS, payload.service);
-    const urg = find(URGS, payload.urgency);
-    const timestamp = new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' });
-
-    return `🚨 OCTIS OPERATIONS DESK: NEW INTAKE TICKET
----------------------------------------
-SERVICE LEVEL: ${svc.label || 'N/A'}
-URGENCY TIER: ${urg.label || 'N/A'}
----------------------------------------
-DISPATCH TO: ${payload.patient.name}
-CONTACT PHONE: ${payload.patient.phone}
-LOCATION TARGET: ${payload.patient.location}
----------------------------------------
-CASE DETAILS:
-${payload.situation}
----------------------------------------
-Routing ID: ${payload.routingId}
-Generated: ${timestamp}`;
-  }
-
-  function launchWhatsAppRouting(payload) {
     try {
-      const message = generateWhatsAppTicket(payload);
-      const encodedMessage = encodeURIComponent(message);
-      const phone = APP_CONFIG.operationsPhone.replace(/\D/g, '');
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+      // ── 1. Compile payload ──
+      S.routingId = genID();
 
-      setTimeout(() => { window.open(whatsappUrl, '_blank'); }, 600);
+      const svc = find(SVCS, S.service);
+      const urg = find(URGS, S.urgency);
+
+      const payload = {
+        routingId:  S.routingId,
+        timestamp:  new Date().toISOString(),
+        service:    S.service,
+        serviceLabel: svc.label  || S.service,
+        urgency:    S.urgency,
+        urgencyLabel: urg.label  || S.urgency,
+        urgencyETA:   urg.eta    || '',
+        fullName:   S.name.trim(),
+        phone:      S.phone.trim(),
+        location:   S.location,
+        description:S.description.trim(),
+        meta: {
+          engine:  'OCTIS-IntakeEngine',
+          version: APP_CONFIG.version,
+          phase:   3,
+        }
+      };
+
+      // ── 2. Run routing (whatsapp deep-link) after loading animation ──
+      setTimeout(() => {
+        initiateRouting(payload);
+      }, 1800);
+
     } catch (err) {
-      // Silently fail WhatsApp routing — doesn't block submission success
+      // ── Error recovery — restore submit state ──
+      _isSubmitting = false;
+      if (nextBtn) nextBtn.disabled = false;
+      if (lbl)     lbl.textContent = 'Confirm Intake';
+      if (arr)     arr.style.display = 'block';
+      if (backBtn) backBtn.className = 'ie-btn-b show';
+      if (gerr) {
+        gerr.textContent = 'Routing error. Please try again.';
+        setTimeout(() => { if (gerr) gerr.textContent = ''; }, 4000);
+      }
     }
   }
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), APP_CONFIG.submissionTimeout);
 
-    fetch(APP_CONFIG.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: controller.signal
-    })
-    .then(r => {
-      clearTimeout(timeout);
-      if (!r.ok) throw new Error('Intake submission failed');
-      return r.json();
-    })
-    .then(() => {
-      launchWhatsAppRouting(payload);
-      showSuccess();
-    })
-    .catch(err => {
-      clearTimeout(timeout);
-      S.isSubmitting = false;
-      if (err.name !== 'AbortError') {
-        const nextBtn = document.getElementById('ie-next');
-        const gerr = document.getElementById('ie-gerr');
-        if (nextBtn) { nextBtn.disabled = false; }
-        const lbl = document.getElementById('ie-nlbl');
-        if (lbl) lbl.textContent = 'Confirm Intake';
-        const arr = document.getElementById('ie-narr');
-        if (arr) arr.style.display = 'block';
-        if (gerr) gerr.textContent = 'Unable to submit intake. Please check your connection and try again.';
+  /* ── Phase 3: WhatsApp deep-link dispatch ── */
+  function initiateRouting(payload) {
+    try {
+      // ── Format local timestamp (human-readable) ──
+      const ts = new Date();
+      const localTS = ts.toLocaleString('en-NG', {
+        day:    '2-digit',
+        month:  'short',
+        year:   'numeric',
+        hour:   '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
+
+      // ── Build the operational dispatch ticket ──
+      const lines = [
+        '\uD83D\uDEA8 OCTIS OPERATIONS DESK: NEW INTAKE TICKET',
+        '---------------------------------------',
+        `SERVICE LEVEL: ${payload.serviceLabel.toUpperCase()}`,
+        `URGENCY TIER: ${payload.urgencyLabel.toUpperCase()} (ETA: ${payload.urgencyETA})`,
+        '---------------------------------------',
+        `DISPATCH TO: ${payload.fullName}`,
+        `CONTACT PHONE: ${payload.phone}`,
+        `LOCATION TARGET: ${payload.location}`,
+        '---------------------------------------',
+        'CASE DETAILS:',
+        payload.description,
+        '---------------------------------------',
+        `REF ID: ${payload.routingId}`,
+        `Generated: ${localTS}`,
+      ];
+
+      const message  = lines.join('\n');
+      const encoded  = encodeURIComponent(message);
+      const waURL    = `https://api.whatsapp.com/send?phone=${APP_CONFIG.operationsPhone}&text=${encoded}`;
+
+      // ── Render success screen first, then open WhatsApp ──
+      showSuccess(payload, waURL);
+
+    } catch (routeErr) {
+      // Routing build failed — still show success but surface the error
+      _isSubmitting = false;
+      showSuccess(payload, null);
+      const gerr = document.getElementById('ie-gerr');
+      if (gerr) {
+        gerr.textContent = 'WhatsApp link failed. Use the call button below.';
       }
-    });
+    }
   }
 
-  function showSuccess() {
+  function showSuccess(payload, waURL) {
+    // Reset submission lock so restart works cleanly
+    _isSubmitting = false;
     // Complete the header
     const pEl = document.getElementById('ie-pct');
     const bar = document.getElementById('ie-pfill');
@@ -1834,16 +1846,6 @@ Generated: ${timestamp}`;
     const body = document.getElementById('ie-body');
     if (!body) return;
     body.style.opacity='0'; body.style.transform='translateY(10px)';
-
-    // Create announcement for screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'assertive');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.style.position = 'absolute';
-    announcement.style.left = '-9999px';
-    announcement.textContent = `Case submitted successfully. Routing ID: ${S.routingId}. Expected response time: ${urg.eta}`;
-    document.body.appendChild(announcement);
 
     setTimeout(() => {
       body.innerHTML = `
@@ -1871,11 +1873,20 @@ Generated: ${timestamp}`;
           <div style="font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:8px;margin-bottom:24px;">Save This Reference ID</div>
 
           <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-            <a href="tel:${APP_CONFIG.operationsPhone}" class="ie-btn-n" style="text-decoration:none;">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13 9.5C13 9.9 12.83 10.29 12.51 10.57L11.24 11.84C10.55 12.53 9.58 12.88 8.59 12.76C6.83 12.54 4.96 11.49 3.36 9.89C1.76 8.29 0.71 6.42 0.49 4.66C0.37 3.67 0.72 2.7 1.41 2.01L2.68 0.74C3.07 0.35 3.7 0.35 4.09 0.74L5.84 2.49C6.23 2.88 6.23 3.51 5.84 3.9L5.12 4.62C5 4.74 4.98 4.92 5.07 5.06C5.59 5.91 6.28 6.7 7.09 7.36C7.23 7.45 7.41 7.43 7.53 7.31L8.25 6.59C8.64 6.2 9.27 6.2 9.66 6.59L11.41 8.34C11.8 8.73 11.8 9.36 11.41 9.75Z" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+            ${waURL ? `
+            <a href="${waURL}" target="_blank" rel="noopener noreferrer" class="ie-btn-n" style="text-decoration:none;background:linear-gradient(135deg,#25d366,#128c7e);"
+               aria-label="Open WhatsApp to dispatch this intake ticket">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 1C4.14 1 1 4.14 1 8C1 9.26 1.35 10.43 1.95 11.43L1 15L4.67 14.07C5.64 14.62 6.78 14.95 8 14.95C11.86 14.95 15 11.81 15 7.95C15 4.09 11.86 1 8 1Z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M5.5 6C5.5 6 5.5 5.5 6 5.5C6.5 5.5 7 6.5 7 6.5C7 6.5 7.25 7 7 7.25C6.75 7.5 6.5 7.5 6.75 8C7 8.5 7.5 9 8 9.25C8.5 9.5 8.5 9.25 8.75 9C9 8.75 9.5 9 9.5 9L10 9.5C10 9.5 10.5 10 10 10.5C9.5 11 8.5 10.5 7.5 9.75C6.5 9 5.5 7.5 5.5 6Z" fill="white"/>
+              </svg>
+              Send via WhatsApp
+            </a>` : ''}
+            <a href="tel:+2349041999098" class="ie-btn-n" style="text-decoration:none;" aria-label="Call dispatch directly">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M13 9.5C13 9.9 12.83 10.29 12.51 10.57L11.24 11.84C10.55 12.53 9.58 12.88 8.59 12.76C6.83 12.54 4.96 11.49 3.36 9.89C1.76 8.29 0.71 6.42 0.49 4.66C0.37 3.67 0.72 2.7 1.41 2.01L2.68 0.74C3.07 0.35 3.7 0.35 4.09 0.74L5.84 2.49C6.23 2.88 6.23 3.51 5.84 3.9L5.12 4.62C5 4.74 4.98 4.92 5.07 5.06C5.59 5.91 6.28 6.7 7.09 7.36C7.23 7.45 7.41 7.43 7.53 7.31L8.25 6.59C8.64 6.2 9.27 6.2 9.66 6.59L11.41 8.34C11.8 8.73 11.8 9.36 11.41 9.75Z" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
               Call Dispatch
             </a>
-            <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()" style="border-color:rgba(59,107,255,.25);color:var(--accent-d);">
+            <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()" style="border-color:rgba(59,107,255,.25);color:var(--accent-d);" aria-label="Start a new intake">
               New Intake
             </button>
           </div>
@@ -1885,8 +1896,6 @@ Generated: ${timestamp}`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         body.style.opacity = '1'; body.style.transform = 'translateY(0)';
       }));
-
-      setTimeout(() => { document.body.removeChild(announcement); }, 5000);
     }, 140);
   }
 
