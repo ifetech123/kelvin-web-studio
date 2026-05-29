@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OCTIS — Omni-Channel Triage &amp; Intake System</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   OCTIS DESIGN SYSTEM v5.0 — PREMIUM DARK GRAPHITE
+   Direction: Apple-discipline · restrained medical-tech · tactile
+   Surfaces: graphite-950 / graphite-900 / graphite-800
+   Type:     off-white #f0ede8 / slate #9a9fa8 / dim #5a6070
+   Accent:   low-sat cyan #6eb5c0 / #8ecdd6
+═══════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Surfaces ── */
+  --bg:            #0f1117;
+  --bg-sec:        #141820;
+  --bg-ter:        #1a1f2a;
+  --surface:       #1e2330;
+  --surface-2:     #242a38;
+  --surface-raise: #2a3040;
+
+  /* ── Type ── */
+  --text:          #f0ede8;
+  --text-2:        #9a9fa8;
+  --text-3:        #5a6070;
+  --text-inv:      #0f1117;
+
+  /* ── Accent — restrained low-saturation cyan ── */
+  --accent:        #8ecdd6;
+  --accent-h:      #6eb5c0;
+  --accent-d:      #4fa3b0;
+  --accent-dim:    rgba(110,181,192,.12);
+  --accent-glow:   rgba(110,181,192,.08);
+
+  /* ── Borders — barely-there ── */
+  --border:        rgba(255,255,255,.07);
+  --border-2:      rgba(255,255,255,.11);
+  --border-acc:    rgba(110,181,192,.22);
+
+  /* ── Shadows — deep, not blue-tinted ── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.3),  0 1px 2px rgba(0,0,0,.2);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.4), 0 2px 6px rgba(0,0,0,.25);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.3);
+  --shadow-xl:  0 24px 64px rgba(0,0,0,.55),0 8px 24px rgba(0,0,0,.35);
+
+  /* ── Status palette — muted, professional ── */
+  --red:    #e05252; --red-bg:  rgba(224,82,82,.1);  --red-bd:  rgba(224,82,82,.22);
+  --orange: #d97b45; --or-bg:   rgba(217,123,69,.1); --or-bd:   rgba(217,123,69,.22);
+  --amber:  #c9963a; --am-bg:   rgba(201,150,58,.1); --am-bd:   rgba(201,150,58,.2);
+  --green:  #4dab82; --gr-bg:   rgba(77,171,130,.1); --gr-bd:   rgba(77,171,130,.22);
+
+  /* ── Geometry — tighter radii, feels machined ── */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+
+  /* ── 8-point spacing scale ── */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px;
+  --s6:24px; --s7:32px; --s8:40px; --s9:48px; --s10:64px;
+}
+
+/* ── Reset ── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+}
+img,svg { display:block; }
+a { color:inherit; }
+
+/* ── Typography utilities ── */
+.fs { font-family:'Sora',sans-serif; }
+.fi { font-family:'Inter',sans-serif; }
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+.container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 var(--s6);
+}
+@media(max-width:640px) { .container { padding:0 var(--s5); } }
+
+/* ══════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════ */
+#nav {
+  position:fixed; top:0; left:0; right:0;
+  z-index:200; height:60px;
+  background:rgba(15,17,23,.82);
+  backdrop-filter:blur(24px) saturate(1.6);
+  -webkit-backdrop-filter:blur(24px) saturate(1.6);
+  border-bottom:1px solid var(--border);
+  transition:background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+#nav.elevated {
+  background:rgba(20,24,32,.96);
+  border-bottom-color:var(--border-2);
+  box-shadow:0 1px 0 rgba(255,255,255,.04), var(--shadow-sm);
+}
+.nav-inner {
+  height:60px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:var(--s4);
+}
+
+/* Logo */
+.logo { display:flex; align-items:center; gap:var(--s3); text-decoration:none; flex-shrink:0; }
+.logo-mark {
+  width:32px; height:32px;
+  background:var(--surface-raise);
+  border:1px solid var(--border-acc);
+  border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  transition:border-color .2s;
+}
+.logo:hover .logo-mark { border-color:var(--accent-h); }
+.logo-text { line-height:1; }
+.logo-name {
+  font-family:'Sora',sans-serif; font-weight:700;
+  font-size:.98rem; letter-spacing:.04em;
+  color:var(--text);
+}
+.logo-sub {
+  font-size:.48rem; letter-spacing:.18em;
+  color:var(--text-3); margin-top:2px;
+  text-transform:uppercase;
+}
+
+/* Nav links */
+.nav-links { display:flex; align-items:center; gap:var(--s8); }
+@media(max-width:768px) { .nav-links { display:none; } }
+.nav-link {
+  font-size:.7rem; letter-spacing:.1em; font-weight:500;
+  color:var(--text-3); text-decoration:none;
+  text-transform:uppercase;
+  transition:color .15s;
+}
+.nav-link:hover { color:var(--text-2); }
+
+/* Nav CTA — emergency */
+.nav-cta {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:transparent;
+  border:1px solid var(--border-acc);
+  color:var(--accent); font-size:.68rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:8px 16px; border-radius:var(--r-sm);
+  text-decoration:none; cursor:pointer;
+  transition:background .15s, border-color .15s, color .15s;
+  white-space:nowrap;
+}
+.nav-cta:hover {
+  background:var(--accent-dim);
+  border-color:var(--accent-h);
+  color:var(--accent-h);
+}
+.nav-cta:active { opacity:.8; transform:scale(.98); }
+
+/* Mobile nav CTA */
+.nav-cta-mobile {
+  display:none;
+  align-items:center; gap:var(--s2);
+  background:transparent; border:1px solid var(--border-acc);
+  color:var(--accent); font-size:.62rem; font-weight:600;
+  letter-spacing:.07em; text-transform:uppercase;
+  padding:7px 12px; border-radius:var(--r-sm);
+  text-decoration:none; cursor:pointer;
+  transition:background .15s, border-color .15s;
+  white-space:nowrap;
+}
+@media(max-width:768px) { .nav-cta-mobile { display:inline-flex; } }
+.nav-cta-mobile:active { opacity:.8; }
+
+/* Live status dot */
+.live-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:#4dab82; flex-shrink:0; position:relative;
+}
+.live-dot::after {
+  content:''; position:absolute; inset:-2px; border-radius:50%;
+  background:rgba(77,171,130,.35);
+  animation:live-ring 2s ease-out infinite;
+}
+@keyframes live-ring { 0%{transform:scale(.8);opacity:1;} 100%{transform:scale(2.4);opacity:0;} }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero {
+  min-height:100vh;
+  padding-top:60px;
+  position:relative; overflow:hidden;
+  display:flex; align-items:center;
+  background:var(--bg);
+}
+
+/* Subtle dot grid — replaces loud gradients */
+.hero-pattern {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 65% 70% at 55% 45%, black 20%, transparent 75%);
+}
+
+/* Ambient light orbs — very subtle */
+.orb { position:absolute; border-radius:50%; pointer-events:none; }
+.orb-1 {
+  width:480px; height:480px; top:-80px; right:-60px;
+  background:radial-gradient(circle, rgba(110,181,192,.06) 0%, transparent 68%);
+  animation:orb-drift 14s ease-in-out infinite;
+}
+.orb-2 {
+  width:360px; height:360px; bottom:-40px; left:-40px;
+  background:radial-gradient(circle, rgba(77,171,130,.04) 0%, transparent 68%);
+  animation:orb-drift 18s ease-in-out infinite reverse;
+}
+@keyframes orb-drift { 0%,100%{transform:translate(0,0);} 50%{transform:translate(18px,26px);} }
+
+.hero-inner {
+  display:grid; grid-template-columns:1fr;
+  gap:var(--s9); align-items:center;
+  padding:var(--s10) 0; position:relative; z-index:1;
+}
+@media(min-width:1024px) { .hero-inner { grid-template-columns:1fr 1fr; gap:var(--s10); padding:0; } }
+
+/* Hero eyebrow badge */
+.hero-badge {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:var(--r-xs);
+  padding:5px var(--s3);
+  font-size:.64rem; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--text-3);
+  margin-bottom:var(--s5);
+}
+.badge-dot {
+  width:16px; height:16px; border-radius:var(--r-xs);
+  background:var(--surface-raise);
+  border:1px solid var(--border-acc);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+
+/* Hero headline — Sora, restrained tracking */
+.hero-h1 {
+  font-family:'Sora',sans-serif; font-weight:700;
+  font-size:clamp(2rem,5vw,3.5rem);
+  line-height:1.1; letter-spacing:-.02em;
+  color:var(--text); margin-bottom:var(--s5);
+}
+.hero-h1 .accent-line {
+  color:var(--accent);
+  /* No gradient — just solid accent. Cleaner. */
+  -webkit-text-fill-color:var(--accent);
+}
+
+/* Hero body copy */
+.hero-body {
+  font-size:.95rem; line-height:1.8;
+  color:var(--text-2); max-width:460px;
+  margin-bottom:var(--s7); font-weight:400;
+}
+
+/* CTA row */
+.cta-group {
+  display:flex; flex-wrap:wrap; gap:var(--s3);
+  margin-bottom:var(--s8); align-items:center;
+}
+@media(max-width:400px) { .cta-group { flex-direction:column; align-items:stretch; } }
+
+/* Primary button — solid, tactile */
+.btn-primary {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:var(--accent-d);
+  color:#fff; font-size:.8rem; font-weight:600; letter-spacing:.04em;
+  padding:13px 22px; border-radius:var(--r-md);
+  border:none; text-decoration:none; cursor:pointer;
+  white-space:nowrap;
+  transition:background .15s, box-shadow .15s, transform .15s;
+  position:relative; overflow:hidden;
+}
+.btn-primary:hover {
+  background:var(--accent-h);
+  box-shadow:0 4px 20px rgba(110,181,192,.22);
+  transform:translateY(-1px);
+}
+.btn-primary:active { transform:scale(.97); box-shadow:none; }
+
+/* Secondary button — ghost */
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:transparent;
+  border:1px solid var(--border-2);
+  color:var(--text-2); font-size:.8rem; font-weight:500; letter-spacing:.03em;
+  padding:13px 20px; border-radius:var(--r-md);
+  text-decoration:none; cursor:pointer; white-space:nowrap;
+  transition:border-color .15s, color .15s, background .15s;
+}
+.btn-secondary:hover {
+  border-color:var(--border-acc);
+  color:var(--text);
+  background:rgba(255,255,255,.03);
+}
+.btn-secondary:active { transform:scale(.98); }
+
+/* Trust row */
+.trust-row { display:flex; align-items:center; gap:var(--s3); }
+.trust-avatars { display:flex; }
+.trust-avatar {
+  width:28px; height:28px; border-radius:50%;
+  border:1.5px solid var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.62rem; font-weight:600; color:rgba(255,255,255,.85);
+  margin-right:-8px; flex-shrink:0;
+  background:var(--surface-raise);
+}
+.trust-text {
+  font-size:.72rem; color:var(--text-3);
+  padding-left:var(--s4); font-weight:400;
+  letter-spacing:.01em;
+}
+
+/* Hero visual (desktop only) */
+.hero-visual {
+  display:none; position:relative;
+  min-height:460px; align-items:center; justify-content:center;
+}
+@media(min-width:1024px) { .hero-visual { display:flex; } }
+
+/* Floating data cards */
+.fcard {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-xl);
+}
+.fcard-main {
+  padding:var(--s5); width:272px;
+  position:relative; z-index:20;
+  animation:float-a 7s ease-in-out infinite;
+}
+.fcard-sm-1 {
+  position:absolute; top:12px; right:-12px;
+  width:152px; padding:var(--s4);
+  z-index:15; animation:float-b 9s ease-in-out infinite;
+}
+.fcard-sm-2 {
+  position:absolute; bottom:12px; left:-12px;
+  width:162px; padding:var(--s4);
+  z-index:15; animation:float-c 8s ease-in-out infinite;
+}
+@keyframes float-a { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+@keyframes float-b { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+@keyframes float-c { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+/* Queue items inside hero card */
+.q-item {
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg-ter); border:1px solid var(--border);
+  border-radius:var(--r-sm); padding:var(--s2) var(--s3);
+  margin-bottom:var(--s2);
+  transition:border-color .15s;
+}
+.q-item:last-child { margin-bottom:0; }
+.q-item:hover { border-color:var(--border-2); }
+.q-badge {
+  font-size:.58rem; font-weight:600;
+  letter-spacing:.07em; padding:2px 7px; border-radius:var(--r-xs);
+}
+
+/* ══════════════════════════════════════
+   SECTION PRIMITIVES
+══════════════════════════════════════ */
+.section    { padding:var(--s10) 0; }
+.section-sm { padding:var(--s9) 0; }
+
+.section-label {
+  font-size:.64rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--accent-d); margin-bottom:var(--s3);
+}
+.section-title {
+  font-family:'Sora',sans-serif; font-weight:700;
+  font-size:clamp(1.6rem,3.5vw,2.3rem);
+  letter-spacing:-.02em; color:var(--text); line-height:1.18;
+}
+.section-body {
+  font-size:.92rem; color:var(--text-2); line-height:1.8;
+  max-width:520px; margin-top:var(--s3);
+}
+.divider { height:1px; background:var(--border); }
+
+/* ══════════════════════════════════════
+   METRICS STRIP
+══════════════════════════════════════ */
+#metrics { background:var(--bg-sec); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.metrics-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+  background:var(--border); /* creates hairline dividers */
+  border-radius:var(--r-lg); overflow:hidden;
+}
+@media(min-width:1024px) { .metrics-grid { grid-template-columns:repeat(4,1fr); } }
+
+.metric-card {
+  background:var(--bg-sec);
+  padding:var(--s7) var(--s6);
+  position:relative; overflow:hidden;
+  transition:background .2s;
+}
+.metric-card:hover { background:var(--surface); }
+.metric-card::after {
+  content:''; position:absolute; bottom:0; left:var(--s6); right:var(--s6);
+  height:1px; background:var(--accent-d);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+.metric-card:hover::after { transform:scaleX(1); }
+
+.metric-label {
+  font-size:.6rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:var(--s3);
+}
+.metric-num {
+  font-family:'Sora',sans-serif; font-weight:700;
+  font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1;
+  color:var(--text); margin-bottom:var(--s2);
+  letter-spacing:-.02em;
+}
+.metric-sub { font-size:.7rem; color:var(--text-3); font-weight:400; }
+
+/* ══════════════════════════════════════
+   INTAKE ENGINE WRAPPER
+══════════════════════════════════════ */
+#intake-section { background:var(--bg); }
+#intake-engine-container {
+  position:relative; border:none; background:none;
+  overflow:visible; min-height:0;
+}
+#intake-engine-container::before { display:none; }
+
+/* ══════════════════════════════════════
+   SERVICE CARDS
+══════════════════════════════════════ */
+#services { background:var(--bg-sec); }
+.svc-grid {
+  display:grid; grid-template-columns:1fr; gap:1px;
+  background:var(--border);
+  border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden;
+}
+@media(min-width:640px)  { .svc-grid { grid-template-columns:repeat(2,1fr); } }
+@media(min-width:1024px) { .svc-grid { grid-template-columns:repeat(3,1fr); } }
+
+.svc-card {
+  background:var(--bg-sec);
+  padding:var(--s7) var(--s6);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+  transition:background .2s;
+}
+.svc-card:hover { background:var(--surface); }
+/* Hover: left accent rule */
+.svc-card::before {
+  content:''; position:absolute; left:0; top:var(--s7); bottom:var(--s7);
+  width:2px; background:var(--accent-d);
+  transform:scaleY(0); transform-origin:bottom;
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.svc-card:hover::before { transform:scaleY(1); }
+
+.svc-icon {
+  width:40px; height:40px; border-radius:var(--r-sm);
+  background:var(--bg-ter); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:var(--s5); flex-shrink:0;
+  transition:border-color .2s;
+}
+.svc-card:hover .svc-icon { border-color:var(--border-acc); }
+
+.svc-title {
+  font-family:'Sora',sans-serif; font-weight:600;
+  font-size:.95rem; color:var(--text);
+  margin-bottom:var(--s2); letter-spacing:-.01em;
+}
+.svc-body  { font-size:.84rem; color:var(--text-2); line-height:1.75; flex:1; }
+.svc-tag   {
+  display:inline-flex; align-items:center;
+  font-size:.6rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--accent-d); margin-top:auto; padding-top:var(--s5);
+  transition:color .15s;
+}
+.svc-card:hover .svc-tag { color:var(--accent-h); }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background:var(--bg-sec);
+  border-top:1px solid var(--border);
+  padding:var(--s7) 0;
+}
+.footer-inner {
+  display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:space-between; gap:var(--s4);
+}
+.footer-logo { display:flex; align-items:center; gap:var(--s3); text-decoration:none; }
+.footer-copy { font-size:.68rem; color:var(--text-3); letter-spacing:.04em; }
+
+/* Emergency pill — ghost accent */
+.em-pill {
+  display:inline-flex; align-items:center; gap:var(--s2);
+  background:transparent; border:1px solid var(--border-acc);
+  color:var(--accent); font-size:.68rem; font-weight:600; letter-spacing:.08em;
+  padding:8px 14px; border-radius:var(--r-sm);
+  text-decoration:none; cursor:pointer; text-transform:uppercase;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.em-pill:hover { background:var(--accent-dim); border-color:var(--accent-h); color:var(--accent-h); }
+.em-pill:active { opacity:.8; }
+
+/* ══════════════════════════════════════
+   MOBILE BOTTOM NAV
+══════════════════════════════════════ */
+#mob-nav {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; z-index:300;
+  background:rgba(15,17,23,.95);
+  backdrop-filter:blur(24px) saturate(1.6);
+  -webkit-backdrop-filter:blur(24px) saturate(1.6);
+  border-top:1px solid var(--border);
+  padding:var(--s2) var(--s4) calc(var(--s2) + env(safe-area-inset-bottom));
+  gap:var(--s2);
+}
+@media(max-width:767px) {
+  #mob-nav { display:flex; }
+  body { padding-bottom:calc(64px + env(safe-area-inset-bottom)); }
+}
+
+.mob-btn {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:var(--s2) var(--s2);
+  border-radius:var(--r-sm);
+  border:1px solid transparent;
+  background:transparent;
+  font-size:.56rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-3); cursor:pointer; text-decoration:none;
+  min-height:52px; justify-content:center;
+  transition:color .15s, background .15s, border-color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.mob-btn:active, .mob-btn.on {
+  background:var(--accent-glow);
+  border-color:var(--border-acc);
+  color:var(--accent);
+}
+
+/* ══════════════════════════════════════
+   HOURS MODAL
+══════════════════════════════════════ */
+#hours-modal {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  align-items:flex-end; justify-content:center;
+  padding:0 var(--s4) calc(var(--s4) + env(safe-area-inset-bottom));
+  opacity:0; transition:opacity .22s;
+}
+.hours-card {
+  width:100%; max-width:400px;
+  background:var(--surface);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-xl) var(--r-xl) var(--r-lg) var(--r-lg);
+  padding:var(--s6);
+  box-shadow:var(--shadow-xl);
+}
+.hours-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s3) var(--s4); border-radius:var(--r-sm);
+  margin-bottom:var(--s2); font-size:.82rem;
+}
+.close-btn {
+  width:30px; height:30px; border-radius:var(--r-xs);
+  background:var(--bg-ter); border:1px solid var(--border);
+  color:var(--text-3); cursor:pointer; font-size:13px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.close-btn:hover { background:var(--surface-2); color:var(--text); border-color:var(--border-2); }
+
+/* ══════════════════════════════════════
+   FADE-UP SCROLL ANIMATION
+══════════════════════════════════════ */
+.fu {
+  opacity:0; transform:translateY(20px);
+  transition:opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);
+}
+.fu.vis { opacity:1; transform:translateY(0); }
+
+/* ══════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════ */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border-2); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:var(--text-3); }
+
+/* ══════════════════════════════════════════════════════
+   PHASE 2 — INTAKE ENGINE  (dark graphite edition)
+══════════════════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes ie-pulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(110,181,192,0); }
+  50%      { box-shadow:0 0 0 3px rgba(110,181,192,.18); }
+}
+@keyframes ie-check {
+  0%   { transform:scale(0) rotate(-10deg); opacity:0; }
+  65%  { transform:scale(1.12) rotate(2deg); opacity:1; }
+  100% { transform:scale(1) rotate(0); opacity:1; }
+}
+@keyframes ie-success {
+  0%   { transform:scale(.5); opacity:0; }
+  65%  { transform:scale(1.05); }
+  100% { transform:scale(1); opacity:1; }
+}
+@keyframes ie-blink {
+  0%,80%,100% { opacity:.2; transform:scale(.65); }
+  40%         { opacity:1;  transform:scale(1); }
+}
+@keyframes ie-shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+/* ── Engine shell ── */
+.ie-shell {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow-xl);
+  position:relative;
+}
+/* Single-pixel top accent line */
+.ie-shell::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent 5%, var(--accent-d) 30%, var(--accent) 70%, transparent 95%);
+  opacity:.7;
+}
+
+/* ── Header area ── */
+.ie-hdr {
+  padding:var(--s6) var(--s7) var(--s5);
+  border-bottom:1px solid var(--border);
+  background:var(--bg-sec);
+}
+@media(max-width:480px) { .ie-hdr { padding:var(--s5) var(--s5) var(--s4); } }
+
+/* ── Step dot stepper ── */
+.ie-dot {
+  width:26px; height:26px; border-radius:50%;
+  border:1px solid var(--border-2);
+  background:var(--bg-ter);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.58rem; font-weight:600; color:var(--text-3);
+  flex-shrink:0; position:relative;
+  transition:border-color .28s, background .28s, color .28s, box-shadow .28s;
+}
+.ie-dot.active {
+  border-color:var(--accent-d);
+  color:var(--accent);
+  background:var(--accent-dim);
+  box-shadow:0 0 0 3px rgba(110,181,192,.1);
+  animation:ie-pulse 2.8s ease-in-out infinite;
+}
+.ie-dot.done {
+  border-color:var(--green);
+  background:rgba(77,171,130,.1);
+  color:transparent; animation:none;
+}
+.ie-dot.done::after {
+  content:''; position:absolute;
+  width:8px; height:5px;
+  border-left:1.5px solid var(--green);
+  border-bottom:1.5px solid var(--green);
+  transform:rotate(-45deg) translate(1px,-1px);
+}
+.ie-line {
+  flex:1; height:1px; background:var(--border); margin:0 3px;
+  transition:background .4s ease;
+}
+.ie-line.done { background:var(--accent-d); }
+
+/* ── Progress bar ── */
+.ie-pbar {
+  height:2px; background:var(--bg-ter);
+  border-radius:2px; overflow:hidden; margin-top:var(--s4);
+}
+.ie-pfill {
+  height:100%; border-radius:2px;
+  background:linear-gradient(90deg, var(--accent-d), var(--accent));
+  transition:width .48s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.ie-pfill::after {
+  content:''; position:absolute; right:0; top:0; bottom:0; width:24px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));
+}
+
+/* ── Step label ── */
+.ie-tag {
+  font-size:.58rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent-d); margin-bottom:3px;
+}
+.ie-title {
+  font-family:'Sora',sans-serif; font-weight:600;
+  font-size:1rem; color:var(--text); letter-spacing:-.01em;
+}
+
+/* ── Body ── */
+.ie-body {
+  padding:var(--s6) var(--s7) var(--s4);
+  min-height:280px; position:relative;
+  transition:opacity .26s ease, transform .26s cubic-bezier(.4,0,.2,1);
+}
+@media(max-width:480px) { .ie-body { padding:var(--s5) var(--s5) var(--s3); } }
+
+/* ── Footer ── */
+.ie-ftr {
+  padding:var(--s4) var(--s7) var(--s6);
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; gap:var(--s3);
+  background:var(--bg-sec);
+}
+@media(max-width:480px) { .ie-ftr { padding:var(--s3) var(--s5) var(--s5); } }
+
+/* ── Option cards — Step 1 ── */
+.ie-opt {
+  background:var(--bg-ter);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:var(--s4) var(--s3);
+  cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:var(--s2);
+  text-align:center; min-height:106px; justify-content:center;
+  position:relative; overflow:hidden; user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .18s, background .18s, transform .16s cubic-bezier(.4,0,.2,1);
+}
+.ie-opt:hover {
+  transform:translateY(-2px);
+  border-color:var(--border-2);
+  background:var(--surface);
+}
+.ie-opt:active { transform:scale(.97); }
+.ie-opt.sel {
+  border-color:var(--accent-d);
+  background:var(--accent-dim);
+  animation:ie-pulse 3s ease-in-out infinite;
+}
+.ie-oico {
+  width:38px; height:38px; border-radius:var(--r-sm);
+  background:var(--surface-2); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .18s;
+}
+.ie-opt.sel .ie-oico { border-color:var(--border-acc); }
+.ie-olbl {
+  font-size:.63rem; font-weight:600; letter-spacing:.04em;
+  color:var(--text-2); line-height:1.3; transition:color .18s;
+}
+.ie-opt.sel .ie-olbl { color:var(--accent); }
+.ie-opt .ie-osub { font-size:.58rem; color:var(--text-3); }
+.ie-ochk {
+  position:absolute; top:6px; right:7px;
+  width:15px; height:15px; border-radius:50%;
+  background:var(--accent-d);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:scale(0); pointer-events:none;
+}
+.ie-opt.sel .ie-ochk { animation:ie-check .26s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+/* ── Urgency cards — Step 2 ── */
+.ie-urg {
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:var(--s4) var(--s5); cursor:pointer;
+  display:flex; align-items:center; gap:var(--s4);
+  min-height:68px; position:relative; overflow:hidden;
+  user-select:none; -webkit-tap-highlight-color:transparent;
+  background:var(--bg-ter);
+  transition:transform .16s cubic-bezier(.4,0,.2,1), border-color .18s, background .18s;
+}
+.ie-urg:hover { transform:translateY(-1px); background:var(--surface); border-color:var(--border-2); }
+.ie-urg:active { transform:scale(.98); }
+.ie-urg.sel { border-color:var(--uc); box-shadow:inset 0 0 0 1px var(--uc); }
+.urg-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; background:var(--uc); }
+.urg-title {
+  font-family:'Sora',sans-serif; font-weight:600;
+  font-size:.9rem; color:var(--text); margin-bottom:2px;
+}
+.urg-desc  { font-size:.78rem; color:var(--text-2); line-height:1.45; }
+.urg-badge {
+  font-size:.58rem; font-weight:600; letter-spacing:.1em;
+  padding:2px 7px; border-radius:var(--r-xs);
+  flex-shrink:0; display:none;
+}
+.ie-urg.sel .urg-badge { display:block; }
+
+/* ── Form inputs ── */
+.ie-inp {
+  width:100%;
+  background:var(--bg-ter);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  color:var(--text);
+  font-family:'Inter',sans-serif; font-size:.88rem;
+  padding:13px var(--s4); outline:none;
+  transition:border-color .16s, box-shadow .16s, background .16s;
+  -webkit-appearance:none; appearance:none;
+}
+.ie-inp::placeholder { color:var(--text-3); }
+.ie-inp:focus {
+  border-color:var(--accent-d);
+  box-shadow:0 0 0 3px rgba(110,181,192,.1);
+  background:var(--surface);
+}
+.ie-inp.err {
+  border-color:rgba(224,82,82,.5);
+  box-shadow:0 0 0 3px rgba(224,82,82,.08);
+}
+textarea.ie-inp { resize:none; line-height:1.65; }
+.ie-lbl {
+  font-size:.62rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:6px; display:block;
+}
+.ie-em  { font-size:.68rem; color:var(--red); margin-top:5px; display:none; font-weight:500; }
+.ie-em.on { display:block; }
+.ie-cct { font-size:.65rem; color:var(--text-3); text-align:right; margin-top:5px; transition:color .2s; }
+.ie-cct.warn { color:var(--amber); }
+
+/* Select wrapper */
+.sel-w { position:relative; }
+.sel-w::after {
+  content:''; position:absolute; right:13px; top:50%; transform:translateY(-50%);
+  border-left:4px solid transparent; border-right:4px solid transparent;
+  border-top:4px solid var(--text-3); pointer-events:none;
+}
+select.ie-inp { cursor:pointer; padding-right:34px; }
+select.ie-inp option { background:var(--surface); color:var(--text); }
+
+/* ── Engine buttons ── */
+.ie-btn-n {
+  background:var(--accent-d);
+  border:none; border-radius:var(--r-md); color:#fff;
+  font-family:'Inter',sans-serif; font-size:.76rem; font-weight:600; letter-spacing:.05em;
+  padding:13px 22px; cursor:pointer; min-height:48px;
+  display:flex; align-items:center; justify-content:center; gap:var(--s2);
+  transition:background .15s, box-shadow .15s, transform .15s, opacity .15s;
+}
+.ie-btn-n:hover {
+  background:var(--accent-h);
+  box-shadow:0 4px 16px rgba(110,181,192,.2);
+  transform:translateY(-1px);
+}
+.ie-btn-n:active { transform:scale(.97); box-shadow:none; }
+.ie-btn-n:disabled { opacity:.35; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.ie-btn-b {
+  background:transparent;
+  border:1px solid var(--border-2);
+  border-radius:var(--r-md);
+  color:var(--text-3);
+  font-family:'Inter',sans-serif; font-size:.76rem; font-weight:500; letter-spacing:.04em;
+  padding:13px var(--s5); cursor:pointer; min-height:48px;
+  display:flex; align-items:center; gap:var(--s2);
+  transition:border-color .15s, color .15s, background .15s, transform .15s;
+  visibility:hidden;
+}
+.ie-btn-b.show { visibility:visible; }
+.ie-btn-b:hover {
+  border-color:var(--border-acc); color:var(--accent);
+  background:var(--accent-glow); transform:translateX(-1px);
+}
+.ie-btn-b:active { transform:scale(.98); }
+
+/* ── Review rows ── */
+.rv-row {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:11px 0; border-bottom:1px solid var(--border); gap:var(--s4);
+}
+.rv-row:last-child { border-bottom:none; }
+.rv-k {
+  font-size:.62rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-3); flex-shrink:0; padding-top:2px;
+}
+.rv-v { font-size:.86rem; color:var(--text); text-align:right; line-height:1.5; max-width:60%; }
+
+/* ── Success ring ── */
+.ie-sring {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--gr-bg); border:1px solid var(--gr-bd);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto var(--s5);
+  animation:ie-success .42s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* ── Reference ID pill ── */
+.ie-rid {
+  font-family:'Sora',sans-serif;
+  font-size:.85rem; font-weight:600; letter-spacing:.14em;
+  color:var(--accent);
+  background:var(--accent-dim); border:1px solid var(--border-acc);
+  padding:8px 20px; border-radius:var(--r-sm);
+  display:inline-block; margin-top:var(--s3);
+}
+
+/* ── Loading dots ── */
+.ie-dots { display:flex; gap:5px; align-items:center; justify-content:center; }
+.ie-dots span {
+  width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.7);
+  display:inline-block; animation:ie-blink 1.4s ease-in-out infinite;
+}
+.ie-dots span:nth-child(2) { animation-delay:.18s; }
+.ie-dots span:nth-child(3) { animation-delay:.36s; }
+
+/* ── Info box ── */
+.ie-info {
+  display:flex; gap:var(--s3); align-items:flex-start;
+  background:rgba(110,181,192,.05); border:1px solid rgba(110,181,192,.12);
+  border-radius:var(--r-md); padding:var(--s3) var(--s4);
+  margin-top:var(--s5);
+}
+.ie-info-text { font-size:.73rem; line-height:1.65; color:var(--text-2); }
+
+/* ── Global error ── */
+.ie-gerr { font-size:.7rem; color:var(--red); font-weight:500; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+  NAVIGATION
+════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-name">OCTIS</div>
+          <div class="logo-sub">Triage System</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#metrics"  class="nav-link">Network</a>
+        <a href="#intake-section" class="nav-link">Intake</a>
+        <a href="tel:+2341234567890" class="nav-cta">
+          <span class="live-dot"></span>Emergency Protocol
+        </a>
+      </div>
+
+      <a href="tel:+2341234567890" class="nav-cta-mobile">
+        <span class="live-dot"></span>Emergency
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════
+  HERO
+════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="container" style="width:100%;position:relative;z-index:1;">
+    <div class="hero-inner">
+
+      <!-- Copy -->
+      <div class="fu">
+        <div class="hero-badge">
+          <div class="badge-dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M5 1L8.5 3V7L5 9L1.5 7V3L5 1Z" stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Enterprise Medical Infrastructure
+        </div>
+
+        <h1 class="hero-h1">
+          Streamlined Medical<br/>
+          Infrastructure.<br/>
+          <span class="accent-line">Zero Friction<br/>Admissions.</span>
+        </h1>
+
+        <p class="hero-body">
+          Rapid scheduling automation, real-time emergency intake routing, and intelligent triage handling — purpose-built for clinics and diagnostic centers operating at scale.
+        </p>
+
+        <div class="cta-group">
+          <a href="#intake-section" class="btn-primary">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7 1L14 7.5L7 14M1 7.5H14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Launch Intake Portal
+          </a>
+          <a href="#services" class="btn-secondary">
+            View Service Network
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5H12M7 1.5L12 6.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-avatars">
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#2a3a5c,#3d5280);">A</div>
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4);">C</div>
+            <div class="trust-avatar" style="background:linear-gradient(135deg,#059669,#34d399);">M</div>
+          </div>
+          <div class="trust-text">Trusted by 340+ medical facilities</div>
+        </div>
+      </div>
+
+      <!-- Visual (desktop) -->
+      <div class="hero-visual fu" style="transition-delay:.15s;">
+        <div class="fcard fcard-main">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div>
+              <div style="font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);margin-bottom:3px;">Live Triage</div>
+              <div class="fs" style="font-weight:700;font-size:.95rem;color:var(--text);">Queue Status</div>
+            </div>
+            <div class="live-dot"></div>
+          </div>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">EMG-0042</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Emergency Admit</div>
+            </div>
+            <span class="q-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);">CRITICAL</span>
+          </div>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">SCH-0198</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Scheduled Intake</div>
+            </div>
+            <span class="q-badge" style="background:var(--gr-bg);color:var(--green);border:1px solid var(--gr-bd);">ACTIVE</span>
+          </div>
+          <div class="q-item">
+            <div>
+              <div style="font-size:.72rem;font-weight:600;color:var(--text);">DGN-0317</div>
+              <div style="font-size:.62rem;color:var(--text-3);">Diagnostic Queue</div>
+            </div>
+            <span class="q-badge" style="background:rgba(59,107,255,.08);color:var(--accent-d);border:1px solid rgba(59,107,255,.2);">PENDING</span>
+          </div>
+          <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:.65rem;color:var(--text-3);font-weight:500;">Avg Response</div>
+            <div class="fs" style="font-weight:800;font-size:1rem;color:var(--accent-d);">3.2 MIN</div>
+          </div>
+        </div>
+
+        <div class="fcard fcard-sm-1">
+          <div style="font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);margin-bottom:4px;">Uptime</div>
+          <div class="fs" style="font-weight:800;font-size:1.6rem;color:var(--text);line-height:1;">99.98%</div>
+          <div style="font-size:.6rem;color:var(--text-3);margin-top:3px;">Platform SLA</div>
+          <div style="margin-top:10px;height:4px;background:var(--bg-sec);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:99.98%;background:linear-gradient(90deg,var(--accent-d),var(--accent));border-radius:4px;"></div>
+          </div>
+        </div>
+
+        <div class="fcard fcard-sm-2">
+          <div style="font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);margin-bottom:4px;">Intake Today</div>
+          <div class="fs" style="font-weight:800;font-size:1.5rem;color:var(--text);line-height:1;">2,481</div>
+          <div style="font-size:.65rem;color:#059669;font-weight:600;margin-top:5px;">▲ 12.4% vs yesterday</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  METRICS STRIP
+════════════════════════════════════ -->
+<section id="metrics" class="section-sm" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="metrics-grid">
+
+      <div class="metric-card fu">
+        <div class="metric-label">Response Time</div>
+        <div class="metric-num" data-target="3" data-suffix=" MIN">0</div>
+        <div class="metric-sub">Avg emergency intake</div>
+      </div>
+
+      <div class="metric-card fu" style="transition-delay:.1s;">
+        <div class="metric-label">Automation Rate</div>
+        <div class="metric-num" data-target="94" data-suffix="%">0</div>
+        <div class="metric-sub">Intake processes automated</div>
+      </div>
+
+      <div class="metric-card fu" style="transition-delay:.2s;">
+        <div class="metric-label">Active Facilities</div>
+        <div class="metric-num" data-target="340" data-suffix="+">0</div>
+        <div class="metric-sub">In triage network</div>
+      </div>
+
+      <div class="metric-card fu" style="transition-delay:.3s;">
+        <div class="metric-label">Support Coverage</div>
+        <div class="metric-num" data-target="24" data-suffix="/7">0</div>
+        <div class="metric-sub">Always operational</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  INTAKE ENGINE
+════════════════════════════════════ -->
+<section id="intake-section" class="section">
+  <div class="container" style="max-width:800px;">
+
+    <div class="fu" style="text-align:center;margin-bottom:var(--s8);">
+      <div class="section-label">Live Portal</div>
+      <h2 class="section-title">Intake Engine</h2>
+      <p class="section-body" style="margin:var(--s3) auto 0;text-align:center;">Complete your intake in under 3 minutes. Secure, encrypted, and routed instantly to our triage grid.</p>
+    </div>
+
+    <div id="intake-engine-container" class="fu" style="transition-delay:.1s;"></div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  SERVICES
+════════════════════════════════════ -->
+<section id="services" class="section" style="background:var(--bg-sec);">
+  <div class="container">
+
+    <div class="fu" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--s5);margin-bottom:var(--s8);">
+      <div>
+        <div class="section-label">Core Capabilities</div>
+        <h2 class="section-title">Service Network</h2>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-2);max-width:300px;line-height:1.7;">Six specialized pillars engineered for zero-friction medical operations.</p>
+    </div>
+
+    <div class="svc-grid">
+
+      <div class="svc-card fu" data-card>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 1L20 6V16L11 21L2 16V6L11 1Z" stroke="#6eb5c0" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 7V15M7 11H15" stroke="#6eb5c0" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="svc-title">Emergency Admissions</div>
+        <div class="svc-body">Real-time triage routing with automated severity classification. Critical cases prioritized in under 90 seconds.</div>
+        <div class="svc-tag">Response &lt; 90s →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.07s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#6eb5c0" stroke-width="1.5"/><path d="M6 11H9L10.5 8L12 14L13.5 11H16" stroke="#6eb5c0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Mobile Diagnostics</div>
+        <div class="svc-body">Field diagnostic units connected to the OCTIS grid. Results streamed and routed instantly to specialist queues.</div>
+        <div class="svc-tag">Field Ready →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.14s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8H18M4 14H14M2 5H20V19H2V5Z" stroke="#6eb5c0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Specialized Logistics</div>
+        <div class="svc-body">Cold chain, pharmaceutical transport, and specimen handling tracked in real-time with automated compliance documentation.</div>
+        <div class="svc-tag">Compliant Chain →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.21s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#6eb5c0" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="2" stroke="#6eb5c0" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="2" stroke="#6eb5c0" stroke-width="1.5"/><path d="M15.5 15.5H12V19M12 15.5H19V19" stroke="#6eb5c0" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="svc-title">Rapid Scheduling</div>
+        <div class="svc-body">AI-assisted appointment allocation with conflict resolution and real-time calendar sync across all facilities.</div>
+        <div class="svc-tag">AI-Assisted →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.28s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#6eb5c0" stroke-width="1.5"/><path d="M3 11H19M11 3V19" stroke="#6eb5c0" stroke-width="1.2" stroke-linecap="round" opacity=".5"/></svg>
+        </div>
+        <div class="svc-title">Medical Dispatch</div>
+        <div class="svc-body">Geo-intelligent dispatch with ETA tracking, resource availability mapping, and automated incident documentation.</div>
+        <div class="svc-tag">Geo-Intelligent →</div>
+      </div>
+
+      <div class="svc-card fu" data-card style="transition-delay:.35s;">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 8H20L14.5 11.5L17 18L11 14.5L5 18L7.5 11.5L2 8H8.5L11 2Z" stroke="#6eb5c0" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="svc-title">Secure Case Routing</div>
+        <div class="svc-body">End-to-end encrypted patient case management with role-based access, full audit trails, and HIPAA-aligned data handling.</div>
+        <div class="svc-tag">HIPAA Aligned →</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  FOOTER
+════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">
+        <div class="logo-mark" style="width:30px;height:30px;border-radius:8px;">
+          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6V12M6 9H12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <span class="fs" style="font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:var(--text);">OCTIS</span>
+        <span style="font-size:.6rem;color:var(--text-3);letter-spacing:.1em;">v4.0</span>
+      </a>
+      <div class="footer-copy">© 2026 OCTIS Systems — All rights reserved</div>
+      <a href="tel:+2341234567890" class="em-pill">
+        <span class="live-dot" style="width:6px;height:6px;"></span>Call Now
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════
+  MOBILE BOTTOM NAV
+════════════════════════════════════ -->
+<nav id="mob-nav">
+  <a href="tel:+2341234567890" class="mob-btn">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.3 14.2C18.3 14.6 18.1 15 17.8 15.3L16.3 16.8C15.6 17.5 14.6 17.9 13.5 17.7C11.6 17.5 9.5 16.3 7.7 14.5C5.9 12.7 4.7 10.6 4.5 8.7C4.3 7.6 4.7 6.6 5.4 5.9L6.9 4.4C7.3 4 8 4 8.4 4.4L10.3 6.3C10.7 6.7 10.7 7.4 10.3 7.8L9.5 8.6C9.4 8.7 9.4 8.9 9.5 9.1C10 9.9 10.8 10.8 11.7 11.5C11.8 11.6 12 11.6 12.1 11.5L12.9 10.7C13.3 10.3 14 10.3 14.4 10.7L16.3 12.6C16.7 13 16.7 13.7 16.3 14.1Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Call Center
+  </a>
+  <a href="#intake-section" class="mob-btn">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.4"/><path d="M10 6V14M6 10H14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    Open Portal
+  </a>
+  <button class="mob-btn" onclick="showHoursModal()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M10 6V10L12.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Hours
+  </button>
+</nav>
+
+
+<!-- ════════════════════════════════════
+  HOURS MODAL
+════════════════════════════════════ -->
+<div id="hours-modal">
+  <div class="hours-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s5);">
+      <div class="fs" style="font-weight:700;font-size:1.05rem;color:var(--text);">Operating Hours</div>
+      <button class="close-btn" onclick="hideHoursModal()">✕</button>
+    </div>
+    <div class="hours-row" style="background:rgba(59,107,255,.06);border:1px solid rgba(59,107,255,.15);">
+      <span style="font-weight:600;color:var(--text);">Emergency Line</span>
+      <span style="font-weight:700;color:var(--accent-d);">24 / 7</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);">
+      <span style="color:var(--text-2);">Mon – Fri</span>
+      <span style="font-weight:500;color:var(--text);">7:00 AM – 10:00 PM</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);">
+      <span style="color:var(--text-2);">Sat – Sun</span>
+      <span style="font-weight:500;color:var(--text);">8:00 AM – 6:00 PM</span>
+    </div>
+    <div class="hours-row" style="background:var(--bg-sec);margin-bottom:0;">
+      <span style="color:var(--text-2);">Holidays</span>
+      <span style="font-weight:600;color:#059669;">Emergency Only</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+  JAVASCRIPT
+════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ─────────────────────────────────
+   PHASE 1 — INTERACTIONS
+───────────────────────────────── */
+
+// Nav elevation on scroll
+const NAV = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  NAV.classList.toggle('elevated', window.scrollY > 20);
+}, { passive: true });
+
+// Smooth anchor scroll (offset for fixed nav)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const y = target.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  });
+});
+
+// Fade-up on scroll
+const fuObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); fuObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.fu').forEach(el => fuObs.observe(el));
+
+// Metric counter animation
+function runCounter(el) {
+  const end = parseInt(el.dataset.target, 10);
+  const suf = el.dataset.suffix || '';
+  const dur = 1600;
+  const t0 = performance.now();
+  (function tick(now) {
+    const p    = Math.min((now - t0) / dur, 1);
+    const ease = 1 - Math.pow(2, -10 * p);
+    el.textContent = Math.round(ease * end) + suf;
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cObs.unobserve(e.target); } });
+}, { threshold: 0.6 });
+document.querySelectorAll('.metric-num[data-target]').forEach(el => cObs.observe(el));
+
+// Service card mouse-tracked glow
+document.querySelectorAll('[data-card]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--mx', '50%');
+    card.style.setProperty('--my', '50%');
+  });
+});
+
+// Mobile nav tap feedback
+document.querySelectorAll('.mob-btn').forEach(b => {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.mob-btn').forEach(x => x.classList.remove('on'));
+    this.classList.add('on');
+    setTimeout(() => this.classList.remove('on'), 500);
+  });
+});
+
+// Hours modal
+window.showHoursModal = function() {
+  const m = document.getElementById('hours-modal');
+  m.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => { m.style.opacity = '1'; }));
+};
+window.hideHoursModal = function() {
+  const m = document.getElementById('hours-modal');
+  m.style.opacity = '0';
+  setTimeout(() => { m.style.display = 'none'; }, 260);
+};
+document.getElementById('hours-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) window.hideHoursModal();
+});
+
+
+/* ═══════════════════════════════════════════════════
+   APP CONFIG
+   Single source of truth — update values here only.
+═══════════════════════════════════════════════════ */
+const APP_CONFIG = Object.freeze({
+  // Routing
+  operationsPhone:    '2349041999098', // WhatsApp: country code + number, no + or spaces
+  emergencyPhone:     '+2349041999098', // tel: link format
+
+  // Make.com webhook
+  webhookUrl:         'https://hook.eu1.make.com/wopcwsqf93pc4wn02nxrct127emtbcfj',
+  webhookTimeoutMs:   8000, // ms — abort webhook fetch if no response within this window
+
+  // Platform
+  platformName:       'OCTIS Operations Desk',
+  version:            '4.1.0',
+
+  // Intake engine behaviour
+  totalSteps:         5,
+  submitDelay:        1800,  // ms — loading animation before routing
+  successFadeDelay:   140,   // ms — delay before success screen animates in
+  errorMessageTTL:    4000,  // ms — how long inline error messages stay visible
+
+  // Validation limits
+  nameMinLength:      2,
+  descMinLength:      20,
+  descMaxLength:      400,
+  phoneMinChars:      10,
+  phoneMaxChars:      20,
+
+  // Transition
+  stepTransitionMs:   150,   // ms — step slide-out duration before content swap
+  bodyTransitionIn:   'opacity .28s ease, transform .28s cubic-bezier(.4,0,.2,1)',
+  successTransitionIn:'opacity .35s ease, transform .35s cubic-bezier(.4,0,.2,1)',
+});
+
+
+/* ═══════════════════════════════════════════════════
+   OCTIS INTAKE ENGINE  v4.1
+   Phase 1–3 | Modular | Refactored
+═══════════════════════════════════════════════════ */
+const IE = (function() {
+
+  /* ─────────────────────────────
+     STATE
+  ───────────────────────────── */
+  const S = {
+    step:        1,
+    service:     null,
+    urgency:     null,
+    name:        '',
+    phone:       '',
+    location:    '',
+    description: '',
+    routingId:   null,
+  };
+
+  // Duplicate-submission guard
+  let _isSubmitting = false;
+
+
+  /* ─────────────────────────────
+     STATIC DATA
+  ───────────────────────────── */
+
+  // SVG icon shared between service cards (colour token only changes)
+  const ICON_STROKE = '#6eb5c0';
+
+  const SVCS = [
+    { id: 'emergency',   label: 'Emergency Care',  sub: 'Immediate dispatch',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6V14M6 10H14" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linecap="round"/></svg>` },
+    { id: 'diagnostics', label: 'Diagnostics',     sub: 'Lab & imaging',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="${ICON_STROKE}" stroke-width="1.5"/><path d="M5 10H8L9.5 7L11 13L12.5 10H15" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+    { id: 'home_visit',  label: 'Home Visit',      sub: 'In-home care',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 9L10 3L17 9V17H13V13H7V17H3V9Z" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+    { id: 'logistics',   label: 'Logistics',       sub: 'Transport & chain',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="7" width="11" height="9" rx="2" stroke="${ICON_STROKE}" stroke-width="1.5"/><path d="M13 10H15.5L18 13V16H13V10Z" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="17" r="1.5" fill="${ICON_STROKE}"/><circle cx="15" cy="17" r="1.5" fill="${ICON_STROKE}"/></svg>` },
+    { id: 'consult',     label: 'Consultation',    sub: 'Expert review',
+      icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 9C17 12.87 13.87 16 10 16C8.77 16 7.62 15.67 6.63 15.1L3 16L3.9 12.37C3.33 11.38 3 10.23 3 9C3 5.13 6.13 2 10 2C13.87 2 17 5.13 17 9Z" stroke="${ICON_STROKE}" stroke-width="1.5" stroke-linejoin="round"/></svg>` },
+  ];
+
+  const URGS = [
+    { id: 'critical', label: 'Critical', desc: 'Life-threatening. Immediate response required.',    clr: '#dc2626', bg: 'rgba(220,38,38,.07)',  bd: 'rgba(220,38,38,.22)',  eta: '< 5 MIN' },
+    { id: 'high',     label: 'High',     desc: 'Serious condition. Urgent care within 30 minutes.', clr: '#ea580c', bg: 'rgba(234,88,12,.07)',  bd: 'rgba(234,88,12,.22)',  eta: '< 30 MIN' },
+    { id: 'medium',   label: 'Medium',   desc: 'Stable but requires prompt medical attention.',      clr: '#d97706', bg: 'rgba(217,119,6,.07)',  bd: 'rgba(217,119,6,.2)',   eta: '< 2 HRS' },
+    { id: 'low',      label: 'Low',      desc: 'Routine. Scheduled intake is appropriate.',          clr: '#059669', bg: 'rgba(5,150,105,.07)', bd: 'rgba(5,150,105,.2)',  eta: 'Scheduled' },
+  ];
+
+  const REGIONS = [
+    'Lagos Island','Lagos Mainland','Ikeja','Surulere','Lekki',
+    'Victoria Island','Ajah','Ikorodu','Yaba','Apapa','Gbagada','Magodo','Other Region',
+  ];
+
+  // Step header metadata — indexed by step number (1-based)
+  const STEP_META = [
+    null, // index 0 unused — keeps array 1-based
+    { tag: 'Step 1 of 5', title: 'Select Service' },
+    { tag: 'Step 2 of 5', title: 'Urgency Level' },
+    { tag: 'Step 3 of 5', title: 'Your Information' },
+    { tag: 'Step 4 of 5', title: 'Situation Detail' },
+    { tag: 'Step 5 of 5', title: 'Review & Confirm' },
+  ];
+
+  // Routing ID prefixes by service
+  const ID_PREFIX = {
+    emergency: 'EMG', diagnostics: 'DGN',
+    home_visit: 'HMV', logistics: 'LGS', consult: 'CON',
+  };
+
+
+  /* ─────────────────────────────
+     PURE UTILITIES
+  ───────────────────────────── */
+
+  /** HTML-escape a value for safe injection into template strings */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /** Find an item in SVCS or URGS by id; returns {} if not found */
+  function findById(arr, id) {
+    return arr.find(x => x.id === id) || {};
+  }
+
+  /** Generate a unique routing reference ID */
+  function generateRoutingId() {
+    const prefix = ID_PREFIX[S.service] || 'OTC';
+    const suffix = String(Math.floor(1000 + Math.random() * 8999));
+    return `${prefix}-${suffix}`;
+  }
+
+  /** Progress percentage for a given step */
+  function stepPercent(step) {
+    return Math.round(((step - 1) / (APP_CONFIG.totalSteps - 1)) * 100);
+  }
+
+  /**
+   * Nigerian phone validation.
+   * Accepts: 0[7-9][0-1]XXXXXXXX  or  (+)234[7-9][0-1]XXXXXXXX
+   */
+  function isValidNigerianPhone(raw) {
+    const n = raw.trim().replace(/[\s\-().]/g, '');
+    if (!/^\+?[0-9]{10,15}$/.test(n)) return false;
+    return /^(0[7-9][0-1]\d{8}|(\+?234)[7-9][0-1]\d{8})$/.test(n);
+  }
+
+  /** Format a Date as a human-readable Nigerian locale string */
+  function formatLocalTimestamp(date) {
+    return date.toLocaleString('en-NG', {
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', hour12: true,
+    });
+  }
+
+
+  /* ─────────────────────────────
+     DOM HELPERS
+  ───────────────────────────── */
+
+  /** Get element by id — returns null silently if missing */
+  const $ = id => document.getElementById(id);
+
+  /** Show an inline error element */
+  function showError(id) { const e = $(id); if (e) e.classList.add('on'); }
+
+  /** Hide an inline error element */
+  function clearError(id) { const e = $(id); if (e) e.classList.remove('on'); }
+
+  /** Mark a field as invalid */
+  function markInvalid(id) { const e = $(id); if (e) e.classList.add('err'); }
+
+  /** Mark a field as valid */
+  function clearInvalid(id) { const e = $(id); if (e) e.classList.remove('err'); }
+
+  /** Write innerHTML to ie-body */
+  function setBody(html) {
+    const b = $('ie-body');
+    if (b) b.innerHTML = html;
+  }
+
+  /** Show a timed global error message in the footer */
+  function showGlobalError(msg) {
+    const gerr = $('ie-gerr');
+    if (!gerr) return;
+    gerr.textContent = msg;
+    setTimeout(() => { gerr.textContent = ''; }, APP_CONFIG.errorMessageTTL);
+  }
+
+  /** Clear the global footer error */
+  function clearGlobalError() {
+    const gerr = $('ie-gerr');
+    if (gerr) gerr.textContent = '';
+  }
+
+
+  /* ─────────────────────────────
+     PROGRESS & HEADER
+  ───────────────────────────── */
+
+  /** Update the step tag, title, % counter, and progress bar */
+  function updateProgress(step) {
+    const meta = STEP_META[step];
+    const pct  = stepPercent(step);
+
+    const tag = $('ie-tag');   if (tag) tag.textContent   = meta.tag;
+    const ttl = $('ie-title'); if (ttl) ttl.textContent   = meta.title;
+    const pEl = $('ie-pct');   if (pEl) pEl.textContent   = pct + '%';
+    const bar = $('ie-pfill'); if (bar) bar.style.width   = pct + '%';
+  }
+
+  /** Update the dot stepper and connector lines */
+  function updateDots(step) {
+    for (let i = 1; i <= APP_CONFIG.totalSteps; i++) {
+      const dot  = $('ied' + i);
+      const line = $('iel' + i);
+      if (!dot) continue;
+
+      if (i < step)        { dot.className = 'ie-dot done';   dot.textContent = ''; }
+      else if (i === step) { dot.className = 'ie-dot active'; dot.textContent = i; }
+      else                 { dot.className = 'ie-dot';        dot.textContent = i; }
+
+      if (line) line.className = 'ie-line' + (i < step ? ' done' : '');
+    }
+  }
+
+  /** Full header update (progress + dots) */
+  function updateHeader(step) {
+    updateProgress(step);
+    updateDots(step);
+  }
+
+
+  /* ─────────────────────────────
+     FOOTER CONTROLS
+  ───────────────────────────── */
+
+  /** Sync footer buttons and label for the given step */
+  function syncFooter(step) {
+    const back = $('ie-back');
+    const next = $('ie-next');
+    const lbl  = $('ie-nlbl');
+    const arr  = $('ie-narr');
+
+    if (back) back.className = step > 1 ? 'ie-btn-b show' : 'ie-btn-b';
+    if (next) next.disabled  = false;
+    if (lbl)  lbl.textContent = step === APP_CONFIG.totalSteps ? 'Confirm Intake' : 'Continue';
+    if (arr)  arr.style.display = 'block';
+    clearGlobalError();
+  }
+
+  /** Lock the footer during submission */
+  function lockSubmission() {
+    const next = $('ie-next');
+    const lbl  = $('ie-nlbl');
+    const arr  = $('ie-narr');
+    const back = $('ie-back');
+
+    if (next) next.disabled = true;
+    if (lbl)  lbl.innerHTML = '<div class="ie-dots"><span></span><span></span><span></span></div>';
+    if (arr)  arr.style.display = 'none';
+    if (back) back.className = 'ie-btn-b'; // hide during submit
+    clearGlobalError();
+  }
+
+  /** Restore footer to submittable state (used on error recovery) */
+  function unlockSubmission() {
+    const next = $('ie-next');
+    const lbl  = $('ie-nlbl');
+    const arr  = $('ie-narr');
+    const back = $('ie-back');
+
+    _isSubmitting = false;
+    if (next) next.disabled = false;
+    if (lbl)  lbl.textContent = 'Confirm Intake';
+    if (arr)  arr.style.display = 'block';
+    if (back) back.className = 'ie-btn-b show';
+  }
+
+
+  /* ─────────────────────────────
+     STEP TRANSITIONS
+  ───────────────────────────── */
+
+  /** Animated step transition — slides old content out, new content in */
+  function renderStep(step, dir) {
+    const body = $('ie-body');
+    if (!body) return;
+
+    // Slide out
+    body.style.opacity   = '0';
+    body.style.transform = dir === 'fwd' ? 'translateX(14px)' : 'translateX(-14px)';
+
+    setTimeout(() => {
+      updateHeader(step);
+      body.innerHTML = buildStepHTML(step);
+      bindStepEvents(step);
+      syncFooter(step);
+
+      // Reset to opposite side before sliding in
+      body.style.transition = 'none';
+      body.style.opacity    = '0';
+      body.style.transform  = dir === 'fwd' ? 'translateX(-14px)' : 'translateX(14px)';
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.style.transition = APP_CONFIG.bodyTransitionIn;
+        body.style.opacity    = '1';
+        body.style.transform  = 'translateX(0)';
+      }));
+    }, APP_CONFIG.stepTransitionMs);
+  }
+
+
+  /* ─────────────────────────────
+     STEP HTML BUILDERS
+  ───────────────────────────── */
+
+  function buildStepHTML(step) {
+    switch (step) {
+      case 1: return buildStep1();
+      case 2: return buildStep2();
+      case 3: return buildStep3();
+      case 4: return buildStep4();
+      case 5: return buildStep5();
+      default: return '';
+    }
+  }
+
+  function buildStep1() {
+    const cards = SVCS.map(s => `
+      <div class="ie-opt${S.service === s.id ? ' sel' : ''}"
+           data-svc="${s.id}" role="button" tabindex="0"
+           aria-pressed="${S.service === s.id}"
+           aria-label="Select service: ${esc(s.label)}">
+        <div class="ie-ochk" aria-hidden="true">
+          <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+            <path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ie-oico" aria-hidden="true">${s.icon}</div>
+        <div class="ie-olbl">${esc(s.label)}</div>
+        <div class="ie-osub">${esc(s.sub)}</div>
+      </div>
+    `).join('');
+
+    return `
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">
+        Select the type of service you need. This determines how your case is routed through the triage grid.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-bottom:16px;" role="group" aria-label="Service options">
+        ${cards}
+      </div>
+      <div class="ie-em" id="err1" role="alert">Please select a service type to continue.</div>
+    `;
+  }
+
+  function buildStep2() {
+    const cards = URGS.map(u => {
+      const isSel = S.urgency === u.id;
+      return `
+        <div class="ie-urg${isSel ? ' sel' : ''}"
+             data-urg="${u.id}" role="button" tabindex="0"
+             aria-pressed="${isSel}"
+             aria-label="Urgency: ${esc(u.label)}"
+             style="background:${isSel ? u.bg : 'var(--bg)'};border-color:${isSel ? u.bd : 'var(--border)'};--uc:${u.clr};">
+          <div class="urg-dot" style="background:${u.clr};" aria-hidden="true"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="urg-title">${esc(u.label)}</div>
+            <div class="urg-desc">${esc(u.desc)}</div>
+          </div>
+          <div class="urg-badge" style="background:${u.bg};color:${u.clr};border:1px solid ${u.bd};" aria-hidden="true">✓</div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">
+        How critical is your situation? This determines response priority and resource allocation.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;" role="group" aria-label="Urgency levels">
+        ${cards}
+      </div>
+      <div class="ie-em" id="err2" role="alert">Please select an urgency level to continue.</div>
+    `;
+  }
+
+  function buildStep3() {
+    const regionOptions = REGIONS.map(r =>
+      `<option value="${esc(r)}"${S.location === r ? ' selected' : ''}>${esc(r)}</option>`
+    ).join('');
+
+    return `
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:8px;">
+
+        <div>
+          <label class="ie-lbl" for="ie-name">Full Name</label>
+          <input class="ie-inp" id="ie-name" type="text"
+            placeholder="e.g. Adaora Okafor"
+            value="${esc(S.name)}"
+            autocomplete="name"
+            maxlength="80"
+            aria-describedby="err-name"
+            aria-required="true"/>
+          <div class="ie-em" id="err-name" role="alert">Please enter your full name (min. ${APP_CONFIG.nameMinLength} characters).</div>
+        </div>
+
+        <div>
+          <label class="ie-lbl" for="ie-phone">Phone Number</label>
+          <input class="ie-inp" id="ie-phone" type="tel"
+            placeholder="e.g. 0812 345 6789"
+            value="${esc(S.phone)}"
+            autocomplete="tel"
+            maxlength="${APP_CONFIG.phoneMaxChars}"
+            aria-describedby="err-phone"
+            aria-required="true"/>
+          <div class="ie-em" id="err-phone" role="alert">Please enter a valid Nigerian phone number.</div>
+        </div>
+
+        <div>
+          <label class="ie-lbl" for="ie-loc">Location / Region</label>
+          <div class="sel-w">
+            <select class="ie-inp" id="ie-loc" aria-describedby="err-loc" aria-required="true">
+              <option value="" disabled${!S.location ? ' selected' : ''}>Select your area…</option>
+              ${regionOptions}
+            </select>
+          </div>
+          <div class="ie-em" id="err-loc" role="alert">Please select your location.</div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function buildStep4() {
+    const cur = S.description.length;
+    const MAX = APP_CONFIG.descMaxLength;
+    const warnClass = cur >= MAX * 0.85 ? ' warn' : '';
+
+    return `
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">
+        Describe the situation clearly. Include symptoms, duration, and any relevant medical history.
+      </p>
+      <div>
+        <label class="ie-lbl" for="ie-desc">Situation Description</label>
+        <textarea class="ie-inp" id="ie-desc" rows="6"
+          maxlength="${MAX}"
+          placeholder="e.g. Patient, 54M, presenting with chest pain and difficulty breathing for the past 2 hours…"
+          aria-describedby="err-desc ie-cct"
+          aria-required="true">${esc(S.description)}</textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <div class="ie-em" id="err-desc" role="alert">Please provide at least ${APP_CONFIG.descMinLength} characters.</div>
+          <div class="ie-cct${warnClass}" id="ie-cct" aria-live="polite">${cur} / ${MAX}</div>
+        </div>
+      </div>
+      <div class="ie-info">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px;" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" stroke="#6eb5c0" stroke-width="1.3"/>
+          <path d="M8 7V11M8 5V4.5" stroke="#6eb5c0" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <div class="ie-info-text">All data is encrypted in transit. Only authorized OCTIS triage personnel will access this information.</div>
+      </div>
+    `;
+  }
+
+  function buildStep5() {
+    const svc = findById(SVCS, S.service);
+    const urg = findById(URGS, S.urgency);
+    const preview = S.description.length > 100
+      ? S.description.slice(0, 100) + '…'
+      : S.description;
+
+    return `
+      <p style="font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px;">
+        Review your case details carefully before submitting. Once confirmed, your intake is routed immediately.
+      </p>
+
+      <div style="background:var(--bg-sec);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;" role="region" aria-label="Case summary">
+        <div style="font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px;">Case Summary</div>
+        <div class="rv-row"><div class="rv-k">Service</div>
+          <div class="rv-v">${esc(svc.label || '')}<br/><span style="font-size:.78rem;color:var(--text-3);">${esc(svc.sub || '')}</span></div>
+        </div>
+        <div class="rv-row"><div class="rv-k">Urgency</div>
+          <div class="rv-v">
+            <span style="font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label || '')}</span>
+          </div>
+        </div>
+        <div class="rv-row"><div class="rv-k">Patient</div><div class="rv-v">${esc(S.name)}</div></div>
+        <div class="rv-row"><div class="rv-k">Contact</div><div class="rv-v">${esc(S.phone)}</div></div>
+        <div class="rv-row"><div class="rv-k">Location</div><div class="rv-v">${esc(S.location)}</div></div>
+        <div class="rv-row"><div class="rv-k">Details</div>
+          <div class="rv-v" style="font-size:.82rem;color:var(--text-2);">${esc(preview)}</div>
+        </div>
+      </div>
+
+      <div class="ie-info" style="background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.18);">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;" aria-hidden="true">
+          <path d="M7 1L13 3.5V7C13 10.2 10.3 12.8 7 13C3.7 12.8 1 10.2 1 7V3.5L7 1Z" stroke="#059669" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M4.5 7L6.3 8.8L9.5 5.5" stroke="#059669" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="ie-info-text">Submission is end-to-end encrypted and routed directly to OCTIS triage operations.</div>
+      </div>
+    `;
+  }
+
+
+  /* ─────────────────────────────
+     EVENT BINDING
+  ───────────────────────────── */
+
+  function bindStepEvents(step) {
+    if (step === 1) bindServiceCards();
+    if (step === 2) bindUrgencyCards();
+    if (step === 3) bindInfoFields();
+    if (step === 4) bindDescriptionField();
+  }
+
+  function bindServiceCards() {
+    document.querySelectorAll('[data-svc]').forEach(card => {
+      card.addEventListener('click', () => selectService(card));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectService(card); }
+      });
+    });
+  }
+
+  function selectService(card) {
+    S.service = card.dataset.svc;
+    document.querySelectorAll('[data-svc]').forEach(c => {
+      c.classList.remove('sel');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    card.classList.add('sel');
+    card.setAttribute('aria-pressed', 'true');
+    clearError('err1');
+  }
+
+  function bindUrgencyCards() {
+    document.querySelectorAll('[data-urg]').forEach(card => {
+      card.addEventListener('click', () => selectUrgency(card));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectUrgency(card); }
+      });
+    });
+  }
+
+  function selectUrgency(card) {
+    const u = findById(URGS, card.dataset.urg);
+    S.urgency = card.dataset.urg;
+
+    // Reset all cards
+    document.querySelectorAll('[data-urg]').forEach(c => {
+      c.classList.remove('sel');
+      c.setAttribute('aria-pressed', 'false');
+      c.style.background  = 'var(--bg)';
+      c.style.borderColor = 'var(--border)';
+      const badge = c.querySelector('.urg-badge');
+      if (badge) badge.style.display = 'none';
+    });
+
+    // Apply selected state
+    card.classList.add('sel');
+    card.setAttribute('aria-pressed', 'true');
+    card.style.background  = u.bg;
+    card.style.borderColor = u.bd;
+    const badge = card.querySelector('.urg-badge');
+    if (badge) badge.style.display = 'block';
+    clearError('err2');
+  }
+
+  function bindInfoFields() {
+    const nm = $('ie-name');
+    const ph = $('ie-phone');
+    const lc = $('ie-loc');
+
+    if (nm) nm.addEventListener('input', () => {
+      S.name = nm.value;
+      clearInvalid('ie-name');
+      clearError('err-name');
+    });
+    if (ph) ph.addEventListener('input', () => {
+      S.phone = ph.value;
+      clearInvalid('ie-phone');
+      clearError('err-phone');
+    });
+    if (lc) lc.addEventListener('change', () => {
+      S.location = lc.value;
+      clearInvalid('ie-loc');
+      clearError('err-loc');
+    });
+  }
+
+  function bindDescriptionField() {
+    const ta  = $('ie-desc');
+    const cct = $('ie-cct');
+    const MAX = APP_CONFIG.descMaxLength;
+
+    if (!ta) return;
+    ta.addEventListener('input', () => {
+      S.description = ta.value;
+      if (cct) {
+        cct.textContent = ta.value.length + ' / ' + MAX;
+        cct.className   = 'ie-cct' + (ta.value.length >= MAX * 0.85 ? ' warn' : '');
+      }
+      clearInvalid('ie-desc');
+      clearError('err-desc');
+    });
+  }
+
+
+  /* ─────────────────────────────
+     VALIDATION
+  ───────────────────────────── */
+
+  function validateStep() {
+    switch (S.step) {
+      case 1: return validateService();
+      case 2: return validateUrgency();
+      case 3: return validateInfoFields();
+      case 4: return validateDescription();
+      default: return true;
+    }
+  }
+
+  function validateService() {
+    if (!S.service) { showError('err1'); return false; }
+    return true;
+  }
+
+  function validateUrgency() {
+    if (!S.urgency) { showError('err2'); return false; }
+    return true;
+  }
+
+  function validateInfoFields() {
+    let valid = true;
+
+    if (!S.name.trim() || S.name.trim().length < APP_CONFIG.nameMinLength) {
+      markInvalid('ie-name'); showError('err-name'); valid = false;
+    }
+    if (!isValidNigerianPhone(S.phone)) {
+      markInvalid('ie-phone'); showError('err-phone'); valid = false;
+    }
+    if (!S.location) {
+      markInvalid('ie-loc'); showError('err-loc'); valid = false;
+    }
+    return valid;
+  }
+
+  function validateDescription() {
+    if (S.description.trim().length < APP_CONFIG.descMinLength) {
+      markInvalid('ie-desc'); showError('err-desc'); return false;
+    }
+    return true;
+  }
+
+
+  /* ─────────────────────────────
+     PAYLOAD & TICKET GENERATION
+  ───────────────────────────── */
+
+  /** Build the structured dispatch payload from current state */
+  function buildPayload() {
+    const svc = findById(SVCS, S.service);
+    const urg = findById(URGS, S.urgency);
+
+    return {
+      routingId:    S.routingId,
+      timestamp:    new Date().toISOString(),
+      service:      S.service,
+      serviceLabel: svc.label || S.service,
+      urgency:      S.urgency,
+      urgencyLabel: urg.label || S.urgency,
+      urgencyETA:   urg.eta   || '',
+      fullName:     S.name.trim(),
+      phone:        S.phone.trim(),
+      location:     S.location,
+      description:  S.description.trim(),
+      meta: {
+        engine:  'OCTIS-IntakeEngine',
+        version: APP_CONFIG.version,
+        phase:   3,
+      },
+    };
+  }
+
+  /** Generate the formatted WhatsApp dispatch ticket from a payload */
+  function generateTicket(payload) {
+    const localTS = formatLocalTimestamp(new Date());
+    const SEP = '---------------------------------------';
+
+    return [
+      '\uD83D\uDEA8 OCTIS OPERATIONS DESK: NEW INTAKE TICKET',
+      SEP,
+      `SERVICE LEVEL: ${payload.serviceLabel.toUpperCase()}`,
+      `URGENCY TIER:  ${payload.urgencyLabel.toUpperCase()} (ETA: ${payload.urgencyETA})`,
+      SEP,
+      `DISPATCH TO:     ${payload.fullName}`,
+      `CONTACT PHONE:   ${payload.phone}`,
+      `LOCATION TARGET: ${payload.location}`,
+      SEP,
+      'CASE DETAILS:',
+      payload.description,
+      SEP,
+      `REF ID:    ${payload.routingId}`,
+      `Generated: ${localTS}`,
+    ].join('\n');
+  }
+
+  /** Build a safe WhatsApp deep-link URL from a ticket string */
+  function buildWhatsAppURL(ticket) {
+    const encoded = encodeURIComponent(ticket);
+    return `https://api.whatsapp.com/send?phone=${APP_CONFIG.operationsPhone}&text=${encoded}`;
+  }
+
+
+  /* ─────────────────────────────
+     ROUTING — PHASE 3
+  ───────────────────────────── */
+
+  /* ─────────────────────────────
+     WEBHOOK — MAKE.COM
+  ───────────────────────────── */
+
+  /**
+   * sendToWebhook(payload)
+   * POST the finalized payload to the Make.com webhook.
+   * Uses AbortController for timeout protection.
+   * Resolves true on success, throws on failure.
+   */
+  async function sendToWebhook(payload) {
+    const controller = new AbortController();
+    const timer = setTimeout(
+      () => controller.abort(),
+      APP_CONFIG.webhookTimeoutMs
+    );
+
+    try {
+      const response = await fetch(APP_CONFIG.webhookUrl, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+        signal:  controller.signal,
+      });
+
+      // Make.com returns 200 on success — treat anything else as a failure
+      if (!response.ok) {
+        throw new Error(`Webhook responded with status ${response.status}`);
+      }
+
+      return true;
+
+    } finally {
+      // Always clear the timeout, whether we succeeded or threw
+      clearTimeout(timer);
+    }
+  }
+
+
+  /** Main routing entry point — generates ticket and launches WhatsApp link */
+  function routeToWhatsApp(payload) {
+    try {
+      const ticket = generateTicket(payload);
+      const waURL  = buildWhatsAppURL(ticket);
+      showSuccess(payload, waURL);
+    } catch (routeErr) {
+      // Ticket build failed — show success screen without WhatsApp link
+      _isSubmitting = false;
+      showSuccess(payload, null);
+      showGlobalError('WhatsApp link failed. Use the call button below.');
+    }
+  }
+
+
+  /* ─────────────────────────────
+     SUBMISSION
+  ───────────────────────────── */
+
+  async function submit() {
+    // Duplicate-submission guard
+    if (_isSubmitting) return;
+    _isSubmitting = true;
+
+    lockSubmission();
+
+    try {
+      // 1. Compile payload
+      S.routingId    = generateRoutingId();
+      const payload  = buildPayload();
+
+      // 2. Hold on loading animation (UX breathing room)
+      await new Promise(resolve => setTimeout(resolve, APP_CONFIG.submitDelay));
+
+      // 3. Send to Make.com webhook — blocks WhatsApp routing until confirmed
+      await sendToWebhook(payload);
+
+      // 4. Webhook succeeded — proceed to WhatsApp routing
+      routeToWhatsApp(payload);
+
+    } catch (err) {
+      // Webhook failed (network error, timeout, non-200, or payload build error)
+      unlockSubmission();
+
+      const isTimeout = err.name === 'AbortError';
+      const msg = isTimeout
+        ? 'Request timed out. Check your connection and try again.'
+        : 'Submission failed. Please try again or call dispatch directly.';
+
+      showGlobalError(msg);
+    }
+  }
+
+
+  /* ─────────────────────────────
+     SUCCESS SCREEN
+  ───────────────────────────── */
+
+  function showSuccess(payload, waURL) {
+    _isSubmitting = false;
+
+    // Complete the progress header
+    const pEl = $('ie-pct'); if (pEl) pEl.textContent = '100%';
+    const bar  = $('ie-pfill'); if (bar) bar.style.width = '100%';
+    for (let i = 1; i <= APP_CONFIG.totalSteps; i++) {
+      const d = $('ied' + i); if (d) { d.className = 'ie-dot done'; d.textContent = ''; }
+      const l = $('iel' + i); if (l) l.className = 'ie-line done';
+    }
+    const tag = $('ie-tag');   if (tag) tag.textContent = 'Complete';
+    const ttl = $('ie-title'); if (ttl) ttl.textContent = 'Case Routed';
+    const ftr = document.querySelector('.ie-ftr'); if (ftr) ftr.style.display = 'none';
+
+    const urg  = findById(URGS, S.urgency);
+    const body = $('ie-body');
+    if (!body) return;
+
+    // Fade out body
+    body.style.opacity   = '0';
+    body.style.transform = 'translateY(10px)';
+
+    setTimeout(() => {
+      body.innerHTML = buildSuccessHTML(urg, waURL);
+      body.style.transition = APP_CONFIG.successTransitionIn;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.style.opacity   = '1';
+        body.style.transform = 'translateY(0)';
+      }));
+    }, APP_CONFIG.successFadeDelay);
+  }
+
+  /** Build the success screen HTML */
+  function buildSuccessHTML(urg, waURL) {
+    const whatsappBtn = waURL ? `
+      <a href="${waURL}" target="_blank" rel="noopener noreferrer"
+         class="ie-btn-n" style="text-decoration:none;background:linear-gradient(135deg,#25d366,#128c7e);"
+         aria-label="Open WhatsApp to dispatch this intake ticket">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1C4.14 1 1 4.14 1 8C1 9.26 1.35 10.43 1.95 11.43L1 15L4.67 14.07C5.64 14.62 6.78 14.95 8 14.95C11.86 14.95 15 11.81 15 7.95C15 4.09 11.86 1 8 1Z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M5.5 6C5.5 6 5.5 5.5 6 5.5C6.5 5.5 7 6.5 7 6.5C7 6.5 7.25 7 7 7.25C6.75 7.5 6.5 7.5 6.75 8C7 8.5 7.5 9 8 9.25C8.5 9.5 8.5 9.25 8.75 9C9 8.75 9.5 9 9.5 9L10 9.5C10 9.5 10.5 10 10 10.5C9.5 11 8.5 10.5 7.5 9.75C6.5 9 5.5 7.5 5.5 6Z" fill="white"/>
+        </svg>
+        Send via WhatsApp
+      </a>` : '';
+
+    return `
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 24px;" role="status" aria-live="polite">
+
+        <div class="ie-sring" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path d="M8 17L14 23L26 11" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="fs" style="font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);margin-bottom:10px;">
+          Case Routed Successfully
+        </div>
+        <p style="color:var(--text-2);font-size:.9rem;max-width:340px;line-height:1.7;margin-bottom:22px;">
+          Your intake has been dispatched to the OCTIS triage grid. Our team will contact you within the target response window.
+        </p>
+
+        <!-- Urgency ETA card -->
+        <div style="width:100%;max-width:340px;background:${urg.bg};border:1px solid ${urg.bd};border-radius:var(--r-lg);padding:16px 20px;margin-bottom:18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Urgency Tier</div>
+            <span style="font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:6px;background:${urg.bg};color:${urg.clr};border:1px solid ${urg.bd};">${esc(urg.label)}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Target Response</div>
+            <div class="fs" style="font-weight:800;font-size:1.05rem;color:${urg.clr};">${esc(urg.eta)}</div>
+          </div>
+        </div>
+
+        <!-- Reference ID -->
+        <div class="ie-rid" aria-label="Reference ID: ${esc(S.routingId)}">${esc(S.routingId)}</div>
+        <div style="font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:8px;margin-bottom:24px;">
+          Save This Reference ID
+        </div>
+
+        <!-- Action buttons -->
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+          ${whatsappBtn}
+          <a href="tel:${APP_CONFIG.emergencyPhone}" class="ie-btn-n" style="text-decoration:none;" aria-label="Call dispatch directly">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M13 9.5C13 9.9 12.83 10.29 12.51 10.57L11.24 11.84C10.55 12.53 9.58 12.88 8.59 12.76C6.83 12.54 4.96 11.49 3.36 9.89C1.76 8.29 0.71 6.42 0.49 4.66C0.37 3.67 0.72 2.7 1.41 2.01L2.68 0.74C3.07 0.35 3.7 0.35 4.09 0.74L5.84 2.49C6.23 2.88 6.23 3.51 5.84 3.9L5.12 4.62C5 4.74 4.98 4.92 5.07 5.06C5.59 5.91 6.28 6.7 7.09 7.36C7.23 7.45 7.41 7.43 7.53 7.31L8.25 6.59C8.64 6.2 9.27 6.2 9.66 6.59L11.41 8.34C11.8 8.73 11.8 9.36 11.41 9.75Z" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            Call Dispatch
+          </a>
+          <button class="ie-btn-b show" onclick="window.OCTIS_IE.restart()"
+                  style="border-color:rgba(59,107,255,.25);color:var(--accent-d);"
+                  aria-label="Start a new intake">
+            New Intake
+          </button>
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* ─────────────────────────────
+     MOUNT / NAVIGATION / RESTART
+  ───────────────────────────── */
+
+  function mount() {
+    const wrap = document.getElementById('intake-engine-container');
+    if (!wrap) return;
+
+    // Reset state
+    Object.assign(S, {
+      step: 1, service: null, urgency: null,
+      name: '', phone: '', location: '', description: '', routingId: null,
+    });
+
+    wrap.innerHTML = '';
+    const shell = document.createElement('div');
+    shell.className = 'ie-shell';
+    shell.innerHTML = buildShell();
+    wrap.appendChild(shell);
+
+    // Initial render without slide animation
+    updateHeader(1);
+    setBody(buildStepHTML(1));
+    bindStepEvents(1);
+    syncFooter(1);
+  }
+
+  function buildShell() {
+    const dots = Array.from({ length: APP_CONFIG.totalSteps }, (_, i) => {
+      const n = i + 1;
+      const line = i < APP_CONFIG.totalSteps - 1 ? `<div class="ie-line" id="iel${n}"></div>` : '';
+      return `<div class="ie-dot" id="ied${n}">${n}</div>${line}`;
+    }).join('');
+
+    return `
+      <div class="ie-hdr">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+          <div>
+            <div class="ie-tag" id="ie-tag">Step 1 of 5</div>
+            <div class="ie-title" id="ie-title">Select Service</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;padding-left:12px;">
+            <div style="font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);">Progress</div>
+            <div class="fs" id="ie-pct" style="font-weight:800;font-size:1rem;color:var(--accent-d);line-height:1.2;" aria-live="polite">0%</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;" id="ie-dots" role="list" aria-label="Step progress">${dots}</div>
+        <div class="ie-pbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="ie-pfill" id="ie-pfill" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <div class="ie-body" id="ie-body"></div>
+
+      <div class="ie-ftr">
+        <button class="ie-btn-b" id="ie-back"
+                onclick="window.OCTIS_IE.back()"
+                aria-label="Go to previous step">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </button>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="ie-gerr" id="ie-gerr" role="alert" aria-live="polite"></div>
+          <button class="ie-btn-n" id="ie-next"
+                  onclick="window.OCTIS_IE.next()"
+                  aria-label="Continue to next step">
+            <span id="ie-nlbl">Continue</span>
+            <svg id="ie-narr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M5 2L10 7L5 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  function next() {
+    if (!validateStep()) return;
+    if (S.step === APP_CONFIG.totalSteps) { submit(); return; }
+    S.step++;
+    renderStep(S.step, 'fwd');
+  }
+
+  function back() {
+    if (S.step <= 1) return;
+    S.step--;
+    renderStep(S.step, 'back');
+  }
+
+  function restart() {
+    const ftr = document.querySelector('.ie-ftr');
+    if (ftr) ftr.style.display = '';
+    mount();
+  }
+
+
+  /* ─────────────────────────────
+     INIT
+  ───────────────────────────── */
+  mount();
+  return { next, back, restart };
+
+})();
+
+window.OCTIS_IE = IE;
+
+})();
+</script>
+</body>
+</html>
