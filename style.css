@@ -1702,3 +1702,96 @@ footer{
   #lead-capture{padding:4.5rem 5%;}
   .lc-btn{width:100%;justify-content:center;}
 }
+
+/* ══════════════════════════════════════
+   NEW TEMPLATE MOCK COLOURS
+══════════════════════════════════════ */
+.t-luxury .mock-bar{background:#0e0a06;border-bottom:1px solid #2a1e10;}
+.t-luxury .mock-content{background:#120d08;}
+.t-luxury .mc-hero{background:#1a1410;}
+.t-luxury .mc-box{background:#241a0e;}.t-luxury .mc-box:nth-child(2){background:#1a1208;}
+
+.t-velour .mock-bar{background:#1a0a12;border-bottom:1px solid #2e1020;}
+.t-velour .mock-content{background:#140810;}
+.t-velour .mc-hero{background:#1a0a12;}
+.t-velour .mc-box{background:#240d18;}.t-velour .mc-box:nth-child(2){background:#1e0a14;}
+
+/* enterprise badge */
+.badge-enterprise{
+  background:rgba(0,180,220,.1);
+  color:#007a99;
+  border-color:rgba(0,180,220,.25);
+}
+
+/* enterprise card subtle treatment */
+.tpl-card-enterprise{
+  border-color:rgba(0,180,220,.2);
+}
+.tpl-card-enterprise:hover{
+  border-color:rgba(0,180,220,.45);
+  box-shadow:0 4px 12px rgba(0,0,0,.06),0 24px 64px rgba(0,180,220,.1);
+}
+
+/* case study thumb colours — new */
+.case-thumb.ct-luxury{
+  background:linear-gradient(135deg,#0e0a06 0%,#3a2510 100%);
+}
+.case-thumb.ct-velour{
+  background:linear-gradient(135deg,#1a0a12 0%,#4a1a30 100%);
+}
+
+/* cases grid — responsive column counts to avoid squeeze */
+.cases-grid{grid-template-columns:repeat(2,1fr);}
+@media(min-width:1200px){
+  .cases-grid{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:600px){
+  .cases-grid{grid-template-columns:1fr;}
+}
+
+/* ══════════════════════════════════════
+   TEMPLATE FILTER TABS
+══════════════════════════════════════ */
+.tpl-filters{
+  display:flex;flex-wrap:wrap;gap:.6rem;
+  margin:2rem 0 2.5rem;
+}
+.tpl-filter-btn{
+  background:var(--white);border:1px solid var(--border);
+  color:var(--ink2);padding:.55rem 1.1rem;
+  border-radius:100px;font-size:.83rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+  white-space:nowrap;
+}
+.tpl-filter-btn:hover{
+  border-color:rgba(26,107,74,.35);color:var(--accent);
+}
+.tpl-filter-btn.active{
+  background:var(--ink);border-color:var(--ink);color:#fff;
+}
+
+/* tpl-card is now an <a> tag — reset link defaults */
+.tpl-card{
+  text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+}
+
+/* empty state message when filter has zero results */
+.tpl-empty-state{
+  text-align:center;padding:3rem 1rem;
+  font-size:.9rem;color:var(--muted);
+}
+.tpl-empty-state a{color:var(--accent);font-weight:600;}
+.tpl-empty-state a:hover{text-decoration:underline;}
+
+/* scroll filters horizontally on small screens */
+@media(max-width:600px){
+  .tpl-filters{
+    flex-wrap:nowrap;overflow-x:auto;
+    padding-bottom:.5rem;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .tpl-filters::-webkit-scrollbar{display:none;}
+  .tpl-filter-btn{flex-shrink:0;}
+}

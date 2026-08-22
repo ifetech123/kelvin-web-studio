@@ -239,13 +239,24 @@
       <div class="label sr">Ready-Made Templates</div>
       <h2 class="section-h sr">Pick a design.<br>I'll make it yours.</h2>
     </div>
-    <p class="section-p sr" style="max-width:36ch;text-align:right;">All live, all tested on real Nigerian mobile data. Click Preview, then tell me which one you want.</p>
+    <p class="section-p sr" style="max-width:36ch;text-align:right;">All live, all tested on real Nigerian mobile data. Tap Preview, then tell me which one you want.</p>
   </div>
-  <div class="templates-grid">
 
-    <div class="tpl-card sr" style="transition-delay:.05s" onclick="window.open('https://ifetech123.github.io/MKADreamHomeProperty/','_blank')">
+  <!-- FILTER TABS -->
+  <div class="tpl-filters sr" role="tablist" aria-label="Filter templates by category">
+    <button class="tpl-filter-btn active" data-filter="all">All</button>
+    <button class="tpl-filter-btn" data-filter="real-estate">Real Estate</button>
+    <button class="tpl-filter-btn" data-filter="food">Food & Catering</button>
+    <button class="tpl-filter-btn" data-filter="grooming">Grooming</button>
+    <button class="tpl-filter-btn" data-filter="beauty">Beauty</button>
+    <button class="tpl-filter-btn" data-filter="fashion">Fashion</button>
+    <button class="tpl-filter-btn" data-filter="enterprise">Enterprise</button>
+  </div>
+
+  <div class="templates-grid" id="templatesGrid">
+
+    <a href="https://ifetech123.github.io/MKADreamHomeProperty/" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="real-estate" style="transition-delay:.05s">
       <div class="tpl-thumb">
-        <!-- FIX: added loading="lazy" -->
         <img src="image3.JPG" alt="MKA Dream Home Property" loading="lazy">
         <div class="tpl-overlay"><div class="preview-btn">👁 Preview Live</div></div>
       </div>
@@ -263,9 +274,9 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tpl-card sr" style="transition-delay:.1s" onclick="window.open('https://ifetech.name.ng/templates/clientproject/index.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/clientproject/index.html" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="food" style="transition-delay:.1s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-food">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -294,9 +305,9 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tpl-card sr" style="transition-delay:.15s" onclick="window.open('https://ifetech.name.ng/templates/barber-shop/index.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/barber-shop/index.html" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="grooming" style="transition-delay:.15s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-barber">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -324,9 +335,9 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tpl-card sr" style="transition-delay:.2s" onclick="window.open('https://ifetech.name.ng/templates/hair-salon/index0.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/hair-salon/index0.html" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="beauty" style="transition-delay:.2s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-beauty">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -354,9 +365,9 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tpl-card sr" style="transition-delay:.25s" onclick="window.open('https://ifetech.name.ng/templates/boutique/index2.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/boutique/index2.html" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="fashion" style="transition-delay:.25s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-luxury">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -385,9 +396,9 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tpl-card sr" style="transition-delay:.3s" onclick="window.open('https://ifetech.name.ng/templates/hair-salon/index3.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/hair-salon/index3.html" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="beauty" style="transition-delay:.3s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-velour">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -416,10 +427,10 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
     <!-- ENTERPRISE CARD — OCTIS -->
-    <div class="tpl-card tpl-card-enterprise sr" style="transition-delay:.35s" onclick="window.open('https://ifetech.name.ng/templates/octisflow/index.html','_blank')">
+    <a href="https://ifetech.name.ng/templates/octisflow/index.html" target="_blank" rel="noopener noreferrer" class="tpl-card tpl-card-enterprise sr" data-category="enterprise" style="transition-delay:.35s">
       <div class="tpl-thumb">
         <div class="tpl-mock-fallback t-tech">
           <div class="mock-bar"><div class="m-d"></div><div class="m-d"></div><div class="m-d"></div></div>
@@ -448,10 +459,10 @@
           <div class="tpl-action">Preview →</div>
         </div>
       </div>
-    </div>
+    </a>
 
     <!-- REQUEST CARD -->
-    <div class="tpl-card sr" style="transition-delay:.4s;cursor:pointer;" onclick="window.open('https://wa.me/2349041999098?text=I%20want%20a%20custom%20template','_blank')">
+    <a href="https://wa.me/2349041999098?text=I%20want%20a%20custom%20template" target="_blank" rel="noopener noreferrer" class="tpl-card sr" data-category="all" style="transition-delay:.4s;cursor:pointer;">
       <div class="tpl-coming">+ Your Niche Here</div>
       <div class="tpl-body">
         <div class="tpl-category">Custom Template</div>
@@ -459,12 +470,14 @@
         <p class="tpl-desc">I build for any niche. Tell me your business and I'll design something specific to you.</p>
         <div class="tpl-footer">
           <div class="tpl-price" style="color:var(--muted);">Let's talk</div>
-          <a href="https://wa.me/2349041999098?text=I%20want%20a%20custom%20template" target="_blank" rel="noopener noreferrer" class="tpl-action" onclick="event.stopPropagation()">Request one →</a>
+          <span class="tpl-action">Request one →</span>
         </div>
       </div>
-    </div>
+    </a>
 
   </div>
+
+  <p class="tpl-empty-state" id="tplEmptyState" style="display:none;">No templates in this category yet — <a href="https://wa.me/2349041999098?text=I%20want%20a%20custom%20template" target="_blank" rel="noopener noreferrer">request one on WhatsApp →</a></p>
 </section>
 
 <!-- CASE STUDIES -->
@@ -1051,7 +1064,7 @@
     <div class="about-right sr-right">
       <div class="about-card">
         <div class="about-avatar">👨🏾‍💻</div>
-        <div class="about-name"> Ifeoluwa Kelvin</div>
+        <div class="about-name">Ifeoluwa Kelvin</div>
         <div class="about-role">Web Developer · Lagos, Nigeria</div>
         <div class="about-stack">
           <span>HTML</span><span>CSS</span><span>JavaScript</span><span>SEO</span><span>WhatsApp API</span>
@@ -1109,7 +1122,9 @@
     <a href="#templates">Templates</a>
     <a href="#cases">Case Studies</a>
     <a href="#services">Packages</a>
-    <a href="#process">Process</a>
+    <a href="#compare">Compare</a>
+    <a href="#faq">FAQ</a>
+    <a href="#about-dev">About</a>
     <a href="https://wa.me/2349041999098" target="_blank" rel="noopener noreferrer">WhatsApp</a>
   </div>
   <div class="footer-copy">© 2025 Kelvin Web Studio. Built to convert.</div>
@@ -1412,7 +1427,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   /* FIX: only auto-open if user has never touched the widget */
   setTimeout(() => {
     if (!cardOpen && !userInteracted) toggleCard();
-  }, 8000);
+  }, 10000);
 })();
 
 /* ══════════════════════════════════════
@@ -1429,6 +1444,34 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     });
   }, { threshold: 0.1 });
   obs.observe(hero);
+})();
+
+/* ══════════════════════════════════════
+   TEMPLATE CATEGORY FILTER
+══════════════════════════════════════ */
+(function() {
+  const filterBtns = document.querySelectorAll('.tpl-filter-btn');
+  const cards = document.querySelectorAll('#templatesGrid .tpl-card');
+  const emptyState = document.getElementById('tplEmptyState');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const cat = card.dataset.category;
+        const matches = filter === 'all' || cat === filter || cat === 'all';
+        card.style.display = matches ? '' : 'none';
+        if (matches) visibleCount++;
+      });
+
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  });
 })();
 </script>
 </body>
